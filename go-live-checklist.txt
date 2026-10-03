@@ -33,9 +33,9 @@ D. First-article release checklist
 [ ] Complete plagiarism/image-integrity and reference/link review using available editorial procedures; document the editor's assessment.
 [ ] Confirm the publication agreement and reuse licence applicable to this article.
 [ ] Prepare accessible HTML and a final PDF; verify they match and include references and declarations.
-[ ] Create a stable article page and link it from the correct issue and archive page.
+[ ] Create and publish a stable article HTML page and final PDF to the site. Enter the live HTTPS article/full-text/PDF URLs and issue metadata in the private Publication Checklist.
 [ ] Test article page, PDF, citation downloads, mobile layout, keyboard use, and all internal links.
 [ ] Publish only identifiers and indexing/preservation claims that have actually been assigned or activated.
-[ ] Have a second authorized person review the completed production checklist before release.
+[ ] Have a second authorized person review the completed production checklist before release. After verifying the live files, set Public listing approved = YES, then Publication status = Published. Confirm the article appears on Current Issue and Archives and the author receives the published status notice.
 
 Record completion date, responsible person, evidence/link, and any exception for each checked item. Keep this completed checklist private with the editorial records. Do not upload a completed checklist to the public site.
