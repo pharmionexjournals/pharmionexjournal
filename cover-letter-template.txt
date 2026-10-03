@@ -1,0 +1,30 @@
+COVER LETTER TEMPLATE — PHARMIONEX RESEARCH JOURNAL
+
+[Date]
+Editor-in-Chief
+Pharmionex Research Journal
+
+Re: [Manuscript title] — [Article type]
+
+Dear Editor,
+
+Please consider our manuscript, “[Title],” as a [article type] for Pharmionex Research Journal. The work addresses [brief research question and importance] and contributes [one or two sentences on the principal finding or contribution].
+
+Originality and related work: [Confirm the manuscript is not published and is not under consideration elsewhere. Disclose preprints, abstracts, related manuscripts, or prior dissemination.]
+
+Author approval and responsibility: [Confirm that all listed authors meet authorship criteria, reviewed and approved this version, and agree to submission. Identify the corresponding author.]
+
+Ethics and declarations: [Summarize ethics approval/consent/registration as relevant. State where funding, competing interests, author contributions, data availability, and AI-use disclosures appear in the manuscript.]
+
+[Optional: Suggested reviewers, with institutional email and expertise, if the journal requests them. Disclose any relationship. Do not list conflicted reviewers.]
+
+Thank you for your consideration.
+
+Sincerely,
+[Corresponding author name]
+[Institution]
+[Email]
+[ORCID, optional]
+On behalf of all authors
+
+Do not include confidential patient information. Replace all bracketed text and remove inapplicable sections.

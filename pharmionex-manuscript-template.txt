@@ -1,0 +1,55 @@
+PHARMIONEX RESEARCH JOURNAL — MANUSCRIPT TEMPLATE
+
+TITLE PAGE (keep separate for blinded review if requested)
+Article type:
+Full title:
+Short title:
+Authors and affiliations (number affiliations; mark corresponding author):
+Corresponding author name, postal address, email:
+ORCID iDs:
+Word count / tables / figures:
+
+ABSTRACT (original research: structured, approximately 200–300 words)
+Background / Aim:
+Methods:
+Results:
+Conclusion:
+
+Keywords (3–6):
+
+MAIN MANUSCRIPT
+1. Introduction
+2. Materials and Methods
+   Study design and setting:
+   Participants / materials:
+   Procedures and outcomes:
+   Statistical analysis:
+   Ethics approval / consent / registration:
+3. Results
+4. Discussion
+5. Conclusion
+
+DECLARATIONS (include each heading; state “Not applicable” where appropriate)
+Ethics approval and consent to participate:
+Consent for publication:
+Availability of data and materials:
+Competing interests:
+Funding and role of funder:
+Author contributions (CRediT roles where possible):
+Acknowledgements:
+Generative AI / AI-assisted tools (tool, purpose, human verification; or none):
+Trial registration (registry and identifier; if applicable):
+
+REFERENCES
+Use numbered references in order of first citation. Verify all bibliographic details and DOI values.
+
+TABLES
+Place editable tables after references or in separate files. Number and title each; define abbreviations.
+
+FIGURE LEGENDS
+Number in citation order. Supply figure files separately where appropriate; include permissions for reused content.
+
+SUPPLEMENTARY MATERIAL
+List each file and cite it in the manuscript. Include applicable reporting checklist and flow diagram.
+
+This editable template is a starting structure. Follow current author instructions and the applicable reporting guideline. Remove instructions and unused prompts before submission.

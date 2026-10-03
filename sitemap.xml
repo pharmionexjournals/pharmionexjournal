@@ -1,11 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://viveksharmamail11.github.io/pharma-research-hub/</loc></url>
-  <url><loc>https://viveksharmamail11.github.io/pharma-research-hub/about.html</loc></url>
-  <url><loc>https://viveksharmamail11.github.io/pharma-research-hub/current-issue.html</loc></url>
-  <url><loc>https://viveksharmamail11.github.io/pharma-research-hub/archives.html</loc></url>
-  <url><loc>https://viveksharmamail11.github.io/pharma-research-hub/policies.html</loc></url>
-  <url><loc>https://viveksharmamail11.github.io/pharma-research-hub/editorial-board.html</loc></url>
-  <url><loc>https://viveksharmamail11.github.io/pharma-research-hub/submit.html</loc></url>
-  <url><loc>https://viveksharmamail11.github.io/pharma-research-hub/contact.html</loc></url>
+  <url>
+    <loc>https://viveksharmamail11.github.io/pharma-research-hub/</loc>
+  </url>
+  <url>
+    <loc>https://viveksharmamail11.github.io/pharma-research-hub/about.html</loc>
+  </url>
+  <url>
+    <loc>https://viveksharmamail11.github.io/pharma-research-hub/current-issue.html</loc>
+  </url>
+  <url>
+    <loc>https://viveksharmamail11.github.io/pharma-research-hub/archives.html</loc>
+  </url>
+  <url>
+    <loc>https://viveksharmamail11.github.io/pharma-research-hub/policies.html</loc>
+  </url>
+  <url>
+    <loc>https://viveksharmamail11.github.io/pharma-research-hub/editorial-board.html</loc>
+  </url>
+  <url>
+    <loc>https://viveksharmamail11.github.io/pharma-research-hub/submit.html</loc>
+  </url>
+  <url>
+    <loc>https://viveksharmamail11.github.io/pharma-research-hub/contact.html</loc>
+  </url>
+  <url>
+    <loc>https://viveksharmamail11.github.io/pharma-research-hub/author-resources.html</loc>
+  </url>
 </urlset>
