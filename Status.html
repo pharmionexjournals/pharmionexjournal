@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root{font-family:Arial,Helvetica,sans-serif;color:#18313b;background:#fff}
+    body{margin:0;padding:20px}.card{max-width:620px;margin:auto;border:1px solid #d8e3e6;border-radius:14px;padding:24px;box-shadow:0 8px 24px #10252b12}
+    h1{font-size:1.35rem;margin:0 0 8px;color:#102b35}p{line-height:1.55;color:#4b6068}
+    label{display:block;font-weight:700;margin:16px 0 6px}input{box-sizing:border-box;width:100%;padding:12px;border:1px solid #aebfc4;border-radius:8px;font:inherit}
+    button{margin-top:18px;padding:12px 18px;border:0;border-radius:8px;background:#087b78;color:white;font-weight:700;font-size:1rem;cursor:pointer}
+    button:disabled{opacity:.65;cursor:wait}.result{margin-top:20px;padding:14px;border-radius:8px;background:#f2f7f7;line-height:1.5;white-space:pre-line}.error{background:#fff4f1;color:#6b2b1e}
+    .small{font-size:.88rem}.status{font-size:1.12rem;font-weight:700;color:#102b35}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Check manuscript status</h1>
+    <p>Enter the manuscript ID and private status-check code from the corresponding author receipt email. The checker displays only the current editorial stage and update date.</p>
+    <form id="lookup">
+      <label for="manuscriptId">Manuscript ID</label>
+      <input id="manuscriptId" name="manuscriptId" required autocomplete="off" placeholder="PX-2026-0001">
+      <label for="accessCode">Private status-check code</label>
+      <input id="accessCode" name="accessCode" required autocomplete="off" spellcheck="false" placeholder="Code from your receipt email">
+      <button id="check" type="submit">Check status</button>
+    </form>
+    <div id="result" class="result" role="status" aria-live="polite" hidden></div>
+    <p class="small">Keep your code private. If you lose it, email <a href="mailto:pharmionex.journal@gmail.com">pharmionex.journal@gmail.com</a> from the corresponding-author email address. Receipt does not mean a manuscript has been accepted.</p>
+  </main>
+  <script>
+    const form=document.getElementById('lookup'),button=document.getElementById('check'),result=document.getElementById('result');
+    form.addEventListener('submit',function(event){
+      event.preventDefault();button.disabled=true;button.textContent='Checking…';result.hidden=false;result.className='result';result.textContent='Checking securely…';
+      const id=document.getElementById('manuscriptId').value.trim();
+      const code=document.getElementById('accessCode').value.trim();
+      google.script.run.withSuccessHandler(function(data){
+        button.disabled=false;button.textContent='Check status';result.hidden=false;
+        if(!data||!data.ok){result.className='result error';result.textContent=data&&data.message?data.message:'Unable to check the status. Please try again later.';return;}
+        result.className='result';result.textContent='Current status: '+data.status+'\nLast updated: '+data.updated;
+      }).withFailureHandler(function(){button.disabled=false;button.textContent='Check status';result.hidden=false;result.className='result error';result.textContent='The status service is temporarily unavailable. Please try again later or email the editorial office.';}).getManuscriptStatus(id,code);
+    });
+  </script>
+</body>
+</html>
