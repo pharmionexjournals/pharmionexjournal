@@ -1,7 +1,7 @@
 {
   "name":"Pharmionex Research Journal",
   "short_name":"Pharmionex Research Journal",
-  "start_url":"/pharma-research-hub/",
+  "start_url":"/pharmionexjournal/",
   "display":"standalone",
   "background_color":"#071820",
   "theme_color":"#0e8b7b",
