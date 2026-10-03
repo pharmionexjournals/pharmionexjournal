@@ -1,0 +1,9 @@
+{
+  "name":"Pharmionex Research Journal",
+  "short_name":"Pharmionex Research Journal",
+  "start_url":"/pharma-research-hub/",
+  "display":"standalone",
+  "background_color":"#071820",
+  "theme_color":"#0e8b7b",
+  "icons":[{"src":"assets/favicon.svg","sizes":"any","type":"image/svg+xml"}]
+}
