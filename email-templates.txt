@@ -1,0 +1,51 @@
+PHARMIONEX — MANUAL EDITORIAL EMAIL TEMPLATES
+Use manuscript IDs in subjects. Replace bracketed text. For blind review, remove reviewer identity and consolidate comments before sending to authors.
+
+INCOMPLETE SUBMISSION
+Subject: Pharmionex submission [ID] — files or information needed
+Dear [Name],
+Thank you for your submission, “[Title]” ([ID]). Please provide the following to complete the initial check: [specific missing file/declaration]. Please reply by [date] and retain the manuscript ID in the subject. The submission has not yet entered peer review.
+Regards,
+Editorial Office · pharmionex.journal@gmail.com
+
+REVIEWER INVITATION
+Subject: Review invitation — manuscript [ID]
+Dear [Name],
+Would you be available to review “[Title]” ([ID]) for Pharmionex Research Journal? Please accept or decline by [date]. If accepted, please return your review by [deadline]. Disclose any competing interest. The manuscript is confidential; do not share, upload to third-party tools, or contact authors directly. [Insert private blinded file link.]
+Regards,
+[Editor]
+
+REVIEWER REMINDER
+Subject: Review reminder — manuscript [ID]
+Dear [Name],
+This is a reminder that your review of “[Title]” ([ID]) is due [date]. Please let us know if you need an extension or must decline.
+Regards,
+[Editor]
+
+DECISION — REVISION REQUESTED
+Subject: Decision on manuscript [ID] — [minor/major] revision
+Dear [Name],
+The decision on “[Title]” ([ID]) is [minor/major] revision. Please provide a revised manuscript, a marked copy if requested, and a point-by-point response by [date]. A revision does not guarantee acceptance. [Insert editor and anonymized reviewer comments.]
+Regards,
+[Editor]
+
+ACCEPTANCE
+Subject: Manuscript [ID] — accepted
+Dear [Name],
+We are pleased to accept “[Title]” ([ID]), subject to final production checks. Please confirm the author list, metadata, declarations, permissions, final files and proof corrections by [date]. [Include any remaining conditions.]
+Regards,
+[Editor]
+
+REJECTION
+Subject: Decision on manuscript [ID]
+Dear [Name],
+Thank you for submitting “[Title]” ([ID]). We are unable to accept this manuscript. [Provide a clear, reasoned explanation and anonymized comments where appropriate.]
+Regards,
+[Editor]
+
+APPEAL ACKNOWLEDGEMENT
+Subject: Appeal received — manuscript [ID]
+Dear [Name],
+We acknowledge your appeal concerning the decision on “[Title]” ([ID]). An editor not involved in the original decision will assess the grounds raised where practicable. The appeal process does not guarantee reconsideration or acceptance. We will contact you when the assessment is complete.
+Regards,
+Editorial Office

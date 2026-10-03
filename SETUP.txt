@@ -1,0 +1,31 @@
+PHARMIONEX AUTOMATION — LIVE SYSTEM NOTES
+
+Live components
+- Public manuscript intake form: https://docs.google.com/forms/d/e/1FAIpQLSfeNhcHdfcFAu_Z3MQY_lX_ju8lZXdai0CCKfW_jMNTN7yV7w/viewform
+- Private editorial tracker: open it from the journal Google account. Its link belongs only in restricted editorial records, never on the public website.
+- Editorial contact: pharmionex.journal@gmail.com
+
+The Apps Script setup has already been run for the journal account. It created the form and tracker and installed the form-submit, sheet-edit, and daily reminder triggers. Do not run setupPharmionex() again on the live project. Code.gs is retained as the source copy. Any changes to the live script must be made in the Google Apps Script project and reviewed before saving.
+
+What the system does
+- Collects article type, manuscript title, author details, ORCIDs, abstract, keywords, ethics/consent, trial registration, funding, conflicts, contributions, data and AI statements, reporting checklist, suggested reviewers, and a restricted Drive folder link.
+- Assigns sequential manuscript IDs and logs submissions in a private Sheet with Submissions, Reviewer Pool, Review Queue, and Publication Checklist tabs.
+- Sends author receipts, editor alerts, selected status emails, reviewer invitations, limited reminders, and publication-readiness alerts.
+- Does not assess research, choose reviewers, make editorial decisions, host secure files, produce article PDFs/HTML, deploy the journal website, or register DOIs.
+
+Before accepting live submissions
+1. Test the public form from a non-editor account and confirm the responder can submit.
+2. Verify receipt email, editor alert, manuscript ID, tracker row, status update email, and Drive access restrictions.
+3. Tell authors to share their manuscript folder directly with pharmionex.journal@gmail.com. Do not request public access for confidential material.
+4. Delete any dummy submission after the test. Keep the tracker private and limited to authorized editors.
+5. Name an inbox owner and backup; agree acknowledgement cadence, reviewer response windows, retention/deletion schedule, and backup routine.
+
+Tracker operation
+- Submissions: update Status for author notices; fill Handling editor and Revision due where applicable.
+- Reviewer Pool: keep expertise, contact details, conflicts, and last-verified dates current and private.
+- Review Queue: enter manuscript ID, reviewer contact, title, blinded manuscript link, and due date. Set Invitation status to READY to send an invitation. The editor records conflicts and reviewer responses.
+- Publication Checklist: complete required fields and set Approved to publish to YES only after editorial checks. This sends a readiness notice; publication remains manual.
+- Reminders are limited. Monitor Apps Script executions and email delivery; quotas and delivery can vary by account.
+
+Safeguards
+Use least-privilege access, protect reviewer identities, avoid unnecessary patient-identifiable information, keep periodic private backups, and follow applicable privacy and institutional requirements. This lightweight Google workflow is not a dedicated journal-management platform or a secure submission portal.
