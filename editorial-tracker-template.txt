@@ -1,0 +1,14 @@
+PHARMIONEX — PRIVATE EDITORIAL TRACKING LOG (BLANK TEMPLATE)
+Store completed records in access-restricted storage. Do not put this completed log on the public website. Limit personal information to what is necessary; use manuscript IDs in routine correspondence.
+
+Manuscript ID | Article type | Short title | Corresponding author contact | Date received | Completeness check | Ethics/reporting check | Handling editor | Conflict check | Reviewer A invited/date/response | Reviewer B invited/date/response | Decision/date | Revision due | Revision received | Final decision/date | Production/PDF check | Publication URL/DOI (verified only) | Notes / next action
+
+Example ID format: PX-2026-001 (example only; assign sequentially and check for duplicates).
+
+Status vocabulary: Received; incomplete; editor screening; reviewer invitation; under review; revision requested; revision received; accepted; rejected; production; published; withdrawn.
+
+Operating notes
+- Keep identity and blinded review files clearly separated.
+- Save received files, reviewer reports, author responses and decision letters by manuscript ID in a restricted folder.
+- Record only factual process notes and dates; avoid subjective or sensitive personal details.
+- Back up records appropriately; define retention and deletion arrangements before inviting submissions.
