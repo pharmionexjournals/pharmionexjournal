@@ -530,7 +530,7 @@
           <div class="card-header">
             <div>
               <h2 class="card-title">3. Interactive Manuscript Sections & Content Builder</h2>
-              <p class="card-subtitle">Compose or paste manuscript sections. Sections adapt automatically to your selected Article Type.</p>
+              <p class="card-subtitle">Compose or paste manuscript sections. Sections adapt automatically to your selected Article Type and follow the standard structure expected of UGC-CARE listed journals (main text plus Acknowledgements and Author Contributions).</p>
             </div>
             <div style="display:flex; gap:8px;">
               <button type="button" class="btn btn-outline btn-sm" onclick="applyArticleTypeTemplate()">🔄 Load Sections for Article Type</button>
@@ -618,6 +618,32 @@
               </div>
               <div class="editable-area" contenteditable="true" id="editor-conclusion" oninput="updateStats()">
                 <p>Summarize principal scientific findings and propose future translational research trajectories.</p>
+              </div>
+            </div>
+
+            <!-- Section 6: Acknowledgements -->
+            <div class="editor-section" id="sec-ack">
+              <h3 style="font-size:15px; font-weight:700; color:var(--primary); margin-bottom:8px;">6. Acknowledgements</h3>
+              <div class="editor-toolbar">
+                <button class="toolbar-btn" type="button" onclick="formatDoc('bold')">B</button>
+                <button class="toolbar-btn" type="button" onclick="formatDoc('italic')">I</button>
+                <button class="toolbar-btn" type="button" onclick="insertCitationPrompt()">[#] Cite</button>
+              </div>
+              <div class="editable-area" contenteditable="true" id="editor-ack" oninput="updateStats()">
+                <p>Acknowledge individuals, institutions or facilities that contributed but do not meet authorship criteria. Write "None" if not applicable.</p>
+              </div>
+            </div>
+
+            <!-- Section 7: Author Contributions -->
+            <div class="editor-section" id="sec-contrib">
+              <h3 style="font-size:15px; font-weight:700; color:var(--primary); margin-bottom:8px;">7. Author Contributions</h3>
+              <div class="editor-toolbar">
+                <button class="toolbar-btn" type="button" onclick="formatDoc('bold')">B</button>
+                <button class="toolbar-btn" type="button" onclick="formatDoc('italic')">I</button>
+                <button class="toolbar-btn" type="button" onclick="insertCitationPrompt()">[#] Cite</button>
+              </div>
+              <div class="editable-area" contenteditable="true" id="editor-contrib" oninput="updateStats()">
+                <p>State each author&#39;s contribution using CRediT roles (e.g. Conceptualization, Methodology, Investigation, Writing – original draft, Supervision).</p>
               </div>
             </div>
           </div>
@@ -817,10 +843,40 @@
         <div class="card-header">
           <div>
             <h2 class="card-title">📖 Instructions for Authors & Manuscript Guidelines</h2>
-            <p class="card-subtitle">Comprehensive standards for manuscript preparation, reporting frameworks, reference styles, and ethical requirements.</p>
+            <p class="card-subtitle">Comprehensive standards for manuscript preparation, reporting frameworks, reference styles, and ethical requirements, aligned with the norms expected of standard UGC-CARE listed journals.</p>
           </div>
           <button type="button" class="btn btn-primary btn-sm" onclick="switchMainView('submission')">✍️ Start Submission</button>
         </div>
+
+        <!-- UGC-CARE aligned publication standards -->
+        <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:var(--radius); padding:18px; margin-bottom:24px;">
+          <h3 style="font-size:15px; font-weight:700; color:#1e3a8a; margin-bottom:8px;">🏛️ Publication Standards (UGC-CARE Aligned)</h3>
+          <p style="font-size:12px; color:#334155; line-height:1.6; margin-bottom:10px;">
+            Pharmionex Journal follows the practices expected of standard, peer-reviewed journals considered for the UGC-CARE list. Manuscripts must meet the following requirements.
+          </p>
+          <ul style="font-size:12px; color:#334155; padding-left:18px; line-height:1.7;">
+            <li><strong>Peer Review:</strong> Every manuscript undergoes double-blind review by at least two independent subject experts before a decision.</li>
+            <li><strong>Originality &amp; Plagiarism:</strong> Work must be original and unpublished. Similarity must be below 10% (UGC academic integrity regulations); manuscripts above this are returned.</li>
+            <li><strong>Publication Ethics:</strong> COPE and ICMJE standards apply to authorship, conflicts of interest, data integrity, corrections and retractions. Fabrication, falsification, duplicate submission and salami slicing are not accepted.</li>
+            <li><strong>Authorship &amp; Identity:</strong> Full names, affiliations, corresponding-author email and ORCID iD are required for each author. Author contributions must be stated.</li>
+            <li><strong>Research Ethics:</strong> IAEC / IEC approval, informed consent and CTRI registration (where applicable) must be reported in the manuscript.</li>
+            <li><strong>Transparency:</strong> Funding, conflict of interest and data availability statements are mandatory. Use of AI tools must be disclosed; AI tools cannot be listed as authors.</li>
+            <li><strong>Referencing:</strong> Consistent Vancouver style, with DOIs. Avoid citations to predatory or unverifiable sources.</li>
+            <li><strong>Open Access &amp; Licence:</strong> Articles are published under CC BY 4.0 with no author fees.</li>
+          </ul>
+          <p style="font-size:11px; color:#64748b; margin-top:8px;">Note: UGC-CARE listing is decided solely by UGC-CARE. These guidelines describe the standards the journal follows and do not state any listing or indexing status.</p>
+        </div>
+
+        <!-- Standard manuscript structure -->
+        <h3 style="font-size:16px; font-weight:700; color:var(--primary); margin-bottom:12px;">🧾 Standard Manuscript Structure</h3>
+        <ol style="font-size:12px; color:#334155; padding-left:20px; line-height:1.8; margin-bottom:24px;">
+          <li><strong>Title page:</strong> Title, running title, all authors with affiliations and ORCID iDs, corresponding author email.</li>
+          <li><strong>Abstract &amp; Keywords:</strong> Structured abstract within the limit for the article type; 4 to 6 keywords.</li>
+          <li><strong>Main text:</strong> Introduction, Materials &amp; Methods, Results, Discussion, Conclusion (or the structure for your article type).</li>
+          <li><strong>Back matter:</strong> Acknowledgements, Author Contributions (CRediT roles), Funding, Conflict of Interest, Ethics Statement, Data Availability.</li>
+          <li><strong>References:</strong> Numbered in order of citation, Vancouver style, with DOIs.</li>
+          <li><strong>Tables, figures &amp; supplementary files:</strong> Each cited in the text with a numbered title and legend.</li>
+        </ol>
 
         <!-- Article Types Matrix Table -->
         <h3 style="font-size:16px; font-weight:700; color:var(--primary); margin-bottom:12px;">📋 Article Categories & Specifications</h3>
@@ -891,6 +947,8 @@
               <li><strong>Typography:</strong> 12 pt Times New Roman or Arial, double-spaced with continuous line numbers.</li>
               <li><strong>Title Page:</strong> Running title, full author names, institutional affiliations, and corresponding author email.</li>
               <li><strong>Keywords:</strong> 4 to 6 terms chosen from Medical Subject Headings (MeSH).</li>
+              <li><strong>Author Details:</strong> ORCID iD for every author; contributions stated using CRediT roles.</li>
+              <li><strong>Declarations:</strong> Funding, conflict of interest, ethics and data availability statements included in the manuscript.</li>
             </ul>
           </div>
 
@@ -924,7 +982,7 @@
         </div>
 
         <!-- Pre-Submission Verification Checklist -->
-        <h3 style="font-size:16px; font-weight:700; color:var(--primary); margin-bottom:12px;">✅ Pre-Submission 8-Point Checklist</h3>
+        <h3 style="font-size:16px; font-weight:700; color:var(--primary); margin-bottom:12px;">✅ Pre-Submission 12-Point Checklist</h3>
         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:10px;">
           <div style="background:var(--surface-muted); padding:10px 14px; border-radius:4px; font-size:12px;">
             ☑️ <strong>1. Authorship:</strong> All co-authors meet ICMJE criteria and approved final manuscript.
@@ -949,6 +1007,18 @@
           </div>
           <div style="background:var(--surface-muted); padding:10px 14px; border-radius:4px; font-size:12px;">
             ☑️ <strong>8. Data Access:</strong> Raw chromatographic / spectral datasets available in supplementary files.
+          </div>
+          <div style="background:var(--surface-muted); padding:10px 14px; border-radius:4px; font-size:12px;">
+            ☑️ <strong>9. ORCID &amp; Contributions:</strong> ORCID iD and CRediT author contributions provided for all authors.
+          </div>
+          <div style="background:var(--surface-muted); padding:10px 14px; border-radius:4px; font-size:12px;">
+            ☑️ <strong>10. Structure:</strong> Abstract, keywords, main text, back matter and references follow the standard manuscript structure.
+          </div>
+          <div style="background:var(--surface-muted); padding:10px 14px; border-radius:4px; font-size:12px;">
+            ☑️ <strong>11. AI Disclosure:</strong> Any use of AI tools declared; no AI tool listed as an author.
+          </div>
+          <div style="background:var(--surface-muted); padding:10px 14px; border-radius:4px; font-size:12px;">
+            ☑️ <strong>12. Journal Quality:</strong> All cited sources are verifiable; no citations to predatory journals.
           </div>
         </div>
       </div>

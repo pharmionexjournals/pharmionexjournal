@@ -41,7 +41,9 @@ var state = {
     { id: "methods", title: "2. Materials & Methods", content: "" },
     { id: "results", title: "3. Results", content: "" },
     { id: "discussion", title: "4. Discussion", content: "" },
-    { id: "conclusion", title: "5. Conclusion", content: "" }
+    { id: "conclusion", title: "5. Conclusion", content: "" },
+    { id: "ack", title: "6. Acknowledgements", content: "" },
+    { id: "contrib", title: "7. Author Contributions", content: "" }
   ],
   references: [],
   uploadedFiles: {
@@ -447,6 +449,12 @@ function applyArticleTypeTemplate() {
       { id: "conclusion", title: "5. Conclusion", content: "<p>Summarize principal conclusions and highlight recommended directions for future investigation.</p>" }
     ];
   }
+
+  // Standard back matter expected of UGC-CARE style journals (all article types)
+  state.sections.push(
+    { id: "ack", title: "6. Acknowledgements", content: "<p>Acknowledge individuals, institutions or facilities that contributed but do not meet authorship criteria. Write 'None' if not applicable.</p>" },
+    { id: "contrib", title: "7. Author Contributions", content: "<p>State each author's contribution using CRediT roles (e.g. Conceptualization, Methodology, Investigation, Writing – original draft, Supervision).</p>" }
+  );
 
   // Update UI editor panes
   renderCustomSectionsUI();
@@ -1264,6 +1272,27 @@ function renderLivePreview() {
       b.innerHTML = sec.content || "<p>No content provided in this section.</p>";
       pvBody.appendChild(h);
       pvBody.appendChild(b);
+    });
+
+    // Mandatory declarations shown in the manuscript (funding, COI, ethics, data availability)
+    const decl = state.declarations || {};
+    const ethicsParts = [];
+    if (decl.iaecProtocol) ethicsParts.push("Ethics approval: " + decl.iaecProtocol);
+    if (decl.ctriNumber) ethicsParts.push("CTRI registration: " + decl.ctriNumber);
+    const declItems = [
+      ["Funding", decl.funding],
+      ["Conflict of Interest", decl.coi],
+      ["Ethics Statement", ethicsParts.join("; ")],
+      ["Data Availability", decl.dataAvailability]
+    ];
+    declItems.forEach(function (item) {
+      const dh = document.createElement("h2");
+      dh.className = "preview-section-title";
+      dh.innerText = item[0];
+      const dp = document.createElement("p");
+      dp.innerText = item[1] && item[1].trim() ? item[1] : "Not provided.";
+      pvBody.appendChild(dh);
+      pvBody.appendChild(dp);
     });
   }
 
