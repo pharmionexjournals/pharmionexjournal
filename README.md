@@ -1,32 +1,109 @@
-# Pharmionex Research Journal
+# Journal Article Builder & Manuscript Submission System
 
-Static journal website with a live Google Forms intake, private editorial tracker, and Apps Script email/status automation.
+A modern, responsive, zero-dependency web application designed for academic journals, publishers, and scientific conferences. It provides authors with a structured environment to author articles section-by-section and submit complete manuscript packages.
 
-## Live editorial system
-- Submission form: https://docs.google.com/forms/d/e/1FAIpQLSfeNhcHdfcFAu_Z3MQY_lX_ju8lZXdai0CCKfW_jMNTN7yV7w/viewform
-- Private tracker: available from the journal Google account. Do not publish its link or give access to unauthorized people.
-- Editorial contact: pharmionex.journal@gmail.com
+[![GitHub Pages](https://img.shields.io/badge/Deploy-GitHub%20Pages-blue.svg)](https://pages.github.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Tech: Vanilla JS](https://img.shields.io/badge/Tech-HTML5%20%7C%20CSS3%20%7C%20ES6-green.svg)]()
 
-Authors use the public Form for manuscript metadata and declarations. For manuscript files, follow the Form instructions and share the restricted Drive folder directly with the journal account. The intake receipt confirms arrival only; editors make all screening, peer-review, ethics and publication decisions. The website does not host submissions or provide a secure manuscript portal.
+---
 
-The Apps Script source and operating instructions are in the private `automation/` folder. Do not run `setupPharmionex()` again on the live project. The existing system handles intake, acknowledgements, status notices, reviewer invitations, and capped reminders. The complete package adds a private editor Dashboard, unique reviewer-report collection, Editorial Cases log, and weekly tracker-only backups; these require the account owner to apply `Code.gs`, run `setupOperationalEnhancements_()`, authorize it, and deploy a new version. Follow `automation/SETUP.txt`. The live status-check web app returns only a general editorial stage and date after verifying the manuscript ID and private receipt code. The published-article list reads only approved release records. Acceptance creates a private production checklist; after the team publishes and verifies an article page and PDF and marks the release Published, the current-issue and archive lists update from approved metadata.
+## 🌟 Core Features
 
-## Author and editorial resources
-`downloads/` contains editable plain-text author/editor templates plus browser-readable `.htm` copies. The `.htm` files retain legacy download paths that older site links used; they also include a working link to the editable text file. Test these paths after upload and preserve the `downloads/` folder name and casing. The folder also contains the private go-live/first-publication checklist; completed copies must remain private.
+### 1. Bibliographic Metadata & Author Hierarchy
+- Article metadata fields: Title, Publication Track/Category (Research, Review, Short Communication, Methodology, Case Study), Abstract, Keywords.
+- Dynamic author management: Add/remove co-authors, institutional affiliations, country, ORCID iD, and designation of the Corresponding Author.
 
-The article template creates metadata-driven BibTeX, RIS, and JSON preparation exports. It refuses to export when the title, authors, or publication date still look like placeholders. The JSON packet is for editorial review and metadata handoff; it does not register a DOI or create a Crossref deposit. Update the citation meta tags and structured JSON-LD to match the final article before removing `noindex`.
+### 2. Interactive Article Builder (IMRAD Architecture)
+- Built around standard scientific journal sections:
+  - **1. Introduction**
+  - **2. Materials & Methods**
+  - **3. Results**
+  - **4. Discussion**
+  - **5. Conclusion**
+  - **Custom Sections**: Authors can add any number of additional sections.
+- Rich-text formatting toolbar: Bold, Italic, Underline, Bulleted/Numbered Lists, Table Generator, Formula/Equation formatting, and Reference Citation markers (`[#]`).
+- Integrated bibliography and reference management with automated numbering.
 
-The private Publication Checklist is a release gate with YES/NO validations, metadata/date/ORCID/DOI checks, and explicit declarations, references, accessibility, second-person review, and preservation-copy checks. The script rechecks the article when the editor changes any checklist cell. The published-article feed still exposes only records marked Published and Public listing approved = YES.
+### 3. Manuscript File Upload Form
+- Drag-and-drop & file picker upload zone supporting:
+  - **Primary Manuscript**: `.pdf`, `.docx`, `.doc`, `.tex`, `.zip` (up to 50 MB)
+  - **Supplementary Files**: Data spreadsheets (`.xlsx`, `.csv`), ZIP archives, high-resolution figures (`.png`, `.jpg`, `.tif`).
+- Real-time client-side file validation and file removal.
 
-`publishing-information.html` records publisher, governance, fee, identifier, and preservation status without inventing pending legal details. `automation/SECURITY_RECOVERY_CHECKLIST.txt` is private. It covers owners, account controls, access review, backups, incident response, and restoration. The external preservation-service field stays pending until the journal actually enrols and deposits content.
+### 4. Ethics, Disclosures & Compliance
+- Standard ICMJE/COPE declarations:
+  - Funding and grant disclosures.
+  - Conflict of interest (COI) statements.
+  - Data availability statements.
+  - Mandatory confirmation checkboxes for originality, co-author consensus, and CC BY 4.0 copyright agreement.
 
-Never upload the `automation/` folder, completed internal records, reviewer reports, or confidential manuscript files to this public website. Restrict access to the tracker and Drive folders. Avoid unnecessary personal or identifiable patient data, approve and apply a retention schedule, use account security features, and keep private backups. The automatic backup covers the tracker spreadsheet only, not manuscript folders or website files.
+### 5. Live Journal Preview, Auto-Save & Submission Receipt
+- Real-time academic journal preview with 1-column or 2-column layout toggle.
+- Print-to-PDF support with specialized `@media print` typography.
+- Automatic draft saving to browser `localStorage` every 20 seconds.
+- JSON draft export and import functionality.
+- Formal submission confirmation dialog with unique tracking ID (`JAST-YYYY-XXXX`) and downloadable text receipt.
 
-## Journal status
-The journal is new and does not claim an assigned ISSN/DOI, external indexing, preservation service, or publication track record. Do not fabricate identifiers. DOI registration requires an active registration arrangement. Publisher details, board appointments, frequency, rights, and any policy not formally adopted must be confirmed before being presented as established.
+---
 
-## Website updates and publication
-Publish the website files to the configured public website root, preserving the supplied folder and file names. Article HTML pages and PDFs are prepared and published manually. Once a real article has passed the private release checklist and is marked Published and listing-approved, Current Issue and Archives read the approved metadata from the live editorial feed. If the feed is temporarily unavailable, the pages use `published-articles.json`; only add a verified, released article there. Keep that public fallback file free of private editorial data. Each article must have a stable page, verified metadata, references, declarations, article history, and HTML/PDF full text before listing. Only add a DOI after registration is completed.
+## 📁 Repository Structure
 
-## Before accepting live submissions
-Complete a test from a non-editor account. Confirm the Form is open to intended authors, the receipt and editor alert arrive, the tracker creates the expected row and ID, file access is restricted to the journal account, and status emails work. Remove the test record after verification. Ensure someone monitors the inbox and tracker, and clearly tell authors what is required for Drive access.
+```text
+journal-article-builder/
+├── index.html                 # Main standalone single-page application
+├── README.md                  # Project documentation & setup instructions
+├── LICENSE                    # MIT open-source license
+├── .gitignore                 # Standard git ignore definitions
+└── .github/
+    └── workflows/
+        └── pages.yml          # Automated GitHub Pages deployment workflow
+```
+
+---
+
+## 🚀 How to Run Locally
+
+1. Clone or download this repository:
+   ```bash
+   git clone https://github.com/YOUR-USERNAME/journal-article-builder.git
+   cd journal-article-builder
+   ```
+2. Open `index.html` directly in any web browser (Google Chrome, Firefox, Safari, Microsoft Edge).
+3. No build tools, Node.js packages, or external CDN dependencies are required.
+
+---
+
+## 🌐 Deploy to GitHub Pages (Free Hosting)
+
+You can host this application live for free on GitHub Pages:
+1. Push this repository to GitHub.
+2. Go to your repository's **Settings** tab.
+3. In the left sidebar, click **Pages**.
+4. Under **Build and deployment** > **Branch**, select `main` (or `master`) branch and folder `/ (root)`.
+5. Click **Save**. Your portal will be live at `https://<your-username>.github.io/<repo-name>/`.
+
+---
+
+## 🔌 Backend Integration
+
+To connect the submission form to your own backend API (Python Flask/Django, Node.js, Express, PHP, etc.):
+1. Open `index.html`.
+2. Locate the function `submitArticleToJournal()` in the `<script>` section.
+3. Replace the `console.log("Journal Manuscript Submission Payload:", ...)` statement with an HTTP `fetch` request:
+   ```javascript
+   fetch("/api/submissions", {
+     method: "POST",
+     headers: { "Content-Type": "application/json" },
+     body: JSON.stringify(payload)
+   })
+   .then(res => res.json())
+   .then(data => {
+     // Handle success
+   });
+   ```
+
+---
+
+## 📄 License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
