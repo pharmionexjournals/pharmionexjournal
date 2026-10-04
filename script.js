@@ -273,6 +273,8 @@ let lastActiveEditorId = "editor-intro";
 document.addEventListener("DOMContentLoaded", () => {
   loadDraftFromStorage();
   loadSavedSubmissions();
+  applyTypeConfigUI(state.articleType);
+  renderCustomSectionsUI();
   renderAuthors();
   renderReferences();
   updateStats();
@@ -369,96 +371,242 @@ function showToast(message, type = "success") {
 }
 
 /* ==========================================================================
+   Article Type Configuration (single source of truth for the Article Builder)
+   ========================================================================== */
+var BACK_MATTER = [
+  { id: "ack", title: "Acknowledgements", hint: "Acknowledge individuals, institutions or facilities that contributed but do not meet authorship criteria. Write 'None' if not applicable." },
+  { id: "contrib", title: "Author Contributions", hint: "State each author's contribution using CRediT roles (e.g. Conceptualization, Methodology, Investigation, Writing – original draft, Supervision)." }
+];
+
+var IMRAD_SECTIONS = [
+  ["intro", "Introduction", "Introduce the background, state the research gap, and clearly define the objectives of this study."],
+  ["methods", "Materials & Methods", "Detail all reagents, equipment, formulation procedures, and statistical methods to ensure reproducibility."],
+  ["results", "Results", "Present quantitative findings with tables, chromatographic traces, and statistical analysis."],
+  ["discussion", "Discussion", "Interpret results in the context of prior literature, discuss broader scientific implications, and acknowledge study limitations."],
+  ["conclusion", "Conclusion", "Summarize principal conclusions and highlight recommended directions for future investigation."]
+];
+
+var ARTICLE_TYPE_CONFIG = {
+  "Original Research Article": {
+    hint: "Full-length original empirical investigation. Standard IMRAD structure required.",
+    limit: "Target Length: 4,000 – 7,000 words", abstractMax: 300,
+    abstractPlaceholder: "Background: State the clinical or pharmaceutical rationale.\nMethods: Summarize experimental formulation and analytical validation.\nResults: Highlight principal quantitative findings.\nConclusion: State principal conclusions and therapeutic impact.",
+    sections: IMRAD_SECTIONS
+  },
+  "Comprehensive Review Article": {
+    hint: "Critical, state-of-the-art literature synthesis evaluating the past 5–10 years.",
+    limit: "Target Length: 6,000 – 12,000 words (80+ references)", abstractMax: 350,
+    abstractPlaceholder: "Background: Define therapeutic challenge or technology.\nScope of Review: Outline literature sources and mechanistic aspects covered.\nKey Insights: Summarize critical advances and comparative delivery systems.\nConclusion & Future Perspectives: Address unresolved hurdles and translational outlook.",
+    sections: [
+      ["intro", "Introduction & Historical Context", "Introduce the therapeutic need, historical context, and fundamental mechanisms of the topic under review."],
+      ["methods", "Mechanistic Review & Classification", "Detail the biochemical classifications, molecular targets, and physicochemical properties."],
+      ["results", "Recent Technological Advances (Past 5–10 Years)", "Critically synthesize recent peer-reviewed literature, delivery systems, and clinical trial outcomes."],
+      ["discussion", "Current Challenges & Critical Analysis", "Critique current limitations, scale-up bottlenecks, toxicological liabilities, and bioequivalence hurdles."],
+      ["conclusion", "Future Perspectives & Concluding Remarks", "Highlight anticipated breakthroughs, regulatory perspectives, and research trajectories for the next decade."]
+    ]
+  },
+  "Short Communication / Rapid Letter": {
+    hint: "Urgent preliminary breakthrough or novel technological observation warranting rapid publication.",
+    limit: "Target Length: 2,000 – 3,500 words (up to 3 figures/tables)", abstractMax: 200,
+    abstractPlaceholder: "Concise unstructured abstract summarizing the preliminary discovery, methodology, and primary quantitative evidence (max 200 words).",
+    sections: [
+      ["intro", "Introduction", "Brief context of scientific novelty and the urgency that justifies rapid publication."],
+      ["methods", "Materials & Methods", "Concise but fully reproducible experimental protocols and characterization techniques."],
+      ["results", "Results & Discussion", "Combine key results with their interpretation; keep to a maximum of 3 figures/tables."],
+      ["conclusion", "Conclusion", "State the core finding, immediate utility, and follow-up investigation directions."]
+    ]
+  },
+  "Methodology & Validation Protocol": {
+    hint: "Step-by-step validated chromatographic or laboratory procedure strictly complying with ICH Q2.",
+    limit: "Target Length: 3,500 – 6,000 words (Detailed SOP required)", abstractMax: 250,
+    abstractPlaceholder: "Background: Analytical challenge and regulatory context.\nMethod Principles: Stationary phase, mobile phase, and detection parameters.\nValidation Findings: Specificity, precision, accuracy, LOD, LOQ, and robustness.\nApplication: Routine commercial batch testing.",
+    sections: [
+      ["intro", "Introduction & Method Rationale", "Describe the target active pharmaceutical ingredients (APIs), dosage forms, and analytical challenges justifying the method."],
+      ["methods", "Reagents, Standards & Equipment SOP", "Specify high-purity solvents, primary reference standards, chromatographic columns, instrumentation, and standard operating procedures (SOP)."],
+      ["results", "Step-by-Step Chromatographic / Analytical Protocol", "Detail gradient/isocratic programs, flow rate, column temperature, injection volume, and system suitability criteria."],
+      ["discussion", "Validation Parameters under ICH Q2(R1)", "Present empirical data for specificity, linearity, precision (% RSD), accuracy (recovery %), LOD, LOQ, and robustness."],
+      ["conclusion", "Application to Finished Commercial Formulations & Conclusion", "Demonstrate routine assay on commercial batches and state the conclusion on regulatory compliance."]
+    ]
+  },
+  "Industrial Research Article": {
+    hint: "Manufacturing, formulation, scale-up and stability research with industrial relevance.",
+    limit: "Target Length: 4,000 – 7,000 words", abstractMax: 250,
+    abstractPlaceholder: "Industrial Context: State the formulation or manufacturing problem.\nFormulation Engineering: Summarize design, excipients and process parameters.\nStability & Quality: Report critical quality attributes and ICH stability findings.\nScalability: State scale-up relevance.",
+    sections: [
+      ["intro", "Introduction & Formulation Rationale", "Describe the commercial formulation challenge, excipient compatibility, and scale-up objectives."],
+      ["methods", "Materials & Manufacturing Methods", "Detail pilot batch manufacturing, equipment parameters, in-process controls (IPQC), and ICH Q1A storage conditions."],
+      ["results", "Critical Quality Attributes & Stability Results", "Report weight variation, content uniformity, disintegration, dissolution, and stability data with tables."],
+      ["discussion", "Discussion & Scale-up Considerations", "Interpret batch-to-batch reproducibility, process robustness, and regulatory implications."],
+      ["conclusion", "Conclusion & Industrial Recommendations", "Give practical recommendations for formulation scientists and shelf-life determination."]
+    ]
+  },
+  "Regulatory & Review Article": {
+    hint: "Analysis of drug regulation, Schedule M, cGMP, pharmaceutical quality systems and compliance.",
+    limit: "Target Length: 4,500 – 8,000 words", abstractMax: 250,
+    abstractPlaceholder: "Regulatory Context: Define the regulation or guideline examined.\nCompliance Challenges: Summarize gaps and risks.\nImplementation Framework: Outline the proposed approach.\nPolicy Impact: State implications for industry and regulators.",
+    sections: [
+      ["intro", "Introduction & Regulatory Context", "Examine the evolving statutory requirements (CDSCO, USFDA, EMA, WHO) relevant to the topic."],
+      ["methods", "Regulatory Framework & Methodology", "Describe the guidelines, sources, audit approaches, and risk assessment methods used."],
+      ["results", "Analysis of Findings & Compliance Gaps", "Present recurring audit findings, remediation workflows, and CAPA effectiveness."],
+      ["discussion", "Discussion & Implementation Framework", "Discuss practical implementation, quality risk management (ICH Q9) and quality systems (ICH Q10)."],
+      ["conclusion", "Conclusion & Policy Recommendations", "Offer actionable recommendations for manufacturers and regulators."]
+    ]
+  },
+  "Pharmacokinetic Research Article": {
+    hint: "IVIVC, PK/PD modelling, bioavailability and bioequivalence investigations.",
+    limit: "Target Length: 4,000 – 7,000 words", abstractMax: 250,
+    abstractPlaceholder: "Objective: State the pharmacokinetic question.\nStudy Design: Describe subjects/animals, dosing and sampling.\nBioanalytical Assay & Results: Report Cmax, Tmax, AUC and IVIVC outcomes.\nConclusion: State the correlation or bioequivalence conclusion.",
+    sections: [
+      ["intro", "Introduction", "Give the therapeutic rationale, target pharmacokinetic parameters (Cmax, Tmax, AUC), and the study objective."],
+      ["methods", "Study Design, Subjects & Bioanalytical Methods", "Describe study design, ethical approvals (IEC/IAEC/CTRI), dosing, sampling timetable, and validated bioanalytical assay."],
+      ["results", "Pharmacokinetic Results & IVIVC", "Present PK parameters, deconvolution (e.g. Wagner-Nelson), correlation levels, and 90% confidence intervals."],
+      ["discussion", "Discussion", "Interpret findings against prior literature, discuss PK/PD relevance, and acknowledge limitations."],
+      ["conclusion", "Conclusion", "State whether in-vitro data predict in-vivo performance and any biowaiver implications."]
+    ]
+  },
+  "Clinical Case Study & Pharmacovigilance": {
+    hint: "Rare adverse drug reaction (ADR), clinical drug interaction, or off-label therapeutic observation.",
+    limit: "Target Length: 2,000 – 3,500 words (Naranjo score required)", abstractMax: 250,
+    abstractPlaceholder: "Background: Clinical significance of drug reaction.\nCase Presentation: Patient demographics, drug administration, and clinical course.\nCausality Assessment: Naranjo ADR probability score and WHO-UMC category.\nTakeaway Lessons: Clinical implications for pharmacy practice.",
+    sections: [
+      ["intro", "Introduction", "Introduce the drug class, established safety profile, and pharmacological rationale for vigilance."],
+      ["methods", "Case Presentation & Clinical History", "Detail patient presentation, medical history, concurrent pharmacotherapy, dosage timeline, and onset of symptoms. Do not include identifiable patient data; obtain informed consent."],
+      ["results", "Diagnostic Findings & ADR Causality Scoring", "Present laboratory workups, dechallenge/rechallenge outcomes, and the Naranjo algorithm score."],
+      ["discussion", "Discussion & Pharmacological Mechanisms", "Examine drug-drug interactions, pharmacogenomic predispositions, and comparative adverse event literature."],
+      ["conclusion", "Clinical Lessons & Practice Recommendations", "Summarize takeaway guidance for clinical pharmacists and healthcare practitioners."]
+    ]
+  },
+  "Systematic Review & Meta-Analysis": {
+    hint: "Systematic review conducted in adherence to PRISMA 2020 guidelines.",
+    limit: "Target Length: 5,000 – 10,000 words", abstractMax: 300,
+    abstractPlaceholder: "Objective: State the review question (PICO).\nData Sources: List databases searched and dates.\nStudy Selection & Synthesis: Describe screening, risk of bias and pooled results.\nConclusion: State the main conclusion and certainty of evidence.",
+    sections: [
+      ["intro", "Introduction", "State the clinical question in PICO format and justify why a new synthesis is needed. Mention protocol registration (e.g. PROSPERO)."],
+      ["methods", "Methods (Search Strategy, Selection & Risk of Bias)", "Report databases, full search strings, eligibility criteria, dual-reviewer screening, and risk-of-bias tools (RoB 2, ROBINS-I)."],
+      ["results", "Results (PRISMA Flow & Synthesis)", "Include the PRISMA flow diagram, study characteristics table, forest plots, heterogeneity (I²) and GRADE ratings."],
+      ["discussion", "Discussion", "Interpret pooled effects in clinical context and discuss limitations of the included evidence."],
+      ["conclusion", "Conclusion", "Recommend practice or research priorities."]
+    ]
+  }
+};
+
+// Text that older versions stored as if it were real content (treated as empty)
+var LEGACY_PLACEHOLDER_TEXTS = [
+  "Introduce the therapeutic background, cite existing literature gaps, and state the formal research objectives.",
+  "Detail all reagents, formulations, analytical equipment, experimental parameters, and statistical validation methods.",
+  "Present findings clearly with tables, figures, chromatographic retention parameters, and kinetic release data.",
+  "Interpret results in relation to prior literature, discuss therapeutic mechanisms, and address study limitations.",
+  "Summarize principal scientific findings and propose future translational research trajectories.",
+  "Compose section content here...",
+  "Compose custom research section content here..."
+];
+
+function getTypeConfig(type) {
+  return ARTICLE_TYPE_CONFIG[type] || ARTICLE_TYPE_CONFIG["Original Research Article"];
+}
+
+function defaultSectionsForType(type) {
+  const cfg = getTypeConfig(type);
+  const out = [];
+  cfg.sections.forEach((s, i) => out.push({ id: s[0], title: (i + 1) + ". " + s[1], hint: s[2], content: "" }));
+  BACK_MATTER.forEach((b, k) => out.push({ id: b.id, title: (cfg.sections.length + k + 1) + ". " + b.title, hint: b.hint, content: "" }));
+  return out;
+}
+
+function htmlToText(html) {
+  const d = document.createElement("div");
+  d.innerHTML = html || "";
+  return (d.textContent || "").replace(/\u00a0/g, " ").trim();
+}
+
+function isPlaceholderText(text) {
+  if (!text) return true;
+  if (LEGACY_PLACEHOLDER_TEXTS.indexOf(text) !== -1) return true;
+  for (const k in ARTICLE_TYPE_CONFIG) {
+    const c = ARTICLE_TYPE_CONFIG[k];
+    for (let i = 0; i < c.sections.length; i++) if (c.sections[i][2] === text) return true;
+  }
+  for (let i = 0; i < BACK_MATTER.length; i++) if (BACK_MATTER[i].hint === text) return true;
+  return false;
+}
+
+// True when a section holds real author-written content (not empty / not a template hint)
+function hasRealContent(html) {
+  if (!html) return false;
+  if (/<(table|img)\b/i.test(html)) return true;
+  return !isPlaceholderText(htmlToText(html));
+}
+
+function sectionHint(sec) {
+  if (sec.hint) return sec.hint;
+  const cfg = getTypeConfig(state.articleType);
+  for (let i = 0; i < cfg.sections.length; i++) if (cfg.sections[i][0] === sec.id) return cfg.sections[i][2];
+  for (let i = 0; i < BACK_MATTER.length; i++) if (BACK_MATTER[i].id === sec.id) return BACK_MATTER[i].hint;
+  return "Compose section content here...";
+}
+
+/* ==========================================================================
    Article Type Dynamic Configuration in Submission Wizard
    ========================================================================== */
+function applyTypeConfigUI(type) {
+  const cfg = getTypeConfig(type);
+  const hintEl = document.getElementById("articleTypeHint");
+  const wordLimitEl = document.getElementById("typeWordLimitBadge");
+  const absEl = document.getElementById("articleAbstract");
+  const maxEl = document.getElementById("abstractMaxCount");
+  if (hintEl) hintEl.innerText = cfg.hint;
+  if (wordLimitEl) wordLimitEl.innerText = cfg.limit;
+  if (absEl) absEl.placeholder = cfg.abstractPlaceholder;
+  if (maxEl) maxEl.innerText = cfg.abstractMax;
+}
+
 function onArticleTypeChange() {
   const typeSelect = document.getElementById("articleType");
   if (!typeSelect) return;
   state.articleType = typeSelect.value;
-
-  const hintEl = document.getElementById("articleTypeHint");
-  const wordLimitEl = document.getElementById("typeWordLimitBadge");
-  const absPlaceholder = document.getElementById("articleAbstract");
-
-  if (state.articleType === "Original Research Article") {
-    if (hintEl) hintEl.innerText = "Full-length original empirical investigation. Standard IMRAD structure required.";
-    if (wordLimitEl) wordLimitEl.innerText = "Target Length: 4,000 – 7,000 words";
-    if (absPlaceholder) absPlaceholder.placeholder = "Background: State the clinical or pharmaceutical rationale.\nMethods: Summarize experimental formulation and analytical validation.\nResults: Highlight principal quantitative findings.\nConclusion: State principal conclusions and therapeutic impact.";
-  } else if (state.articleType === "Comprehensive Review Article") {
-    if (hintEl) hintEl.innerText = "Critical, state-of-the-art literature synthesis evaluating the past 5–10 years.";
-    if (wordLimitEl) wordLimitEl.innerText = "Target Length: 6,000 – 12,000 words (80+ references)";
-    if (absPlaceholder) absPlaceholder.placeholder = "Background: Define therapeutic challenge or technology.\nScope of Review: Outline literature sources and mechanistic aspects covered.\nKey Insights: Summarize critical advances and comparative delivery systems.\nConclusion & Future Perspectives: Address unresolved hurdles and translational Outlook.";
-  } else if (state.articleType === "Short Communication / Rapid Letter") {
-    if (hintEl) hintEl.innerText = "Urgent preliminary breakthrough or novel technological observation warranting rapid publication.";
-    if (wordLimitEl) wordLimitEl.innerText = "Target Length: 2,000 – 3,500 words (up to 3 figures/tables)";
-    if (absPlaceholder) absPlaceholder.placeholder = "Concise unstructured abstract summarizing the preliminary discovery, methodology, and primary quantitative evidence (max 200 words).";
-  } else if (state.articleType === "Methodology & Validation Protocol") {
-    if (hintEl) hintEl.innerText = "Step-by-step validated chromatographic or laboratory procedure strictly complying with ICH Q2.";
-    if (wordLimitEl) wordLimitEl.innerText = "Target Length: 3,500 – 6,000 words (Detailed SOP required)";
-    if (absPlaceholder) absPlaceholder.placeholder = "Background: Analytical challenge and regulatory context.\nMethod Principles: Stationary phase, mobile phase, and detection parameters.\nValidation Findings: Specificity, precision, accuracy, LOD, LOQ, and robustness.\nApplication: Routine commercial batch testing.";
-  } else if (state.articleType === "Clinical Case Study & Pharmacovigilance") {
-    if (hintEl) hintEl.innerText = "Rare adverse drug reaction (ADR), clinical drug interaction, or off-label therapeutic observation.";
-    if (wordLimitEl) wordLimitEl.innerText = "Target Length: 2,000 – 3,500 words (Naranjo score required)";
-    if (absPlaceholder) absPlaceholder.placeholder = "Background: Clinical significance of drug reaction.\nCase Presentation: Patient demographics, drug administration, and clinical course.\nCausality Assessment: Naranjo ADR probability score and WHO-UMC category.\nTakeaway Lessons: Clinical implications for pharmacy practice.";
-  } else if (state.articleType === "Systematic Review & Meta-Analysis") {
-    if (hintEl) hintEl.innerText = "Systematic review conducted in adherence to PRISMA 2020 guidelines.";
-    if (wordLimitEl) wordLimitEl.innerText = "Target Length: 5,000 – 10,000 words";
-  } else if (state.articleType === "Regulatory Perspective & Expert Commentary") {
-    if (hintEl) hintEl.innerText = "Authoritative expert perspective on pharmaceutical legislation, Schedule M, or ICH guidelines.";
-    if (wordLimitEl) wordLimitEl.innerText = "Target Length: 1,500 – 3,500 words";
-  }
-
+  applyTypeConfigUI(state.articleType);
+  // Re-shape the section outline; anything the author already wrote is carried over
+  rebuildSections(state.articleType);
   showToast(`Configured submission parameters for: ${state.articleType}`, "info");
   triggerAutoSave();
 }
 
-function applyArticleTypeTemplate() {
-  const type = state.articleType || "Original Research Article";
+function rebuildSections(type) {
+  updateStats(); // pull the latest text out of the editors first
+  const cfg = getTypeConfig(type);
+  const old = state.sections.slice();
+  const fresh = [];
+  cfg.sections.forEach((s, i) => fresh.push({ id: s[0], title: (i + 1) + ". " + s[1], hint: s[2], content: "" }));
+  BACK_MATTER.forEach((b, k) => fresh.push({ id: b.id, title: (cfg.sections.length + k + 1) + ". " + b.title, hint: b.hint, content: "" }));
 
-  if (type === "Comprehensive Review Article") {
-    state.sections = [
-      { id: "intro", title: "1. Introduction & Historical Context", content: "<p>Introduce the therapeutic need, historical context, and fundamental mechanisms of the topic under review.</p>" },
-      { id: "methods", title: "2. Mechanistic Review & Classification", content: "<p>Detail the biochemical classifications, molecular targets, and physicochemical properties.</p>" },
-      { id: "results", title: "3. Recent Technological Advances (Past 5–10 Years)", content: "<p>Critically synthesize recent peer-reviewed literature, delivery systems, and clinical trial outcomes.</p>" },
-      { id: "discussion", title: "4. Current Challenges & Critical Analysis", content: "<p>Critique current limitations, scale-up bottlenecks, toxicological liabilities, and bioequivalence hurdles.</p>" },
-      { id: "conclusion", title: "5. Future Perspectives & Concluding Remarks", content: "<p>Highlight anticipated breakthroughs, regulatory perspectives, and research trajectories for the next decade.</p>" }
-    ];
-  } else if (type === "Methodology & Validation Protocol") {
-    state.sections = [
-      { id: "intro", title: "1. Introduction & Method Rationale", content: "<p>Describe the target active pharmaceutical ingredients (APIs), dosage forms, and analytical challenges justifying the method.</p>" },
-      { id: "methods", title: "2. Reagents, Standards & Equipment SOP", content: "<p>Specify high-purity solvents, primary reference standards, chromatographic columns, instrumentation, and standard operating procedures (SOP).</p>" },
-      { id: "results", title: "3. Step-by-Step Chromatographic / Analytical Protocol", content: "<p>Detail gradient/isocratic programs, flow rate, column temperature, injection volume, and system suitability criteria.</p>" },
-      { id: "discussion", title: "4. Validation Parameters under ICH Q2(R1)", content: "<p>Present empirical data for specificity, linearity, precision (% RSD), accuracy (recovery %), LOD, LOQ, and robustness.</p>" },
-      { id: "conclusion", title: "5. Application to Finished Commercial Formulations & Conclusion", content: "<p>Demonstrate routine assay on commercial batches and state conclusion on regulatory compliance.</p>" }
-    ];
-  } else if (type === "Clinical Case Study & Pharmacovigilance") {
-    state.sections = [
-      { id: "intro", title: "1. Introduction", content: "<p>Introduce the drug class, established safety profile, and pharmacological rationale for vigilance.</p>" },
-      { id: "methods", title: "2. Case Presentation & Clinical History", content: "<p>Detail patient presentation, medical history, concurrent pharmacotherapy, dosage timeline, and onset of symptoms.</p>" },
-      { id: "results", title: "3. Diagnostic Findings & ADR Causality Scoring", content: "<p>Present laboratory workups, biopsy data, dechallenge/rechallenge outcomes, and Naranjo Algorithm score.</p>" },
-      { id: "discussion", title: "4. Discussion & Pharmacological Mechanisms", content: "<p>Examine drug-drug interactions, pharmacogenomic predispositions, and comparative adverse event literature.</p>" },
-      { id: "conclusion", title: "5. Clinical Lessons & Practice Recommendations", content: "<p>Summarize takeaway guidelines for clinical pharmacists and healthcare practitioners.</p>" }
-    ];
-  } else {
-    // Standard IMRAD
-    state.sections = [
-      { id: "intro", title: "1. Introduction", content: "<p>Introduce the background, state the research gap, and clearly define the objectives of this study.</p>" },
-      { id: "methods", title: "2. Materials & Methods", content: "<p>Detail all reagents, equipment, formulation procedures, and statistical methods to ensure reproducibility.</p>" },
-      { id: "results", title: "3. Results", content: "<p>Present quantitative findings with tables, chromatographic traces, and statistical analysis.</p>" },
-      { id: "discussion", title: "4. Discussion", content: "<p>Interpret results in the context of prior literature, discuss broader scientific implications, and acknowledge study limitations.</p>" },
-      { id: "conclusion", title: "5. Conclusion", content: "<p>Summarize principal conclusions and highlight recommended directions for future investigation.</p>" }
-    ];
-  }
-
-  // Standard back matter expected of standard peer-reviewed journals (all article types)
-  state.sections.push(
-    { id: "ack", title: "6. Acknowledgements", content: "<p>Acknowledge individuals, institutions or facilities that contributed but do not meet authorship criteria. Write 'None' if not applicable.</p>" },
-    { id: "contrib", title: "7. Author Contributions", content: "<p>State each author's contribution using CRediT roles (e.g. Conceptualization, Methodology, Investigation, Writing – original draft, Supervision).</p>" }
-  );
-
-  // Update UI editor panes
+  fresh.forEach(f => {
+    const o = old.find(x => x.id === f.id);
+    if (o && hasRealContent(o.content)) f.content = o.content;
+  });
+  // Keep custom sections, and keep any written section the new outline doesn't have
+  old.forEach(o => {
+    if (fresh.some(f => f.id === o.id)) return;
+    const isCustom = o.id.indexOf("custom_") === 0;
+    if (isCustom || hasRealContent(o.content)) {
+      fresh.push({
+        id: isCustom ? o.id : "custom_" + o.id,
+        title: String(o.title || "Additional Section").replace(/^\d+\.\s*/, ""),
+        hint: "",
+        content: hasRealContent(o.content) ? o.content : ""
+      });
+    }
+  });
+  state.sections = fresh;
   renderCustomSectionsUI();
   updateStats();
+}
+
+function applyArticleTypeTemplate() {
+  const typeSelect = document.getElementById("articleType");
+  const type = (typeSelect && typeSelect.value) || state.articleType || "Original Research Article";
+  state.articleType = type;
+  applyTypeConfigUI(type);
+  rebuildSections(type);
   triggerAutoSave();
   showToast(`Applied section outline for: ${type}`, "success");
 }
@@ -466,29 +614,38 @@ function applyArticleTypeTemplate() {
 function renderCustomSectionsUI() {
   const container = document.getElementById("editorSectionsContainer");
   if (!container) return;
+  const legacy = document.getElementById("customSectionsContainer");
+  if (legacy) legacy.innerHTML = "";
   container.innerHTML = "";
 
   state.sections.forEach(sec => {
+    const deletable = String(sec.id).indexOf("custom_") === 0;
     const secDiv = document.createElement("div");
     secDiv.className = "editor-section";
     secDiv.id = "sec-" + sec.id;
     secDiv.innerHTML = `
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
         <h3 style="font-size:15px; font-weight:700; color:var(--primary);">${escapeHtml(sec.title)}</h3>
+        ${deletable ? `<button type="button" class="btn btn-danger btn-sm" onclick="removeSection('${sec.id}')">Delete Section</button>` : ""}
       </div>
       <div class="editor-toolbar">
-        <button class="toolbar-btn" type="button" onclick="formatDoc('bold')">B</button>
-        <button class="toolbar-btn" type="button" onclick="formatDoc('italic')">I</button>
-        <button class="toolbar-btn" type="button" onclick="insertTableAtSelection()">📊 Table</button>
-        <button class="toolbar-btn" type="button" onclick="insertFormula()">∑ Formula</button>
-        <button class="toolbar-btn" type="button" onclick="insertCitationPrompt()">[#] Cite</button>
+        <button class="toolbar-btn" type="button" onmousedown="event.preventDefault()" onclick="formatDoc('bold')"><b>B</b></button>
+        <button class="toolbar-btn" type="button" onmousedown="event.preventDefault()" onclick="formatDoc('italic')"><i>I</i></button>
+        <button class="toolbar-btn" type="button" onmousedown="event.preventDefault()" onclick="insertTableAtSelection()">📊 Table</button>
+        <button class="toolbar-btn" type="button" onmousedown="event.preventDefault()" onclick="insertFormula()">∑ Formula</button>
+        <button class="toolbar-btn" type="button" onmousedown="event.preventDefault()" onclick="insertCitationPrompt()">[#] Cite</button>
       </div>
-      <div class="editable-area" contenteditable="true" id="editor-${sec.id}" oninput="updateStats()">
-        ${sec.content || "<p>Compose section content here...</p>"}
-      </div>
+      <div class="editable-area" contenteditable="true" id="editor-${sec.id}" data-placeholder="${escapeHtml(sectionHint(sec))}" oninput="updateStats()"></div>
     `;
     container.appendChild(secDiv);
+    const area = secDiv.querySelector(".editable-area");
+    if (hasRealContent(sec.content)) area.innerHTML = sec.content;
+    else sec.content = "";
   });
+
+  if (!document.getElementById(lastActiveEditorId) && state.sections.length) {
+    lastActiveEditorId = "editor-" + state.sections[0].id;
+  }
 }
 
 /* ==========================================================================
@@ -992,122 +1149,150 @@ function setCorrespondingAuthor(index) {
   triggerAutoSave();
 }
 
+/* ---- Editor helpers: keep the caret/selection so toolbar buttons always act on the right section ---- */
+var savedEditorRange = null;
+
+function editorOfNode(node) {
+  while (node && node !== document) {
+    if (node.nodeType === 1 && node.classList && node.classList.contains("editable-area")) return node;
+    node = node.parentNode;
+  }
+  return null;
+}
+
+document.addEventListener("selectionchange", function () {
+  const sel = window.getSelection();
+  if (!sel || !sel.rangeCount) return;
+  const area = editorOfNode(sel.getRangeAt(0).commonAncestorContainer);
+  if (area) {
+    savedEditorRange = sel.getRangeAt(0).cloneRange();
+    lastActiveEditorId = area.id;
+  }
+});
+
+function getActiveEditor() {
+  let el = document.getElementById(lastActiveEditorId);
+  if (!el || !el.isConnected) {
+    el = document.querySelector("#editorSectionsContainer .editable-area");
+    if (el) lastActiveEditorId = el.id;
+  }
+  return el;
+}
+
+function restoreEditorSelection() {
+  const el = getActiveEditor();
+  if (!el) return null;
+  el.focus();
+  const sel = window.getSelection();
+  sel.removeAllRanges();
+  if (savedEditorRange && el.contains(savedEditorRange.commonAncestorContainer)) {
+    sel.addRange(savedEditorRange);
+  } else {
+    const r = document.createRange();
+    r.selectNodeContents(el);
+    r.collapse(false);
+    sel.addRange(r);
+  }
+  return el;
+}
+
+function insertHtmlAtCaret(html) {
+  const el = restoreEditorSelection();
+  if (!el) { showToast("Click inside a manuscript section first", "warning"); return false; }
+  document.execCommand("insertHTML", false, html);
+  updateStats();
+  return true;
+}
+
 function formatDoc(cmd, val = null) {
+  const el = restoreEditorSelection();
+  if (!el) { showToast("Click inside a manuscript section first", "warning"); return; }
   document.execCommand(cmd, false, val);
-  const active = document.getElementById(lastActiveEditorId);
-  if (active) active.focus();
   updateStats();
 }
 
 function insertTableAtSelection() {
+  const cell = "border:1px solid #cbd5e1; padding:8px;";
   const html = `
     <table style="width:100%; border-collapse:collapse; margin:14px 0; font-size:13px;">
       <thead>
         <tr style="background:#f1f5f9; border-bottom:2px solid #cbd5e1;">
-          <th style="border:1px solid #cbd5e1; padding:8px; text-align:left;">Sample / Batch ID</th>
-          <th style="border:1px solid #cbd5e1; padding:8px; text-align:center;">Assay (%)</th>
-          <th style="border:1px solid #cbd5e1; padding:8px; text-align:center;">Retention Time (min)</th>
-          <th style="border:1px solid #cbd5e1; padding:8px; text-align:center;">% RSD</th>
+          <th style="${cell} text-align:left;">Sample / Batch ID</th>
+          <th style="${cell} text-align:center;">Assay (%)</th>
+          <th style="${cell} text-align:center;">Retention Time (min)</th>
+          <th style="${cell} text-align:center;">% RSD</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td style="border:1px solid #cbd5e1; padding:8px;">Batch-01</td>
-          <td style="border:1px solid #cbd5e1; padding:8px; text-align:center;">99.82</td>
-          <td style="border:1px solid #cbd5e1; padding:8px; text-align:center;">3.45</td>
-          <td style="border:1px solid #cbd5e1; padding:8px; text-align:center;">0.42</td>
+          <td style="${cell}">Batch-01</td>
+          <td style="${cell} text-align:center;">99.82</td>
+          <td style="${cell} text-align:center;">3.45</td>
+          <td style="${cell} text-align:center;">0.42</td>
         </tr>
         <tr>
-          <td style="border:1px solid #cbd5e1; padding:8px;">Batch-02</td>
-          <td style="border:1px solid #cbd5e1; padding:8px; text-align:center;">100.14</td>
-          <td style="border:1px solid #cbd5e1; padding:8px; text-align:center;">3.44</td>
-          <td style="border:1px solid #cbd5e1; padding:8px; text-align:center;">0.38</td>
+          <td style="${cell}">Batch-02</td>
+          <td style="${cell} text-align:center;">100.14</td>
+          <td style="${cell} text-align:center;">3.44</td>
+          <td style="${cell} text-align:center;">0.38</td>
         </tr>
       </tbody>
-    </table><p></p>
-  `;
-  document.execCommand("insertHTML", false, html);
-  updateStats();
+    </table><p><br></p>`;
+  insertHtmlAtCaret(html);
 }
 
 function insertFormula() {
   const f = prompt("Enter standard formula or notation (e.g. C_max = (Dose * F) / V_d):", "C_max = (Dose * F) / V_d");
-  if (f) {
+  if (f && f.trim()) {
     const html = `<span style="font-family:serif; font-style:italic; background:#f1f5f9; padding:2px 8px; border-radius:4px; border:1px solid #cbd5e1;">${escapeHtml(f)}</span>&nbsp;`;
-    document.execCommand("insertHTML", false, html);
-    updateStats();
+    insertHtmlAtCaret(html);
   }
 }
 
 function insertCitationPrompt() {
   const num = prompt("Enter reference citation index number (e.g. 1 or 2,3):", (state.references.length || 1).toString());
-  if (num) {
-    const html = `<sup><a href="#ref-${num}" style="color:#1f6f4a; text-decoration:none; font-weight:bold;">[${escapeHtml(num)}]</a></sup>&nbsp;`;
-    document.execCommand("insertHTML", false, html);
-    updateStats();
+  if (num && num.trim()) {
+    const html = `<sup><a href="#ref-${escapeHtml(num.trim())}" style="color:#1f6f4a; text-decoration:none; font-weight:bold;">[${escapeHtml(num.trim())}]</a></sup>&nbsp;`;
+    insertHtmlAtCaret(html);
   }
 }
 
 function insertPharmaTemplate(type) {
   let content = "";
   if (type === "chromatography") {
-    content = `
-      <p><strong>Chromatographic Conditions:</strong> High-performance liquid chromatography was performed using an isocratic C18 stationary phase (250 × 4.6 mm, 5 µm particle size). Mobile phase: Acetonitrile:Phosphate Buffer (pH 4.5) (60:40 v/v), flow rate: 1.0 mL/min, detection wavelength: 228 nm, injection volume: 10 µL, ambient column temperature.</p>
-    `;
+    content = `<p><strong>Chromatographic Conditions:</strong> High-performance liquid chromatography was performed using an isocratic C18 stationary phase (250 × 4.6 mm, 5 µm particle size). Mobile phase: Acetonitrile:Phosphate Buffer (pH 4.5) (60:40 v/v), flow rate: 1.0 mL/min, detection wavelength: 228 nm, injection volume: 10 µL, ambient column temperature.</p>`;
   } else if (type === "dissolution") {
-    content = `
-      <p><strong>In-Vitro Dissolution Methodology:</strong> Dissolution testing was executed using USP Apparatus 1 (Basket Method) at 100 rpm in 900 mL of simulated gastric fluid (pH 1.2) maintained at 37°C ± 0.5°C. Samples (5 mL) were withdrawn at 5, 10, 15, 30, 45, and 60 minutes with automated sink replacement and quantified by UV spectrophotometry.</p>
-    `;
+    content = `<p><strong>In-Vitro Dissolution Methodology:</strong> Dissolution testing was executed using USP Apparatus 1 (Basket Method) at 100 rpm in 900 mL of simulated gastric fluid (pH 1.2) maintained at 37°C ± 0.5°C. Samples (5 mL) were withdrawn at 5, 10, 15, 30, 45, and 60 minutes with automated sink replacement and quantified by UV spectrophotometry.</p>`;
   } else if (type === "synthesis") {
-    content = `
-      <p><strong>Lipid Nanocarrier Homogenization Protocol:</strong> Solid lipid (Precirol ATO 5) and liquid lipid (Oleic acid) were melted at 75°C. Active ingredient was dissolved in lipid phase. The aqueous surfactant solution (Poloxamer 188) was preheated to 75°C, added dropwise under high-shear homogenization (12,000 rpm, 10 min), followed by 5 cycles of high-pressure homogenization at 800 bar.</p>
-    `;
+    content = `<p><strong>Lipid Nanocarrier Homogenization Protocol:</strong> Solid lipid (Precirol ATO 5) and liquid lipid (Oleic acid) were melted at 75°C. Active ingredient was dissolved in lipid phase. The aqueous surfactant solution (Poloxamer 188) was preheated to 75°C, added dropwise under high-shear homogenization (12,000 rpm, 10 min), followed by 5 cycles of high-pressure homogenization at 800 bar.</p>`;
   } else if (type === "stability") {
-    content = `
-      <p><strong>ICH Q1A Accelerated Stability Testing:</strong> Packaged dosage forms were placed in stability chambers maintained at 40°C ± 2°C and 75% RH ± 5% RH for 6 months. Quality attributes evaluated at 0, 1, 2, 3, and 6-month intervals included physical appearance, assay content, degradation impurities, and dissolution profile.</p>
-    `;
+    content = `<p><strong>ICH Q1A Accelerated Stability Testing:</strong> Packaged dosage forms were placed in stability chambers maintained at 40°C ± 2°C and 75% RH ± 5% RH for 6 months. Quality attributes evaluated at 0, 1, 2, 3, and 6-month intervals included physical appearance, assay content, degradation impurities, and dissolution profile.</p>`;
   }
-
-  document.execCommand("insertHTML", false, content);
-  updateStats();
-  showToast("Pharmacological template inserted", "info");
+  if (content && insertHtmlAtCaret(content)) {
+    showToast("Pharmacological template inserted - edit the values to match your study", "info");
+  }
 }
 
 function insertCustomSection() {
   const title = prompt("Enter Title for Custom Manuscript Section:", "Additional Methodology & Protocols");
-  if (!title) return;
-
+  if (!title || !title.trim()) return;
+  updateStats(); // keep what has been typed so far
   const id = "custom_" + Date.now();
-  state.sections.push({ id: id, title: title, content: "" });
-
-  const container = document.getElementById("customSectionsContainer");
-  if (!container) return;
-  const secDiv = document.createElement("div");
-  secDiv.className = "editor-section";
-  secDiv.id = "sec-" + id;
-  secDiv.innerHTML = `
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-      <h3 style="font-size:15px; font-weight:700; color:var(--primary);">${escapeHtml(title)}</h3>
-      <button type="button" class="btn btn-danger btn-sm" onclick="removeSection('${id}')">Delete Section</button>
-    </div>
-    <div class="editor-toolbar">
-      <button class="toolbar-btn" type="button" onclick="formatDoc('bold')">B</button>
-      <button class="toolbar-btn" type="button" onclick="formatDoc('italic')">I</button>
-      <button class="toolbar-btn" type="button" onclick="insertCitationPrompt()">[#] Cite</button>
-    </div>
-    <div class="editable-area" contenteditable="true" id="editor-${id}" oninput="updateStats()">
-      <p>Compose custom research section content here...</p>
-    </div>
-  `;
-  container.appendChild(secDiv);
+  state.sections.push({ id: id, title: title.trim(), hint: "Compose custom research section content here...", content: "" });
+  renderCustomSectionsUI();
   updateStats();
+  const el = document.getElementById("editor-" + id);
+  if (el) { lastActiveEditorId = el.id; el.focus(); }
   showToast("Custom section created", "success");
 }
 
 function removeSection(id) {
+  if (String(id).indexOf("custom_") !== 0) return;
+  updateStats();
+  const sec = state.sections.find(s => s.id === id);
+  if (sec && hasRealContent(sec.content) && !confirm("Delete this section and its text?")) return;
   state.sections = state.sections.filter(s => s.id !== id);
-  const el = document.getElementById("sec-" + id);
-  if (el) el.remove();
+  renderCustomSectionsUI();
   updateStats();
   triggerAutoSave();
 }
@@ -1217,6 +1402,13 @@ function removeSuppFile(idx) {
   triggerAutoSave();
 }
 
+// Plain text of editor HTML with a space between blocks (accurate word counts even when the pane is hidden)
+function sectionPlainText(html) {
+  const d = document.createElement("div");
+  d.innerHTML = String(html || "").replace(/<\/(p|div|li|tr|h[1-6])>|<br\s*\/?>|<\/t[dh]>/gi, " $&");
+  return (d.textContent || "").replace(/\u00a0/g, " ").replace(/\s+/g, " ").trim();
+}
+
 function updateStats() {
   const typeSelect = document.getElementById("articleType");
   if (typeSelect) state.articleType = typeSelect.value;
@@ -1227,15 +1419,21 @@ function updateStats() {
 
   let allText = state.title + " " + state.abstract + " ";
   const absWords = state.abstract.trim() ? state.abstract.trim().split(/\s+/).length : 0;
-  if (document.getElementById("abstractWordCount")) {
-    document.getElementById("abstractWordCount").innerText = absWords;
+  const absMax = getTypeConfig(state.articleType).abstractMax;
+  const absCountEl = document.getElementById("abstractWordCount");
+  if (absCountEl) {
+    absCountEl.innerText = absWords;
+    absCountEl.style.color = absWords > absMax ? "#dc2626" : "";
+    absCountEl.style.fontWeight = absWords > absMax ? "700" : "";
   }
 
   state.sections.forEach(sec => {
     const el = document.getElementById("editor-" + sec.id);
     if (el) {
+      // A cleared editor can leave a stray <br>; empty it so the hint text shows again
+      if (!sectionPlainText(el.innerHTML) && !el.querySelector("img,table")) { if (el.innerHTML !== "") el.innerHTML = ""; }
       sec.content = el.innerHTML;
-      allText += el.innerText + " ";
+      allText += sectionPlainText(el.innerHTML) + " ";
     }
   });
 
@@ -1328,11 +1526,40 @@ function submitArticleToJournal() {
     jumpToWizardStep(1);
     return;
   }
+  const absWordsNow = state.abstract.trim().split(/\s+/).length;
+  const absLimit = getTypeConfig(state.articleType).abstractMax;
+  if (absWordsNow > absLimit) {
+    showToast(`Abstract is ${absWordsNow} words; the limit for this article type is ${absLimit}`, "danger");
+    jumpToWizardStep(1);
+    return;
+  }
+  const kwCount = state.keywords.split(",").map(k => k.trim()).filter(Boolean).length;
+  if (kwCount < 4 || kwCount > 6) {
+    showToast("Please provide 4 to 6 comma-separated keywords", "danger");
+    jumpToWizardStep(1);
+    return;
+  }
 
   const corr = state.authors.find(a => a.isCorresponding) || state.authors[0];
   if (!corr || !corr.name.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test((corr.email || "").trim())) {
     showToast("Please enter the corresponding author's name and a valid email", "danger");
     jumpToWizardStep(2);
+    return;
+  }
+
+  const hasBuilderContent = state.sections.some(s => hasRealContent(s.content));
+  if (!hasBuilderContent && !uploadedFileObjects.primary) {
+    showToast("Please write your manuscript in the Article Builder or attach a manuscript file", "danger");
+    jumpToWizardStep(3);
+    return;
+  }
+
+  const fundingTxt = (document.getElementById("fundingStatement")?.value || "").trim();
+  const coiTxt = (document.getElementById("coiStatement")?.value || "").trim();
+  const dataTxt = (document.getElementById("dataAvailability")?.value || "").trim();
+  if (!fundingTxt || !coiTxt || !dataTxt) {
+    showToast("Funding, Conflict of Interest and Data Availability statements are required (write 'None' if not applicable)", "danger");
+    jumpToWizardStep(6);
     return;
   }
 
@@ -1413,10 +1640,10 @@ function submitArticleToJournal() {
       affiliation: affiliation,
       coAuthors: state.authors.slice(1).map(a => a.name).join(", "),
       iaecProtocol: document.getElementById("iaecProtocol")?.value || "Not Applicable",
-      funding: document.getElementById("fundingStatement")?.value || "Institutional Research Support",
-      coi: document.getElementById("coiStatement")?.value || "None declared",
-      dataAvailability: document.getElementById("dataAvailability")?.value || "All data in manuscript",
-      fileUrl: state.uploadedFiles.primary?.name || "Uploaded via Portal"
+      funding: fundingTxt,
+      coi: coiTxt,
+      dataAvailability: dataTxt,
+      fileUrl: (uploadedFileObjects.primary && uploadedFileObjects.primary.name) || "Written in the Article Builder (see Builder_Manuscript file)"
     };
     // Runs in the background; updates the receipt line when finished
     setTimeout(() => syncSubmissionToCloud(payload, subId), 0);
@@ -1474,7 +1701,14 @@ async function syncSubmissionToCloud(payload, subId) {
     let budget = MAX_TOTAL;
     const fileNotes = [];
 
-    const primary = uploadedFileObjects.primary;
+    // The Article Builder text is sent too (as a Word-readable file), so it is never lost
+    let builderFile = null;
+    try { builderFile = makeBuilderManuscriptFile(subId); } catch (e) { console.warn("Could not prepare builder manuscript", e); }
+    let primary = uploadedFileObjects.primary;
+    const extraSupp = [];
+    if (builderFile) {
+      if (!primary) primary = builderFile; else extraSupp.push(builderFile);
+    }
     if (primary) {
       if (primary.size <= budget) {
         payload.fileName = primary.name;
@@ -1484,12 +1718,10 @@ async function syncSubmissionToCloud(payload, subId) {
       } else {
         fileNotes.push("Manuscript file '" + primary.name + "' is larger than 20 MB and was not sent.");
       }
-    } else if (state.uploadedFiles.primary) {
-      fileNotes.push("Manuscript file '" + state.uploadedFiles.primary.name + "' could not be sent (page was reloaded before submitting).");
     }
 
     const supp = [];
-    for (const f of uploadedFileObjects.supplementary) {
+    for (const f of extraSupp.concat(uploadedFileObjects.supplementary)) {
       if (f.size <= budget) {
         supp.push({ fileName: f.name, fileType: f.type || "application/octet-stream", base64File: await readFileAsBase64(f) });
         budget -= f.size;
@@ -1599,11 +1831,12 @@ function saveDraftToStorage() {
   state.declarations.coi = document.getElementById("coiStatement") ? document.getElementById("coiStatement").value : "";
   state.declarations.dataAvailability = document.getElementById("dataAvailability") ? document.getElementById("dataAvailability").value : "";
 
-  localStorage.setItem("pharmionex_draft", JSON.stringify(state));
+  try { localStorage.setItem("pharmionex_draft", JSON.stringify(state)); } catch (e) { console.warn("Draft could not be saved in this browser", e); }
 }
 
 function loadDraftFromStorage() {
-  const saved = localStorage.getItem("pharmionex_draft");
+  let saved = null;
+  try { saved = localStorage.getItem("pharmionex_draft"); } catch (e) { return; }
   if (!saved) return;
   try {
     const parsed = JSON.parse(saved);
@@ -1621,13 +1854,89 @@ function loadDraftFromStorage() {
     if (document.getElementById("coiStatement")) document.getElementById("coiStatement").value = state.declarations.coi || "";
     if (document.getElementById("dataAvailability")) document.getElementById("dataAvailability").value = state.declarations.dataAvailability || "";
 
-    state.sections.forEach(sec => {
-      const el = document.getElementById("editor-" + sec.id);
-      if (el && sec.content) el.innerHTML = sec.content;
-    });
+    if (!Array.isArray(state.sections) || !state.sections.length) state.sections = defaultSectionsForType(state.articleType);
+    if (!Array.isArray(state.authors) || !state.authors.length) state.authors = [{ name: "", email: "", affiliation: "", country: "India", orcid: "", isCorresponding: true }];
+    if (!Array.isArray(state.references)) state.references = [];
+    // Files cannot survive a page reload, so never claim they are still attached
+    const hadFiles = !!(state.uploadedFiles && (state.uploadedFiles.primary || (state.uploadedFiles.supplementary || []).length));
+    state.uploadedFiles = { primary: null, supplementary: [] };
+    if (hadFiles) setTimeout(() => showToast("Draft restored. Please re-attach your manuscript files in step 5.", "info"), 600);
   } catch (e) {
     console.error("Error loading draft", e);
   }
+}
+
+
+/* ==========================================================================
+   Manuscript export from the Article Builder (Word-readable .doc)
+   ========================================================================== */
+function sanitizeHtmlFragment(html) {
+  const t = document.createElement("template");
+  t.innerHTML = String(html || "");
+  t.content.querySelectorAll("script,style,iframe,object,embed,link,meta,form,base").forEach(n => n.remove());
+  t.content.querySelectorAll("*").forEach(n => {
+    Array.from(n.attributes).forEach(at => {
+      const name = at.name.toLowerCase();
+      const val = String(at.value).trim().toLowerCase();
+      if (name.indexOf("on") === 0 || ((name === "href" || name === "src" || name === "xlink:href") && /^(javascript|data|vbscript):/.test(val))) n.removeAttribute(at.name);
+    });
+  });
+  return t.innerHTML;
+}
+
+function buildManuscriptHtml() {
+  updateStats();
+  const d = state.declarations || {};
+  const ethics = [];
+  if (d.iaecProtocol) ethics.push("Ethics approval: " + d.iaecProtocol);
+  if (d.ctriNumber) ethics.push("CTRI registration: " + d.ctriNumber);
+  const authors = state.authors.filter(a => (a.name || "").trim());
+  const authorLine = authors.map(a => escapeHtml(a.name) + (a.isCorresponding ? "*" : "")).join(", ");
+  const affLines = authors.map(a => escapeHtml(a.name) + ": " + escapeHtml(a.affiliation || "Affiliation not provided") + (a.orcid ? " (ORCID: " + escapeHtml(a.orcid) + ")" : "")).join("<br>");
+  const corr = state.authors.find(a => a.isCorresponding) || state.authors[0] || {};
+  const body = state.sections.map(s => {
+    const content = hasRealContent(s.content) ? sanitizeHtmlFragment(s.content) : "<p><em>Not provided.</em></p>";
+    return "<h2>" + escapeHtml(s.title) + "</h2>" + content;
+  }).join("\n");
+  const decl = [["Funding", d.funding], ["Conflict of Interest", d.coi], ["Ethics Statement", ethics.join("; ")], ["Data Availability", d.dataAvailability]]
+    .map(x => "<h2>" + x[0] + "</h2><p>" + escapeHtml(x[1] && String(x[1]).trim() ? x[1] : "Not provided.") + "</p>").join("\n");
+  const refs = state.references.map(r => "<li>" + escapeHtml(r) + "</li>").join("\n");
+  return `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+<head><meta charset="utf-8"><title>${escapeHtml(state.title || "Untitled Manuscript")}</title>
+<style>body{font-family:'Times New Roman',serif;font-size:12pt;line-height:1.6} h1{font-size:18pt} h2{font-size:13pt;margin-top:16pt} table{border-collapse:collapse} td,th{border:1px solid #999;padding:4px}</style></head>
+<body>
+<p><em>Pharmionex Journal &bull; ${escapeHtml(state.articleType)} &bull; ${escapeHtml(state.track)}</em></p>
+<h1>${escapeHtml(state.title || "Untitled Manuscript")}</h1>
+<p>${authorLine || "No authors listed"}</p>
+<p style="font-size:10pt">${affLines}<br>*Corresponding author: ${escapeHtml(corr.name || "")} (${escapeHtml(corr.email || "")})</p>
+<h2>Abstract</h2><p>${escapeHtml(state.abstract || "No abstract provided.")}</p>
+<p><strong>Keywords:</strong> ${escapeHtml(state.keywords || "None")}</p>
+${body}
+${decl}
+<h2>References</h2><ol>${refs || "<li>None provided.</li>"}</ol>
+</body></html>`;
+}
+
+function builderManuscriptBlob() {
+  return new Blob(["\ufeff" + buildManuscriptHtml()], { type: "application/msword" });
+}
+
+function makeBuilderManuscriptFile(subId) {
+  if (!state.sections.some(s => hasRealContent(s.content))) return null;
+  return new File([builderManuscriptBlob()], "Builder_Manuscript_" + subId + ".doc", { type: "application/msword" });
+}
+
+function downloadManuscriptDoc() {
+  const blob = builderManuscriptBlob();
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "pharmionex_manuscript_" + Date.now() + ".doc";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  showToast("Manuscript downloaded as a Word-readable .doc file", "success");
 }
 
 function exportDraftJSON() {

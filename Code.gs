@@ -28,7 +28,7 @@ const CONFIG = {
   AUDIT_SHEET: "AuditLog",
   MAX_TOTAL_FILE_BYTES: 20 * 1024 * 1024,           // all uploaded files combined
   ALLOWED_PRIMARY_EXT: ["pdf", "doc", "docx", "zip", "tex"],
-  ALLOWED_SUPP_EXT: ["xlsx", "csv", "zip", "png", "jpg", "jpeg", "tif", "tiff", "pdf"],
+  ALLOWED_SUPP_EXT: ["xlsx", "csv", "zip", "png", "jpg", "jpeg", "tif", "tiff", "pdf", "doc"],
   MAX_SUBMISSIONS_PER_EMAIL_PER_HOUR: 3,
   MAX_SUBMISSIONS_PER_HOUR: 40
 };

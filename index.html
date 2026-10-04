@@ -399,7 +399,7 @@
           <span class="stat-pill">Words: <strong id="totalWordCount">0</strong></span>
           <span class="stat-pill">Characters: <strong id="totalCharCount">0</strong></span>
           <span class="stat-pill">Authors: <strong id="authorCountBadge">1</strong></span>
-          <span class="stat-pill">References: <strong id="refCountBadge">3</strong></span>
+          <span class="stat-pill">References: <strong id="refCountBadge">0</strong></span>
         </div>
         <div style="display:flex; gap:8px;">
           <button type="button" class="btn btn-outline btn-sm" onclick="exportDraftJSON()">Export JSON</button>
@@ -494,7 +494,7 @@
           </div>
 
           <div class="form-group">
-            <label for="articleAbstract">Abstract <span class="required-star">*</span> (Words: <span id="abstractWordCount">0</span>/300)</label>
+            <label for="articleAbstract">Abstract <span class="required-star">*</span> (Words: <span id="abstractWordCount">0</span>/<span id="abstractMaxCount">300</span>)</label>
             <textarea id="articleAbstract" rows="6" placeholder="Background: State the clinical or pharmaceutical rationale.&#10;Methods: Summarize experimental formulation and analytical validation.&#10;Results: Highlight principal quantitative findings.&#10;Conclusion: State principal conclusions and therapeutic impact." oninput="updateStats()"></textarea>
           </div>
 
@@ -548,104 +548,7 @@
 
           <!-- Container for dynamic sections -->
           <div id="editorSectionsContainer">
-            <!-- Section 1: Intro -->
-            <div class="editor-section" id="sec-intro">
-              <h3 style="font-size:15px; font-weight:700; color:var(--primary); margin-bottom:8px;">1. Introduction</h3>
-              <div class="editor-toolbar">
-                <button class="toolbar-btn" type="button" onclick="formatDoc('bold')">B</button>
-                <button class="toolbar-btn" type="button" onclick="formatDoc('italic')">I</button>
-                <button class="toolbar-btn" type="button" onclick="insertTableAtSelection()">📊 Table</button>
-                <button class="toolbar-btn" type="button" onclick="insertFormula()">∑ Formula</button>
-                <button class="toolbar-btn" type="button" onclick="insertCitationPrompt()">[#] Cite</button>
-              </div>
-              <div class="editable-area" contenteditable="true" id="editor-intro" oninput="updateStats()">
-                <p>Introduce the therapeutic background, cite existing literature gaps, and state the formal research objectives.</p>
-              </div>
-            </div>
-
-            <!-- Section 2: Methods -->
-            <div class="editor-section" id="sec-methods">
-              <h3 style="font-size:15px; font-weight:700; color:var(--primary); margin-bottom:8px;">2. Materials & Methods</h3>
-              <div class="editor-toolbar">
-                <button class="toolbar-btn" type="button" onclick="formatDoc('bold')">B</button>
-                <button class="toolbar-btn" type="button" onclick="formatDoc('italic')">I</button>
-                <button class="toolbar-btn" type="button" onclick="insertTableAtSelection()">📊 Table</button>
-                <button class="toolbar-btn" type="button" onclick="insertFormula()">∑ Formula</button>
-                <button class="toolbar-btn" type="button" onclick="insertCitationPrompt()">[#] Cite</button>
-              </div>
-              <div class="editable-area" contenteditable="true" id="editor-methods" oninput="updateStats()">
-                <p>Detail all reagents, formulations, analytical equipment, experimental parameters, and statistical validation methods.</p>
-              </div>
-            </div>
-
-            <!-- Section 3: Results -->
-            <div class="editor-section" id="sec-results">
-              <h3 style="font-size:15px; font-weight:700; color:var(--primary); margin-bottom:8px;">3. Results</h3>
-              <div class="editor-toolbar">
-                <button class="toolbar-btn" type="button" onclick="formatDoc('bold')">B</button>
-                <button class="toolbar-btn" type="button" onclick="formatDoc('italic')">I</button>
-                <button class="toolbar-btn" type="button" onclick="insertTableAtSelection()">📊 Table</button>
-                <button class="toolbar-btn" type="button" onclick="insertFormula()">∑ Formula</button>
-                <button class="toolbar-btn" type="button" onclick="insertCitationPrompt()">[#] Cite</button>
-              </div>
-              <div class="editable-area" contenteditable="true" id="editor-results" oninput="updateStats()">
-                <p>Present findings clearly with tables, figures, chromatographic retention parameters, and kinetic release data.</p>
-              </div>
-            </div>
-
-            <!-- Section 4: Discussion -->
-            <div class="editor-section" id="sec-discussion">
-              <h3 style="font-size:15px; font-weight:700; color:var(--primary); margin-bottom:8px;">4. Discussion</h3>
-              <div class="editor-toolbar">
-                <button class="toolbar-btn" type="button" onclick="formatDoc('bold')">B</button>
-                <button class="toolbar-btn" type="button" onclick="formatDoc('italic')">I</button>
-                <button class="toolbar-btn" type="button" onclick="insertTableAtSelection()">📊 Table</button>
-                <button class="toolbar-btn" type="button" onclick="insertFormula()">∑ Formula</button>
-                <button class="toolbar-btn" type="button" onclick="insertCitationPrompt()">[#] Cite</button>
-              </div>
-              <div class="editable-area" contenteditable="true" id="editor-discussion" oninput="updateStats()">
-                <p>Interpret results in relation to prior literature, discuss therapeutic mechanisms, and address study limitations.</p>
-              </div>
-            </div>
-
-            <!-- Section 5: Conclusion -->
-            <div class="editor-section" id="sec-conclusion">
-              <h3 style="font-size:15px; font-weight:700; color:var(--primary); margin-bottom:8px;">5. Conclusion</h3>
-              <div class="editor-toolbar">
-                <button class="toolbar-btn" type="button" onclick="formatDoc('bold')">B</button>
-                <button class="toolbar-btn" type="button" onclick="formatDoc('italic')">I</button>
-                <button class="toolbar-btn" type="button" onclick="insertCitationPrompt()">[#] Cite</button>
-              </div>
-              <div class="editable-area" contenteditable="true" id="editor-conclusion" oninput="updateStats()">
-                <p>Summarize principal scientific findings and propose future translational research trajectories.</p>
-              </div>
-            </div>
-
-            <!-- Section 6: Acknowledgements -->
-            <div class="editor-section" id="sec-ack">
-              <h3 style="font-size:15px; font-weight:700; color:var(--primary); margin-bottom:8px;">6. Acknowledgements</h3>
-              <div class="editor-toolbar">
-                <button class="toolbar-btn" type="button" onclick="formatDoc('bold')">B</button>
-                <button class="toolbar-btn" type="button" onclick="formatDoc('italic')">I</button>
-                <button class="toolbar-btn" type="button" onclick="insertCitationPrompt()">[#] Cite</button>
-              </div>
-              <div class="editable-area" contenteditable="true" id="editor-ack" oninput="updateStats()">
-                <p>Acknowledge individuals, institutions or facilities that contributed but do not meet authorship criteria. Write "None" if not applicable.</p>
-              </div>
-            </div>
-
-            <!-- Section 7: Author Contributions -->
-            <div class="editor-section" id="sec-contrib">
-              <h3 style="font-size:15px; font-weight:700; color:var(--primary); margin-bottom:8px;">7. Author Contributions</h3>
-              <div class="editor-toolbar">
-                <button class="toolbar-btn" type="button" onclick="formatDoc('bold')">B</button>
-                <button class="toolbar-btn" type="button" onclick="formatDoc('italic')">I</button>
-                <button class="toolbar-btn" type="button" onclick="insertCitationPrompt()">[#] Cite</button>
-              </div>
-              <div class="editable-area" contenteditable="true" id="editor-contrib" oninput="updateStats()">
-                <p>State each author&#39;s contribution using CRediT roles (e.g. Conceptualization, Methodology, Investigation, Writing – original draft, Supervision).</p>
-              </div>
-            </div>
+            <!-- Sections are generated by script.js from the selected Article Type -->
           </div>
 
           <!-- Custom Sections -->
@@ -775,6 +678,7 @@
             <div style="display:flex; gap:8px;">
               <button type="button" class="btn btn-outline btn-sm" onclick="toggleColumns()">Toggle 1 / 2 Columns</button>
               <button type="button" class="btn btn-outline btn-sm" onclick="window.print()">🖨️ Print Preview</button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="downloadManuscriptDoc()">⬇️ Download .doc</button>
               <button type="button" class="btn btn-primary btn-sm" onclick="submitArticleToJournal()">🚀 Submit Article</button>
             </div>
           </div>

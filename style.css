@@ -1140,6 +1140,13 @@ body {
   color: #1e293b;
 }
 
+.editable-area:empty:before {
+  content: attr(data-placeholder);
+  color: #94a3b8;
+  pointer-events: none;
+  display: block;
+}
+
 .editable-area:focus {
   background: #fdfdfe;
 }
