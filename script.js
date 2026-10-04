@@ -50,7 +50,7 @@ var state = {
     primary: null,
     supplementary: []
   },
-  declarations: { iaecProtocol: "", ctriNumber: "", funding: "", coi: "", dataAvailability: "", chkOriginality: false, chkAuthorship: false, chkCopyright: false },
+  declarations: { iaecProtocol: "", ctriNumber: "", funding: "", coi: "", dataAvailability: "", chkOriginality: false, chkAuthorship: false, chkCopyright: false, chkPrivacy: false },
   currentStep: 1,
   submissionId: null
 };
@@ -63,7 +63,7 @@ var publishedArticlesDataset = [
     title: "Official Author Template: Original Research Article",
     track: "Pharmaceutics & Targeted Drug Delivery",
     category: "Pharmaceutics & Drug Delivery",
-    status: "Call for Papers Open",
+    status: "Inaugural Issue: Invited Submissions",
     issuingBody: "Pharmionex Editorial Board • Vivek Sharma (Editor-in-Chief & Publisher)",
     wordLimit: "4,000 – 7,000 words (excluding abstract & references)",
     abstractFormat: "250 – 300 words (Structured: Background, Methods, Results, Conclusion)",
@@ -82,7 +82,7 @@ var publishedArticlesDataset = [
     title: "Official Author Template: Methodology & Validation Protocol",
     track: "Pharmaceutical Analysis & Method Validation",
     category: "Pharmaceutical Analysis",
-    status: "Call for Papers Open",
+    status: "Inaugural Issue: Invited Submissions",
     issuingBody: "Pharmionex Editorial Board • Vivek Sharma (Editor-in-Chief & Publisher)",
     wordLimit: "3,500 – 6,000 words",
     abstractFormat: "200 – 250 words (Structured: Analytical Rationale, Chromatographic System, Validation Results, Utility)",
@@ -101,7 +101,7 @@ var publishedArticlesDataset = [
     title: "Official Author Template: Industrial Pharmacy & Formulation Science",
     track: "Industrial Pharmacy & Formulation Science",
     category: "Industrial Pharmacy",
-    status: "Call for Papers Open",
+    status: "Inaugural Issue: Invited Submissions",
     issuingBody: "Pharmionex Editorial Board • Vivek Sharma (Editor-in-Chief & Publisher)",
     wordLimit: "4,000 – 7,000 words",
     abstractFormat: "250 words (Structured: Industrial Context, Formulation Engineering, Stability Testing, Scalability)",
@@ -120,7 +120,7 @@ var publishedArticlesDataset = [
     title: "Official Author Template: Comprehensive Review Article",
     track: "Pharmaceutics & Targeted Drug Delivery",
     category: "Review Article",
-    status: "Call for Papers Open",
+    status: "Inaugural Issue: Invited Submissions",
     issuingBody: "Pharmionex Editorial Board • Vivek Sharma (Editor-in-Chief & Publisher)",
     wordLimit: "6,000 – 12,000 words (Minimum 60 references)",
     abstractFormat: "250 – 350 words (Narrative overview of therapeutic landscape, mechanistic barriers, and future horizons)",
@@ -139,7 +139,7 @@ var publishedArticlesDataset = [
     title: "Official Author Template: Regulatory Affairs & Quality Assurance",
     track: "Regulatory Affairs, GMP & Quality Assurance",
     category: "Regulatory Affairs",
-    status: "Call for Papers Open",
+    status: "Inaugural Issue: Invited Submissions",
     issuingBody: "Pharmionex Editorial Board • Vivek Sharma (Editor-in-Chief & Publisher)",
     wordLimit: "4,500 – 8,000 words",
     abstractFormat: "250 words (Structured: Regulatory Context, Compliance Challenges, Implementation Framework, Policy Impact)",
@@ -158,7 +158,7 @@ var publishedArticlesDataset = [
     title: "Official Author Template: Pharmacokinetic & IVIVC Studies",
     track: "Pharmacology & Clinical Pharmacokinetics",
     category: "Pharmacokinetics",
-    status: "Call for Papers Open",
+    status: "Inaugural Issue: Invited Submissions",
     issuingBody: "Pharmionex Editorial Board • Vivek Sharma (Editor-in-Chief & Publisher)",
     wordLimit: "4,000 – 7,000 words",
     abstractFormat: "250 words (Structured: Objective, Study Design, Bioanalytical Assay, IVIVC Results, Conclusion)",
@@ -177,7 +177,7 @@ var publishedArticlesDataset = [
     title: "Official Author Template: Short Communication / Rapid Letter",
     track: "Medicinal Chemistry & Nanomedicine",
     category: "Short Communication",
-    status: "Call for Papers Open",
+    status: "Inaugural Issue: Invited Submissions",
     issuingBody: "Pharmionex Editorial Board • Vivek Sharma (Editor-in-Chief & Publisher)",
     wordLimit: "2,000 – 3,500 words (Max 3 Display Items)",
     abstractFormat: "Up to 200 words (Unstructured, concise summary of core experimental breakthrough)",
@@ -196,7 +196,7 @@ var publishedArticlesDataset = [
     title: "Official Author Template: Clinical Case Study & ADR Report",
     track: "Clinical Pharmacy & Pharmacovigilance",
     category: "Case Study & Safety",
-    status: "Call for Papers Open",
+    status: "Inaugural Issue: Invited Submissions",
     issuingBody: "Pharmionex Editorial Board • Vivek Sharma (Editor-in-Chief & Publisher)",
     wordLimit: "2,000 – 3,500 words",
     abstractFormat: "150 – 250 words (Unstructured: Clinical Event, Suspected Drug, Causality Assessment, Pharmacovigilance Impact)",
@@ -245,7 +245,7 @@ var publishedArticlesDataset = [
 
 // Fill in fields the UI reads, so every record renders and is searchable
 publishedArticlesDataset.forEach(function (a) {
-  var defaults = { status: "Call for Papers Open", issuingBody: "Pharmionex Editorial Board • Vivek Sharma (Editor-in-Chief & Publisher)", category: a.track };
+  var defaults = { status: "Inaugural Issue: Invited Submissions", issuingBody: "Pharmionex Editorial Board • Vivek Sharma (Editor-in-Chief & Publisher)", category: a.track };
   Object.keys(defaults).forEach(function (k) { if (a[k] === undefined) a[k] = defaults[k]; });
   if (!a.authors) a.authors = a.issuingBody;
   if (!a.abstract) a.abstract = (a.abstractFormat || "") + (a.scope ? " Scope: " + a.scope : "");
@@ -281,6 +281,10 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // Initialize Article Repository
   loadPublishedArticles();
+
+  // Open a section directly from a link such as ...#track or ...#privacy
+  var hashView = (window.location.hash || "").replace("#", "");
+  if (hashView && document.getElementById("view-" + hashView)) switchMainView(hashView);
   
   // Track active editor
   document.addEventListener("focusin", (e) => {
@@ -659,7 +663,7 @@ function renderArticlesRepo(articles) {
   container.innerHTML = "";
 
   if (countBanner) {
-    countBanner.innerHTML = `<span>Showing <strong>${articles.length}</strong> article types & subject tracks • Call for Papers Active</span>`;
+    countBanner.innerHTML = `<span>Showing <strong>${articles.length}</strong> article types & subject tracks • Inaugural issue open to invited submissions</span>`;
   }
 
   if (articles.length === 0) {
@@ -934,7 +938,7 @@ function renderTrackResult(data, isLiveFromGas = false) {
       <div class="track-header-row">
         <div>
           <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.5px; font-weight:700; color:var(--accent); margin-bottom:4px;">
-            ${isLiveFromGas ? '🟢 Live Cloud Synchronization (Google Sheet)' : '⚡ Active Editorial Record'}
+            ${isLiveFromGas ? '🟢 Status from the editorial database (updated by the editorial office)' : '⚡ Active Editorial Record'}
           </div>
           <h2 style="font-size:20px; font-weight:700; color:var(--text-main); margin-bottom:4px;">
             ${escapeHtml(data.title)}
@@ -969,8 +973,8 @@ function renderTrackResult(data, isLiveFromGas = false) {
           <strong style="font-size:13px; color:var(--primary);">Authorship & Submission Details</strong>
           <div style="font-size:12px; margin-top:8px; line-height:1.7;">
             <div><strong>Corresponding Author:</strong> ${escapeHtml(data.author)}</div>
-            <div><strong>Registered Email:</strong> ${escapeHtml(data.email || 'Author on file')}</div>
-            <div><strong>Affiliation:</strong> ${escapeHtml(data.affiliation || 'University Department')}</div>
+            <div><strong>Registered Email:</strong> ${escapeHtml(data.email || 'On file with the editorial office')}</div>
+            <div><strong>Affiliation:</strong> ${escapeHtml(data.affiliation || 'On file with the editorial office')}</div>
           </div>
         </div>
 
@@ -979,8 +983,8 @@ function renderTrackResult(data, isLiveFromGas = false) {
           <div style="font-size:12px; margin-top:8px; line-height:1.7;">
             <div><strong>Editor-in-Chief:</strong> Vivek Sharma</div>
             <div><strong>Editorial Contact:</strong> <a href="mailto:pharmionex.journal@gmail.com" style="color:var(--accent);">pharmionex.journal@gmail.com</a></div>
-            <div><strong>Plagiarism Audit:</strong> ${escapeHtml(data.plagiarismScore || '< 10% Verified')}</div>
-            <div><strong>Reviewers Assigned:</strong> ${escapeHtml(data.assignedReviewers || '2 External Reviewers')}</div>
+            <div><strong>Plagiarism Audit:</strong> ${escapeHtml(data.plagiarismScore || 'Pending')}</div>
+            <div><strong>Reviewers Assigned:</strong> ${escapeHtml(data.assignedReviewers || 'Assigned after desk review')}</div>
           </div>
         </div>
       </div>
@@ -1566,8 +1570,9 @@ function submitArticleToJournal() {
   const chkOrig = document.getElementById("chkOriginality")?.checked;
   const chkAuth = document.getElementById("chkAuthorship")?.checked;
   const chkCopy = document.getElementById("chkCopyright")?.checked;
-  if (!chkOrig || !chkAuth || !chkCopy) {
-    showToast("Please accept all required ethics and plagiarism checkboxes", "danger");
+  const chkPriv = document.getElementById("chkPrivacy")?.checked;
+  if (!chkOrig || !chkAuth || !chkCopy || !chkPriv) {
+    showToast("Please accept all required declarations, including the Privacy Policy and Terms of Use", "danger");
     jumpToWizardStep(6);
     return;
   }

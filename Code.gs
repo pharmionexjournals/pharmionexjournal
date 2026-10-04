@@ -7,7 +7,7 @@
  * Google Drive Storage: pharmionex.journal@gmail.com
  * Journal: Pharmionex Journal (Intl Journal of Pharmaceutical, Biomedical & Clinical Research)
  * ISSN Status: Application in Process (CSIR-NIScPR, New Delhi, India)
- * Ethics & Governance: UGC-CARE, COPE, and ICMJE Guidelines Compliant
+ * Ethics & Governance: COPE and ICMJE recommendations
  *
  * IMPORTANT: This script must be created from the Google Sheet itself
  * (Extensions -> Apps Script). After ANY edit: Deploy -> Manage deployments ->
@@ -412,7 +412,7 @@ function sendReviewerInvite() {
         ["Keywords", s.keywords]
       ]) +
       "<p><strong>Abstract</strong></p><p style='font-size:13px;color:#334155;'>" + esc_(s.abstract).replace(/\n/g, "<br>") + "</p>" +
-      "<p>The review period is approximately <strong>14 days</strong>. Please reply to this email with <strong>ACCEPT</strong> or <strong>DECLINE</strong>. " +
+      "<p>We would be grateful for your review within about <strong>3 weeks</strong> of accepting; please tell us if you need more time. Please reply to this email with <strong>ACCEPT</strong> or <strong>DECLINE</strong>. " +
       "If you accept, the full anonymized manuscript and review form will be sent to you. Please decline if you have any competing interest with the work or its likely authors, " +
       "and treat all material as strictly confidential (COPE guidelines).</p>");
 
@@ -643,10 +643,11 @@ function buildAckEmail_(authorName, title, articleType, track, subId) {
     "<a href='" + CONFIG.WEBSITE_URL + "#track' style='color:#0f766e;font-weight:bold;'>" + CONFIG.WEBSITE_URL + "#track</a></p>" +
     "<p><strong>Next steps in the double-blind peer review lifecycle:</strong></p>" +
     "<ol style='font-size:13px;color:#475569;padding-left:20px;'>" +
-    "<li><strong>Initial Editorial Desk Review (Days 1-3):</strong> scope, Author Guidelines compliance and similarity check.</li>" +
-    "<li><strong>Double-Blind Peer Review (Days 4-18):</strong> two independent external reviewers.</li>" +
-    "<li><strong>Editorial Decision &amp; Revisions (Days 19-28):</strong> acceptance, revision request or decision.</li>" +
-    "<li><strong>Advance Online Publication (Volume 1, Issue 1, 2026):</strong> open access with zero APC.</li></ol>" +
-    "<p style='margin-top:24px;font-size:13px;color:#64748b;'>To provide updated files or supplementary data, reply to this email or write to <a href='mailto:" +
+    "<li><strong>Initial Editorial Desk Review (target: about 1 week):</strong> scope, Author Guidelines compliance and similarity check.</li>" +
+    "<li><strong>Double-Blind Peer Review (target: about 3 weeks):</strong> two independent external reviewers.</li>" +
+    "<li><strong>Editorial Decision &amp; Revisions:</strong> acceptance, revision request or rejection. We aim to give a first decision within about 4-6 weeks, but this is a target and may take longer.</li>" +
+    "<li><strong>Publication:</strong> accepted articles are planned for the inaugural issue (Volume 1, Issue 1), open access with zero APC.</li></ol>" +
+    "<p style='margin-top:24px;font-size:12px;color:#64748b;'>This email confirms receipt only. It is not a decision on your manuscript. How we handle your data is explained in our <a href='" + CONFIG.WEBSITE_URL + "#privacy'>Privacy Policy</a>.</p>" +
+    "<p style='margin-top:12px;font-size:13px;color:#64748b;'>To provide updated files or supplementary data, reply to this email or write to <a href='mailto:" +
     CONFIG.EDITORIAL_EMAIL + "'>" + CONFIG.EDITORIAL_EMAIL + "</a>.</p>");
 }

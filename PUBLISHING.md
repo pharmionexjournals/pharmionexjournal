@@ -4,6 +4,13 @@ Articles show up on the **Articles** tab (and the 3 newest on the Home page) aut
 The site reads one file: `published-articles.json`. While `"articles": []` is empty, the site
 shows "No articles have been published yet". Nothing is invented or pre-filled.
 
+## Before you touch the JSON: from acceptance to PDF
+1. Send the author the final accepted version and ask for any last corrections.
+2. Typeset the article into the journal's PDF (a Word or LaTeX template with the journal name, volume, issue, article type, authors, affiliations, received/accepted/published dates, licence line CC BY 4.0, and the citation).
+3. Send the author the proof and wait for sign-off.
+4. Decide on a DOI. Do not show one until it is really registered (for example through Crossref or Zenodo). Until then, leave `doi` out.
+5. Keep a copy of the final PDF and the acceptance email in Drive.
+
 ## Steps (about 2 minutes per article)
 1. Make sure the article is accepted, edited, and approved for release.
 2. Copy the final PDF into the `articles/` folder, e.g. `articles/2026-sharma-lipid-carriers.pdf`.
