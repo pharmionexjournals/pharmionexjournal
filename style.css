@@ -1457,23 +1457,131 @@ body {
 }
 
 /* ==========================================================================
-   Responsive Breakpoints
+   Responsive Breakpoints (desktop first)
    ========================================================================== */
-@media (max-width: 992px) {
+html { -webkit-text-size-adjust: 100%; }
+img, svg, video, canvas { max-width: 100%; }
+.app-container, .card, .track-result-panel { min-width: 0; }
+table { max-width: 100%; }
+pre, code { overflow-wrap: anywhere; }
+.card, .repo-search-toolbar, .journal-preview-paper { overflow-wrap: break-word; }
+
+.nav-links { flex-wrap: nowrap; flex: 0 1 auto; }
+.header-actions .btn { white-space: nowrap; }
+.journal-brand { min-width: 0; }
+
+/* The long tagline made the header tall and pushed the menu onto two lines.
+   The full journal name still appears in the page title, footer and Editorial page. */
+.brand-tagline { display: none; }
+.brand-title { white-space: nowrap; }
+
+/* Small laptops, tablets and below: hamburger menu */
+@media (max-width: 1100px) {
   .nav-links { display: none; }
   .mobile-menu-btn { display: block; }
-  .hero-title { font-size: 28px; }
-  .preview-two-col { column-count: 1; }
-  .stepper-steps-wrapper { overflow-x: auto; padding-bottom: 8px; }
 }
 
+@media (max-width: 992px) {
+  .header-container { padding: 12px 18px; gap: 12px; }
+  .hero-title { font-size: 28px; }
+  .preview-two-col { column-count: 1; }
+  .stepper-steps-wrapper { overflow-x: auto; padding-bottom: 8px; -webkit-overflow-scrolling: touch; }
+  .wizard-stepper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .footer-container { gap: 28px; }
+}
+
+/* Phones */
 @media (max-width: 640px) {
-  .hero-banner { padding: 32px 20px; }
+  /* Announcement bar: keep one line of text and the contact email */
+  .top-bar { padding: 6px 0; }
+  .top-bar-inner { padding: 0 14px; flex-direction: row; justify-content: space-between; gap: 8px; }
+  .top-bar-left span:nth-child(n+2) { display: none; }
+  .top-bar-right span:first-child { display: none; }
+  .top-bar-right span { font-size: 11px; }
+
+  /* Header */
+  .header-container { padding: 10px 14px; padding-left: max(14px, env(safe-area-inset-left)); padding-right: max(14px, env(safe-area-inset-right)); }
+  .journal-brand { gap: 10px; min-width: 0; flex: 1 1 auto; }
+  .brand-logo svg { width: 32px; height: 32px; }
+  .brand-title { font-size: 16px; letter-spacing: -0.2px; }
+  .brand-tagline { display: none; }
+  .header-actions { flex: 0 0 auto; gap: 8px; }
+  .header-actions .btn { display: none; }
+  .mobile-menu-btn { min-width: 44px; min-height: 44px; }
+
+  /* Drawer */
+  .mobile-drawer { width: min(300px, 86vw); overflow-y: auto; padding: 20px; padding-top: max(20px, env(safe-area-inset-top)); }
+  .mobile-nav-list button { min-height: 44px; }
+
+  /* Layout */
+  .app-container { padding-left: 14px; padding-right: 14px; }
+  .hero-banner { padding: 26px 18px; }
   .hero-title { font-size: 23px; }
+  .hero-badge { font-size: 12px; }
   .hero-buttons { flex-direction: column; }
-  .top-bar-inner { flex-direction: column; align-items: flex-start; }
+  .hero-buttons .btn { width: 100%; justify-content: center; }
+  .card { padding: 16px; }
+  .card-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .card-header .btn { align-self: flex-start; }
+
+  /* Forms: 16px stops iOS zooming into fields; 44px touch targets */
+  input[type="text"], input[type="email"], input[type="url"], input[type="number"], input[type="search"], select, textarea { font-size: 16px; }
+  .btn, .step-btn, .repo-chip { min-height: 44px; }
+  .btn-sm { min-height: 40px; }
+  .form-row { grid-template-columns: 1fr; }
+  input[type="checkbox"] { width: 20px; height: 20px; flex: 0 0 auto; }
+
+  /* Article search and filters */
+  .repo-search-toolbar { padding: 14px; }
+  .repo-search-input-wrap { flex-wrap: wrap; }
+  .repo-search-input { flex: 1 1 100%; min-width: 0; }
+  .repo-search-input-wrap .btn { flex: 1 1 calc(50% - 5px); justify-content: center; }
+  .repo-filters-row { flex-direction: column; align-items: stretch; gap: 10px; }
+  .repo-filters-row > div { display: flex; flex-direction: column; gap: 4px; }
+  .repo-filters-row label { margin: 0 !important; }
+  .repo-filter-select { width: 100%; max-width: 100%; }
+  .repo-chips-row { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 6px; -webkit-overflow-scrolling: touch; }
+  .repo-chip { white-space: nowrap; flex: 0 0 auto; }
+  .repo-chips-row > span:first-child { white-space: nowrap; flex: 0 0 auto; }
+
+  /* Tracking */
   .track-search-form { flex-direction: column; }
-  .card { padding: 18px; }
+  .track-search-form .btn { width: 100%; justify-content: center; }
+  .track-header-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .track-header-row > div:last-child { text-align: left !important; }
+
+  /* Tracking stepper: vertical list on phones */
+  .stepper-container { margin: 22px 0; }
+  .stepper-progress-bar { display: none; }
+  .stepper-steps-wrapper { flex-direction: column; gap: 10px; overflow: visible; }
+  .stepper-stage-node { flex-direction: row; width: 100%; text-align: left; gap: 12px; align-items: center; }
+  .stepper-stage-circle { margin-bottom: 0; flex: 0 0 auto; width: 38px; height: 38px; }
+  .stepper-stage-name { font-size: 13px; }
+
+  /* Submission wizard */
+  .journal-preview-paper { padding: 16px; }
+
+  /* Footer */
+  .footer-container { grid-template-columns: 1fr; gap: 22px; margin-bottom: 24px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start !important; }
+  .footer-bottom > div { flex-wrap: wrap; gap: 12px !important; }
+  .main-footer { padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); padding-bottom: max(20px, env(safe-area-inset-bottom)); }
+}
+
+/* Small phones */
+@media (max-width: 380px) {
+  .brand-title { font-size: 15px; }
+  .hero-title { font-size: 21px; }
+}
+
+/* Larger screens: keep long text readable */
+@media (min-width: 1400px) {
+  .app-container { max-width: 1280px; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; scroll-behavior: auto !important; }
 }
 
 @media print {

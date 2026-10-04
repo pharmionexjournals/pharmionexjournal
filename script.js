@@ -968,7 +968,7 @@ function renderTrackResult(data, isLiveFromGas = false) {
       </div>
 
       <!-- Metadata & Peer Review Grid -->
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px; margin:24px 0;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap:16px; margin:24px 0;">
         <div style="background:var(--surface-muted); padding:16px; border-radius:var(--radius-sm); border-left:3px solid var(--primary);">
           <strong style="font-size:13px; color:var(--primary);">Authorship & Submission Details</strong>
           <div style="font-size:12px; margin-top:8px; line-height:1.7;">
