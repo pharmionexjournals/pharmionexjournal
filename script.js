@@ -4,7 +4,7 @@
  * International Journal of Pharmaceutical, Biomedical & Clinical Research
  * ============================================================================
  * Editor-in-Chief & Publisher: Vivek Sharma
- * Official Editorial Office: pharmionex.journal@gmail.com
+ * Official Editorial Office: pharmioneex.journal@gmail.com
  * ISSN Status: Application in Process (National Science Library - NIScPR, New Delhi)
  * Standards: UGC-CARE, COPE, and ICMJE Guidelines Compliant
  * ============================================================================
@@ -15,14 +15,15 @@ var GOOGLE_APPS_SCRIPT_URL = localStorage.getItem("pharmionex_gas_url") || "";
 
 // Core Application State
 var state = {
-  journalInfo: {
+    journalInfo: {
     name: "Pharmionex Journal",
     shortTitle: "Pharmionex J.",
     tagline: "International Journal of Pharmaceutical, Biomedical & Clinical Research",
-    eIssn: "Application in Process (NIScPR, India)",
-    pIssn: "Pending Application",
+    eIssn: "Application in Process (CSIR-NIScPR, New Delhi)",
+    pIssn: "Pending Formal Allocation",
     editorInChief: "Vivek Sharma",
-    contactEmail: "pharmionex.journal@gmail.com"
+    contactEmail: "pharmioneex.journal@gmail.com",
+    driveAccount: "pharmioneex.journal@gmail.com"
   },
   articleType: "Original Research Article",
   title: "",
@@ -32,7 +33,7 @@ var state = {
   authors: [
     {
       name: "Vivek Sharma",
-      email: "pharmionex.journal@gmail.com",
+      email: "pharmioneex.journal@gmail.com",
       affiliation: "Department of Pharmaceutical Sciences",
       country: "India",
       orcid: "0000-0002-1825-0097",
@@ -47,7 +48,7 @@ var state = {
     { id: "conclusion", title: "5. Conclusion", content: "" }
   ],
   references: [
-    "Sharma V, Patel RK, Chen H. Machine learning approaches for molecular property prediction in drug discovery. Pharmionex J. 2026;1(1):1-16. doi:10.59234/pharmionex.2026.01.01",
+    "Sharma V, Patel RK, Chen H. Machine learning approaches for molecular property prediction in drug discovery. Pharmionex J. 2026;1(1):1-16. ",
     "Srivastava AK, Sharma V, Gupta N. High-performance liquid chromatography (HPLC) validation protocols for pharmaceutical formulations under ICH Q2(R1). Int J Pharm Anal. 2024;32(2):145-159. doi:10.1021/acs.analchem.4c01289",
     "Sharma V, Kumar D, Mukherjee S. Critical quality attributes in hard gelatin capsule manufacturing and dissolution stability. J Drug Deliv Sci Technol. 2025;29(1):88-99. doi:10.1016/j.jddst.2025.01.033"
   ],
@@ -73,258 +74,224 @@ var state = {
 // Spanning all core pharmaceutical article types
 var publishedArticlesDataset = [
   {
-    id: "art-1",
+    id: "track-1",
     type: "Original Research Article",
-    title: "Development and In-Vitro Characterization of Nanostructured Lipid Carriers for Targeted Doxorubicin Delivery",
-    authors: "Vivek Sharma, R. K. Patel, S. A. Nair, H. Chen",
+    title: "Official Author Template: Original Research Article",
     track: "Pharmaceutics & Targeted Drug Delivery",
-    year: 2026,
+    category: "Pharmaceutics & Drug Delivery",
     volume: 1,
     issue: 1,
-    pages: "1–16",
-    doi: "10.59234/pharmionex.2026.01.01",
+    year: 2026,
+    status: "Call for Papers Open (Inaugural Vol. 1, 2026)",
+    issuingBody: "Pharmionex Editorial Board • Vivek Sharma (Editor-in-Chief & Publisher)",
     pdfPath: "articles/pharmionex-2026-01-01.pdf",
-    date: "October 2026",
-    abstract: "Nanostructured lipid carriers (NLCs) were formulated via high-pressure hot homogenization using Precirol ATO 5 and Oleic Acid stabilized with Poloxamer 188. Particle size (142.5 ± 4.2 nm) and high entrapment efficiency (88.4 ± 2.1%) yielded sustained drug release obeying Higuchi kinetics over 48 hours with enhanced antiproliferative cytotoxicity against MCF-7 cell lines.",
-    keywords: "Nanostructured Lipid Carriers (NLCs), Doxorubicin, Targeted Drug Delivery, Colloidal Stability, Higuchi Kinetics",
+    date: "Inaugural Issue 2026",
+    wordLimit: "4,000 – 7,000 words (excluding abstract & references)",
+    abstractFormat: "250 – 300 words (Structured: Background, Methods, Results, Conclusion)",
+    scope: "Novel drug delivery systems, nanocarriers (SLNs, NLCs, liposomes), modified-release formulations, dissolution kinetics, and preformulation studies.",
+    keywords: "Original Research; Pharmaceutics; Nanotechnology; Drug Delivery; Preformulation; Dissolution; Pharmacokinetics",
     fullContent: {
-      intro: "Targeted drug delivery systems utilizing colloidal lipid nanocarriers have revolutionized the therapeutic index of chemotherapeutic agents. In this study, doxorubicin was immobilized within nanostructured lipid matrices to limit systemic cardiotoxicity and maximize sustained intracellular accumulation.",
-      methods: "High-pressure homogenization was executed at 800 bar across 5 cycles. Physical characterization was completed via Malvern Zetasizer Nano ZS. Drug entrapment efficiency was analyzed using validated reverse-phase HPLC with fluorescence detection (Ex 480 nm, Em 560 nm).",
-      results: "The optimized NLC dispersion exhibited a narrow PDI of 0.162 ± 0.015 and a zeta potential of -28.4 ± 1.8 mV. In-vitro dissolution at pH 5.5 demonstrated accelerated drug release compared to physiological pH 7.4.",
-      conclusion: "The engineered NLC formulation confers colloidal stability, prolonged shelf-life, and superior in-vitro anticancer efficacy compared to conventional free drug solutions."
+      intro: "This official author template defines the structural and formatting requirements for submitting Original Research Articles to Pharmionex Journal. Submissions must present novel empirical findings with rigorous pharmaceutical methodologies.",
+      methods: "Experimental protocols must detail reagents, analytical instruments (HPLC, LC-MS, Zetasizer), synthesis/formulation parameters, and statistical validation. Animal studies must cite valid Institutional Animal Ethics Committee (IAEC) approval numbers.",
+      results: "Results should be presented objectively with clear numerical tables and high-resolution figures (minimum 300 DPI in PNG, TIFF, or EPS format). In-vitro release profiles and kinetic modeling must be mathematically validated.",
+      conclusion: "Conclusions must synthesize major experimental discoveries and their therapeutic significance without ungrounded extrapolations."
     }
   },
   {
-    id: "art-2",
+    id: "track-2",
     type: "Methodology & Validation Protocol",
-    title: "RP-HPLC Method Development and Validation for Simultaneous Estimation of Metformin and Remogliflozin in Combined Solid Dosage Forms",
-    authors: "A. K. Srivastava, Vivek Sharma, N. Gupta, P. M. Joshi",
+    title: "Official Author Template: Methodology & Validation Protocol",
     track: "Pharmaceutical Analysis & Method Validation",
-    year: 2026,
+    category: "Pharmaceutical Analysis",
     volume: 1,
     issue: 1,
-    pages: "17–28",
-    doi: "10.59234/pharmionex.2026.01.02",
+    year: 2026,
+    status: "Call for Papers Open (Inaugural Vol. 1, 2026)",
+    issuingBody: "Pharmionex Editorial Board • Vivek Sharma (Editor-in-Chief & Publisher)",
     pdfPath: "articles/pharmionex-2026-01-02.pdf",
-    date: "October 2026",
-    abstract: "An isocratic reversed-phase HPLC technique was validated on a Phenomenex C18 column (250 × 4.6 mm, 5 µm) using 0.02 M potassium dihydrogen phosphate buffer (pH 4.5) and acetonitrile (60:40 v/v) at 1.0 mL/min with UV detection at 228 nm. Validated strictly under ICH Q2(R1) with recovery rates between 99.82% and 100.14%.",
-    keywords: "RP-HPLC, Metformin, Remogliflozin, ICH Q2(R1), Validation, Stability-Indicating",
+    date: "Inaugural Issue 2026",
+    wordLimit: "3,500 – 6,000 words",
+    abstractFormat: "200 – 250 words (Structured: Analytical Rationale, Chromatographic System, Validation Results, Utility)",
+    scope: "Stability-indicating RP-HPLC, UPLC, LC-MS/MS, GC, and spectrophotometric method development and validation strictly under ICH Q2(R1)/Q2(R2) guidelines.",
+    keywords: "Method Validation; RP-HPLC; ICH Q2; Stability-Indicating; Forced Degradation; Impurity Profiling",
     fullContent: {
-      intro: "Fixed-dose antidiabetic therapy requires robust analytical assays to verify batch-to-batch content uniformity. This investigation presents a fully validated, rapid, stability-indicating RP-HPLC method for simultaneous estimation of metformin and remogliflozin.",
-      methods: "Separations were performed on a Waters Alliance 2695 system. Method validation addressed specificity, linearity, precision (repeatability and intermediate precision), accuracy, limit of detection (LOD), limit of quantitation (LOQ), and robustness in compliance with ICH Q2(R1).",
-      results: "Both active analytes achieved baseline resolution with retention times of 2.84 ± 0.08 min (metformin) and 6.12 ± 0.12 min (remogliflozin). Theoretical plates exceeded 6,500 and tailing factors remained below 1.25. Forced degradation confirmed stability-indicating capability.",
-      conclusion: "The developed RP-HPLC method is cost-effective, precise, and highly suitable for regular commercial batch release and stability studies."
+      intro: "Defines reporting requirements for chromatographic and spectroscopic analytical protocols. The manuscript must demonstrate why the new analytical method provides superior resolution, sensitivity, or cost-efficiency over existing pharmacopeial monographs.",
+      methods: "Must include complete chromatographic specifications: stationary phase chemistry, dimensions, particle size, mobile phase ratio, pH adjustments, flow rate, column temperature, injection volume, and detection wavelengths.",
+      results: "System suitability and complete ICH validation parameters: Specificity, Linearity (R² >= 0.999), Precision (repeatability & intermediate precision % RSD < 2.0%), Accuracy (% recovery 98.0%–102.0%), LOD, LOQ, and forced degradation stability-indicating profiles.",
+      conclusion: "Summary of analytical reproducibility, robustness, and suitability for commercial batch release and stability testing."
     }
   },
   {
-    id: "art-3",
+    id: "track-3",
     type: "Industrial Research Article",
-    title: "Critical Quality Attributes and Accelerated Stability Testing of Commercial Hard Gelatin Capsules under ICH Q1A Guidelines",
-    authors: "Vivek Sharma, D. Kumar, S. Mukherjee, R. Verma",
+    title: "Official Author Template: Industrial Pharmacy & Formulation Science",
     track: "Industrial Pharmacy & Formulation Science",
-    year: 2026,
+    category: "Industrial Pharmacy",
     volume: 1,
     issue: 1,
-    pages: "29–42",
-    doi: "10.59234/pharmionex.2026.01.03",
+    year: 2026,
+    status: "Call for Papers Open (Inaugural Vol. 1, 2026)",
+    issuingBody: "Pharmionex Editorial Board • Vivek Sharma (Editor-in-Chief & Publisher)",
     pdfPath: "articles/pharmionex-2026-01-03.pdf",
-    date: "October 2026",
-    abstract: "Hard gelatin capsules containing moisture-sensitive active complexes were investigated under ICH Q1A accelerated conditions (40°C ± 2°C / 75% RH ± 5% RH). Critical quality attributes including loss on drying (LOD), disintegration time, in-vitro dissolution kinetics, and shell cross-linking were monitored over 6 months.",
-    keywords: "Hard Gelatin Capsules, Critical Quality Attributes, Accelerated Stability, ICH Q1A, Dissolution Kinetics",
+    date: "Inaugural Issue 2026",
+    wordLimit: "4,000 – 7,000 words",
+    abstractFormat: "250 words (Structured: Industrial Context, Formulation Engineering, Stability Testing, Scalability)",
+    scope: "Solid oral dosage forms, hard gelatin capsules, Critical Quality Attributes (CQAs), pilot scale-up, accelerated stability testing (ICH Q1A), and WHO Schedule M cGMP controls.",
+    keywords: "Industrial Pharmacy; Hard Gelatin Capsules; CQAs; Accelerated Stability; Dissolution; cGMP; Schedule M",
     fullContent: {
-      intro: "Gelatin moisture equilibrium directly dictates the physical robustness and dissolution profile of encapsulated pharmaceutical powders. Moisture migration between fills and capsule shells can lead to shell embrittlement or delayed disintegration.",
-      methods: "Capsules were packaged in HDPE containers with induction seals and silica desiccants. Karl Fischer titrimetry evaluated moisture content, and in-vitro dissolution was monitored using USP Apparatus 1 at 100 rpm.",
-      results: "Loss on drying values remained within 13.5%–15.2% w/w. Gelatin pellicle cross-linking observed at month 6 caused a 6.8% reduction in initial dissolution, which was fully restored using Tier 2 enzyme dissolution according to USP <711>.",
-      conclusion: "Proper primary barrier selection and packaging headspace optimization are paramount to preserving dissolution kinetics across tropical stability zones."
+      intro: "Focuses on commercial formulation engineering, scale-up bottlenecks, capsule pellicle formation, excipient compatibility, and batch-to-batch reproducibility.",
+      methods: "Details pilot batch manufacturing, high-shear granulation, encapsulation machine parameters, in-process controls (IPQC), and ICH Q1A accelerated stability chamber storage (40°C ± 2°C / 75% RH ± 5% RH).",
+      results: "Empirical evaluation of Critical Quality Attributes (CQAs): weight variation, content uniformity, disintegration, and Tier 1 vs Tier 2 enzyme dissolution kinetics over 1, 2, 3, and 6 months.",
+      conclusion: "Practical recommendations for industrial formulation scientists, regulatory dossiers, and commercial shelf-life determination."
     }
   },
   {
-    id: "art-4",
+    id: "track-4",
     type: "Comprehensive Review Article",
-    title: "Advances in Lipid-Based Nanocarriers, Polymeric Micelles, and Stimuli-Responsive Drug Delivery Systems: A Decadal Overview",
-    authors: "Vivek Sharma, P. K. Singh, M. Tanaka, S. Sengupta",
+    title: "Official Author Template: Comprehensive Review Article",
     track: "Pharmaceutics & Targeted Drug Delivery",
-    year: 2026,
+    category: "Review Article",
     volume: 1,
     issue: 1,
-    pages: "43–62",
-    doi: "10.59234/pharmionex.2026.01.04",
+    year: 2026,
+    status: "Call for Papers Open (Inaugural Vol. 1, 2026)",
+    issuingBody: "Pharmionex Editorial Board • Vivek Sharma (Editor-in-Chief & Publisher)",
     pdfPath: "articles/pharmionex-2026-01-04.pdf",
-    date: "October 2026",
-    abstract: "A critical state-of-the-art evaluation of colloidal nanocarriers from 2016 to 2026, examining fabrication techniques, scale-up hurdles, surface PEGylation, active targeting ligands, and stimuli-responsive smart nano-assemblies (pH, redox, enzyme-triggered) for cancer and systemic disorders.",
-    keywords: "Nanotechnology, Drug Delivery, Polymeric Micelles, Stimuli-Responsive, Lipid Nanoparticles, Clinical Translation",
+    date: "Inaugural Issue 2026",
+    wordLimit: "6,000 – 12,000 words (Minimum 60 references)",
+    abstractFormat: "250 – 350 words (Narrative overview of therapeutic landscape, mechanistic barriers, and future horizons)",
+    scope: "Decadal advances in lipid-based nanocarriers, polymeric micelles, stimuli-responsive carriers, monoclonal antibodies, active targeting ligands, and clinical translation barriers.",
+    keywords: "Review Article; Nanocarriers; Polymeric Micelles; Stimuli-Responsive; Drug Delivery; Clinical Translation",
     fullContent: {
-      intro: "Nanotechnology-enabled drug delivery has witnessed exponential growth over the past decade, driven by the necessity to overcome low aqueous solubility, poor bioavailability, and off-target cytotoxicity of emerging therapeutic chemical entities.",
-      methods: "Comprehensive literature synthesis across 180 peer-reviewed studies published between 2016 and 2026, evaluating in-vitro characterization, cellular internalization, and preclinical animal efficacy.",
-      results: "Lipid-polymer hybrid carriers demonstrate optimal retention profiles while overcoming premature burst release. Surface conjugation with transferrin and folate ligands enhances tumor targeting efficiency by 4.2-fold.",
-      conclusion: "Harmonizing critical quality attribute (CQA) guidelines across international regulatory bodies is essential to accelerate clinical translation of stimuli-responsive nanocarriers."
+      intro: "Critical synthesis of existing literature defining the current state-of-the-art in advanced pharmaceutical systems. Must establish why an updated thematic review is warranted.",
+      methods: "Systematic search methodology across PubMed, Scopus, and Web of Science detailing search strings, inclusion/exclusion criteria, and bibliographic scope.",
+      results: "Categorized critical evaluation of nanocarrier engineering, pharmacokinetic behavior, physicochemical stability, manufacturing scale-up, and regulatory approval barriers.",
+      conclusion: "Forward-looking perspectives identifying unanswered mechanistic questions and emerging formulation paradigms."
     }
   },
   {
-    id: "art-5",
+    id: "track-5",
     type: "Regulatory & Review Article",
-    title: "Implementation of Revised WHO Schedule M and Good Manufacturing Practice Standards in Modern Quality Assurance",
-    authors: "R. K. Sharma, Vivek Sharma, T. Anderson, V. B. Reddy",
+    title: "Official Author Template: Regulatory Affairs & Quality Assurance",
     track: "Regulatory Affairs, GMP & Quality Assurance",
-    year: 2026,
+    category: "Regulatory Affairs",
     volume: 1,
     issue: 1,
-    pages: "63–76",
-    doi: "10.59234/pharmionex.2026.01.05",
+    year: 2026,
+    status: "Call for Papers Open (Inaugural Vol. 1, 2026)",
+    issuingBody: "Pharmionex Editorial Board • Vivek Sharma (Editor-in-Chief & Publisher)",
     pdfPath: "articles/pharmionex-2026-01-05.pdf",
-    date: "October 2026",
-    abstract: "Synthesizes empirical implementation workflows from 45 manufacturing sites transitioning to revised Schedule M and WHO-GMP guidelines. Focus areas include risk management (ICH Q9), computerized system validation (CSV) under 21 CFR Part 11, cleanroom classification (ISO 14644), and audit trail review protocols.",
-    keywords: "Schedule M, WHO-GMP, Data Integrity, 21 CFR Part 11, Computerized System Validation, Pharmaceutical Quality System",
+    date: "Inaugural Issue 2026",
+    wordLimit: "4,500 – 8,000 words",
+    abstractFormat: "250 words (Structured: Regulatory Context, Compliance Challenges, Implementation Framework, Policy Impact)",
+    scope: "Revised WHO Schedule M implementation, 21 CFR Part 11 computerized system validation (CSV), data integrity, CAPA, Quality Risk Management (ICH Q9), and pharmaceutical quality systems (ICH Q10).",
+    keywords: "Regulatory Affairs; Schedule M; WHO-GMP; 21 CFR Part 11; Data Integrity; Quality Risk Management",
     fullContent: {
-      intro: "The notification of revised Schedule M aligns Indian pharmaceutical manufacturing with PIC/S and WHO-GMP benchmarks, establishing mandatory Pharmaceutical Quality Systems (PQS) and audit-trail data integrity.",
-      methods: "Statistical audit data from 45 facilities were analyzed to track non-conformance remediation, HVAC Grade B/C laminar retrofitting, and electronic Batch Manufacturing Record (eBMR) adoption.",
-      results: "Facilities implementing automated computerized logging demonstrated a 68% decrease in data integrity audit observations within 9 months of transition.",
-      conclusion: "Adherence to upgraded Schedule M not only ensures global export compliance but elevates Indian pharmaceutical manufacturing to world-class safety and consistency benchmarks."
+      intro: "Examines evolving national and international statutory drug regulations (CDSCO, USFDA, EMA, WHO) and mandatory modernization mandates.",
+      methods: "Methodologies for facility audit readiness, HVAC qualification, computerized system audit trails, and risk assessment matrices.",
+      results: "Analysis of recurring regulatory audit findings, remediation workflows, CAPA effectiveness, and continuous process verification data.",
+      conclusion: "Actionable strategic frameworks for pharmaceutical manufacturing facilities to ensure global regulatory compliance."
     }
   },
   {
-    id: "art-6",
+    id: "track-6",
     type: "Pharmacokinetic Research Article",
-    title: "Pharmacokinetic Profiling and In-Vitro/In-Vivo Correlation (IVIVC) of Novel Extended-Release Polymeric Matrix Tablets",
-    authors: "M. Sengupta, Vivek Sharma, K. L. Verma, S. Choudhury",
+    title: "Official Author Template: Pharmacokinetic & IVIVC Studies",
     track: "Pharmacology & Clinical Pharmacokinetics",
-    year: 2026,
+    category: "Pharmacokinetics",
     volume: 1,
     issue: 1,
-    pages: "77–90",
-    doi: "10.59234/pharmionex.2026.01.06",
+    year: 2026,
+    status: "Call for Papers Open (Inaugural Vol. 1, 2026)",
+    issuingBody: "Pharmionex Editorial Board • Vivek Sharma (Editor-in-Chief & Publisher)",
     pdfPath: "articles/pharmionex-2026-01-06.pdf",
-    date: "October 2026",
-    abstract: "Hydrophilic matrix tablets of carvedilol were engineered using HPMC K100M and sodium carboxymethylcellulose. A point-to-point Level A In-Vitro/In-Vivo Correlation (IVIVC) was established (R² = 0.988) in human volunteers, validating the dissolution assay as a surrogate for bioequivalence.",
-    keywords: "IVIVC, Extended-Release Matrix, Carvedilol, HPMC K100M, Bioavailability, Wagner-Nelson",
+    date: "Inaugural Issue 2026",
+    wordLimit: "4,000 – 7,000 words",
+    abstractFormat: "250 words (Structured: Objective, Study Design, Bioanalytical Assay, IVIVC Results, Conclusion)",
+    scope: "In-vitro/in-vivo correlation (Level A/B/C), bioavailability enhancement, bioequivalence protocols, mathematical deconvolution (Wagner-Nelson), and clinical PK/PD modeling.",
+    keywords: "Pharmacokinetics; IVIVC; Bioavailability; Bioequivalence; Deconvolution; Clinical PK/PD",
     fullContent: {
-      intro: "Establishing a validated Level A IVIVC allows pharmaceutical scientists to justify biowaivers for formulation scale-up and post-approval manufacturing modifications.",
-      methods: "Formulations were assessed across biorelevant pH media (1.2, 4.5, 6.8). In-vivo pharmacokinetics was evaluated in 12 healthy volunteers using a randomized crossover design with institutional ethics approval (IAEC/PHARM/2026/04).",
-      results: "Formulation F3 sustained release over 24 hours. Level A correlation between in-vivo fraction absorbed and in-vitro fraction dissolved yielded an R² of 0.988 with prediction errors < 6.5% for Cmax and AUC.",
-      conclusion: "The validated mathematical model reliably predicts in-vivo pharmacokinetic behavior directly from standard in-vitro dissolution profiles."
+      intro: "Therapeutic rationale for modified drug release, target pharmacokinetic parameters (Cmax, Tmax, AUC), and surrogate in-vitro dissolution criteria.",
+      methods: "Clinical trial design, subject selection criteria, ethical approvals (IEC/CTRI), bioanalytical LC-MS/MS assay validation, and sampling timetables.",
+      results: "Pharmacokinetic deconvolution curves, mathematical point-to-point correlation (Level A IVIVC, R² >= 0.95), and bioequivalence 90% confidence intervals (80.00%–125.00%).",
+      conclusion: "Validation of in-vitro dissolution as a surrogate for in-vivo bioequivalence and biowaiver justification."
     }
   },
   {
-    id: "art-7",
+    id: "track-7",
     type: "Short Communication / Rapid Letter",
-    title: "Microwave-Assisted Green Synthesis and Antimicrobial Evaluation of Novel Ciprofloxacin-Silver Nanocomposites",
-    authors: "Vivek Sharma, A. Bhattacharya, K. R. Meena",
+    title: "Official Author Template: Short Communication / Rapid Letter",
     track: "Medicinal Chemistry & Nanomedicine",
-    year: 2026,
+    category: "Short Communication",
     volume: 1,
     issue: 1,
-    pages: "91–98",
-    doi: "10.59234/pharmionex.2026.01.07",
+    year: 2026,
+    status: "Call for Papers Open (Inaugural Vol. 1, 2026)",
+    issuingBody: "Pharmionex Editorial Board • Vivek Sharma (Editor-in-Chief & Publisher)",
     pdfPath: "articles/pharmionex-2026-01-07.pdf",
-    date: "October 2026",
-    abstract: "A rapid 90-second microwave-assisted green synthesis of silver nanoparticles conjugated with ciprofloxacin using Azadirachta indica leaf extract. High-resolution TEM revealed uniform 18.4 nm spherical particles with a 4-fold decrease in minimum inhibitory concentration against resistant Pseudomonas aeruginosa.",
-    keywords: "Short Communication, Green Synthesis, Silver Nanoparticles, Ciprofloxacin, Biofilms, Antimicrobial Resistance",
+    date: "Inaugural Issue 2026",
+    wordLimit: "2,000 – 3,500 words (Max 3 Display Items)",
+    abstractFormat: "Up to 200 words (Unstructured, concise summary of core experimental breakthrough)",
+    scope: "Rapid reporting of significant breakthroughs: green nanoparticle synthesis, microwave-assisted synthesis, novel synthetic routes, and antimicrobial biofilm assays.",
+    keywords: "Short Communication; Green Synthesis; Nanocomposites; Biofilms; Antimicrobial; Rapid Letter",
     fullContent: {
-      intro: "Rapid dissemination of nano-antibiotic conjugate synthesis is critical to address escalating fluoroquinolone resistance in healthcare-associated bacterial biofilms.",
-      methods: "Aqueous silver nitrate was reacted with botanical reducing extract under 700 W microwave irradiation for 90 s, followed by passive drug conjugation and microdilution MIC testing.",
-      results: "Surface plasmon resonance at 422 nm confirmed stable colloidal formation. Biofilm inhibition assays showed 82% eradication of established MRSA colonies.",
-      conclusion: "This green synthesis provides an accessible, rapid pathway to potent hybrid nano-antimicrobials."
+      intro: "Brief context of scientific novelty and urgency justifying accelerated publication.",
+      methods: "Concise yet fully reproducible experimental protocols, green synthesis parameters, and characterization techniques (UV-Vis, HR-TEM, XRD).",
+      results: "Combined results and discussion highlighting key spectral data, morphology, and minimum inhibitory concentration (MIC) assays against resistant pathogens.",
+      conclusion: "Core findings, immediate therapeutic utility, and follow-up investigation directions."
     }
   },
   {
-    id: "art-8",
+    id: "track-8",
     type: "Clinical Case Study & Pharmacovigilance",
-    title: "Severe Bullous Fixed Drug Eruption Associated with Metformin-Vildagliptin Combination: Pharmacovigilance and Causality Assessment",
-    authors: "Vivek Sharma, Dr. S. K. Mukherjee, MD, Dr. P. Joshi",
+    title: "Official Author Template: Clinical Case Study & ADR Report",
     track: "Clinical Pharmacy & Pharmacovigilance",
-    year: 2026,
+    category: "Case Study & Safety",
     volume: 1,
     issue: 1,
-    pages: "99–108",
-    doi: "10.59234/pharmionex.2026.01.08",
+    year: 2026,
+    status: "Call for Papers Open (Inaugural Vol. 1, 2026)",
+    issuingBody: "Pharmionex Editorial Board • Vivek Sharma (Editor-in-Chief & Publisher)",
     pdfPath: "articles/pharmionex-2026-01-08.pdf",
-    date: "October 2026",
-    abstract: "A 58-year-old diabetic male developed recurrent bullous cutaneous eruptions over trunk and mucosal surfaces following metformin-vildagliptin therapy. Naranjo ADR probability scored 7 (Probable) and WHO-UMC causality classified the event as 'Certain' upon complete dechallenge resolution.",
-    keywords: "Case Study, Pharmacovigilance, Vildagliptin, Fixed Drug Eruption, Naranjo Scale, Adverse Drug Reaction",
+    date: "Inaugural Issue 2026",
+    wordLimit: "2,000 – 3,500 words",
+    abstractFormat: "150 – 250 words (Unstructured: Clinical Event, Suspected Drug, Causality Assessment, Pharmacovigilance Impact)",
+    scope: "Adverse drug reactions (ADRs), post-marketing pharmacovigilance, causality assessment (Naranjo Probability Scale, WHO-UMC criteria), drug interactions, and therapeutic drug monitoring (TDM).",
+    keywords: "Case Study; Pharmacovigilance; ADR; Naranjo Scale; Causality Assessment; Patient Safety",
     fullContent: {
-      intro: "Post-marketing surveillance of incretin-based antidiabetic agents is vital to identify rare but debilitating hypersensitivity and dermatological reactions.",
-      methods: "Clinical evaluation, histopathological punch biopsy, and causality scoring using the Naranjo Algorithm and WHO-UMC pharmacovigilance criteria.",
-      results: "Discontinuation of vildagliptin resulted in complete resolution of cutaneous blisters within 10 days without recurrence on metformin monotherapy.",
-      conclusion: "Clinical pharmacists must educate diabetic patients regarding cutaneous warning signs to enable prompt drug withdrawal and report suspected adverse events to national pharmacovigilance databases."
+      intro: "Pharmacological background of suspected therapeutic agents, therapeutic indications, and previously documented cutaneous or systemic adverse event incidence.",
+      methods: "Patient history documentation, chronological symptom progression, laboratory investigations, and systematic Naranjo ADR Probability Algorithm scoring.",
+      results: "Clinical presentation details, dechallenge/rechallenge response, causality score computation, and histopathological or biochemical findings.",
+      conclusion: "Clinical management takeaways, risk mitigation strategies, and recommendations for hospital clinical pharmacists and prescribing physicians."
     }
   }
 ];
 
 // Tracking Registry for Author Status Tracking
 var trackingRegistry = {
-  "PHARMIONEX-2026-4109": {
-    trackingId: "PHARMIONEX-2026-4109",
+  "DEMO-2026-001": {
+    trackingId: "DEMO-2026-001",
     articleType: "Original Research Article",
-    title: "Formulation and Optimization of Self-Nanoemulsifying Drug Delivery Systems (SNEDDS) for Poorly Soluble Statins",
+    title: "Demonstration Manuscript: Interactive Showcase of the Double-Blind Peer Review Lifecycle",
     track: "Pharmaceutics & Targeted Drug Delivery",
-    author: "Dr. Rajesh K. Patel",
-    email: "r***l@pharmaresearch.ac.in",
-    affiliation: "Department of Pharmaceutics, National Institute of Pharmaceutical Sciences",
-    submissionDate: "September 18, 2026",
-    status: "Under Double-Blind Peer Review",
+    author: "Pharmionex Editorial Demonstration",
+    email: "pharmioneex.journal@gmail.com",
+    affiliation: "Department of Pharmaceutical Sciences (Demonstration Profile)",
+    submissionDate: "October 01, 2026",
+    status: "Stage 3: Double-Blind Peer Review in Progress",
     stage: 3,
-    plagiarismScore: "5.2% Similarity (Turnitin / iThenticate Passed < 10%)",
-    assignedEditor: "Vivek Sharma (Editor-in-Chief)",
-    assignedReviewers: "2 Independent External Reviewers Assigned",
-    reviewerComments: "Both reviewers accepted the invitation. Technical evaluation of in-vivo bioavailability data in progress.",
-    editorRemarks: "Manuscript passed initial editorial scope check and Turnitin similarity index check. Reviewer feedback expected within 5 business days.",
+    plagiarismScore: "4.8% Similarity (Turnitin Verified < 10% Standard)",
+    assignedEditor: "Vivek Sharma (Editor-in-Chief & Publisher)",
+    assignedReviewers: "2 Independent External Peer Reviewers Assigned",
+    reviewerComments: "Peer review invitations accepted. Independent evaluation of formulation methodology and kinetic data in progress.",
+    editorRemarks: "Manuscript successfully passed preliminary desk screening, formatting compliance check, and plagiarism verification. Dispatched for blind peer review.",
     timeline: [
-      { stage: 1, title: "Submission Received & Formally Acknowledged", date: "Sep 18, 2026", status: "completed", remarks: "Submission recorded. Manuscript assigned to Editor-in-Chief Vivek Sharma." },
-      { stage: 2, title: "Editorial Scope & Anti-Plagiarism Screening", date: "Sep 20, 2026", status: "completed", remarks: "Turnitin similarity score verified at 5.2% (well below 10% ceiling). COPE ethics verified." },
-      { stage: 3, title: "Double-Blind Peer Review in Progress", date: "Sep 22, 2026", status: "current", remarks: "Sent to 2 external reviewers. Both blind evaluations actively underway." },
-      { stage: 4, title: "Author Revisions (Minor / Major)", date: "Pending", status: "pending", remarks: "Pending submission of peer review reports." },
-      { stage: 5, title: "Editorial Decision & Acceptance", date: "Pending", status: "pending", remarks: "Formal decision by Vivek Sharma following reviewer synthesis." },
-      { stage: 6, title: "Typesetting, Galley Proof & Publication", date: "Pending", status: "pending", remarks: "Scheduled for Volume 1, Issue 2." }
-    ]
-  },
-  "PHARMIONEX-2026-3822": {
-    trackingId: "PHARMIONEX-2026-3822",
-    articleType: "Methodology & Validation Protocol",
-    title: "Spectrophotometric and Chemometric Assisted Simultaneous Determination of Ciprofloxacin and Tinidazole",
-    track: "Pharmaceutical Analysis & Method Validation",
-    author: "Dr. Meenakshi Sundaram",
-    email: "m***m@aims.edu.in",
-    affiliation: "Department of Pharmaceutical Chemistry, AIMS Institute",
-    submissionDate: "August 29, 2026",
-    status: "Accepted for Publication",
-    stage: 5,
-    plagiarismScore: "3.8% Similarity (Turnitin / iThenticate Passed)",
-    assignedEditor: "Vivek Sharma (Editor-in-Chief)",
-    assignedReviewers: "Completed (2 Positive Recommendations)",
-    reviewerComments: "Authors satisfactorily addressed minor comments regarding partial least squares (PLS) calibration curves.",
-    editorRemarks: "Official Acceptance Letter issued by Vivek Sharma. Transferred to production for final galley proof.",
-    timeline: [
-      { stage: 1, title: "Submission Received & Formally Acknowledged", date: "Aug 29, 2026", status: "completed", remarks: "Acknowledged and logged in editorial database." },
-      { stage: 2, title: "Editorial Scope & Anti-Plagiarism Screening", date: "Aug 31, 2026", status: "completed", remarks: "Similarity index: 3.8%. High academic quality noted." },
-      { stage: 3, title: "Double-Blind Peer Review Completed", date: "Sep 15, 2026", status: "completed", remarks: "Reviewers recommended minor revision on chemometric modeling." },
-      { stage: 4, title: "Author Revisions Verified", date: "Sep 24, 2026", status: "completed", remarks: "Revised manuscript and point-by-point rebuttal approved." },
-      { stage: 5, title: "Editorial Acceptance Issued", date: "Sep 28, 2026", status: "current", remarks: "Accepted for publication by Editor-in-Chief Vivek Sharma." },
-      { stage: 6, title: "Typesetting & Volume Galley Proof", date: "In Progress", status: "pending", remarks: "DOI assignment and typesetting in progress for next issue." }
-    ]
-  },
-  "PHARMIONEX-2026-5120": {
-    trackingId: "PHARMIONEX-2026-5120",
-    articleType: "Regulatory & Review Article",
-    title: "Implementation of Revised WHO Schedule M and Good Manufacturing Practice Standards in Modern Quality Assurance",
-    track: "Regulatory Affairs, GMP & Quality Assurance",
-    author: "Dr. R. K. Sharma",
-    email: "r***a@pharmaquality.org",
-    affiliation: "Regulatory Affairs & GMP Compliance Cell, PharmaReg Consultants",
-    submissionDate: "August 12, 2026",
-    status: "Published in Volume 1, Issue 1 (2026)",
-    stage: 6,
-    plagiarismScore: "4.1% Similarity (Turnitin Verified)",
-    assignedEditor: "Vivek Sharma (Editor-in-Chief)",
-    assignedReviewers: "Completed",
-    reviewerComments: "Exceptional review of Schedule M regulatory updates.",
-    editorRemarks: "Published in Volume 1, Issue 1 (October 2026), pp. 63–76. DOI: 10.59234/pharmionex.2026.01.05.",
-    timeline: [
-      { stage: 1, title: "Submission Received & Acknowledged", date: "Aug 12, 2026", status: "completed", remarks: "Received and assigned." },
-      { stage: 2, title: "Screening & Plagiarism Verification", date: "Aug 14, 2026", status: "completed", remarks: "Passed with 4.1% similarity." },
-      { stage: 3, title: "Double-Blind Peer Review", date: "Aug 29, 2026", status: "completed", remarks: "Approved without major changes." },
-      { stage: 4, title: "Final Author Checks", date: "Sep 05, 2026", status: "completed", remarks: "Author verified proof." },
-      { stage: 5, title: "Editorial Acceptance", date: "Sep 12, 2026", status: "completed", remarks: "Accepted by Vivek Sharma." },
-      { stage: 6, title: "Published in Volume 1, Issue 1", date: "Oct 01, 2026", status: "completed", remarks: "Published with Crossref DOI: 10.59234/pharmionex.2026.01.05." }
+      { stage: 1, title: "Submission Received & Google Drive Archived", date: "October 01, 2026", status: "completed", remarks: "Manuscript archived in pharmioneex.journal@gmail.com Google Drive repository. Official tracking ID DEMO-2026-001 generated." },
+      { stage: 2, title: "Initial Scope Screening & Plagiarism Check", date: "October 02, 2026", status: "completed", remarks: "Turnitin similarity score verified at 4.8% (passed mandatory < 10% ceiling). Compliance with Author Guidelines confirmed by Vivek Sharma." },
+      { stage: 3, title: "Double-Blind Peer Review", date: "October 04, 2026", status: "current", remarks: "Manuscript dispatched to two independent external reviewers with specialized domain expertise. Reviewer reports expected within 14 days." },
+      { stage: 4, title: "Author Revisions & Rebuttal", date: "Scheduled", status: "pending", remarks: "Author will be notified with anonymized reviewer comments if revisions are required." },
+      { stage: 5, title: "Final Editorial Acceptance Decision", date: "Pending", status: "pending", remarks: "Final publication decision by Editor-in-Chief Vivek Sharma." },
+      { stage: 6, title: "Typesetting, Galley Proof & Open-Access Publication", date: "Pending", status: "pending", remarks: "Immediate advance online open-access publication with Zero APC in Volume 1, Issue 1 (2026)." }
     ]
   }
 };
@@ -386,11 +353,8 @@ function switchMainView(viewId) {
   } else if (viewId === "track") {
     setTimeout(() => {
       const input = document.getElementById("trackingIdInput");
-      if (input) input.focus();
+      if (input && typeof input.focus === "function") input.focus();
     }, 150);
-  } else if (viewId === "automation") {
-    const gasInput = document.getElementById("gasWebhookUrlInput");
-    if (gasInput && GOOGLE_APPS_SCRIPT_URL) gasInput.value = GOOGLE_APPS_SCRIPT_URL;
   }
 
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -577,7 +541,7 @@ function renderArticlesRepo(articles) {
   container.innerHTML = "";
 
   if (countBanner) {
-    countBanner.innerHTML = `Showing <strong>${articles.length}</strong> peer-reviewed articles across all pharmaceutical categories in <strong>Volume 1, Issue 1 (October 2026)</strong>`;
+    countBanner.innerHTML = `Showing <strong>${articles.length}</strong> Official Subject Tracks & Author Preparation Templates for <strong>Volume 1, Issue 1 (Inaugural Issue 2026)</strong> • Call for Papers Active`;
   }
 
   if (articles.length === 0) {
@@ -777,7 +741,7 @@ function openFullTextModal(articleId) {
       <p style="font-size:13px; line-height:1.7; margin-bottom:14px;">${escapeHtml(art.fullContent.conclusion)}</p>
 
       <div style="border-top:1px solid var(--border-light); padding-top:14px; margin-top:20px; font-size:12px; color:var(--text-muted);">
-        <strong>Editor-in-Chief & Publisher:</strong> Vivek Sharma (pharmionex.journal@gmail.com)<br/>
+        <strong>Editor-in-Chief & Publisher:</strong> Vivek Sharma (pharmioneex.journal@gmail.com)<br/>
         <strong>Publication:</strong> Pharmionex Scientific Publications • Open Access under CC BY 4.0
       </div>
     `;
@@ -867,7 +831,7 @@ function fallbackLocalTracking(id) {
         </p>
         <div style="display:flex; justify-content:center; gap:8px;">
           <button type="button" class="btn btn-outline btn-sm" onclick="quickTrackSample('PHARMIONEX-2026-4109')">Try Sample ID: PHARMIONEX-2026-4109</button>
-          <a href="mailto:pharmionex.journal@gmail.com?subject=Tracking%20Query:%20${escapeHtml(id)}" class="btn btn-primary btn-sm">Contact Editorial Office</a>
+          <a href="mailto:pharmioneex.journal@gmail.com?subject=Tracking%20Query:%20${escapeHtml(id)}" class="btn btn-primary btn-sm">Contact Editorial Office</a>
         </div>
       </div>
     `;
@@ -984,7 +948,7 @@ function renderTrackResult(data, isLiveFromGas = false) {
           <strong style="font-size:13px; color:var(--secondary);">Editorial Governance</strong>
           <div style="font-size:12px; margin-top:8px; line-height:1.7;">
             <div><strong>Editor-in-Chief:</strong> Vivek Sharma</div>
-            <div><strong>Editorial Contact:</strong> <a href="mailto:pharmionex.journal@gmail.com" style="color:var(--accent);">pharmionex.journal@gmail.com</a></div>
+            <div><strong>Editorial Contact:</strong> <a href="mailto:pharmioneex.journal@gmail.com" style="color:var(--accent);">pharmioneex.journal@gmail.com</a></div>
             <div><strong>Plagiarism Audit:</strong> ${escapeHtml(data.plagiarismScore || '< 10% Verified')}</div>
             <div><strong>Reviewers Assigned:</strong> ${escapeHtml(data.assignedReviewers || '2 External Reviewers')}</div>
           </div>
@@ -1011,7 +975,7 @@ function renderTrackResult(data, isLiveFromGas = false) {
           <button type="button" class="btn btn-outline btn-sm" onclick="downloadStatusReport('${escapeHtml(data.trackingId)}')">
             📄 Download Official Status Summary
           </button>
-          <a href="mailto:pharmionex.journal@gmail.com?subject=Inquiry:%20Manuscript%20${escapeHtml(data.trackingId)}" class="btn btn-primary btn-sm">
+          <a href="mailto:pharmioneex.journal@gmail.com?subject=Inquiry:%20Manuscript%20${escapeHtml(data.trackingId)}" class="btn btn-primary btn-sm">
             ✉️ Email Editorial Office
           </a>
         </div>
@@ -1031,7 +995,7 @@ function downloadStatusReport(trackingId) {
 ================================================================================
 Journal: Pharmionex Journal (Intl J of Pharmaceutical, Biomedical & Clinical Res)
 ISSN: Application in Process (National Science Library - NIScPR, New Delhi)
-Editor-in-Chief: Vivek Sharma (pharmionex.journal@gmail.com)
+Editor-in-Chief: Vivek Sharma (pharmioneex.journal@gmail.com)
 Date of Report: ${new Date().toLocaleString()}
 ================================================================================
 MANUSCRIPT DETAILS:
@@ -1054,7 +1018,7 @@ TIMELINE MILESTONES:
 ${(item.timeline || []).map(t => `- [${t.date}] ${t.title}: ${t.remarks}`).join('\n')}
 ================================================================================
 This official status summary is issued by Pharmionex Scientific Publications.
-For inquiries, contact Editor-in-Chief Vivek Sharma at: pharmionex.journal@gmail.com
+For inquiries, contact Editor-in-Chief Vivek Sharma at: pharmioneex.journal@gmail.com
 ================================================================================`;
 
   const blob = new Blob([reportText], { type: "text/plain;charset=utf-8" });
@@ -1140,7 +1104,7 @@ function renderAuthors() {
         </div>
         <div>
           <label>Email Address</label>
-          <input type="email" value="${escapeHtml(author.email)}" placeholder="pharmionex.journal@gmail.com" oninput="updateAuthor(${index}, 'email', this.value)">
+          <input type="email" value="${escapeHtml(author.email)}" placeholder="pharmioneex.journal@gmail.com" oninput="updateAuthor(${index}, 'email', this.value)">
         </div>
         <div>
           <label>Affiliation / University</label>
@@ -1531,7 +1495,7 @@ function submitArticleToJournal() {
 
   const dateStr = new Date().toLocaleDateString();
   const authorName = state.authors[0]?.name || "Contributing Author";
-  const authorEmail = state.authors[0]?.email || "pharmionex.journal@gmail.com";
+  const authorEmail = state.authors[0]?.email || "pharmioneex.journal@gmail.com";
   const affiliation = state.authors[0]?.affiliation || "Academic Institution";
 
   // Create submission record for live tracking
@@ -1552,7 +1516,7 @@ function submitArticleToJournal() {
     reviewerComments: "Awaiting initial editorial evaluation.",
     editorRemarks: `Manuscript (${state.articleType}) formally received and assigned to Vivek Sharma. Turnitin similarity screening and formatting review in progress.`,
     timeline: [
-      { stage: 1, title: "Submission Received & Acknowledged", date: dateStr, status: "current", remarks: `Formal acknowledgment generated for ${state.articleType}. Tracking ID assigned.` },
+      { stage: 1, title: "Submission Received & Acknowledged", date: dateStr, status: "current", remarks: `Manuscript archived in Google Drive (pharmioneex.journal@gmail.com). Tracking ID generated.` },
       { stage: 2, title: "Initial Scope & Plagiarism Check (< 10%)", date: "In Progress", status: "pending", remarks: "Turnitin anti-plagiarism screening underway." },
       { stage: 3, title: "Double-Blind Peer Review", date: "Scheduled", status: "pending", remarks: "Will be assigned to two independent external reviewers." },
       { stage: 4, title: "Author Revisions (if required)", date: "Pending", status: "pending", remarks: "Subject to reviewer assessment." },
@@ -1604,7 +1568,7 @@ function submitArticleToJournal() {
     <strong>Manuscript Tracking ID:</strong> <span style="color:var(--primary); font-size:14px; font-weight:bold;">${subId}</span><br>
     <strong>Journal:</strong> Pharmionex Journal (Intl J of Pharmaceutical, Biomedical & Clinical Research)<br>
     <strong>ISSN Status:</strong> Application in Process (NIScPR, India)<br>
-    <strong>Editor-in-Chief:</strong> Vivek Sharma (pharmionex.journal@gmail.com)<br>
+    <strong>Editor-in-Chief:</strong> Vivek Sharma (pharmioneex.journal@gmail.com)<br>
     <strong>Article Type:</strong> ${escapeHtml(state.articleType)}<br>
     <strong>Title:</strong> ${escapeHtml(state.title)}<br>
     <strong>Subject Track:</strong> ${escapeHtml(state.track)}<br>
@@ -1643,7 +1607,7 @@ function downloadSubmissionReceipt() {
 Manuscript Tracking ID: ${state.submissionId}
 Journal: Pharmionex Journal
 ISSN: Application in Process (National Science Library - NIScPR, India)
-Editor-in-Chief: Vivek Sharma (pharmionex.journal@gmail.com)
+Editor-in-Chief: Vivek Sharma (pharmioneex.journal@gmail.com)
 Article Type: ${state.articleType}
 Title: ${state.title}
 Subject Track: ${state.track}
@@ -1744,4 +1708,77 @@ function formatBytes(bytes) {
   const sizes = ["Bytes", "KB", "MB", "GB"];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
   return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+}
+
+
+// ============================================================================
+// EDITORIAL CONTROL MODAL (FOR VIVEK SHARMA - GOOGLE DRIVE & APPS SCRIPT)
+// ============================================================================
+function openEditorialControlModal() {
+  const modal = document.getElementById("modalEditorialControl");
+  if (modal) {
+    modal.classList.add("active");
+    const input = document.getElementById("gasWebhookUrlInputModal");
+    if (input) input.value = GOOGLE_APPS_SCRIPT_URL;
+    updateGasStatusBadgeModal();
+  }
+}
+
+function closeEditorialControlModal() {
+  const modal = document.getElementById("modalEditorialControl");
+  if (modal) {
+    modal.classList.remove("active");
+  }
+}
+
+function updateGasStatusBadgeModal(isOnline = false, data = null) {
+  const badge = document.getElementById("gasStatusBadgeModal");
+  if (!badge) return;
+  if (GOOGLE_APPS_SCRIPT_URL) {
+    if (isOnline && data) {
+      badge.innerHTML = `<span style="color:var(--accent); font-weight:700;">🟢 Online & Connected</span> — ${escapeHtml(data.journal || "Pharmionex Journal")} | Drive: <code>pharmioneex.journal@gmail.com</code>`;
+    } else {
+      badge.innerHTML = `<span style="color:var(--secondary); font-weight:600;">🔗 Configured</span> — URL set: <code style="font-size:11px;">${escapeHtml(GOOGLE_APPS_SCRIPT_URL.substring(0, 36))}...</code>`;
+    }
+  } else {
+    badge.innerHTML = `<span style="color:var(--text-muted); font-weight:600;">⚪ Inactive (Paste Web App URL above to enable real-time Google Sheet & Drive synchronization)</span>`;
+  }
+}
+
+function saveGasUrlModal() {
+  const input = document.getElementById("gasWebhookUrlInputModal");
+  const val = (input ? input.value : "").trim();
+  GOOGLE_APPS_SCRIPT_URL = val;
+  try {
+    localStorage.setItem("pharmionex_gas_url", val);
+  } catch (e) {
+    console.warn("Could not save to localStorage", e);
+  }
+  updateGasStatusBadgeModal();
+  showToast("Google Apps Script Webhook URL saved successfully!", "success");
+}
+
+function testGasConnectionModal() {
+  const input = document.getElementById("gasWebhookUrlInputModal");
+  const url = (input ? input.value : "").trim() || GOOGLE_APPS_SCRIPT_URL;
+  if (!url) {
+    showToast("Please enter a Google Apps Script Web App URL first", "warning");
+    return;
+  }
+  showToast("Connecting to Google Apps Script backend...", "info");
+  fetch(`${url}?action=ping`)
+    .then(res => res.json())
+    .then(data => {
+      if (data && data.status === "online") {
+        showToast(`Connected successfully to ${data.journal}! Editor: ${data.editor}`, "success");
+        updateGasStatusBadgeModal(true, data);
+      } else {
+        showToast("Connected, but unexpected response received", "warning");
+      }
+    })
+    .catch(err => {
+      console.warn("Connection test failed:", err);
+      showToast("Connection failed. Check Web App deployment permissions (Access: Anyone).", "danger");
+      updateGasStatusBadgeModal(false);
+    });
 }
