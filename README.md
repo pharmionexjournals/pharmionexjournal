@@ -1,12 +1,12 @@
 # Pharmionex Journal — Google Apps Script Backend (v2)
 
-**Official Editorial Account:** `pharmioneex.journal@gmail.com`
+**Official Editorial Account:** `pharmionex.journal@gmail.com`
 **Publisher & Editor-in-Chief:** Vivek Sharma
 
 The script receives submissions from the website, logs them in the Google Sheet, stores the manifest and files in the Drive folder "Pharmionex Journal - Submissions Archive", and emails the author and the editorial office.
 
 ## Deploy (once)
-1. Open the editorial Google Sheet while signed in as `pharmioneex.journal@gmail.com` (use a private window if you have several Google accounts).
+1. Open the editorial Google Sheet while signed in as `pharmionex.journal@gmail.com` (use a private window if you have several Google accounts).
 2. **Extensions → Apps Script**, paste `Code.gs`, **Save**.
 3. Select `setupSheetHeaders` → **Run** → approve the permissions (Drive, Sheets, Gmail).
 4. **Deploy → New deployment → Web app** → Execute as **Me**, Who has access **Anyone** → **Deploy**.

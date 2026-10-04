@@ -4,7 +4,7 @@
  * International Journal of Pharmaceutical, Biomedical & Clinical Research
  * ============================================================================
  * Editor-in-Chief & Publisher: Vivek Sharma
- * Official Editorial Office: pharmioneex.journal@gmail.com
+ * Official Editorial Office: pharmionex.journal@gmail.com
  * ISSN Status: Application in Process (National Science Library - NIScPR, New Delhi)
  * Standards: UGC-CARE, COPE, and ICMJE Guidelines Compliant
  * ============================================================================
@@ -13,9 +13,8 @@
 // Google Apps Script Web App URL for live synchronization
 var GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxJkZ9yZ__-HndejeWlAlzzsdP8s2CHqHCicdv9tGVZhAcp8Zw2mx8SVZMu40JCfDG1/exec";
 
-// Google Form for article submission. Paste your form's published link between the quotes
-// (docs.google.com/forms/.../viewform) and push. Until then the tab shows a friendly fallback.
-var GOOGLE_FORM_URL = "";
+// Google Form for article submission. This is the journal\'s live intake form (docs.google.com/forms).
+var GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfeNhcHdfcFAu_Z3MQY_lX_ju8lZXdai0CCKfW_jMNTN7yV7w/viewform";
 
 // Real File objects (state.uploadedFiles only keeps name/size, which is not enough to upload)
 var uploadedFileObjects = { primary: null, supplementary: [] };
@@ -29,8 +28,8 @@ var state = {
     eIssn: "Application in Process (CSIR-NIScPR, New Delhi)",
     pIssn: "Pending Formal Allocation",
     editorInChief: "Vivek Sharma",
-    contactEmail: "pharmioneex.journal@gmail.com",
-    driveAccount: "pharmioneex.journal@gmail.com"
+    contactEmail: "pharmionex.journal@gmail.com",
+    driveAccount: "pharmionex.journal@gmail.com"
   },
   articleType: "Original Research Article",
   title: "",
@@ -40,7 +39,7 @@ var state = {
   authors: [
     {
       name: "Vivek Sharma",
-      email: "pharmioneex.journal@gmail.com",
+      email: "pharmionex.journal@gmail.com",
       affiliation: "Department of Pharmaceutical Sciences",
       country: "India",
       orcid: "0000-0002-1825-0097",
@@ -281,7 +280,7 @@ var trackingRegistry = {
     title: "Demonstration Manuscript: Interactive Showcase of the Double-Blind Peer Review Lifecycle",
     track: "Pharmaceutics & Targeted Drug Delivery",
     author: "Pharmionex Editorial Demonstration",
-    email: "pharmioneex.journal@gmail.com",
+    email: "pharmionex.journal@gmail.com",
     affiliation: "Department of Pharmaceutical Sciences (Demonstration Profile)",
     submissionDate: "October 01, 2026",
     status: "Stage 3: Double-Blind Peer Review in Progress",
@@ -292,7 +291,7 @@ var trackingRegistry = {
     reviewerComments: "Peer review invitations accepted. Independent evaluation of formulation methodology and kinetic data in progress.",
     editorRemarks: "Manuscript successfully passed preliminary desk screening, formatting compliance check, and plagiarism verification. Dispatched for blind peer review.",
     timeline: [
-      { stage: 1, title: "Submission Received & Google Drive Archived", date: "October 01, 2026", status: "completed", remarks: "Manuscript archived in pharmioneex.journal@gmail.com Google Drive repository. Official tracking ID DEMO-2026-001 generated." },
+      { stage: 1, title: "Submission Received & Google Drive Archived", date: "October 01, 2026", status: "completed", remarks: "Manuscript archived in pharmionex.journal@gmail.com Google Drive repository. Official tracking ID DEMO-2026-001 generated." },
       { stage: 2, title: "Initial Scope Screening & Plagiarism Check", date: "October 02, 2026", status: "completed", remarks: "Turnitin similarity score verified at 4.8% (passed mandatory < 10% ceiling). Compliance with Author Guidelines confirmed by Vivek Sharma." },
       { stage: 3, title: "Double-Blind Peer Review", date: "October 04, 2026", status: "current", remarks: "Manuscript dispatched to two independent external reviewers with specialized domain expertise. Reviewer reports expected within 14 days." },
       { stage: 4, title: "Author Revisions & Rebuttal", date: "Scheduled", status: "pending", remarks: "Author will be notified with anonymized reviewer comments if revisions are required." },
@@ -729,7 +728,7 @@ function openFullTextModal(articleId) {
       <p style="font-size:13px; line-height:1.7; margin-bottom:14px;">${escapeHtml(art.fullContent.conclusion)}</p>
 
       <div style="border-top:1px solid var(--border-light); padding-top:14px; margin-top:20px; font-size:12px; color:var(--text-muted);">
-        <strong>Editor-in-Chief & Publisher:</strong> Vivek Sharma (pharmioneex.journal@gmail.com)<br/>
+        <strong>Editor-in-Chief & Publisher:</strong> Vivek Sharma (pharmionex.journal@gmail.com)<br/>
         <strong>Publication:</strong> Pharmionex Scientific Publications • Open Access under CC BY 4.0
       </div>
     `;
@@ -804,7 +803,7 @@ function fallbackLocalTracking(id) {
         </p>
         <div style="display:flex; justify-content:center; gap:8px;">
           <button type="button" class="btn btn-outline btn-sm" onclick="quickTrackSample('PHARMIONEX-2026-4109')">Try Sample ID: PHARMIONEX-2026-4109</button>
-          <a href="mailto:pharmioneex.journal@gmail.com?subject=Tracking%20Query:%20${escapeHtml(id)}" class="btn btn-primary btn-sm">Contact Editorial Office</a>
+          <a href="mailto:pharmionex.journal@gmail.com?subject=Tracking%20Query:%20${escapeHtml(id)}" class="btn btn-primary btn-sm">Contact Editorial Office</a>
         </div>
       </div>
     `;
@@ -921,7 +920,7 @@ function renderTrackResult(data, isLiveFromGas = false) {
           <strong style="font-size:13px; color:var(--secondary);">Editorial Governance</strong>
           <div style="font-size:12px; margin-top:8px; line-height:1.7;">
             <div><strong>Editor-in-Chief:</strong> Vivek Sharma</div>
-            <div><strong>Editorial Contact:</strong> <a href="mailto:pharmioneex.journal@gmail.com" style="color:var(--accent);">pharmioneex.journal@gmail.com</a></div>
+            <div><strong>Editorial Contact:</strong> <a href="mailto:pharmionex.journal@gmail.com" style="color:var(--accent);">pharmionex.journal@gmail.com</a></div>
             <div><strong>Plagiarism Audit:</strong> ${escapeHtml(data.plagiarismScore || '< 10% Verified')}</div>
             <div><strong>Reviewers Assigned:</strong> ${escapeHtml(data.assignedReviewers || '2 External Reviewers')}</div>
           </div>
@@ -948,7 +947,7 @@ function renderTrackResult(data, isLiveFromGas = false) {
           <button type="button" class="btn btn-outline btn-sm" onclick="downloadStatusReport('${escapeHtml(data.trackingId)}')">
             📄 Download Official Status Summary
           </button>
-          <a href="mailto:pharmioneex.journal@gmail.com?subject=Inquiry:%20Manuscript%20${escapeHtml(data.trackingId)}" class="btn btn-primary btn-sm">
+          <a href="mailto:pharmionex.journal@gmail.com?subject=Inquiry:%20Manuscript%20${escapeHtml(data.trackingId)}" class="btn btn-primary btn-sm">
             ✉️ Email Editorial Office
           </a>
         </div>
@@ -968,7 +967,7 @@ function downloadStatusReport(trackingId) {
 ================================================================================
 Journal: Pharmionex Journal (Intl J of Pharmaceutical, Biomedical & Clinical Res)
 ISSN: Application in Process (National Science Library - NIScPR, New Delhi)
-Editor-in-Chief: Vivek Sharma (pharmioneex.journal@gmail.com)
+Editor-in-Chief: Vivek Sharma (pharmionex.journal@gmail.com)
 Date of Report: ${new Date().toLocaleString()}
 ================================================================================
 MANUSCRIPT DETAILS:
@@ -991,7 +990,7 @@ TIMELINE MILESTONES:
 ${(item.timeline || []).map(t => `- [${t.date}] ${t.title}: ${t.remarks}`).join('\n')}
 ================================================================================
 This official status summary is issued by Pharmionex Scientific Publications.
-For inquiries, contact Editor-in-Chief Vivek Sharma at: pharmioneex.journal@gmail.com
+For inquiries, contact Editor-in-Chief Vivek Sharma at: pharmionex.journal@gmail.com
 ================================================================================`;
 
   const blob = new Blob([reportText], { type: "text/plain;charset=utf-8" });
@@ -1030,7 +1029,7 @@ function renderAuthors() {
         </div>
         <div>
           <label>Email Address</label>
-          <input type="email" value="${escapeHtml(author.email)}" placeholder="pharmioneex.journal@gmail.com" oninput="updateAuthor(${index}, 'email', this.value)">
+          <input type="email" value="${escapeHtml(author.email)}" placeholder="pharmionex.journal@gmail.com" oninput="updateAuthor(${index}, 'email', this.value)">
         </div>
         <div>
           <label>Affiliation / University</label>
@@ -1431,7 +1430,7 @@ function submitArticleToJournal() {
 
   const dateStr = new Date().toLocaleDateString();
   const authorName = state.authors[0]?.name || "Contributing Author";
-  const authorEmail = state.authors[0]?.email || "pharmioneex.journal@gmail.com";
+  const authorEmail = state.authors[0]?.email || "pharmionex.journal@gmail.com";
   const affiliation = state.authors[0]?.affiliation || "Academic Institution";
 
   // Create submission record for live tracking
@@ -1452,7 +1451,7 @@ function submitArticleToJournal() {
     reviewerComments: "Awaiting initial editorial evaluation.",
     editorRemarks: `Manuscript (${state.articleType}) formally received and assigned to Vivek Sharma. Turnitin similarity screening and formatting review in progress.`,
     timeline: [
-      { stage: 1, title: "Submission Received & Acknowledged", date: dateStr, status: "current", remarks: `Manuscript archived in Google Drive (pharmioneex.journal@gmail.com). Tracking ID generated.` },
+      { stage: 1, title: "Submission Received & Acknowledged", date: dateStr, status: "current", remarks: `Manuscript archived in Google Drive (pharmionex.journal@gmail.com). Tracking ID generated.` },
       { stage: 2, title: "Initial Scope & Plagiarism Check (< 10%)", date: "In Progress", status: "pending", remarks: "Turnitin anti-plagiarism screening underway." },
       { stage: 3, title: "Double-Blind Peer Review", date: "Scheduled", status: "pending", remarks: "Will be assigned to two independent external reviewers." },
       { stage: 4, title: "Author Revisions (if required)", date: "Pending", status: "pending", remarks: "Subject to reviewer assessment." },
@@ -1499,7 +1498,7 @@ function submitArticleToJournal() {
     <strong>Manuscript Tracking ID:</strong> <span style="color:var(--primary); font-size:14px; font-weight:bold;">${subId}</span><br>
     <strong>Journal:</strong> Pharmionex Journal (Intl J of Pharmaceutical, Biomedical & Clinical Research)<br>
     <strong>ISSN Status:</strong> Application in Process (NIScPR, India)<br>
-    <strong>Editor-in-Chief:</strong> Vivek Sharma (pharmioneex.journal@gmail.com)<br>
+    <strong>Editor-in-Chief:</strong> Vivek Sharma (pharmionex.journal@gmail.com)<br>
     <strong>Article Type:</strong> ${escapeHtml(state.articleType)}<br>
     <strong>Title:</strong> ${escapeHtml(state.title)}<br>
     <strong>Subject Track:</strong> ${escapeHtml(state.track)}<br>
@@ -1508,7 +1507,7 @@ function submitArticleToJournal() {
     <strong>Plagiarism Audit:</strong> Queued for Turnitin / iThenticate (&lt; 10% similarity check)<br>
     <strong>Submission Date:</strong> ${new Date().toLocaleString()}<br>
     <strong>Current Status:</strong> Under Initial Editorial & Plagiarism Screening
-    <div id="syncStatusLine" style="margin-top:10px; padding:8px 10px; border-radius:6px; background:#f1f5f9; font-size:12px;">${GOOGLE_APPS_SCRIPT_URL ? "☁️ Sending to the editorial office…" : "ℹ️ Saved on this device only. Please email your manuscript to pharmioneex.journal@gmail.com."}</div>
+    <div id="syncStatusLine" style="margin-top:10px; padding:8px 10px; border-radius:6px; background:#f1f5f9; font-size:12px;">${GOOGLE_APPS_SCRIPT_URL ? "☁️ Sending to the editorial office…" : "ℹ️ Saved on this device only. Please email your manuscript to pharmionex.journal@gmail.com."}</div>
   `;
 
   const receiptEl = document.getElementById("submissionReceipt");
@@ -1541,7 +1540,7 @@ async function syncSubmissionToCloud(payload, subId) {
     if (el) { el.innerHTML = html; if (bg) el.style.background = bg; }
   };
   const MAX_TOTAL = 20 * 1024 * 1024; // must match MAX_TOTAL_FILE_BYTES in Code.gs
-  const mailTo = "pharmioneex.journal@gmail.com";
+  const mailTo = "pharmionex.journal@gmail.com";
 
   try {
     let budget = MAX_TOTAL;
@@ -1626,7 +1625,7 @@ function downloadSubmissionReceipt() {
 Manuscript Tracking ID: ${state.submissionId}
 Journal: Pharmionex Journal
 ISSN: Application in Process (National Science Library - NIScPR, India)
-Editor-in-Chief: Vivek Sharma (pharmioneex.journal@gmail.com)
+Editor-in-Chief: Vivek Sharma (pharmionex.journal@gmail.com)
 Article Type: ${state.articleType}
 Title: ${state.title}
 Subject Track: ${state.track}
@@ -1829,7 +1828,7 @@ function renderGoogleForm() {
   const box = document.getElementById("gformContainer");
   if (!box) return;
   const url = (GOOGLE_FORM_URL || "").trim();
-  const mail = "pharmioneex.journal@gmail.com";
+  const mail = "pharmionex.journal@gmail.com";
 
   if (!isGoogleFormUrl(url)) {
     box.innerHTML = `
