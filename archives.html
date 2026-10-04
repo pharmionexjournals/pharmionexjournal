@@ -1,8 +1,30 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Archive of published volumes and issues of Pharmionex Research Journal."><link rel="icon" href="favicon.svg"><link rel="manifest" href="site.webmanifest"><title>Archives | Pharmionex Research Journal</title><link rel="stylesheet" href="styles.css"></head><body>
-<header class="site-header"><div class="container header-inner"><a class="brand" href="index.html"><span class="brand-mark">PX</span>
-      <span class="brand-copy"><strong>Pharmionex Research Journal</strong><small>Independent • Open Access • Scholarly Publishing</small></span></a><button class="menu-toggle" aria-expanded="false" aria-controls="primary-nav">☰</button><nav id="primary-nav" class="nav"><a href="index.html">Home</a><a href="about.html">About</a><a href="current-issue.html">Current Issue</a><a class="active" href="archives.html">Archives</a><a href="policies.html">Policies</a><a href="editorial-board.html">Editorial Board</a><a class="nav-submit" href="submit.html">Submit manuscript ↗</a></nav></div></header>
-<main><section class="page-hero"><div class="container"><p class="eyebrow">Past publications</p><h1>Journal archives</h1><p>Browse released articles. Records are listed only after the article page and full text are live and the editorial publication checklist is complete.</p></div></section><section class="container content-section"><div class="archive-row"><div><span class="archive-year">Pharmionex Research Journal</span><h2>Published articles</h2><p>Sorted by publication date, with issue details on each record.</p></div><span class="status-pill">Verified releases</span></div><iframe title="Pharmionex published article archive" src="https://script.google.com/macros/s/AKfycbwDyZCOaPMA2ips2Q1buPvkaCUHr7m9fJc3IL6ERIjyb762kC9LSyeTYIB1BuPAFAX4Jg/exec?view=published" style="width:100%;height:850px;border:0" loading="lazy" referrerpolicy="no-referrer"></iframe></section></main><footer class="footer"><div class="container footer-bottom"><span>© <span id="year"></span> Pharmionex Research Journal</span><a href="current-issue.html">Current issue</a></div></footer><script src="main.js"></script></body></html>
-
-
-
-
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Search the published article archive of Pharmionex Research Journal.">
+<meta name="theme-color" content="#f8fbfa"><link rel="icon" href="favicon.svg"><link rel="manifest" href="site.webmanifest">
+<title>Archives | Pharmionex Research Journal</title><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a class="brand" href="index.html"><span class="brand-mark">PX</span><span class="brand-copy"><strong>Pharmionex Research Journal</strong><small>Independent • Open Access • Scholarly Publishing</small></span></a>
+<button class="menu-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation">☰</button>
+<nav id="primary-nav" class="nav"><a href="index.html">Home</a><a href="about.html">About</a><a href="current-issue.html">Current Issue</a><a class="active" href="archives.html">Archives</a><a href="author-resources.html">Author Resources</a><a href="editor-workflow.html">Editorial Workflow</a><a href="editorial-automation.html">Automation</a><a href="policies.html">Policies</a><a href="editorial-board.html">Editorial Board</a><a class="nav-submit" href="submit.html">Submit manuscript ↗</a></nav>
+</div></header>
+<main>
+<section class="page-hero"><div class="container"><p class="eyebrow">Published scholarly record</p><h1>Journal archives</h1><p>Search released articles by title, author, keyword, year, or article type. Records appear only after the article page and full text are live and the publication checklist is complete.</p></div></section>
+<section class="container content-section">
+<div class="archive-row"><div class="archive-intro"><span class="archive-year">Pharmionex Research Journal</span><h2>Published articles</h2><p>Sorted newest first, with volume, issue, article history, references, and licence on each record when applicable.</p></div><span class="status-pill"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10 4 4 8-9"/></svg>Verified releases</span></div>
+<div class="feed-filters" role="search" aria-label="Search article archive">
+<label class="filter-search"><span>Search title, author, or keyword</span><span class="input-with-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m16 16 4.2 4.2"/></svg><input id="archive-search" type="search" placeholder="e.g. drug delivery" autocomplete="off"></span></label>
+<label><span>Publication year</span><select id="archive-year"><option value="">All years</option></select></label>
+<label><span>Article type</span><select id="archive-type"><option value="">All types</option></select></label>
+<button id="archive-reset" class="button button-quiet" type="button"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 7.5V3.8m0 0h3.7M3.5 3.8l3 3a6 6 0 1 1-1.2 6.6"/></svg>Reset</button>
+</div>
+<p id="feed-status" class="feed-status" role="status" aria-live="polite"><span class="loading-dot" aria-hidden="true"></span> Loading published articles…</p>
+<div id="publication-feed" class="publication-feed" data-mode="archive" aria-label="Archived published articles"></div>
+</section></main>
+<footer class="footer"><div class="container footer-bottom"><span>© <span id="year"></span> Pharmionex Research Journal</span><a href="current-issue.html">Current issue</a><a href="policies.html">Publication policies</a></div></footer>
+<script src="main.js"></script><script src="publication-feed.js" defer></script>
+</body></html>

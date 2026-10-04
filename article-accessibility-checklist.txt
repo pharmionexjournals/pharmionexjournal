@@ -1,0 +1,30 @@
+PHARMIONEX — ARTICLE ACCESSIBILITY RELEASE CHECKLIST
+
+Complete this checklist for each article's final HTML and PDF. This is a practical review aid, not an accessibility audit or a claim of WCAG conformance. Do not publish a conformance claim unless a qualified review supports it.
+
+HTML ARTICLE
+[ ] Page has a meaningful title and language declaration.
+[ ] Headings follow a logical order; section headings describe the content.
+[ ] All controls and links work with keyboard only; keyboard focus is visible and not trapped.
+[ ] Text remains readable when enlarged and the page reflows on a narrow screen without horizontal scrolling for ordinary text.
+[ ] Text/background contrast and link states are distinguishable; meaning is not conveyed by color alone.
+[ ] Links describe their destination or action instead of using only “click here.”
+[ ] Every informative figure has a concise text alternative; decorative images are marked decorative.
+[ ] Tables have header cells and a clear reading order; complex tables have an explanatory caption or note.
+[ ] Equations, symbols, and abbreviations are explained sufficiently for assistive technology and readers.
+[ ] Article metadata, dates, DOI/ISSN (if actually assigned), references, and citation files match the visible article.
+
+PDF
+[ ] Text can be selected and searched; pages are not simply scanned images.
+[ ] Document title and language are set; headings and lists are tagged with a logical reading order.
+[ ] Figures have text alternatives where the PDF format supports them; tables and links are tagged and understandable.
+[ ] Reading order, bookmarks for long articles, page numbers, references, and link destinations were checked.
+[ ] Final PDF was opened on desktop and mobile and compared with the approved HTML proof.
+
+Release record
+Manuscript ID: __________________________
+Article URL: ____________________________
+PDF URL: _______________________________
+Checked by: ____________________________
+Date: __________________________________
+Exceptions and corrective action: __________________________________________

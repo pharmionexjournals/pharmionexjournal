@@ -15,6 +15,7 @@ Subject: Review invitation — [article type] in [broad topic]
 Dear Dr [Name],
 Would you be available to review manuscript [ID], “[short title],” for Pharmionex Research Journal? Please reply by [date] to accept or decline. If you accept, please submit comments by [deadline]. The manuscript and review are confidential. Please disclose any competing interest and decline if a conflict or lack of expertise prevents an impartial review. Do not share or upload the manuscript to third-party services, including generative AI tools. Please do not contact the authors directly.
 [Attach blinded manuscript and reviewer guidance only after acceptance, or provide access through an approved private method.]
+After accepting, submit your confidential report through this individual assignment link: [unique reviewer report form link]. Do not forward the link. If you identify a conflict after accepting, stop reviewing and contact the handling editor before submitting a recommendation.
 Regards,
 [Handling editor]
 

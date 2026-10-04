@@ -15,13 +15,18 @@ B. Live intake acceptance test (perform from a non-editor account)
 [ ] Confirm the author can provide a folder link and that only the journal account/editorial team can access the files.
 [ ] Change a test record's status and confirm the expected author notification.
 [ ] Test reviewer invitation using an internal test address; confirm READY sends one invitation and does not duplicate it.
+[ ] Test the unique reviewer report link, conflict declaration, private Reviewer Reports entry, editor alert, duplicate submission handling, and no public access to tracker data.
 [ ] Confirm reminders are understandable and capped; inspect Apps Script execution history for errors.
+[ ] Open the private Dashboard and confirm counts. Create a manual backup, confirm its restricted folder access, and document how to restore the tracker. Confirm the weekly trigger is installed.
+[ ] Test the author status checker with a correct ID/code and an incorrect code; confirm it reveals only the broad stage and update date.
 [ ] Delete the dummy record, test files, and any test messages that should not remain in the live record.
 
 C. Governance and policy decisions
 [ ] Confirm the named Editor-in-Chief and handling editor(s), with permission to publish their accurate profiles.
+[ ] Confirm the public institutional affiliation is accurate and does not imply the institution publishes, sponsors, or endorses the journal without written authorization.
 [ ] Appoint an independent alternate editor for conflicts involving the Editor-in-Chief and appeals.
 [ ] Name a contact for research-integrity concerns and a backup for inbox coverage.
+[ ] Record the independent alternate editor's written agreement and authority to handle EiC conflicts and appeals before the first such case arises.
 [ ] Approve the review model, conflict procedure, appeal procedure, complaint pathway, and reviewer confidentiality instructions.
 [ ] Approve and publish the fee policy, publication frequency, copyright/licence terms, publisher details, and retention policy. Keep unapproved items marked pending.
 [ ] Confirm the policy framework and operational practices before inviting submissions; do not claim external endorsements or indexing.
@@ -34,8 +39,14 @@ D. First-article release checklist
 [ ] Confirm the publication agreement and reuse licence applicable to this article.
 [ ] Prepare accessible HTML and a final PDF; verify they match and include references and declarations.
 [ ] Create and publish a stable article HTML page and final PDF to the site. Enter the live HTTPS article/full-text/PDF URLs and issue metadata in the private Publication Checklist.
-[ ] Test article page, PDF, citation downloads, mobile layout, keyboard use, and all internal links.
+[ ] Complete downloads/article-accessibility-checklist.txt for HTML and PDF; check screen-reader heading order, visible keyboard focus, figure alternatives, responsive layout, and selectable/tagged PDF text. This checklist is not itself a WCAG audit.
 [ ] Publish only identifiers and indexing/preservation claims that have actually been assigned or activated.
 [ ] Have a second authorized person review the completed production checklist before release. After verifying the live files, set Public listing approved = YES, then Publication status = Published. Confirm the article appears on Current Issue and Archives and the author receives the published status notice.
+
+E. Governance assignments that cannot be automated
+[ ] Name a second authorized editor / independent alternate.
+[ ] Name a backup owner for the editorial inbox and account recovery.
+[ ] Approve and date a retention/deletion schedule for submissions, reviewer data, case records, and backups; assign who carries it out.
+[ ] Verify all board member names, credentials, affiliations, consent to serve, and conflicts before publishing appointments.
 
 Record completion date, responsible person, evidence/link, and any exception for each checked item. Keep this completed checklist private with the editorial records. Do not upload a completed checklist to the public site.
