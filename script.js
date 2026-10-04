@@ -11,10 +11,10 @@
  */
 
 // Google Apps Script Web App URL for live synchronization (configurable by Vivek Sharma)
-let GOOGLE_APPS_SCRIPT_URL = localStorage.getItem("pharmionex_gas_url") || "";
+var GOOGLE_APPS_SCRIPT_URL = localStorage.getItem("pharmionex_gas_url") || "";
 
 // Core Application State
-let state = {
+var state = {
   journalInfo: {
     name: "Pharmionex Journal",
     shortTitle: "Pharmionex J.",
@@ -71,7 +71,7 @@ let state = {
 
 // Official Published Articles Repository (Volume 1, Issue 1 - October 2026)
 // Spanning all core pharmaceutical article types
-const publishedArticlesDataset = [
+var publishedArticlesDataset = [
   {
     id: "art-1",
     type: "Original Research Article",
@@ -251,7 +251,7 @@ const publishedArticlesDataset = [
 ];
 
 // Tracking Registry for Author Status Tracking
-let trackingRegistry = {
+var trackingRegistry = {
   "PHARMIONEX-2026-4109": {
     trackingId: "PHARMIONEX-2026-4109",
     articleType: "Original Research Article",
@@ -464,17 +464,11 @@ function onArticleTypeChange() {
   if (state.articleType === "Original Research Article") {
     if (hintEl) hintEl.innerText = "Full-length original empirical investigation. Standard IMRAD structure required.";
     if (wordLimitEl) wordLimitEl.innerText = "Target Length: 4,000 – 7,000 words";
-    if (absPlaceholder) absPlaceholder.placeholder = "Background: State the clinical or pharmaceutical rationale.
-Methods: Summarize experimental formulation and analytical validation.
-Results: Highlight principal quantitative findings.
-Conclusion: State principal conclusions and therapeutic impact.";
+    if (absPlaceholder) absPlaceholder.placeholder = "Background: State the clinical or pharmaceutical rationale.\nMethods: Summarize experimental formulation and analytical validation.\nResults: Highlight principal quantitative findings.\nConclusion: State principal conclusions and therapeutic impact.";
   } else if (state.articleType === "Comprehensive Review Article") {
     if (hintEl) hintEl.innerText = "Critical, state-of-the-art literature synthesis evaluating the past 5–10 years.";
     if (wordLimitEl) wordLimitEl.innerText = "Target Length: 6,000 – 12,000 words (80+ references)";
-    if (absPlaceholder) absPlaceholder.placeholder = "Background: Define therapeutic challenge or technology.
-Scope of Review: Outline literature sources and mechanistic aspects covered.
-Key Insights: Summarize critical advances and comparative delivery systems.
-Conclusion & Future Perspectives: Address unresolved hurdles and translational Outlook.";
+    if (absPlaceholder) absPlaceholder.placeholder = "Background: Define therapeutic challenge or technology.\nScope of Review: Outline literature sources and mechanistic aspects covered.\nKey Insights: Summarize critical advances and comparative delivery systems.\nConclusion & Future Perspectives: Address unresolved hurdles and translational Outlook.";
   } else if (state.articleType === "Short Communication / Rapid Letter") {
     if (hintEl) hintEl.innerText = "Urgent preliminary breakthrough or novel technological observation warranting rapid publication.";
     if (wordLimitEl) wordLimitEl.innerText = "Target Length: 2,000 – 3,500 words (up to 3 figures/tables)";
@@ -482,17 +476,11 @@ Conclusion & Future Perspectives: Address unresolved hurdles and translational O
   } else if (state.articleType === "Methodology & Validation Protocol") {
     if (hintEl) hintEl.innerText = "Step-by-step validated chromatographic or laboratory procedure strictly complying with ICH Q2.";
     if (wordLimitEl) wordLimitEl.innerText = "Target Length: 3,500 – 6,000 words (Detailed SOP required)";
-    if (absPlaceholder) absPlaceholder.placeholder = "Background: Analytical challenge and regulatory context.
-Method Principles: Stationary phase, mobile phase, and detection parameters.
-Validation Findings: Specificity, precision, accuracy, LOD, LOQ, and robustness.
-Application: Routine commercial batch testing.";
+    if (absPlaceholder) absPlaceholder.placeholder = "Background: Analytical challenge and regulatory context.\nMethod Principles: Stationary phase, mobile phase, and detection parameters.\nValidation Findings: Specificity, precision, accuracy, LOD, LOQ, and robustness.\nApplication: Routine commercial batch testing.";
   } else if (state.articleType === "Clinical Case Study & Pharmacovigilance") {
     if (hintEl) hintEl.innerText = "Rare adverse drug reaction (ADR), clinical drug interaction, or off-label therapeutic observation.";
     if (wordLimitEl) wordLimitEl.innerText = "Target Length: 2,000 – 3,500 words (Naranjo score required)";
-    if (absPlaceholder) absPlaceholder.placeholder = "Background: Clinical significance of drug reaction.
-Case Presentation: Patient demographics, drug administration, and clinical course.
-Causality Assessment: Naranjo ADR probability score and WHO-UMC category.
-Takeaway Lessons: Clinical implications for pharmacy practice.";
+    if (absPlaceholder) absPlaceholder.placeholder = "Background: Clinical significance of drug reaction.\nCase Presentation: Patient demographics, drug administration, and clinical course.\nCausality Assessment: Naranjo ADR probability score and WHO-UMC category.\nTakeaway Lessons: Clinical implications for pharmacy practice.";
   } else if (state.articleType === "Systematic Review & Meta-Analysis") {
     if (hintEl) hintEl.innerText = "Systematic review conducted in adherence to PRISMA 2020 guidelines.";
     if (wordLimitEl) wordLimitEl.innerText = "Target Length: 5,000 – 10,000 words";
