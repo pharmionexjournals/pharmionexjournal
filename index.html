@@ -1039,18 +1039,18 @@
           <li><a href="javascript:void(0)" onclick="switchMainView('submission')">Author Submission Portal</a></li>
           <li><a href="javascript:void(0)" onclick="switchMainView('guidelines')">Author Guidelines & Checklist</a></li>
           <li><a href="javascript:void(0)" onclick="switchMainView('editorial')">Editorial Board & Policies</a></li>
-          <li></li>
+          
         </ul>
       </div>
 
       <div class="footer-col">
         <h4>Indexing & Repositories</h4>
         <ul>
-          <li><a href="javascript:void(0)">Google Scholar Indexing</a></li>
-          <li><a href="javascript:void(0)">Crossref Metadata DOIs</a></li>
-          <li><a href="javascript:void(0)">OAI-PMH Open Archives</a></li>
-          <li><a href="javascript:void(0)">DOAJ Standards Compliant</a></li>
-          <li><a href="javascript:void(0)">PKP Preservation Network (LOCKSS)</a></li>
+          <li><a href="javascript:void(0)" onclick="openIndexingModal('google-scholar')">Google Scholar Indexing</a></li>
+          <li><a href="javascript:void(0)" onclick="openIndexingModal('crossref')">Crossref Metadata DOIs</a></li>
+          <li><a href="javascript:void(0)" onclick="openIndexingModal('oai-pmh')">OAI-PMH Open Archives</a></li>
+          <li><a href="javascript:void(0)" onclick="openIndexingModal('doaj')">DOAJ Standards Compliant</a></li>
+          <li><a href="javascript:void(0)" onclick="openIndexingModal('lockss')">PKP Preservation Network (LOCKSS)</a></li>
         </ul>
       </div>
 
@@ -1065,15 +1065,16 @@
       </div>
     </div>
 
-    
-      <div style="margin-top:20px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.1); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:12px;">
-        <span style="color:var(--text-light); opacity:0.7;">© 2026 Pharmionex Scientific Publications • Editor-in-Chief & Publisher: Vivek Sharma</span>
-        <a href="javascript:void(0)" onclick="openEditorialControlModal()" style="color:var(--accent); text-decoration:none; opacity:0.8; font-weight:600;">🔒 Editorial Management Portal (Vivek Sharma)</a>
+    <div class="footer-bottom" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-top:24px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.12); font-size:12px; color:#94a3b8;">
+      <div>
+        © 2026 <strong>Pharmionex Scientific Publications</strong> • Published under Creative Commons Attribution 4.0 (CC BY 4.0) • Diamond Open Access (Zero APC)
       </div>
-
-      <div class="footer-bottom">
-      <div>© 2026 Pharmionex Journal. Published under Creative Commons Attribution 4.0 International (CC BY 4.0).</div>
-      <div>Editor-in-Chief & Publisher: Vivek Sharma • Contact: pharmioneex.journal@gmail.com</div>
+      <div style="display:flex; align-items:center; gap:18px;">
+        <span>Publisher & Editor-in-Chief: <strong>Vivek Sharma</strong></span>
+        <a href="javascript:void(0)" onclick="openEditorialControlModal()" style="color:var(--accent); text-decoration:none; font-weight:600; display:inline-flex; align-items:center; gap:6px; padding:5px 10px; border-radius:4px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15);">
+          🔒 Editorial Management Portal
+        </a>
+      </div>
     </div>
   </footer>
 
@@ -1127,7 +1128,7 @@
        EDITORIAL CONTROL MODAL (FOR VIVEK SHARMA - SECURE / DISCREET)
        ==================================================================== -->
   <div class="modal-overlay" id="modalEditorialControl">
-    <div class="modal-container" style="max-width:680px;">
+    <div class="modal-card" style="max-width:680px; max-height:88vh; overflow-y:auto;">
       <div class="modal-header">
         <div>
           <h3 style="font-size:18px; font-weight:800; color:var(--primary); margin:0;">🔒 Editorial Backend & Google Apps Script Setup</h3>
@@ -1174,5 +1175,21 @@
     </div>
   </div>
 
+  <!-- Indexing & Preservation Info Modal -->
+  <div class="modal-overlay" id="modalIndexingInfo">
+    <div class="modal-card" style="max-width:620px;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; border-bottom:1px solid var(--border-light); padding-bottom:10px;">
+        <div>
+          <span class="badge-track" id="indexingModalBadge" style="background:#e0e7ff; color:#3730a3;">Indexing Standard</span>
+          <h3 id="indexingModalTitle" style="font-size:17px; font-weight:700; color:var(--primary); margin-top:6px;">Indexing Policy</h3>
+        </div>
+        <button type="button" class="btn btn-ghost btn-sm" onclick="closeIndexingModal()">✕</button>
+      </div>
+      <div id="indexingModalBody" style="font-size:13px; color:var(--text-main); line-height:1.7; margin-bottom:20px;"></div>
+      <div style="display:flex; justify-content:flex-end;">
+        <button type="button" class="btn btn-secondary btn-sm" onclick="closeIndexingModal()">Close</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

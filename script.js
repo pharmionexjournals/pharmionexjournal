@@ -409,7 +409,7 @@ function showToast(message, type = "success") {
     toast.style.opacity = "0";
     toast.style.transform = "translateX(100%)";
     toast.style.transition = "all 0.3s ease";
-    setTimeout(() => toast.remove(), 300);
+    setTimeout(() => { if (toast && typeof toast.remove === "function") toast.remove(); else if (toast && toast.parentNode) toast.parentNode.removeChild(toast); }, 300);
   }, 3500);
 }
 
@@ -659,7 +659,8 @@ function downloadArticlePDF(articleId) {
 
   const a = document.createElement("a");
   a.href = art.pdfPath;
-  a.download = `${art.id}-${art.title.slice(0, 30).toLowerCase().replace(/[^a-z0-9]+/g, '-')}.pdf`;
+  a.download = `pharmionex-template-${art.id}.pdf`;
+  a.target = "_blank";
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -764,12 +765,17 @@ function copyArticleCitation(articleId) {
   const art = publishedArticlesDataset.find(a => a.id === articleId);
   if (!art) return;
 
-  const citation = `${art.authors}. ${art.title}. Pharmionex J. ${art.year};${art.volume}(${art.issue}):${art.pages}. doi:${art.doi}`;
-  navigator.clipboard.writeText(citation).then(() => {
-    showToast("Formatted citation copied to clipboard!", "success");
-  }).catch(() => {
+  const authors = art.authors || "Pharmionex Editorial Board (Vivek Sharma, Ed.)";
+  const citation = `${authors}. ${art.title}. Pharmionex J. 2026;1(1). Official Author Template & Guidelines.`;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(citation).then(() => {
+      showToast("Citation format copied to clipboard!", "success");
+    }).catch(() => {
+      copyCitationDirect(citation);
+    });
+  } else {
     copyCitationDirect(citation);
-  });
+  }
 }
 
 /* ==========================================================================
@@ -1781,4 +1787,83 @@ function testGasConnectionModal() {
       showToast("Connection failed. Check Web App deployment permissions (Access: Anyone).", "danger");
       updateGasStatusBadgeModal(false);
     });
+}
+
+
+// ============================================================================
+// INDEXING & REPOSITORY POLICIES MODAL LOGIC
+// ============================================================================
+const indexingData = {
+  "google-scholar": {
+    title: "Google Scholar & Search Engine Indexing",
+    badge: "Automated Metadata & Citation Crawler",
+    description: "Pharmionex Journal implements Dublin Core and Highwire Press bibliographic meta tags (including citation_title, citation_author, citation_publication_date, citation_journal_title, and citation_pdf_url) across all articles. This enables automated crawling, indexing, and citation tracking by Google Scholar, Microsoft Academic, and global scientific crawlers immediately upon publication."
+  },
+  "crossref": {
+    title: "Crossref Metadata & Persistent Digital Object Identifiers (DOIs)",
+    badge: "Official DOI Registration Agency",
+    description: "All peer-reviewed manuscripts accepted for Volume 1, Issue 1 will be assigned persistent Crossref DOIs. Deposited metadata includes complete bibliographic data, author ORCID iDs, abstracts, and reference linking, guaranteeing permanent discoverability and reliable scholarly citation across the international scientific record."
+  },
+  "oai-pmh": {
+    title: "Open Archives Initiative Protocol for Metadata Harvesting (OAI-PMH v2.0)",
+    badge: "Interoperable Academic Harvesting",
+    description: "Pharmionex Journal adheres to OAI-PMH v2.0 technical standards. University repositories, national science libraries (including CSIR-NIScPR, New Delhi), and scientific aggregation networks can seamlessly harvest article metadata in Dublin Core XML format for institutional indexing and preservation."
+  },
+  "doaj": {
+    title: "Directory of Open Access Journals (DOAJ) Compliance",
+    badge: "Open Access Best Practice & Quality Standards",
+    description: "Pharmionex Journal strictly follows the DOAJ Principles of Transparency and Best Practice in Scholarly Publishing: Diamond Open Access (Zero APC), CC BY 4.0 licensing, author copyright retention, double-blind peer review, and anti-plagiarism verification (< 10% similarity). Formal indexing application will be submitted following the inaugural volume release."
+  },
+  "lockss": {
+    title: "Permanent Digital Preservation (LOCKSS / CLOCKSS Networks)",
+    badge: "Long-Term Archival Guarantee",
+    description: "To safeguard published scholarly pharmaceutical literature against digital obsolescence or server failure, Pharmionex Journal utilizes distributed digital preservation networks including LOCKSS (Lots of Copies Keep Stuff Safe) and PKP Preservation Network, ensuring permanent global availability."
+  }
+};
+
+function openIndexingModal(serviceKey) {
+  const data = indexingData[serviceKey];
+  if (!data) return;
+  const modal = document.getElementById("modalIndexingInfo");
+  const titleEl = document.getElementById("indexingModalTitle");
+  const badgeEl = document.getElementById("indexingModalBadge");
+  const bodyEl = document.getElementById("indexingModalBody");
+  if (titleEl) titleEl.textContent = data.title;
+  if (badgeEl) badgeEl.textContent = data.badge;
+  if (bodyEl) bodyEl.textContent = data.description;
+  if (modal) modal.classList.add("active");
+}
+
+function closeIndexingModal() {
+  const modal = document.getElementById("modalIndexingInfo");
+  if (modal) modal.classList.remove("active");
+}
+
+function prepareTrackSubmission(trackName, articleType) {
+  state.track = trackName;
+  state.articleType = articleType;
+  const selType = document.getElementById("articleType");
+  const selTrack = document.getElementById("subjectTrack");
+  if (selType) selType.value = articleType;
+  if (selTrack) selTrack.value = trackName;
+  onArticleTypeChange();
+  switchMainView("submission");
+  jumpToWizardStep(1);
+  showToast(`Ready to submit ${articleType} (${trackName})`, "info");
+}
+
+
+// Global modal dismiss on backdrop click or ESC key
+if (typeof document !== "undefined" && document.addEventListener) {
+  document.addEventListener("click", (e) => {
+    if (e.target && e.target.classList && e.target.classList.contains("modal-overlay")) {
+      e.target.classList.remove("active");
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      document.querySelectorAll(".modal-overlay.active").forEach(m => m.classList.remove("active"));
+    }
+  });
 }
