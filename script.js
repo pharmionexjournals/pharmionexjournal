@@ -5,8 +5,7 @@
  * ============================================================================
  * Editor-in-Chief & Publisher: Vivek Sharma
  * Official Editorial Office: pharmionex.journal@gmail.com
- * ISSN Status: Application in Process (National Science Library - NIScPR, New Delhi)
- * Standards: UGC-CARE, COPE, and ICMJE Guidelines Compliant
+ * Standards: Guided by COPE and ICMJE recommendations
  * ============================================================================
  */
 
@@ -25,8 +24,6 @@ var state = {
     name: "Pharmionex Journal",
     shortTitle: "Pharmionex J.",
     tagline: "International Journal of Pharmaceutical, Biomedical & Clinical Research",
-    eIssn: "Application in Process (CSIR-NIScPR, New Delhi)",
-    pIssn: "Pending Formal Allocation",
     editorInChief: "Vivek Sharma",
     contactEmail: "pharmionex.journal@gmail.com",
     driveAccount: "pharmionex.journal@gmail.com"
@@ -37,14 +34,7 @@ var state = {
   keywords: "",
   abstract: "",
   authors: [
-    {
-      name: "Vivek Sharma",
-      email: "pharmionex.journal@gmail.com",
-      affiliation: "Department of Pharmaceutical Sciences",
-      country: "India",
-      orcid: "0000-0002-1825-0097",
-      isCorresponding: true
-    }
+    { name: "", email: "", affiliation: "", country: "India", orcid: "", isCorresponding: true }
   ],
   sections: [
     { id: "intro", title: "1. Introduction", content: "" },
@@ -53,25 +43,12 @@ var state = {
     { id: "discussion", title: "4. Discussion", content: "" },
     { id: "conclusion", title: "5. Conclusion", content: "" }
   ],
-  references: [
-    "Sharma V, Patel RK, Chen H. Machine learning approaches for molecular property prediction in drug discovery. Pharmionex J. 2026;1(1):1-16. ",
-    "Srivastava AK, Sharma V, Gupta N. High-performance liquid chromatography (HPLC) validation protocols for pharmaceutical formulations under ICH Q2(R1). Int J Pharm Anal. 2024;32(2):145-159. doi:10.1021/acs.analchem.4c01289",
-    "Sharma V, Kumar D, Mukherjee S. Critical quality attributes in hard gelatin capsule manufacturing and dissolution stability. J Drug Deliv Sci Technol. 2025;29(1):88-99. doi:10.1016/j.jddst.2025.01.033"
-  ],
+  references: [],
   uploadedFiles: {
     primary: null,
     supplementary: []
   },
-  declarations: {
-    iaecProtocol: "IAEC/PHARM/2026/04",
-    ctriNumber: "Not Applicable",
-    funding: "This study was conducted with institutional research support from the Department of Pharmaceutical Sciences.",
-    coi: "The authors declare that they have no competing financial or commercial interests.",
-    dataAvailability: "All experimental and chromatographic datasets are included in the manuscript and supplementary files.",
-    chkOriginality: true,
-    chkAuthorship: true,
-    chkCopyright: true
-  },
+  declarations: { iaecProtocol: "", ctriNumber: "", funding: "", coi: "", dataAvailability: "", chkOriginality: false, chkAuthorship: false, chkCopyright: false },
   currentStep: 1,
   submissionId: null
 };
@@ -272,47 +249,8 @@ publishedArticlesDataset.forEach(function (a) {
   if (!a.abstract) a.abstract = (a.abstractFormat || "") + (a.scope ? " Scope: " + a.scope : "");
 });
 
-// Tracking Registry for Author Status Tracking
-var trackingRegistry = {
-  "DEMO-2026-001": {
-    trackingId: "DEMO-2026-001",
-    articleType: "Original Research Article",
-    title: "Demonstration Manuscript: Interactive Showcase of the Double-Blind Peer Review Lifecycle",
-    track: "Pharmaceutics & Targeted Drug Delivery",
-    author: "Pharmionex Editorial Demonstration",
-    email: "pharmionex.journal@gmail.com",
-    affiliation: "Department of Pharmaceutical Sciences (Demonstration Profile)",
-    submissionDate: "October 01, 2026",
-    status: "Stage 3: Double-Blind Peer Review in Progress",
-    stage: 3,
-    plagiarismScore: "4.8% Similarity (Turnitin Verified < 10% Standard)",
-    assignedEditor: "Vivek Sharma (Editor-in-Chief & Publisher)",
-    assignedReviewers: "2 Independent External Peer Reviewers Assigned",
-    reviewerComments: "Peer review invitations accepted. Independent evaluation of formulation methodology and kinetic data in progress.",
-    editorRemarks: "Manuscript successfully passed preliminary desk screening, formatting compliance check, and plagiarism verification. Dispatched for blind peer review.",
-    timeline: [
-      { stage: 1, title: "Submission Received & Google Drive Archived", date: "October 01, 2026", status: "completed", remarks: "Manuscript archived in pharmionex.journal@gmail.com Google Drive repository. Official tracking ID DEMO-2026-001 generated." },
-      { stage: 2, title: "Initial Scope Screening & Plagiarism Check", date: "October 02, 2026", status: "completed", remarks: "Turnitin similarity score verified at 4.8% (passed mandatory < 10% ceiling). Compliance with Author Guidelines confirmed by Vivek Sharma." },
-      { stage: 3, title: "Double-Blind Peer Review", date: "October 04, 2026", status: "current", remarks: "Manuscript dispatched to two independent external reviewers with specialized domain expertise. Reviewer reports expected within 14 days." },
-      { stage: 4, title: "Author Revisions & Rebuttal", date: "Scheduled", status: "pending", remarks: "Author will be notified with anonymized reviewer comments if revisions are required." },
-      { stage: 5, title: "Final Editorial Acceptance Decision", date: "Pending", status: "pending", remarks: "Final publication decision by Editor-in-Chief Vivek Sharma." },
-      { stage: 6, title: "Typesetting, Galley Proof & Open-Access Publication", date: "Pending", status: "pending", remarks: "Advance online open-access publication with Zero APC." }
-    ]
-  }
-};
-
-
-// Sample records for the demo buttons on the Track page
-[["PHARMIONEX-2026-4109","Under Peer Review",3,"Stage 3: Double-Blind Peer Review in Progress"],
- ["PHARMIONEX-2026-3822","Accepted",5,"Stage 5: Accepted for Publication"],
- ["PHARMIONEX-2026-5120","Published",6,"Stage 6: Published"]].forEach(function (r) {
-  var st = ["Submission Received","Scope & Plagiarism Check","Double-Blind Peer Review","Author Revisions & Rebuttal","Final Editorial Acceptance Decision","Typesetting, Galley Proof & Publication"];
-  trackingRegistry[r[0]] = { trackingId: r[0], articleType: "Original Research Article", title: "Sample Manuscript (" + r[1] + ") - Demonstration Record",
-    track: "Pharmaceutics & Targeted Drug Delivery", author: "Sample Author", email: "sample@example.org", affiliation: "Demonstration Profile",
-    submissionDate: "October 01, 2026", status: r[3], stage: r[2], plagiarismScore: "5.2% Similarity (< 10% Standard)",
-    assignedEditor: "Vivek Sharma", assignedReviewers: "2 Independent External Peer Reviewers", editorRemarks: "Demonstration record for the tracking tool.",
-    timeline: st.map(function (t, i) { return { stage: i + 1, title: t, date: i + 1 <= r[2] ? "Completed" : "Pending", status: i + 1 < r[2] ? "completed" : (i + 1 === r[2] ? "current" : "pending"), remarks: "Demonstration milestone." }; }) };
-});
+// Tracking records created on this device (live status comes from the editorial backend)
+var trackingRegistry = {};
 
 // Load any submissions previously made on this browser
 function loadSavedSubmissions() {
@@ -338,7 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
   updateStats();
   
   // Initialize Article Repository
-  renderArticlesRepo(publishedArticlesDataset);
+  loadPublishedArticles();
   
   // Track active editor
   document.addEventListener("focusin", (e) => {
@@ -364,7 +302,7 @@ function switchMainView(viewId) {
   if (viewId === "gform") {
     renderGoogleForm();
   } else if (viewId === "articles") {
-    renderArticlesRepo(publishedArticlesDataset);
+    filterArticles();
   } else if (viewId === "track") {
     setTimeout(() => {
       const input = document.getElementById("trackingIdInput");
@@ -556,7 +494,7 @@ function renderArticlesRepo(articles) {
   container.innerHTML = "";
 
   if (countBanner) {
-    countBanner.innerHTML = `Showing <strong>${articles.length}</strong> article types & subject tracks • Call for Papers Active`;
+    countBanner.innerHTML = `<span>Showing <strong>${articles.length}</strong> article types & subject tracks • Call for Papers Active</span>`;
   }
 
   if (articles.length === 0) {
@@ -576,7 +514,7 @@ function renderArticlesRepo(articles) {
     card.className = "article-repo-card";
     card.innerHTML = `
       <div class="article-badges-row">
-        <span class="badge-track" style="background:#e0e7ff; color:#3730a3;">${escapeHtml(art.type)}</span>
+        <span class="badge-track" style="background:#dcf3e6; color:#166534;">${escapeHtml(art.type)}</span>
         <span class="badge-track">${escapeHtml(art.track)}</span>
       </div>
 
@@ -607,34 +545,29 @@ function renderArticlesRepo(articles) {
   });
 }
 
+function articleMatches(art, query, track, articleType) {
+  const hay = [art.title, art.authors, art.abstract, art.keywords, art.type, art.track, art.scope, art.doi].join(" ").toLowerCase();
+  return (!query || hay.includes(query)) &&
+         (track === "ALL" || art.track === track) &&
+         (articleType === "ALL" || art.type === articleType);
+}
+
 function filterArticles() {
   const query = (document.getElementById("articleRepoSearchInput")?.value || "").toLowerCase().trim();
   const track = document.getElementById("articleFilterTrack")?.value || "ALL";
   const articleType = document.getElementById("articleFilterType")?.value || "ALL";
   const sortBy = document.getElementById("articleSortBy")?.value || "NEWEST";
 
-  let filtered = publishedArticlesDataset.filter(art => {
-    const matchesQuery = !query || 
-      art.title.toLowerCase().includes(query) ||
-      art.authors.toLowerCase().includes(query) ||
-      art.abstract.toLowerCase().includes(query) ||
-      art.keywords.toLowerCase().includes(query) ||
-      (art.scope || "").toLowerCase().includes(query) ||
-      art.type.toLowerCase().includes(query);
-
-    const matchesTrack = (track === "ALL") || (art.track === track);
-    const matchesType = (articleType === "ALL") || (art.type === articleType);
-    return matchesQuery && matchesTrack && matchesType;
-  });
-
+  const types = publishedArticlesDataset.filter(a => articleMatches(a, query, track, articleType));
+  const pub = publishedArticles.filter(a => articleMatches(a, query, track, articleType));
   if (sortBy === "TITLE") {
-    filtered.sort((a, b) => a.title.localeCompare(b.title));
+    types.sort((a, b) => a.title.localeCompare(b.title));
+    pub.sort((a, b) => a.title.localeCompare(b.title));
   } else {
-    // Default newest
-    filtered.sort((a, b) => b.id.localeCompare(a.id));
+    pub.sort((a, b) => String(b.date).localeCompare(String(a.date)));
   }
-
-  renderArticlesRepo(filtered);
+  renderPublished(pub, !!(query || track !== "ALL" || articleType !== "ALL"));
+  renderArticlesRepo(types);
 }
 
 function resetArticleFilters() {
@@ -643,7 +576,7 @@ function resetArticleFilters() {
   if (document.getElementById("articleFilterType")) document.getElementById("articleFilterType").value = "ALL";
   if (document.getElementById("articleSortBy")) document.getElementById("articleSortBy").value = "NEWEST";
   document.querySelectorAll(".repo-chip").forEach(c => c.classList.remove("active"));
-  renderArticlesRepo(publishedArticlesDataset);
+  filterArticles();
 }
 
 function quickFilterChip(topic) {
@@ -669,7 +602,7 @@ function openFullTextModal(articleId) {
     metaEl.innerHTML = `
       <div style="font-size:13px; color:var(--primary); font-weight:bold; margin-bottom:4px;">${escapeHtml(art.authors)}</div>
       <div style="font-size:12px; color:var(--text-muted);">
-        <span class="badge-track" style="background:#e0e7ff; color:#3730a3; margin-right:6px;">${escapeHtml(art.type)}</span>
+        <span class="badge-track" style="background:#dcf3e6; color:#166534; margin-right:6px;">${escapeHtml(art.type)}</span>
         <em>Pharmionex Journal</em> • Open Access (CC BY 4.0)
       </div>
     `;
@@ -691,38 +624,6 @@ function openFullTextModal(articleId) {
       <h3 style="color:var(--primary); font-size:16px; margin:16px 0 8px;">3. Quantitative Findings & Critical Discussion</h3>
       <p style="font-size:13px; line-height:1.7; margin-bottom:14px;">${escapeHtml(art.fullContent.results)}</p>
 
-      <div style="background:#ffffff; border:1px solid var(--border-color); border-radius:6px; padding:12px; margin:16px 0; overflow-x:auto;">
-        <table style="width:100%; border-collapse:collapse; font-size:12px;">
-          <thead>
-            <tr style="background:var(--surface-muted); border-bottom:2px solid var(--border-color);">
-              <th style="padding:8px; text-align:left;">Quality Attribute / Assay Metric</th>
-              <th style="padding:8px; text-align:center;">Measured Value</th>
-              <th style="padding:8px; text-align:center;">ICH / Pharmacopoeial Limit</th>
-              <th style="padding:8px; text-align:center;">Verification Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style="border-bottom:1px solid var(--border-light);">
-              <td style="padding:8px;">Content Uniformity / Drug Assay</td>
-              <td style="padding:8px; text-align:center;">99.82 ± 0.45%</td>
-              <td style="padding:8px; text-align:center;">98.0% – 102.0%</td>
-              <td style="padding:8px; text-align:center; color:var(--success); font-weight:bold;">Complies</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border-light);">
-              <td style="padding:8px;">Intermediate Precision (% RSD)</td>
-              <td style="padding:8px; text-align:center;">0.82%</td>
-              <td style="padding:8px; text-align:center;">&lt; 2.0%</td>
-              <td style="padding:8px; text-align:center; color:var(--success); font-weight:bold;">Complies</td>
-            </tr>
-            <tr>
-              <td style="padding:8px;">Regression Linearity (r²)</td>
-              <td style="padding:8px; text-align:center;">0.9998</td>
-              <td style="padding:8px; text-align:center;">≥ 0.9990</td>
-              <td style="padding:8px; text-align:center; color:var(--success); font-weight:bold;">Complies</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
 
       <h3 style="color:var(--primary); font-size:16px; margin:16px 0 8px;">4. Translational Conclusion</h3>
       <p style="font-size:13px; line-height:1.7; margin-bottom:14px;">${escapeHtml(art.fullContent.conclusion)}</p>
@@ -799,23 +700,15 @@ function fallbackLocalTracking(id) {
         <div style="font-size:40px; margin-bottom:12px;">⚠️</div>
         <h3 style="font-size:18px; color:var(--danger); margin-bottom:6px;">Tracking ID Not Found: ${escapeHtml(id)}</h3>
         <p style="font-size:13px; color:var(--text-muted); max-width:540px; margin:0 auto 16px;">
-          Please verify the Tracking ID format (e.g., <code>PHARMIONEX-2026-4109</code>). Tracking IDs are case-insensitive and assigned automatically upon submission acknowledgment.
+          Please verify the Tracking ID format (e.g., <code>PHARMIONEX-2026-ABC123</code>). Tracking IDs are case-insensitive and assigned automatically upon submission acknowledgment.
         </p>
-        <div style="display:flex; justify-content:center; gap:8px;">
-          <button type="button" class="btn btn-outline btn-sm" onclick="quickTrackSample('PHARMIONEX-2026-4109')">Try Sample ID: PHARMIONEX-2026-4109</button>
-          <a href="mailto:pharmionex.journal@gmail.com?subject=Tracking%20Query:%20${escapeHtml(id)}" class="btn btn-primary btn-sm">Contact Editorial Office</a>
-        </div>
+        <a href="mailto:pharmionex.journal@gmail.com" class="btn btn-primary btn-sm">Contact Editorial Office</a>
       </div>
     `;
     showToast(`No record found for ${id}`, "danger");
   }
 }
 
-function quickTrackSample(id) {
-  const input = document.getElementById("trackingIdInput");
-  if (input) input.value = id;
-  executeTrackArticle(id);
-}
 
 function renderTrackResult(data, isLiveFromGas = false) {
   const container = document.getElementById("trackingResultContainer");
@@ -941,7 +834,7 @@ function renderTrackResult(data, isLiveFromGas = false) {
 
       <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-top:24px; padding-top:18px; border-top:1px solid var(--border-light);">
         <div style="font-size:12px; color:var(--text-muted);">
-          ISSN Status: <strong>Application in Process (NIScPR, India)</strong> • UGC-CARE & COPE Aligned
+          Pharmionex Journal • Double-blind peer review • Open access
         </div>
         <div style="display:flex; gap:8px;">
           <button type="button" class="btn btn-outline btn-sm" onclick="downloadStatusReport('${escapeHtml(data.trackingId)}')">
@@ -966,7 +859,6 @@ function downloadStatusReport(trackingId) {
   const reportText = `PHARMIONEX JOURNAL - OFFICIAL EDITORIAL STATUS REPORT
 ================================================================================
 Journal: Pharmionex Journal (Intl J of Pharmaceutical, Biomedical & Clinical Res)
-ISSN: Application in Process (National Science Library - NIScPR, New Delhi)
 Editor-in-Chief: Vivek Sharma (pharmionex.journal@gmail.com)
 Date of Report: ${new Date().toLocaleString()}
 ================================================================================
@@ -1025,19 +917,19 @@ function renderAuthors() {
       <div class="author-grid">
         <div>
           <label>Full Name</label>
-          <input type="text" value="${escapeHtml(author.name)}" placeholder="e.g. Vivek Sharma" oninput="updateAuthor(${index}, 'name', this.value)">
+          <input type="text" value="${escapeHtml(author.name)}" placeholder="e.g. Jane Doe" oninput="updateAuthor(${index}, 'name', this.value)">
         </div>
         <div>
           <label>Email Address</label>
-          <input type="email" value="${escapeHtml(author.email)}" placeholder="pharmionex.journal@gmail.com" oninput="updateAuthor(${index}, 'email', this.value)">
+          <input type="email" value="${escapeHtml(author.email)}" placeholder="you@institution.edu" oninput="updateAuthor(${index}, 'email', this.value)">
         </div>
         <div>
           <label>Affiliation / University</label>
-          <input type="text" value="${escapeHtml(author.affiliation)}" placeholder="Department of Pharmaceutical Sciences" oninput="updateAuthor(${index}, 'affiliation', this.value)">
+          <input type="text" value="${escapeHtml(author.affiliation)}" placeholder="Department, institution" oninput="updateAuthor(${index}, 'affiliation', this.value)">
         </div>
         <div>
           <label>ORCID iD</label>
-          <input type="text" value="${escapeHtml(author.orcid || '')}" placeholder="0000-0002-1825-0097" oninput="updateAuthor(${index}, 'orcid', this.value)">
+          <input type="text" value="${escapeHtml(author.orcid || '')}" placeholder="0000-0000-0000-0000" oninput="updateAuthor(${index}, 'orcid', this.value)">
         </div>
       </div>
       <div class="author-actions">
@@ -1142,7 +1034,7 @@ function insertFormula() {
 function insertCitationPrompt() {
   const num = prompt("Enter reference citation index number (e.g. 1 or 2,3):", (state.references.length || 1).toString());
   if (num) {
-    const html = `<sup><a href="#ref-${num}" style="color:#2563eb; text-decoration:none; font-weight:bold;">[${escapeHtml(num)}]</a></sup>&nbsp;`;
+    const html = `<sup><a href="#ref-${num}" style="color:#1f6f4a; text-decoration:none; font-weight:bold;">[${escapeHtml(num)}]</a></sup>&nbsp;`;
     document.execCommand("insertHTML", false, html);
     updateStats();
   }
@@ -1408,6 +1300,13 @@ function submitArticleToJournal() {
     return;
   }
 
+  const corr = state.authors.find(a => a.isCorresponding) || state.authors[0];
+  if (!corr || !corr.name.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test((corr.email || "").trim())) {
+    showToast("Please enter the corresponding author's name and a valid email", "danger");
+    jumpToWizardStep(2);
+    return;
+  }
+
   const chkOrig = document.getElementById("chkOriginality")?.checked;
   const chkAuth = document.getElementById("chkAuthorship")?.checked;
   const chkCopy = document.getElementById("chkCopyright")?.checked;
@@ -1429,9 +1328,10 @@ function submitArticleToJournal() {
   state.submissionId = subId;
 
   const dateStr = new Date().toLocaleDateString();
-  const authorName = state.authors[0]?.name || "Contributing Author";
-  const authorEmail = state.authors[0]?.email || "pharmionex.journal@gmail.com";
-  const affiliation = state.authors[0]?.affiliation || "Academic Institution";
+  const corrA = state.authors.find(a => a.isCorresponding) || state.authors[0];
+  const authorName = corrA.name.trim();
+  const authorEmail = corrA.email.trim();
+  const affiliation = (corrA.affiliation || "").trim() || "Not provided";
 
   // Create submission record for live tracking
   const newSubmissionRecord = {
@@ -1445,14 +1345,14 @@ function submitArticleToJournal() {
     submissionDate: dateStr,
     status: "Under Initial Editorial Screening",
     stage: 1,
-    plagiarismScore: "Queued for Turnitin Plagiarism Check (< 10%)",
+    plagiarismScore: "Queued for Similarity Check (< 10%)",
     assignedEditor: "Vivek Sharma (Editor-in-Chief)",
     assignedReviewers: "Pending Scope Review",
     reviewerComments: "Awaiting initial editorial evaluation.",
-    editorRemarks: `Manuscript (${state.articleType}) formally received and assigned to Vivek Sharma. Turnitin similarity screening and formatting review in progress.`,
+    editorRemarks: `Manuscript (${state.articleType}) formally received and assigned to Vivek Sharma. similarity screening and formatting review in progress.`,
     timeline: [
       { stage: 1, title: "Submission Received & Acknowledged", date: dateStr, status: "current", remarks: `Manuscript archived in Google Drive (pharmionex.journal@gmail.com). Tracking ID generated.` },
-      { stage: 2, title: "Initial Scope & Plagiarism Check (< 10%)", date: "In Progress", status: "pending", remarks: "Turnitin anti-plagiarism screening underway." },
+      { stage: 2, title: "Initial Scope & Plagiarism Check (< 10%)", date: "In Progress", status: "pending", remarks: "Similarity screening underway." },
       { stage: 3, title: "Double-Blind Peer Review", date: "Scheduled", status: "pending", remarks: "Will be assigned to two independent external reviewers." },
       { stage: 4, title: "Author Revisions (if required)", date: "Pending", status: "pending", remarks: "Subject to reviewer assessment." },
       { stage: 5, title: "Editorial Acceptance Decision", date: "Pending", status: "pending", remarks: "Decision by Editor-in-Chief Vivek Sharma." },
@@ -1497,14 +1397,13 @@ function submitArticleToJournal() {
   const receiptHTML = `
     <strong>Manuscript Tracking ID:</strong> <span style="color:var(--primary); font-size:14px; font-weight:bold;">${subId}</span><br>
     <strong>Journal:</strong> Pharmionex Journal (Intl J of Pharmaceutical, Biomedical & Clinical Research)<br>
-    <strong>ISSN Status:</strong> Application in Process (NIScPR, India)<br>
     <strong>Editor-in-Chief:</strong> Vivek Sharma (pharmionex.journal@gmail.com)<br>
     <strong>Article Type:</strong> ${escapeHtml(state.articleType)}<br>
     <strong>Title:</strong> ${escapeHtml(state.title)}<br>
     <strong>Subject Track:</strong> ${escapeHtml(state.track)}<br>
     <strong>Corresponding Author:</strong> ${escapeHtml(authorName)} (${escapeHtml(authorEmail)})<br>
     <strong>Ethics / Protocol:</strong> ${escapeHtml(document.getElementById('iaecProtocol')?.value || 'Not Applicable')}<br>
-    <strong>Plagiarism Audit:</strong> Queued for Turnitin / iThenticate (&lt; 10% similarity check)<br>
+    <strong>Plagiarism Audit:</strong> Queued for similarity-check software (&lt; 10% similarity check)<br>
     <strong>Submission Date:</strong> ${new Date().toLocaleString()}<br>
     <strong>Current Status:</strong> Under Initial Editorial & Plagiarism Screening
     <div id="syncStatusLine" style="margin-top:10px; padding:8px 10px; border-radius:6px; background:#f1f5f9; font-size:12px;">${GOOGLE_APPS_SCRIPT_URL ? "☁️ Sending to the editorial office…" : "ℹ️ Saved on this device only. Please email your manuscript to pharmionex.journal@gmail.com."}</div>
@@ -1624,14 +1523,13 @@ function downloadSubmissionReceipt() {
 ============================================================
 Manuscript Tracking ID: ${state.submissionId}
 Journal: Pharmionex Journal
-ISSN: Application in Process (National Science Library - NIScPR, India)
 Editor-in-Chief: Vivek Sharma (pharmionex.journal@gmail.com)
 Article Type: ${state.articleType}
 Title: ${state.title}
 Subject Track: ${state.track}
 Authors: ${state.authors.map(a => a.name).join(", ")}
 Date: ${new Date().toLocaleString()}
-Turnitin Plagiarism Policy: < 10% Similarity Screening Required
+Similarity Policy: < 10% Similarity Screening Required
 Initial Status: Acknowledged & Assigned to Vivek Sharma
 ============================================================`;
   const blob = new Blob([text], { type: "text/plain" });
@@ -1738,55 +1636,6 @@ function formatBytes(bytes) {
 
 
 
-// ============================================================================
-// INDEXING & REPOSITORY POLICIES MODAL LOGIC
-// ============================================================================
-const indexingData = {
-  "google-scholar": {
-    title: "Google Scholar & Search Engine Indexing",
-    badge: "Automated Metadata & Citation Crawler",
-    description: "Pharmionex Journal implements Dublin Core and Highwire Press bibliographic meta tags (including citation_title, citation_author, citation_publication_date, citation_journal_title, and citation_pdf_url) across all articles. This enables automated crawling, indexing, and citation tracking by Google Scholar, Microsoft Academic, and global scientific crawlers immediately upon publication."
-  },
-  "crossref": {
-    title: "Crossref Metadata & Persistent Digital Object Identifiers (DOIs)",
-    badge: "Official DOI Registration Agency",
-    description: "All peer-reviewed manuscripts accepted for publication will be assigned persistent Crossref DOIs. Deposited metadata includes complete bibliographic data, author ORCID iDs, abstracts, and reference linking, guaranteeing permanent discoverability and reliable scholarly citation across the international scientific record."
-  },
-  "oai-pmh": {
-    title: "Open Archives Initiative Protocol for Metadata Harvesting (OAI-PMH v2.0)",
-    badge: "Interoperable Academic Harvesting",
-    description: "Pharmionex Journal adheres to OAI-PMH v2.0 technical standards. University repositories, national science libraries (including CSIR-NIScPR, New Delhi), and scientific aggregation networks can seamlessly harvest article metadata in Dublin Core XML format for institutional indexing and preservation."
-  },
-  "doaj": {
-    title: "Directory of Open Access Journals (DOAJ) Compliance",
-    badge: "Open Access Best Practice & Quality Standards",
-    description: "Pharmionex Journal strictly follows the DOAJ Principles of Transparency and Best Practice in Scholarly Publishing: Diamond Open Access (Zero APC), CC BY 4.0 licensing, author copyright retention, double-blind peer review, and anti-plagiarism verification (< 10% similarity). Formal indexing application will be submitted after the first issue is published."
-  },
-  "lockss": {
-    title: "Permanent Digital Preservation (LOCKSS / CLOCKSS Networks)",
-    badge: "Long-Term Archival Guarantee",
-    description: "To safeguard published scholarly pharmaceutical literature against digital obsolescence or server failure, Pharmionex Journal utilizes distributed digital preservation networks including LOCKSS (Lots of Copies Keep Stuff Safe) and PKP Preservation Network, ensuring permanent global availability."
-  }
-};
-
-function openIndexingModal(serviceKey) {
-  const data = indexingData[serviceKey];
-  if (!data) return;
-  const modal = document.getElementById("modalIndexingInfo");
-  const titleEl = document.getElementById("indexingModalTitle");
-  const badgeEl = document.getElementById("indexingModalBadge");
-  const bodyEl = document.getElementById("indexingModalBody");
-  if (titleEl) titleEl.textContent = data.title;
-  if (badgeEl) badgeEl.textContent = data.badge;
-  if (bodyEl) bodyEl.textContent = data.description;
-  if (modal) modal.classList.add("active");
-}
-
-function closeIndexingModal() {
-  const modal = document.getElementById("modalIndexingInfo");
-  if (modal) modal.classList.remove("active");
-}
-
 function prepareTrackSubmission(trackName, articleType) {
   state.track = trackName;
   state.articleType = articleType;
@@ -1854,3 +1703,113 @@ function renderGoogleForm() {
     </div>`;
 }
 
+
+
+// ============================================================================
+// PUBLISHED ARTICLES (read from published-articles.json - see PUBLISHING.md)
+// ============================================================================
+var publishedArticles = [];
+
+function safeArticleUrl(u) {
+  u = String(u || "").trim();
+  return /^(https:\/\/|articles\/)[^\s"'<>]*$/.test(u) ? u : "";
+}
+
+function loadPublishedArticles() {
+  fetch("published-articles.json?v=" + Date.now(), { cache: "no-store" })
+    .then(r => (r.ok ? r.json() : { articles: [] }))
+    .then(d => {
+      const list = Array.isArray(d) ? d : (d && d.articles) || [];
+      publishedArticles = list
+        .filter(a => a && a.title && a.authors && a.date)
+        .map((a, i) => ({
+          id: String(a.id || "article-" + (i + 1)),
+          title: String(a.title), authors: String(a.authors), date: String(a.date),
+          type: String(a.type || "Original Research Article"), track: String(a.track || ""),
+          abstract: String(a.abstract || ""), keywords: String(a.keywords || ""),
+          pdf: safeArticleUrl(a.pdf), url: safeArticleUrl(a.url),
+          doi: /^10\.\d{4,9}\/\S+$/.test(String(a.doi || "")) ? String(a.doi) : "",
+          pages: String(a.pages || "")
+        }));
+    })
+    .catch(() => { publishedArticles = []; })
+    .then(() => { filterArticles(); renderHomeLatest(); });
+}
+
+function articleCardHtml(a) {
+  const year = String(a.date).slice(0, 4);
+  return `
+    <div class="article-repo-card">
+      <div class="article-badges-row">
+        <span class="badge-track" style="background:#dcf3e6; color:#166534;">${escapeHtml(a.type)}</span>
+        ${a.track ? `<span class="badge-track">${escapeHtml(a.track)}</span>` : ""}
+        <span class="badge-open-access">🔓 Open Access (CC BY 4.0)</span>
+        ${a.doi ? `<span class="badge-doi">DOI: <a href="https://doi.org/${encodeURI(a.doi)}" target="_blank" rel="noopener" style="color:var(--accent);">${escapeHtml(a.doi)}</a></span>` : ""}
+      </div>
+      <h3 class="article-title-link" onclick="openPublishedArticle('${escapeHtml(a.id)}')">${escapeHtml(a.title)}</h3>
+      <div class="article-authors-text">${escapeHtml(a.authors)}</div>
+      <div class="article-citation-info"><em>Pharmionex Journal</em> • ${escapeHtml(a.date)}${a.pages ? " • " + escapeHtml(a.pages) : ""}</div>
+      ${a.abstract ? `<div class="article-abstract-text"><strong>Abstract:</strong> ${escapeHtml(a.abstract.length > 420 ? a.abstract.slice(0, 420) + "…" : a.abstract)}</div>` : ""}
+      ${a.keywords ? `<div style="font-size:12px; color:var(--text-muted); margin-bottom:14px;"><strong>Keywords:</strong> ${escapeHtml(a.keywords)}</div>` : ""}
+      <div class="article-actions-bar">
+        ${a.pdf ? `<a class="btn btn-primary btn-sm" href="${escapeHtml(a.pdf)}" target="_blank" rel="noopener">📥 Download PDF</a>` : ""}
+        ${a.url ? `<a class="btn btn-outline btn-sm" href="${escapeHtml(a.url)}" target="_blank" rel="noopener">🌐 Full Text</a>` : ""}
+        <button type="button" class="btn btn-outline btn-sm" onclick="openPublishedArticle('${escapeHtml(a.id)}')">📄 Abstract</button>
+        <button type="button" class="btn btn-outline btn-sm" onclick="copyPublishedCitation('${escapeHtml(a.id)}')">📋 Cite</button>
+      </div>
+    </div>`;
+}
+
+function renderPublished(list, filtered) {
+  const box = document.getElementById("publishedArticleList");
+  if (!box) return;
+  if (!publishedArticles.length) {
+    box.innerHTML = `<div style="text-align:center; padding:28px 16px; background:var(--surface-subtle); border:1px dashed var(--border-color); border-radius:var(--radius); font-size:13px; color:var(--text-muted);">
+      No articles have been published yet. Accepted manuscripts will be listed here after publication.
+      <div style="margin-top:10px;"><button type="button" class="btn btn-primary btn-sm" onclick="switchMainView('gform')">✍️ Submit your manuscript</button></div></div>`;
+    return;
+  }
+  if (!list.length) {
+    box.innerHTML = `<div style="padding:18px; font-size:13px; color:var(--text-muted);">No published articles match your search${filtered ? "" : ""}.</div>`;
+    return;
+  }
+  box.innerHTML = list.map(articleCardHtml).join("");
+}
+
+function renderHomeLatest() {
+  const box = document.getElementById("homeLatest");
+  if (!box) return;
+  if (!publishedArticles.length) { box.innerHTML = ""; return; }
+  const latest = publishedArticles.slice().sort((a, b) => String(b.date).localeCompare(String(a.date))).slice(0, 3);
+  box.innerHTML = `<div class="card"><div class="card-header"><div><h2 class="card-title">📰 Latest Published Articles</h2></div>
+    <button type="button" class="btn btn-outline btn-sm" onclick="switchMainView('articles')">All articles ➔</button></div>${latest.map(articleCardHtml).join("")}</div>`;
+}
+
+function openPublishedArticle(id) {
+  const a = publishedArticles.find(x => x.id === id);
+  if (!a) return;
+  const t = document.getElementById("ftModalTitle"), m = document.getElementById("ftModalMeta"), b = document.getElementById("ftModalBody");
+  if (t) t.innerText = a.title;
+  if (m) m.innerHTML = `<div style="font-size:13px; color:var(--primary); font-weight:bold; margin-bottom:4px;">${escapeHtml(a.authors)}</div>
+    <div style="font-size:12px; color:var(--text-muted);"><em>Pharmionex Journal</em> • ${escapeHtml(a.date)} • ${escapeHtml(a.type)} • Open Access (CC BY 4.0)</div>`;
+  if (b) b.innerHTML = `<div style="background:var(--surface-muted); padding:16px; border-radius:var(--radius-sm); border-left:4px solid var(--primary);">
+      <h4 style="color:var(--primary); margin-bottom:6px; font-size:14px;">ABSTRACT</h4>
+      <p style="font-size:13px; line-height:1.6;">${escapeHtml(a.abstract || "Abstract not provided.")}</p>
+      ${a.keywords ? `<p style="font-size:12px; color:var(--text-muted); margin-top:8px;"><strong>Keywords:</strong> ${escapeHtml(a.keywords)}</p>` : ""}
+    </div>
+    <div style="margin-top:14px; display:flex; gap:8px; flex-wrap:wrap;">
+      ${a.pdf ? `<a class="btn btn-primary btn-sm" href="${escapeHtml(a.pdf)}" target="_blank" rel="noopener">📥 Download PDF</a>` : ""}
+      ${a.url ? `<a class="btn btn-outline btn-sm" href="${escapeHtml(a.url)}" target="_blank" rel="noopener">🌐 Full Text</a>` : ""}
+    </div>`;
+  const modal = document.getElementById("fullTextModal");
+  if (modal) modal.classList.add("active");
+}
+
+function copyPublishedCitation(id) {
+  const a = publishedArticles.find(x => x.id === id);
+  if (!a) return;
+  const cite = `${a.authors}. ${a.title}. Pharmionex J. ${String(a.date).slice(0, 4)}${a.pages ? ";" + a.pages : ""}.${a.doi ? " doi:" + a.doi : ""}`;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(cite).then(() => showToast("Citation copied", "success")).catch(() => showToast(cite, "info"));
+  } else { showToast(cite, "info"); }
+}

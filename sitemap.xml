@@ -2,39 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://pharmionexjournals.github.io/pharmionexjournal/</loc>
+    <lastmod>2026-10-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
   </url>
-  <url>
-    <loc>https://pharmionexjournals.github.io/pharmionexjournal/about.html</loc>
-  </url>
-  <url>
-    <loc>https://pharmionexjournals.github.io/pharmionexjournal/current-issue.html</loc>
-  </url>
-  <url>
-    <loc>https://pharmionexjournals.github.io/pharmionexjournal/archives.html</loc>
-  </url>
-  <url>
-    <loc>https://pharmionexjournals.github.io/pharmionexjournal/policies.html</loc>
-  </url>
-  <url>
-    <loc>https://pharmionexjournals.github.io/pharmionexjournal/editorial-board.html</loc>
-  </url>
-  <url>
-    <loc>https://pharmionexjournals.github.io/pharmionexjournal/submit.html</loc>
-  </url>
-  <url>
-    <loc>https://pharmionexjournals.github.io/pharmionexjournal/contact.html</loc>
-  </url>
-  <url>
-    <loc>https://pharmionexjournals.github.io/pharmionexjournal/author-resources.html</loc>
-  </url>
-  <url>
-    <loc>https://pharmionexjournals.github.io/pharmionexjournal/editor-workflow.html</loc>
-  </url>
-  <url>
-    <loc>https://pharmionexjournals.github.io/pharmionexjournal/editorial-automation.html</loc>
-  </url>
-    <url><loc>https://pharmionexjournals.github.io/pharmionexjournal/manuscript-status.html</loc></url>
-  <url><loc>https://pharmionexjournals.github.io/pharmionexjournal/complaints-appeals.html</loc></url>
-  <url><loc>https://pharmionexjournals.github.io/pharmionexjournal/publishing-information.html</loc></url>
 </urlset>
-
