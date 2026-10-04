@@ -530,7 +530,7 @@
           <div class="card-header">
             <div>
               <h2 class="card-title">3. Interactive Manuscript Sections & Content Builder</h2>
-              <p class="card-subtitle">Compose or paste manuscript sections. Sections adapt automatically to your selected Article Type and follow the standard structure expected of UGC-CARE listed journals (main text plus Acknowledgements and Author Contributions).</p>
+              <p class="card-subtitle">Compose or paste manuscript sections. Sections adapt automatically to your selected Article Type and follow the standard structure expected of peer-reviewed scholarly journals (main text plus Acknowledgements and Author Contributions).</p>
             </div>
             <div style="display:flex; gap:8px;">
               <button type="button" class="btn btn-outline btn-sm" onclick="applyArticleTypeTemplate()">🔄 Load Sections for Article Type</button>
@@ -843,16 +843,16 @@
         <div class="card-header">
           <div>
             <h2 class="card-title">📖 Instructions for Authors & Manuscript Guidelines</h2>
-            <p class="card-subtitle">Comprehensive standards for manuscript preparation, reporting frameworks, reference styles, and ethical requirements, aligned with the norms expected of standard UGC-CARE listed journals.</p>
+            <p class="card-subtitle">Comprehensive standards for manuscript preparation, reporting frameworks, reference styles, and ethical requirements, aligned with the UGC suggestive parameters for peer-reviewed journals.</p>
           </div>
           <button type="button" class="btn btn-primary btn-sm" onclick="switchMainView('submission')">✍️ Start Submission</button>
         </div>
 
-        <!-- UGC-CARE aligned publication standards -->
+        <!-- Publication standards aligned with UGC suggestive parameters -->
         <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:var(--radius); padding:18px; margin-bottom:24px;">
-          <h3 style="font-size:15px; font-weight:700; color:#1e3a8a; margin-bottom:8px;">🏛️ Publication Standards (UGC-CARE Aligned)</h3>
+          <h3 style="font-size:15px; font-weight:700; color:#1e3a8a; margin-bottom:8px;">🏛️ Publication Standards (UGC Suggestive Parameters)</h3>
           <p style="font-size:12px; color:#334155; line-height:1.6; margin-bottom:10px;">
-            Pharmionex Journal follows the practices expected of standard, peer-reviewed journals considered for the UGC-CARE list. Manuscripts must meet the following requirements.
+            Pharmionex Journal follows the practices described in the UGC suggestive parameters for choosing peer-reviewed journals (editorial board, editorial policy, quality standards, research ethics, and visibility). Manuscripts must meet the following requirements.
           </p>
           <ul style="font-size:12px; color:#334155; padding-left:18px; line-height:1.7;">
             <li><strong>Peer Review:</strong> Every manuscript undergoes double-blind review by at least two independent subject experts before a decision.</li>
@@ -864,7 +864,7 @@
             <li><strong>Referencing:</strong> Consistent Vancouver style, with DOIs. Avoid citations to predatory or unverifiable sources.</li>
             <li><strong>Open Access &amp; Licence:</strong> Articles are published under CC BY 4.0 with no author fees.</li>
           </ul>
-          <p style="font-size:11px; color:#64748b; margin-top:8px;">Note: UGC-CARE listing is decided solely by UGC-CARE. These guidelines describe the standards the journal follows and do not state any listing or indexing status.</p>
+          <p style="font-size:11px; color:#64748b; margin-top:8px;">Note: UGC discontinued UGC-CARE listing of journals in 2025 and now recommends that institutions evaluate journals against its suggestive parameters. This journal does not claim any UGC listing or indexing status; see the <a href="javascript:void(0)" onclick="switchMainView('editorial')" style="color:var(--accent);">Editorial Board &amp; Policies</a> page for journal details and policies.</p>
         </div>
 
         <!-- Standard manuscript structure -->
@@ -1059,11 +1059,20 @@
           <ul style="font-size:12px; color:#334155; padding-left:20px; line-height:1.7;">
             <li><strong>Journal Title:</strong> Pharmionex Journal (International Journal of Pharmaceutical, Biomedical &amp; Clinical Research)</li>
             <li><strong>Status:</strong> New journal, open for submissions</li>
+            <li><strong>ISSN:</strong> Not yet assigned (application in progress; to be displayed here once issued)</li>
             <li><strong>Publication Format:</strong> Online, open access (CC BY 4.0)</li>
             <li><strong>Fees:</strong> No submission or article processing charges</li>
             <li><strong>Editor-in-Chief &amp; Publisher:</strong> Vivek Sharma</li>
             <li><strong>Editorial Contact:</strong> pharmionex.journal@gmail.com</li>
           </ul>
+        </div>
+
+        <!-- Editorial Board Members -->
+        <div style="background:var(--surface-subtle); border:1px solid var(--border-color); border-radius:var(--radius); padding:18px; margin-bottom:24px;">
+          <h3 style="font-size:16px; font-weight:700; color:var(--primary); margin-bottom:8px;">🧑‍🔬 Editorial Board Members</h3>
+          <p style="font-size:12px; color:#334155; line-height:1.6;">
+            The editorial board is being constituted. Board members will be listed here with their name, designation, institutional affiliation, country and ORCID iD or Google Scholar profile. Subject experts in pharmaceutical sciences who wish to serve as editorial board members or reviewers may write to <a href="mailto:pharmionex.journal@gmail.com" style="color:var(--accent); font-weight:600;">pharmionex.journal@gmail.com</a> with a short CV.
+          </p>
         </div>
 
         <!-- Double-Blind Peer Review Framework -->
@@ -1101,6 +1110,35 @@
             <p style="font-size:12px; color:var(--text-muted); margin-top:8px; line-height:1.6;">
               We adhere strictly to the guidelines of the <strong>Committee on Publication Ethics (COPE)</strong> and ICMJE. Mandatory requirements include clear conflict of interest disclosures, funding declarations, IAEC animal ethics numbers, and CTRI trial registrations.
             </p>
+          </div>
+        </div>
+
+        <!-- Journal Policies -->
+        <h3 style="font-size:16px; font-weight:700; color:var(--primary); margin:24px 0 12px;">📜 Journal Policies</h3>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
+          <div style="background:var(--surface-subtle); border:1px solid var(--border-color); border-radius:var(--radius-sm); padding:16px;">
+            <strong style="color:var(--primary); font-size:14px;">Plagiarism & Originality Policy</strong>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:8px; line-height:1.6;">All manuscripts are screened with similarity-check software. Submissions must be original, unpublished and not under review elsewhere. A similarity index above 10% results in return to the authors before peer review. Text recycling, duplicate submission, image manipulation and data fabrication are treated as misconduct and handled following COPE flowcharts.</p>
+          </div>
+          <div style="background:var(--surface-subtle); border:1px solid var(--border-color); border-radius:var(--radius-sm); padding:16px;">
+            <strong style="color:var(--secondary); font-size:14px;">Corrections & Retraction Policy</strong>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:8px; line-height:1.6;">Honest errors are corrected through a published correction notice linked to the original article. Articles are retracted when there is clear evidence of misconduct, unreliable findings or undisclosed duplicate publication. Retracted articles remain online with a visible retraction notice, following COPE and ICMJE recommendations.</p>
+          </div>
+          <div style="background:var(--surface-subtle); border:1px solid var(--border-color); border-radius:var(--radius-sm); padding:16px;">
+            <strong style="color:#b45309; font-size:14px;">AI Use Policy</strong>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:8px; line-height:1.6;">Authors must disclose any use of generative AI tools in writing, data analysis or figure preparation, naming the tool and its purpose. AI tools cannot be listed as authors, and authors remain fully responsible for the accuracy of the content. Reviewers and editors must not upload confidential manuscripts to AI tools.</p>
+          </div>
+          <div style="background:var(--surface-subtle); border:1px solid var(--border-color); border-radius:var(--radius-sm); padding:16px;">
+            <strong style="color:var(--primary); font-size:14px;">Complaints & Appeals</strong>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:8px; line-height:1.6;">Authors may appeal an editorial decision by emailing the editorial office within 30 days with a point-by-point justification. Complaints about editorial process, reviewers or published content are acknowledged within 7 days and investigated as per COPE guidance. Appeals are not guaranteed to change a decision.</p>
+          </div>
+          <div style="background:var(--surface-subtle); border:1px solid var(--border-color); border-radius:var(--radius-sm); padding:16px;">
+            <strong style="color:var(--secondary); font-size:14px;">Conflicts of Interest & Confidentiality</strong>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:8px; line-height:1.6;">Authors, reviewers and editors must declare competing interests. Editors and reviewers handle manuscripts confidentially and recuse themselves from submissions where a conflict exists. Peer-review identities remain blinded.</p>
+          </div>
+          <div style="background:var(--surface-subtle); border:1px solid var(--border-color); border-radius:var(--radius-sm); padding:16px;">
+            <strong style="color:#b45309; font-size:14px;">Archiving & Preservation</strong>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:8px; line-height:1.6;">Published articles are retained in the journal's online archive and the public repository. The journal intends to deposit articles with a long-term preservation service and assign DOIs; the arrangements will be named here once in place.</p>
           </div>
         </div>
       </div>

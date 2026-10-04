@@ -450,7 +450,7 @@ function applyArticleTypeTemplate() {
     ];
   }
 
-  // Standard back matter expected of UGC-CARE style journals (all article types)
+  // Standard back matter expected of standard peer-reviewed journals (all article types)
   state.sections.push(
     { id: "ack", title: "6. Acknowledgements", content: "<p>Acknowledge individuals, institutions or facilities that contributed but do not meet authorship criteria. Write 'None' if not applicable.</p>" },
     { id: "contrib", title: "7. Author Contributions", content: "<p>State each author's contribution using CRediT roles (e.g. Conceptualization, Methodology, Investigation, Writing – original draft, Supervision).</p>" }
