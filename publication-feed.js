@@ -91,12 +91,55 @@
 
   let requestTimer;
   let activeScript;
-  function setError() {
+  let requestNumber = 0;
+
+  function showRecords(records, source, currentRequest) {
+    if (currentRequest !== requestNumber) return;
     clearTimeout(requestTimer);
     if (activeScript) activeScript.remove();
+    activeScript = null;
+    const items = Array.isArray(records) ? records.filter(function (item) {
+      return item && typeof item === 'object' && String(item.title || '').trim() && safeUrl(item.articleUrl);
+    }) : [];
+    status.className = 'feed-status';
+    if (root.dataset.mode === 'archive') {
+      status.textContent = source === 'local' && items.length
+        ? 'Showing the local release list while the live publication feed is unavailable.'
+        : items.length ? items.length + (items.length === 1 ? ' article in the archive.' : ' articles in the archive.') : 'No published articles yet.';
+      renderArchive(items);
+    } else {
+      status.textContent = source === 'local' && items.length
+        ? 'Showing the local release list while the live publication feed is unavailable.'
+        : items.length ? items.length + (items.length === 1 ? ' published article.' : ' published articles.') : 'No published articles yet.';
+      renderCurrent(items);
+    }
+  }
+
+  function showLoadError(currentRequest) {
+    if (currentRequest !== requestNumber) return;
+    clearTimeout(requestTimer);
+    if (activeScript) activeScript.remove();
+    activeScript = null;
     status.className = 'feed-status feed-error';
-    status.innerHTML = '<span>We could not load the published-article list. Try again in a moment or <a href="mailto:pharmionex.journal@gmail.com">contact the editorial office</a>.</span> <button class="feed-retry" type="button">Retry</button>';
+    status.innerHTML = '<span>We could not load the article list. Try again or <a href="mailto:pharmionex.journal@gmail.com">contact the editorial office</a>.</span> <button class="feed-retry" type="button">Retry</button>';
     status.querySelector('.feed-retry').addEventListener('click', loadFeed);
+  }
+
+  function loadLocalList(currentRequest) {
+    if (currentRequest !== requestNumber) return;
+    clearTimeout(requestTimer);
+    if (activeScript) activeScript.remove();
+    activeScript = null;
+    fetch('published-articles.json?v=' + Date.now(), { cache: 'no-store' })
+      .then(function (response) { if (!response.ok) throw new Error('Local article list unavailable'); return response.json(); })
+      .then(function (records) {
+        if (currentRequest !== requestNumber) return;
+        const approved = Array.isArray(records) ? records.filter(function (item) {
+          return item && item.publicationStatus === 'Published' && item.publicListingApproved === true;
+        }) : [];
+        showRecords(approved, 'local', currentRequest);
+      })
+      .catch(function () { showLoadError(currentRequest); });
   }
 
   function currentArticles(items) {
@@ -158,6 +201,7 @@
   }
 
   function loadFeed() {
+    const currentRequest = ++requestNumber;
     clearTimeout(requestTimer);
     if (activeScript) activeScript.remove();
     status.className = 'feed-status';
@@ -167,22 +211,13 @@
     activeScript = script;
     script.async = true;
     script.src = endpoint + '?view=published-data&v=' + Date.now();
-    script.onerror = setError;
+    script.onerror = function () { loadLocalList(currentRequest); };
     window.PharmionexPublishedFeed = {
       receive: function (records) {
-        clearTimeout(requestTimer);
-        script.remove();
-        activeScript = null;
-        const items = Array.isArray(records) ? records : [];
-        status.className = 'feed-status';
-        if (root.dataset.mode === 'archive') renderArchive(items);
-        else {
-          status.textContent = items.length ? items.length + (items.length === 1 ? ' published article.' : ' published articles.') : 'No published records.';
-          renderCurrent(items);
-        }
+        showRecords(records, 'live', currentRequest);
       }
     };
-    requestTimer = setTimeout(setError, 18000);
+    requestTimer = setTimeout(function () { loadLocalList(currentRequest); }, 8000);
     document.head.appendChild(script);
   }
 
