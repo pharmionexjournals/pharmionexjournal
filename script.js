@@ -11,7 +11,10 @@
  */
 
 // Google Apps Script Web App URL for live synchronization (configurable by Vivek Sharma)
-var GOOGLE_APPS_SCRIPT_URL = localStorage.getItem("pharmionex_gas_url") || "";
+var GOOGLE_APPS_SCRIPT_URL = localStorage.getItem("pharmionex_gas_url") || "https://script.google.com/macros/s/AKfycbxJkZ9yZ__-HndejeWlAlzzsdP8s2CHqHCicdv9tGVZhAcp8Zw2mx8SVZMu40JCfDG1/exec";
+
+// Real File objects (state.uploadedFiles only keeps name/size, which is not enough to upload)
+var uploadedFileObjects = { primary: null, supplementary: [] };
 
 // Core Application State
 var state = {
@@ -1344,6 +1347,7 @@ function handleFileUpload(e, type) {
   if (type === "primary") {
     const f = files[0];
     state.uploadedFiles.primary = { name: f.name, size: f.size };
+    uploadedFileObjects.primary = f;
     const pList = document.getElementById("primaryFileList");
     if (pList) {
       pList.innerHTML = `
@@ -1357,6 +1361,7 @@ function handleFileUpload(e, type) {
   } else {
     Array.from(files).forEach(f => {
       state.uploadedFiles.supplementary.push({ name: f.name, size: f.size });
+      uploadedFileObjects.supplementary.push(f);
     });
     renderSuppFiles();
     showToast(`${files.length} supplementary file(s) attached`, "success");
@@ -1366,6 +1371,7 @@ function handleFileUpload(e, type) {
 
 function removePrimaryFile() {
   state.uploadedFiles.primary = null;
+  uploadedFileObjects.primary = null;
   const input = document.getElementById("manuscriptFileInput");
   if (input) input.value = "";
   const pList = document.getElementById("primaryFileList");
@@ -1390,6 +1396,7 @@ function renderSuppFiles() {
 
 function removeSuppFile(idx) {
   state.uploadedFiles.supplementary.splice(idx, 1);
+  uploadedFileObjects.supplementary.splice(idx, 1);
   renderSuppFiles();
   triggerAutoSave();
 }
@@ -1495,7 +1502,13 @@ function submitArticleToJournal() {
   }
 
   const year = new Date().getFullYear();
-  const rand = Math.floor(1000 + Math.random() * 9000);
+  const idChars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let rand = "";
+  const idBytes = (window.crypto && window.crypto.getRandomValues) ? window.crypto.getRandomValues(new Uint8Array(6)) : null;
+  for (let i = 0; i < 6; i++) {
+    const n = idBytes ? idBytes[i] : Math.floor(Math.random() * 256);
+    rand += idChars.charAt(n % idChars.length);
+  }
   const subId = `PHARMIONEX-${year}-${rand}`;
   state.submissionId = subId;
 
@@ -1541,9 +1554,10 @@ function submitArticleToJournal() {
     console.warn("Could not save to localStorage", e);
   }
 
-  // If Google Apps Script Web App is configured, asynchronously send submission
+  // If Google Apps Script Web App is configured, send the submission (and files) to the editorial office
   if (GOOGLE_APPS_SCRIPT_URL) {
     const payload = {
+      trackingId: subId,
       title: state.title,
       articleType: state.articleType,
       track: state.track,
@@ -1556,17 +1570,11 @@ function submitArticleToJournal() {
       iaecProtocol: document.getElementById("iaecProtocol")?.value || "Not Applicable",
       funding: document.getElementById("fundingStatement")?.value || "Institutional Research Support",
       coi: document.getElementById("coiStatement")?.value || "None declared",
+      dataAvailability: document.getElementById("dataAvailability")?.value || "All data in manuscript",
       fileUrl: state.uploadedFiles.primary?.name || "Uploaded via Portal"
     };
-
-    fetch(GOOGLE_APPS_SCRIPT_URL, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    }).then(() => {
-      console.log("Submission pushed to Google Sheet via Apps Script Web App");
-    }).catch(err => console.warn("Google Apps Script sync warning:", err));
+    // Runs in the background; updates the receipt line when finished
+    setTimeout(() => syncSubmissionToCloud(payload, subId), 0);
   }
 
   // Display Official Receipt
@@ -1583,6 +1591,7 @@ function submitArticleToJournal() {
     <strong>Plagiarism Audit:</strong> Queued for Turnitin / iThenticate (&lt; 10% similarity check)<br>
     <strong>Submission Date:</strong> ${new Date().toLocaleString()}<br>
     <strong>Current Status:</strong> Under Initial Editorial & Plagiarism Screening
+    <div id="syncStatusLine" style="margin-top:10px; padding:8px 10px; border-radius:6px; background:#f1f5f9; font-size:12px;">${GOOGLE_APPS_SCRIPT_URL ? "☁️ Sending to the editorial office…" : "ℹ️ Saved on this device only. Please email your manuscript to pharmioneex.journal@gmail.com."}</div>
   `;
 
   const receiptEl = document.getElementById("submissionReceipt");
@@ -1592,6 +1601,93 @@ function submitArticleToJournal() {
   if (modal) modal.classList.add("active");
 
   showToast("Manuscript successfully submitted!", "success");
+}
+
+/* ==========================================================================
+   Cloud sync: send submission + files to Google Apps Script (Sheet + Drive + email)
+   ========================================================================== */
+function readFileAsBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const str = String(reader.result);
+      resolve(str.substring(str.indexOf(",") + 1));
+    };
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(file);
+  });
+}
+
+async function syncSubmissionToCloud(payload, subId) {
+  const setStatus = (html, bg) => {
+    const el = document.getElementById("syncStatusLine");
+    if (el) { el.innerHTML = html; if (bg) el.style.background = bg; }
+  };
+  const MAX_TOTAL = 20 * 1024 * 1024; // must match MAX_TOTAL_FILE_BYTES in Code.gs
+  const mailTo = "pharmioneex.journal@gmail.com";
+
+  try {
+    let budget = MAX_TOTAL;
+    const fileNotes = [];
+
+    const primary = uploadedFileObjects.primary;
+    if (primary) {
+      if (primary.size <= budget) {
+        payload.fileName = primary.name;
+        payload.fileType = primary.type || "application/octet-stream";
+        payload.base64File = await readFileAsBase64(primary);
+        budget -= primary.size;
+      } else {
+        fileNotes.push("Manuscript file '" + primary.name + "' is larger than 20 MB and was not sent.");
+      }
+    } else if (state.uploadedFiles.primary) {
+      fileNotes.push("Manuscript file '" + state.uploadedFiles.primary.name + "' could not be sent (page was reloaded before submitting).");
+    }
+
+    const supp = [];
+    for (const f of uploadedFileObjects.supplementary) {
+      if (f.size <= budget) {
+        supp.push({ fileName: f.name, fileType: f.type || "application/octet-stream", base64File: await readFileAsBase64(f) });
+        budget -= f.size;
+      } else {
+        fileNotes.push("Supplementary file '" + f.name + "' was not sent (size limit).");
+      }
+    }
+    if (supp.length) payload.supplementary = supp;
+    if (fileNotes.length) payload.fileNotes = fileNotes;
+
+    // text/plain avoids the CORS pre-flight that Apps Script does not support
+    const res = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!data || !data.success) throw new Error((data && data.error) || "Unknown server error");
+
+    // If the server had to issue a different ID, use it everywhere
+    if (data.trackingId && data.trackingId !== subId) {
+      try {
+        const rec = trackingRegistry[subId];
+        if (rec) { rec.trackingId = data.trackingId; trackingRegistry[data.trackingId] = rec; delete trackingRegistry[subId]; }
+        const saved = JSON.parse(localStorage.getItem("pharmionex_submissions") || "{}");
+        if (saved[subId]) { saved[subId].trackingId = data.trackingId; saved[data.trackingId] = saved[subId]; delete saved[subId]; }
+        localStorage.setItem("pharmionex_submissions", JSON.stringify(saved));
+      } catch (e) { console.warn(e); }
+      state.submissionId = data.trackingId;
+      const receiptEl = document.getElementById("submissionReceipt");
+      if (receiptEl) receiptEl.innerHTML = receiptEl.innerHTML.split(subId).join(data.trackingId);
+    }
+
+    let msg = "✅ Received by the editorial office.";
+    if (data.emailSent) msg += " A confirmation email has been sent to " + escapeHtml(payload.authorEmail) + ".";
+    if (fileNotes.length) msg += "<br>⚠️ " + fileNotes.map(escapeHtml).join("<br>⚠️ ") + " Please email the file(s) to " + mailTo + ".";
+    setStatus(msg, fileNotes.length ? "#fef3c7" : "#dcfce7");
+  } catch (err) {
+    console.warn("Cloud sync failed:", err);
+    setStatus("⚠️ We could not confirm delivery to the editorial office. Check your inbox for a confirmation email in a few minutes; if none arrives, please email your manuscript and Tracking ID " + escapeHtml(subId) + " to " + mailTo + ".", "#fee2e2");
+    showToast("Could not confirm cloud delivery - please check your email or contact the editorial office", "warning");
+  }
 }
 
 function trackSubmittedManuscript(subId) {
