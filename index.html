@@ -3,839 +3,1143 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pharmionex Journal - International Journal of Pharmaceutical & Biomedical Sciences</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,6 88,28 88,72 50,94 12,72 12,28' stroke='%232563eb' stroke-width='6' fill='%231e3a8a'/%3E%3Ccircle cx='50' cy='50' r='14' fill='%2338bdf8'/%3E%3C/svg%3E">
-  
-  <link rel=stylesheet href=style.css>
+  <title>Pharmionex Journal | Intl Journal of Pharmaceutical, Biomedical & Clinical Research</title>
+  <meta name="description" content="Pharmionex Journal is a peer-reviewed open-access scientific periodical edited by Vivek Sharma, publishing original research, comprehensive reviews, methodologies, and clinical studies across all pharmaceutical disciplines.">
+  <meta name="author" content="Vivek Sharma">
+  <meta name="keywords" content="pharmacy journal, drug delivery, HPLC, pharmacokinetics, pharmaceutical analysis, clinical research, ISSN, UGC-CARE, open access, COPE">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Top Compliance Bar -->
-  <div class="compliance-top-bar no-print">
-    <div class="compliance-top-container">
-      <div class="compliance-badges">
-        <span class="badge-pill badge-ugc">★ UGC-CARE Criteria Compliant</span>
-        <span class="badge-pill badge-oa">🔓 Diamond Open Access (CC BY 4.0)</span>
-        <span>• e-ISSN: <strong>2835-7191</strong></span>
-        <span>• p-ISSN: <strong>2835-7183</strong></span>
+  <!-- Top Announcement Bar -->
+  <div class="top-bar no-print">
+    <div class="top-bar-inner">
+      <div class="top-bar-left">
+        <span>📖 Open Access Peer-Reviewed Journal</span>
+        <span>• ISSN (Online): <strong>Application in Process (NIScPR, New Delhi)</strong></span>
+        <span>• Volume 1, Issue 1 (October 2026)</span>
+        <span>• UGC-CARE, COPE & ICMJE Guidelines Compliant</span>
       </div>
-      <div>
-        <span>CrossRef DOI Prefix: <strong>10.59234/pharmionex</strong></span>
-        <span style="margin-left: 12px;">Turnitin / iThenticate Screening: <strong>&lt; 10% Similarity</strong></span>
+      <div class="top-bar-right">
+        <span>Editor-in-Chief & Publisher: <strong>Vivek Sharma</strong></span>
+        <span>• Contact: <a href="mailto:pharmionex.journal@gmail.com" style="color:#bfdbfe;">pharmionex.journal@gmail.com</a></span>
       </div>
     </div>
   </div>
 
-  <!-- Modern Header -->
+  <!-- Main Header & Navigation -->
   <header class="main-header no-print">
-    <div class="navbar-container">
-      <a href="javascript:void(0)" class="brand-link" onclick="switchMainView('home')">
-        <svg width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="pxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#38bdf8"/>
-              <stop offset="50%" stop-color="#2563eb"/>
-              <stop offset="100%" stop-color="#0f766e"/>
-            </linearGradient>
-            <linearGradient id="ringGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#06b6d4"/>
-              <stop offset="100%" stop-color="#3b82f6"/>
-            </linearGradient>
-          </defs>
-          <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" stroke="url(#pxGrad)" stroke-width="6" fill="rgba(37,99,235,0.08)" stroke-linejoin="round"/>
-          <circle cx="50" cy="50" r="14" fill="url(#pxGrad)"/>
-          <ellipse cx="50" cy="50" rx="34" ry="12" stroke="url(#ringGrad)" stroke-width="4" stroke-dasharray="4 2" transform="rotate(30 50 50)"/>
-          <ellipse cx="50" cy="50" rx="34" ry="12" stroke="url(#ringGrad)" stroke-width="4" stroke-dasharray="4 2" transform="rotate(-30 50 50)"/>
-          <circle cx="50" cy="6" r="4.5" fill="#38bdf8"/>
-          <circle cx="88" cy="28" r="4.5" fill="#2563eb"/>
-          <circle cx="88" cy="72" r="4.5" fill="#0f766e"/>
-          <circle cx="50" cy="94" r="4.5" fill="#38bdf8"/>
-          <circle cx="12" cy="72" r="4.5" fill="#2563eb"/>
-          <circle cx="12" cy="28" r="4.5" fill="#0f766e"/>
-          <circle cx="50" cy="50" r="6" fill="#ffffff"/>
-        </svg>
-        <div>
+    <div class="header-container">
+      <div class="journal-brand" onclick="switchMainView('home')" style="cursor:pointer;" title="Pharmionex Journal Home">
+        <div class="brand-logo">
+          <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="46" stroke="#ffffff" stroke-width="4" fill="rgba(255,255,255,0.08)"/>
+            <polygon points="50,22 74,36 74,64 50,78 26,64 26,36" stroke="#93c5fd" stroke-width="3" fill="none"/>
+            <circle cx="50" cy="50" r="10" fill="#38bdf8"/>
+            <line x1="50" y1="22" x2="50" y2="40" stroke="#ffffff" stroke-width="2.5"/>
+            <line x1="74" y1="36" x2="59" y2="45" stroke="#ffffff" stroke-width="2.5"/>
+            <line x1="74" y1="64" x2="59" y2="55" stroke="#ffffff" stroke-width="2.5"/>
+            <line x1="50" y1="78" x2="50" y2="60" stroke="#ffffff" stroke-width="2.5"/>
+            <line x1="26" y1="64" x2="41" y2="55" stroke="#ffffff" stroke-width="2.5"/>
+            <line x1="26" y1="36" x2="41" y2="45" stroke="#ffffff" stroke-width="2.5"/>
+          </svg>
+        </div>
+        <div class="brand-text">
           <div class="brand-title">PHARMIONEX JOURNAL</div>
           <div class="brand-tagline">Intl Journal of Pharmaceutical, Biomedical & Clinical Research</div>
         </div>
-      </a>
+      </div>
 
-      <!-- Desktop Nav Items -->
-      <ul class="nav-links">
-        <li><button type="button" class="nav-item-btn active" id="nav-btn-home" onclick="switchMainView('home')">🏠 Journal Home</button></li>
-        <li><button type="button" class="nav-item-btn" id="nav-btn-submission" onclick="switchMainView('submission')">📝 Submission Portal & Builder</button></li>
-        <li><button type="button" class="nav-item-btn" id="nav-btn-articles" onclick="switchMainView('articles')">📚 Current Issue</button></li>
-        <li><button type="button" class="nav-item-btn" id="nav-btn-ugc" onclick="switchMainView('ugc')">📜 UGC & Ethics Standards</button></li>
-      </ul>
+      <nav class="nav-links">
+        <a href="javascript:void(0)" onclick="switchMainView('home')" class="active" id="nav-home">Home</a>
+        <a href="javascript:void(0)" onclick="switchMainView('articles')" id="nav-articles">Articles & Archive</a>
+        <a href="javascript:void(0)" onclick="switchMainView('track')" id="nav-track">🔍 Track Article</a>
+        <a href="javascript:void(0)" onclick="switchMainView('submission')" id="nav-submission">Submit Manuscript</a>
+        <a href="javascript:void(0)" onclick="switchMainView('guidelines')" id="nav-guidelines">Author Guidelines</a>
+        <a href="javascript:void(0)" onclick="switchMainView('editorial')" id="nav-editorial">Editorial Board & Policies</a>
+        <a href="javascript:void(0)" onclick="switchMainView('automation')" id="nav-automation" style="color:var(--accent); font-weight:700;">⚡ Script & Automation</a>
+      </nav>
 
-      <!-- Action Buttons -->
       <div class="header-actions">
-        <button type="button" class="btn btn-outline btn-sm" onclick="openJournalInfoModal()" title="Journal Settings">⚙️ Journal Settings</button>
-        <button type="button" class="btn btn-primary btn-sm" onclick="switchMainView('submission')">🚀 Submit Manuscript</button>
-        <button type="button" class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        <button type="button" class="btn btn-primary btn-sm" onclick="switchMainView('submission')">✍️ Submit Paper</button>
+        <button type="button" class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle Navigation Menu">☰</button>
       </div>
     </div>
   </header>
 
-  <!-- Mobile Drawer Menu -->
-  <div class="mobile-drawer" id="mobileDrawer">
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer no-print" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <strong>Pharmionex Menu</strong>
+      <button type="button" class="btn btn-ghost btn-sm" onclick="toggleMobileMenu()">✕</button>
+    </div>
     <ul class="mobile-nav-list">
       <li><button type="button" onclick="switchMainView('home'); toggleMobileMenu();">🏠 Journal Home</button></li>
-      <li><button type="button" onclick="switchMainView('submission'); toggleMobileMenu();">📝 Author Submission Portal</button></li>
-      <li><button type="button" onclick="switchMainView('articles'); toggleMobileMenu();">📚 Current Issue & Articles</button></li>
-      <li><button type="button" onclick="switchMainView('ugc'); toggleMobileMenu();">📜 UGC & Ethics Guidelines</button></li>
-      <li><button type="button" onclick="openJournalInfoModal(); toggleMobileMenu();">⚙️ Journal Settings</button></li>
+      <li><button type="button" onclick="switchMainView('articles'); toggleMobileMenu();">📚 Articles & Repository</button></li>
+      <li><button type="button" onclick="switchMainView('track'); toggleMobileMenu();">🔍 Track Manuscript Status</button></li>
+      <li><button type="button" onclick="switchMainView('submission'); toggleMobileMenu();">✍️ Author Submission Portal</button></li>
+      <li><button type="button" onclick="switchMainView('guidelines'); toggleMobileMenu();">📖 Author Guidelines & Checklist</button></li>
+      <li><button type="button" onclick="switchMainView('editorial'); toggleMobileMenu();">👥 Editorial Board & Policies</button></li>
+      <li><button type="button" onclick="switchMainView('automation'); toggleMobileMenu();">⚡ Script & Automation Guide</button></li>
     </ul>
   </div>
 
-  <!-- Main Body -->
-  <main class="app-main">
+  <!-- MAIN CONTAINER -->
+  <main class="app-container">
 
-    <!-- VIEW 1: JOURNAL HOME -->
+    <!-- ====================================================================
+         VIEW 1: JOURNAL HOME
+         ==================================================================== -->
     <div id="view-home" class="app-view active">
       <div class="hero-banner">
         <div class="hero-content">
-          <div class="hero-badge">🧬 Volume 14, Issue 4 • Published Monthly • Peer Reviewed</div>
-          <h1 class="hero-title">Advancing Pharmaceutical Sciences, Formulation & Clinical Drug Research</h1>
+          <div class="hero-badge">🧬 Volume 1, Issue 1 (October 2026) • All Pharmaceutical Article Types • Diamond Open Access</div>
+          <h1 class="hero-title">Advancing Pharmaceutical Sciences, Drug Delivery & Translational Medicine</h1>
           <p class="hero-subtitle">
-            <strong>Pharmionex Journal</strong> is a premier open-access scientific periodical adhering to UGC-CARE standards, COPE publishing integrity, and double-blind peer-review. We publish pioneering research in drug delivery, analytical chromatography, pharmacokinetics, and molecular therapeutics.
+            <strong>Pharmionex Journal</strong> is a peer-reviewed open-access academic periodical edited and published by <strong>Vivek Sharma</strong>. We invite original research, comprehensive reviews, methodology protocols, short communications, and clinical case studies across every branch of pharmaceutical sciences.
           </p>
           <div class="hero-buttons">
-            <button type="button" class="btn btn-primary" onclick="switchMainView('submission')" style="background:#38bdf8; color:#0f172a; font-weight:700;">🚀 Submit Your Manuscript</button>
-            <button type="button" class="btn btn-outline" onclick="switchMainView('articles')" style="background:rgba(255,255,255,0.15); color:#ffffff; border-color:rgba(255,255,255,0.3);">📖 Browse Current Issue</button>
-            <button type="button" class="btn btn-outline" onclick="switchMainView('ugc')" style="background:rgba(255,255,255,0.15); color:#ffffff; border-color:rgba(255,255,255,0.3);">📜 Author & UGC Guidelines</button>
-          </div>
-        </div>
-
-        <div class="hero-metrics-bar">
-          <div class="hero-metric-item">
-            <span class="hero-metric-val">3.42</span>
-            <span class="hero-metric-lbl">Impact Metric</span>
-          </div>
-          <div class="hero-metric-item">
-            <span class="hero-metric-val">21 Days</span>
-            <span class="hero-metric-lbl">Avg. Review Time</span>
-          </div>
-          <div class="hero-metric-item">
-            <span class="hero-metric-val">100%</span>
-            <span class="hero-metric-lbl">Diamond Open Access</span>
-          </div>
-          <div class="hero-metric-item">
-            <span class="hero-metric-val">&lt; 10%</span>
-            <span class="hero-metric-lbl">Similarity Threshold</span>
-          </div>
-          <div class="hero-metric-item">
-            <span class="hero-metric-val">Indexed</span>
-            <span class="hero-metric-lbl">PubMed / CrossRef / DOAJ</span>
+            <button type="button" class="btn btn-primary" onclick="switchMainView('articles')">📚 Search Published Papers</button>
+            <button type="button" class="btn btn-outline" onclick="switchMainView('track')">🔍 Track Manuscript Status</button>
+            <button type="button" class="btn btn-light" onclick="switchMainView('submission')">✍️ Submit Paper to Volume 1</button>
           </div>
         </div>
       </div>
 
-      <div style="margin-bottom: 32px;">
-        <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 16px; color: var(--primary);">🔬 High-Impact Publication Tracks</h2>
-        <div class="tools-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
-          <div class="card" style="padding: 20px; margin-bottom: 0;">
-            <div style="font-size: 24px; margin-bottom: 8px;">💊</div>
-            <h3 style="font-size: 15px; font-weight: 700; color: var(--text-main);">Pharmaceutics & NDDS</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-top: 6px;">Nanoparticle delivery, liposomes, bioavailability enhancement, and sustained release capsules.</p>
+      <!-- Journal Fast Facts & Transparency Matrix -->
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 28px 0;">
+        <div class="card" style="margin-bottom:0; padding:20px; border-left:4px solid var(--primary);">
+          <div style="font-size:24px; margin-bottom:8px;">👨‍🔬</div>
+          <h3 style="font-size:16px; font-weight:700; color:var(--primary); margin-bottom:4px;">Editorial Leadership</h3>
+          <p style="font-size:13px; color:var(--text-muted); line-height:1.5;">
+            <strong>Editor-in-Chief & Publisher:</strong> Vivek Sharma<br>
+            <strong>Official Contact:</strong> <a href="mailto:pharmionex.journal@gmail.com" style="color:var(--accent);">pharmionex.journal@gmail.com</a><br>
+            <strong>Affiliation:</strong> Department of Pharmaceutical Sciences, India
+          </p>
+        </div>
+
+        <div class="card" style="margin-bottom:0; padding:20px; border-left:4px solid var(--secondary);">
+          <div style="font-size:24px; margin-bottom:8px;">🏛️</div>
+          <h3 style="font-size:16px; font-weight:700; color:var(--secondary); margin-bottom:4px;">ISSN & Governance</h3>
+          <p style="font-size:13px; color:var(--text-muted); line-height:1.5;">
+            <strong>ISSN Status:</strong> Application in Process (NIScPR, India)<br>
+            <strong>Frequency:</strong> Bi-Monthly (6 Regular Issues/Year)<br>
+            <strong>Review Mode:</strong> Rigorous Double-Blind Peer Review (14–21 Days)
+          </p>
+        </div>
+
+        <div class="card" style="margin-bottom:0; padding:20px; border-left:4px solid var(--accent);">
+          <div style="font-size:24px; margin-bottom:8px;">🔓</div>
+          <h3 style="font-size:16px; font-weight:700; color:var(--accent); margin-bottom:4px;">Diamond Open Access</h3>
+          <p style="font-size:13px; color:var(--text-muted); line-height:1.5;">
+            <strong>Article Processing Charges:</strong> 100% Free / Zero APC<br>
+            <strong>License:</strong> Creative Commons (CC BY 4.0)<br>
+            <strong>Plagiarism Ceiling:</strong> Strictly &lt; 10% (Turnitin / iThenticate)
+          </p>
+        </div>
+
+        <div class="card" style="margin-bottom:0; padding:20px; border-left:4px solid #d97706;">
+          <div style="font-size:24px; margin-bottom:8px;">⚡</div>
+          <h3 style="font-size:16px; font-weight:700; color:#d97706; margin-bottom:4px;">Editorial Automation</h3>
+          <p style="font-size:13px; color:var(--text-muted); line-height:1.5;">
+            <strong>Tracking System:</strong> Real-time stage progress & reviews<br>
+            <strong>Backend Engine:</strong> Google Apps Script & Google Sheets<br>
+            <strong>Alerts:</strong> Automated author & reviewer notifications
+          </p>
+        </div>
+      </div>
+
+      <!-- Scope Across All Pharmaceutical Fields -->
+      <div class="card">
+        <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--primary);">🔬 Comprehensive Scope Across All Pharmaceutical Disciplines</h2>
+        <p style="font-size:13px; color:var(--text-muted); margin-bottom:16px;">
+          Pharmionex Journal welcomes high-quality submissions spanning the entire spectrum of pharmaceutical science and healthcare:
+        </p>
+
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px;">
+          <div style="background:var(--surface-subtle); padding:14px; border-radius:var(--radius-sm); border-left:3px solid var(--accent);">
+            <strong>1. Pharmaceutics & Drug Delivery:</strong> Lipid nanoparticles (SLN, NLC), liposomes, SNEDDS, polymeric micelles, transdermal, ocular, pulmonary, and targeted anticancer delivery systems.
           </div>
-          <div class="card" style="padding: 20px; margin-bottom: 0;">
-            <div style="font-size: 24px; margin-bottom: 8px;">🧪</div>
-            <h3 style="font-size: 15px; font-weight: 700; color: var(--text-main);">Analytical Chemistry & HPLC</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-top: 6px;">ICH Q2(R1) method validation, LC-MS/MS, capillary electrophoresis, and impurity profiling.</p>
+          <div style="background:var(--surface-subtle); padding:14px; border-radius:var(--radius-sm); border-left:3px solid var(--secondary);">
+            <strong>2. Pharmaceutical Analysis & QA:</strong> Stability-indicating HPLC/UPLC, LC-MS/MS, capillary electrophoresis, forced degradation, impurity profiling under ICH Q2(R1) validation.
           </div>
-          <div class="card" style="padding: 20px; margin-bottom: 0;">
-            <div style="font-size: 24px; margin-bottom: 8px;">⚖️</div>
-            <h3 style="font-size: 15px; font-weight: 700; color: var(--text-main);">QA & Regulatory Affairs</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-top: 6px;">WHO GMP, Schedule M compliance, stability protocols (ICH Q1A), and analytical validation.</p>
+          <div style="background:var(--surface-subtle); padding:14px; border-radius:var(--radius-sm); border-left:3px solid #b45309;">
+            <strong>3. Industrial Pharmacy & GMP:</strong> Hard gelatin capsules, solid oral dosage forms, WHO Schedule M compliance, 21 CFR Part 11 computerized validation, cleanroom engineering.
           </div>
-          <div class="card" style="padding: 20px; margin-bottom: 0;">
-            <div style="font-size: 24px; margin-bottom: 8px;">🧬</div>
-            <h3 style="font-size: 15px; font-weight: 700; color: var(--text-main);">Pharmacology & AI in Drug Discovery</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-top: 6px;">Computational screening, deep learning QSAR, animal efficacy studies, and molecular docking.</p>
+          <div style="background:var(--surface-subtle); padding:14px; border-radius:var(--radius-sm); border-left:3px solid #7c3aed;">
+            <strong>4. Pharmacology & Pharmacokinetics:</strong> Preclinical animal models (IAEC), Level A IVIVC correlation, bioequivalence, compartmental PK/PD deconvolution, toxicokinetics.
+          </div>
+          <div style="background:var(--surface-subtle); padding:14px; border-radius:var(--radius-sm); border-left:3px solid #0284c7;">
+            <strong>5. Medicinal Chemistry & Discovery:</strong> Computer-aided drug design (CADD), molecular docking, QSAR modeling, synthesis and bio-evaluation of novel therapeutic heterocycles.
+          </div>
+          <div style="background:var(--surface-subtle); padding:14px; border-radius:var(--radius-sm); border-left:3px solid #16a34a;">
+            <strong>6. Pharmacognosy & Phytomedicine:</strong> Herbal drug standardization, bioactive phytoconstituents isolation, chromatographic fingerprinting, and phytotherapeutic mechanisms.
+          </div>
+          <div style="background:var(--surface-subtle); padding:14px; border-radius:var(--radius-sm); border-left:3px solid #e11d48;">
+            <strong>7. Clinical Pharmacy & Pharmacovigilance:</strong> Adverse drug reactions (ADR) causality assessment, drug interactions, therapeutic drug monitoring (TDM), hospital practice.
+          </div>
+          <div style="background:var(--surface-subtle); padding:14px; border-radius:var(--radius-sm); border-left:3px solid #64748b;">
+            <strong>8. Biopharmaceutics & Biotechnology:</strong> Monoclonal antibodies, charge heterogeneity, biosimilars, peptide therapeutics, recombinant protein characterization.
+          </div>
+        </div>
+      </div>
+
+      <!-- Inaugural Issue Highlights -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title">📚 Volume 1, Issue 1 (October 2026) Inaugural Issue</h2>
+            <p class="card-subtitle">Featuring peer-reviewed research across diverse pharmaceutical formats.</p>
+          </div>
+          <button type="button" class="btn btn-outline btn-sm" onclick="switchMainView('articles')">Browse All 8 Articles ➔</button>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">
+          <div style="background:var(--surface-subtle); border:1px solid var(--border-color); border-radius:var(--radius); padding:18px;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+              <span class="badge-track" style="background:#e0e7ff; color:#3730a3;">Original Research</span>
+              <span class="badge-open-access">🔓 CC BY 4.0</span>
+            </div>
+            <h3 style="font-size:15px; font-weight:700; margin-bottom:4px; color:var(--text-main);">
+              Development and In-Vitro Characterization of Nanostructured Lipid Carriers for Targeted Doxorubicin Delivery
+            </h3>
+            <p style="font-size:12px; color:var(--primary); font-weight:600; margin-bottom:6px;">Vivek Sharma, R. K. Patel, S. A. Nair, H. Chen</p>
+            <p style="font-size:12px; color:var(--text-muted); line-height:1.5; margin-bottom:12px;">
+              Optimized NLCs (142.5 nm, entrapment 88.4%) yielded biphasic sustained release over 48 hours with 3.4-fold enhanced tumor cytotoxicity.
+            </p>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:11px; color:var(--text-muted);">DOI: 10.59234/pharmionex.2026.01.01</span>
+              <button type="button" class="btn btn-primary btn-sm" onclick="downloadArticlePDF('art-1')">📥 Download PDF</button>
+            </div>
+          </div>
+
+          <div style="background:var(--surface-subtle); border:1px solid var(--border-color); border-radius:var(--radius); padding:18px;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+              <span class="badge-track" style="background:#e0e7ff; color:#3730a3;">Comprehensive Review</span>
+              <span class="badge-open-access">🔓 CC BY 4.0</span>
+            </div>
+            <h3 style="font-size:15px; font-weight:700; margin-bottom:4px; color:var(--text-main);">
+              Advances in Lipid-Based Nanocarriers, Polymeric Micelles, and Stimuli-Responsive Drug Delivery Systems
+            </h3>
+            <p style="font-size:12px; color:var(--primary); font-weight:600; margin-bottom:6px;">Vivek Sharma, P. K. Singh, M. Tanaka, S. Sengupta</p>
+            <p style="font-size:12px; color:var(--text-muted); line-height:1.5; margin-bottom:12px;">
+              A decadal critical evaluation (2016–2026) evaluating fabrication hurdles, scale-up, active ligand conjugation, and clinical translation.
+            </p>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:11px; color:var(--text-muted);">DOI: 10.59234/pharmionex.2026.01.04</span>
+              <button type="button" class="btn btn-primary btn-sm" onclick="downloadArticlePDF('art-4')">📥 Download PDF</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- VIEW 2: SUBMISSION WIZARD & BUILDER -->
-    <div id="view-submission" class="app-view">
-      <div class="wizard-stepper no-print">
-        <div class="step-item active" id="step-btn-1" onclick="jumpToWizardStep(1)">
-          <div class="step-number">1</div>
-          <div class="step-label">Metadata</div>
+    <!-- ====================================================================
+         VIEW 2: ARTICLES REPOSITORY & PUBLIC SEARCH TOOLBAR
+         ==================================================================== -->
+    <div id="view-articles" class="app-view">
+      <div class="card" style="margin-bottom:16px;">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title">📚 Published Articles & Scholarly Archive</h2>
+            <p class="card-subtitle">Search, filter, and download peer-reviewed open-access articles published in Pharmionex Journal.</p>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm" onclick="switchMainView('submission')">✍️ Submit Paper</button>
         </div>
-        <div class="step-arrow">➔</div>
-        <div class="step-item" id="step-btn-2" onclick="jumpToWizardStep(2)">
-          <div class="step-number">2</div>
-          <div class="step-label">Authors</div>
+
+        <!-- SEARCH TOOLBAR -->
+        <div class="repo-search-toolbar">
+          <div class="repo-search-input-wrap">
+            <input type="text" id="articleRepoSearchInput" class="repo-search-input" placeholder="Search by title, author name, keyword, DOI, or abstract text (e.g. HPLC, Lipid, Capsule)..." oninput="filterArticles()">
+            <button type="button" class="btn btn-primary" onclick="filterArticles()">🔍 Search</button>
+            <button type="button" class="btn btn-outline" onclick="resetArticleFilters()">Clear</button>
+          </div>
+
+          <div class="repo-filters-row">
+            <div>
+              <label style="font-size:12px; font-weight:600; color:var(--text-muted); margin-right:6px;">Article Type:</label>
+              <select id="articleFilterType" class="repo-filter-select" onchange="filterArticles()">
+                <option value="ALL">All Article Types</option>
+                <option value="Original Research Article">Original Research Article</option>
+                <option value="Comprehensive Review Article">Comprehensive Review Article</option>
+                <option value="Short Communication / Rapid Letter">Short Communication / Rapid Letter</option>
+                <option value="Methodology & Validation Protocol">Methodology & Validation Protocol</option>
+                <option value="Industrial Research Article">Industrial Research Article</option>
+                <option value="Regulatory & Review Article">Regulatory & Review Article</option>
+                <option value="Pharmacokinetic Research Article">Pharmacokinetic Research Article</option>
+                <option value="Clinical Case Study & Pharmacovigilance">Clinical Case Study & Pharmacovigilance</option>
+              </select>
+            </div>
+
+            <div>
+              <label style="font-size:12px; font-weight:600; color:var(--text-muted); margin-right:6px;">Subject Track:</label>
+              <select id="articleFilterTrack" class="repo-filter-select" onchange="filterArticles()">
+                <option value="ALL">All Subject Tracks</option>
+                <option value="Pharmaceutics & Targeted Drug Delivery">Pharmaceutics & Targeted Drug Delivery</option>
+                <option value="Pharmaceutical Analysis & Method Validation">Pharmaceutical Analysis & Method Validation</option>
+                <option value="Industrial Pharmacy & Formulation Science">Industrial Pharmacy & Formulation Science</option>
+                <option value="Regulatory Affairs, GMP & Quality Assurance">Regulatory Affairs, GMP & Quality Assurance</option>
+                <option value="Pharmacology & Clinical Pharmacokinetics">Pharmacology & Clinical Pharmacokinetics</option>
+                <option value="Medicinal Chemistry & Nanomedicine">Medicinal Chemistry & Nanomedicine</option>
+                <option value="Clinical Pharmacy & Pharmacovigilance">Clinical Pharmacy & Pharmacovigilance</option>
+              </select>
+            </div>
+
+            <div>
+              <label style="font-size:12px; font-weight:600; color:var(--text-muted); margin-right:6px;">Issue:</label>
+              <select id="articleFilterIssue" class="repo-filter-select" onchange="filterArticles()">
+                <option value="ALL">Volume 1, Issue 1 (October 2026)</option>
+              </select>
+            </div>
+
+            <div>
+              <label style="font-size:12px; font-weight:600; color:var(--text-muted); margin-right:6px;">Sort By:</label>
+              <select id="articleSortBy" class="repo-filter-select" onchange="filterArticles()">
+                <option value="NEWEST">Newest Articles First</option>
+                <option value="TITLE">Title (A to Z)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="repo-chips-row">
+            <span style="font-size:12px; font-weight:600; color:var(--text-muted);">Quick Filter Topics:</span>
+            <span class="repo-chip" onclick="quickFilterChip('Nanostructured Lipid')">🔬 Lipid Nanocarriers</span>
+            <span class="repo-chip" onclick="quickFilterChip('RP-HPLC')">🧪 RP-HPLC Validation</span>
+            <span class="repo-chip" onclick="quickFilterChip('Hard Gelatin')">💊 Gelatin Capsules</span>
+            <span class="repo-chip" onclick="quickFilterChip('Stimuli-Responsive')">🧬 Smart Micelles</span>
+            <span class="repo-chip" onclick="quickFilterChip('Schedule M')">📋 WHO Schedule M & GMP</span>
+            <span class="repo-chip" onclick="quickFilterChip('IVIVC')">📈 Level A IVIVC</span>
+            <span class="repo-chip" onclick="quickFilterChip('Ciprofloxacin')">🌿 Green Nanocomposites</span>
+            <span class="repo-chip" onclick="quickFilterChip('Pharmacovigilance')">🩺 ADR Case Study</span>
+          </div>
         </div>
-        <div class="step-arrow">➔</div>
-        <div class="step-item" id="step-btn-3" onclick="jumpToWizardStep(3)">
-          <div class="step-number">3</div>
-          <div class="step-label">Article Builder</div>
+
+        <!-- Results Counter -->
+        <div id="articleCountBanner" class="repo-results-count">
+          Showing 8 published peer-reviewed articles across all pharmaceutical categories
         </div>
-        <div class="step-arrow">➔</div>
-        <div class="step-item" id="step-btn-4" onclick="jumpToWizardStep(4)">
-          <div class="step-number">4</div>
-          <div class="step-label">Research & Tools</div>
+
+        <!-- Article List Container -->
+        <div id="articleRepoList"></div>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         VIEW 3: PUBLIC MANUSCRIPT TRACKING SYSTEM
+         ==================================================================== -->
+    <div id="view-track" class="app-view">
+      <div class="track-search-card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px;">
+          <div>
+            <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.5px; color:#93c5fd; font-weight:700;">Author Self-Service Portal</div>
+            <h1 style="font-size:24px; font-weight:700; margin:4px 0 8px;">🔍 Manuscript Status Tracking System</h1>
+            <p style="font-size:14px; color:#e0f2fe; max-width:680px; line-height:1.5;">
+              Monitor the live editorial screening, Turnitin similarity score (&lt; 10%), double-blind peer review milestones, and editorial decisions from <strong>Editor-in-Chief Vivek Sharma</strong>.
+            </p>
+          </div>
+          <div style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:var(--radius-sm); padding:10px 16px; font-size:12px;">
+            <strong>ISSN Status:</strong> Application in Process<br>
+            <strong>Editorial Office:</strong> <span style="color:#bfdbfe;">pharmionex.journal@gmail.com</span>
+          </div>
         </div>
-        <div class="step-arrow">➔</div>
-        <div class="step-item" id="step-btn-5" onclick="jumpToWizardStep(5)">
-          <div class="step-number">5</div>
-          <div class="step-label">Upload Files</div>
+
+        <div class="track-search-form">
+          <input type="text" id="trackingIdInput" class="track-input" placeholder="Enter Tracking ID (e.g. PHARMIONEX-2026-4109)..." onkeydown="if(event.key==='Enter') executeTrackArticle()">
+          <button type="button" class="btn btn-primary" onclick="executeTrackArticle()" style="background:#38bdf8; color:#0f172a; font-weight:700;">Track Status ➔</button>
         </div>
-        <div class="step-arrow">➔</div>
-        <div class="step-item" id="step-btn-6" onclick="jumpToWizardStep(6)">
-          <div class="step-number">6</div>
-          <div class="step-label">Ethics & UGC</div>
-        </div>
-        <div class="step-arrow">➔</div>
-        <div class="step-item" id="step-btn-7" onclick="jumpToWizardStep(7)">
-          <div class="step-number">7</div>
-          <div class="step-label">Preview & Submit</div>
+
+        <div class="track-sample-ids">
+          <span>Click to test sample tracked manuscripts:</span>
+          <button type="button" class="track-sample-btn" onclick="quickTrackSample('PHARMIONEX-2026-4109')">PHARMIONEX-2026-4109 (Under Review)</button>
+          <button type="button" class="track-sample-btn" onclick="quickTrackSample('PHARMIONEX-2026-3822')">PHARMIONEX-2026-3822 (Accepted)</button>
+          <button type="button" class="track-sample-btn" onclick="quickTrackSample('PHARMIONEX-2026-5120')">PHARMIONEX-2026-5120 (Published)</button>
         </div>
       </div>
 
+      <!-- Tracking Results Container -->
+      <div id="trackingResultContainer">
+        <div style="text-align:center; padding:48px 20px; background:var(--surface); border:1px dashed var(--border-color); border-radius:var(--radius);">
+          <div style="font-size:36px; margin-bottom:12px;">🔎</div>
+          <h3 style="font-size:18px; color:var(--text-main); margin-bottom:6px;">Ready to Track Your Manuscript</h3>
+          <p style="font-size:13px; color:var(--text-muted); max-width:540px; margin:0 auto 16px;">
+            Enter your Manuscript Tracking ID above or click one of the sample IDs to inspect the interactive 6-stage review progress tracker.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         VIEW 4: AUTHOR SUBMISSION PORTAL (7-STEP DYNAMIC WIZARD)
+         ==================================================================== -->
+    <div id="view-submission" class="app-view">
+      <!-- Status & Auto-Save Banner -->
       <div class="status-bar no-print">
         <div class="save-indicator">
           <div class="indicator-dot" id="saveDot"></div>
-          <span id="saveStatus">Auto-saved to local browser storage</span>
+          <span id="saveStatus">Draft auto-saved</span>
         </div>
         <div class="stats-badge">
-          <div class="stat-pill">Words: <span id="totalWordCount">0</span></div>
-          <div class="stat-pill">Characters: <span id="totalCharCount">0</span></div>
-          <div class="stat-pill">Authors: <span id="authorCountBadge">1</span></div>
-          <button type="button" class="btn btn-outline btn-sm" onclick="exportDraftJSON()">📥 Backup Draft JSON</button>
-          <button type="button" class="btn btn-secondary btn-sm" onclick="saveDraftManual()">💾 Save</button>
+          <span class="stat-pill">Words: <strong id="totalWordCount">0</strong></span>
+          <span class="stat-pill">Characters: <strong id="totalCharCount">0</strong></span>
+          <span class="stat-pill">Authors: <strong id="authorCountBadge">1</strong></span>
+          <span class="stat-pill">References: <strong id="refCountBadge">3</strong></span>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button type="button" class="btn btn-outline btn-sm" onclick="exportDraftJSON()">Export JSON</button>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="saveDraftManual()">💾 Save Draft</button>
         </div>
       </div>
 
-      <!-- STEP 1: Metadata -->
-      <div class="wizard-pane active" id="step-1-pane">
+      <!-- 7-Step Stepper Navigation -->
+      <div class="wizard-stepper no-print">
+        <button class="step-btn active" id="step-btn-1" onclick="jumpToWizardStep(1)">
+          <div class="step-number">1</div>
+          <div class="step-label">Article Type & Metadata</div>
+        </button>
+        <button class="step-btn" id="step-btn-2" onclick="jumpToWizardStep(2)">
+          <div class="step-number">2</div>
+          <div class="step-label">Authors & Affiliations</div>
+        </button>
+        <button class="step-btn" id="step-btn-3" onclick="jumpToWizardStep(3)">
+          <div class="step-number">3</div>
+          <div class="step-label">Article Builder</div>
+        </button>
+        <button class="step-btn" id="step-btn-4" onclick="jumpToWizardStep(4)">
+          <div class="step-number">4</div>
+          <div class="step-label">References & Tools</div>
+        </button>
+        <button class="step-btn" id="step-btn-5" onclick="jumpToWizardStep(5)">
+          <div class="step-number">5</div>
+          <div class="step-label">Manuscript Files</div>
+        </button>
+        <button class="step-btn" id="step-btn-6" onclick="jumpToWizardStep(6)">
+          <div class="step-number">6</div>
+          <div class="step-label">Ethics & Disclosures</div>
+        </button>
+        <button class="step-btn" id="step-btn-7" onclick="jumpToWizardStep(7)">
+          <div class="step-number">7</div>
+          <div class="step-label">Preview & Submit</div>
+        </button>
+      </div>
+
+      <!-- STEP 1: Article Type & Metadata -->
+      <div id="step-1-pane" class="step-pane">
         <div class="card">
-          <div class="card-header">
-            <div>
-              <h2 class="card-title">1. Article Title & Discipline Metadata</h2>
-              <p class="card-subtitle">Set primary bibliographic metadata according to UGC-CARE & Scopus indexing taxonomies.</p>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+            <h2 class="card-title" style="margin:0;">1. Select Article Type, Title & Abstract</h2>
+            <span class="stat-pill" id="typeWordLimitBadge" style="background:var(--primary-light); color:var(--primary); font-weight:700;">Target Length: 4,000 – 7,000 words</span>
+          </div>
+          <p class="card-subtitle">Pharmionex Journal accepts all types of scholarly pharmaceutical manuscripts. Choose your category to adapt guidelines and templates.</p>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="articleType">Article Category / Type <span class="required-star">*</span></label>
+              <select id="articleType" onchange="onArticleTypeChange(); updateStats();">
+                <option value="Original Research Article">Original Research Article (Full-length empirical study)</option>
+                <option value="Comprehensive Review Article">Comprehensive Review Article (State-of-the-art literature review)</option>
+                <option value="Short Communication / Rapid Letter">Short Communication / Rapid Letter (Urgent breakthrough)</option>
+                <option value="Methodology & Validation Protocol">Methodology & Validation Protocol (ICH Q2 validated SOP)</option>
+                <option value="Industrial Research Article">Industrial Research Article (Manufacturing, formulation, stability)</option>
+                <option value="Regulatory & Review Article">Regulatory & Review Article (Schedule M, cGMP, PQS)</option>
+                <option value="Pharmacokinetic Research Article">Pharmacokinetic Research Article (IVIVC, PK/PD, bioequivalence)</option>
+                <option value="Clinical Case Study & Pharmacovigilance">Clinical Case Study & Pharmacovigilance (ADR report)</option>
+                <option value="Systematic Review & Meta-Analysis">Systematic Review & Meta-Analysis (PRISMA guidelines)</option>
+              </select>
+              <p class="form-hint" id="articleTypeHint">Full-length original empirical investigation. Standard IMRAD structure required.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="articleTrack">Subject Track <span class="required-star">*</span></label>
+              <select id="articleTrack" onchange="updateStats()">
+                <option value="Pharmaceutics & Targeted Drug Delivery">Pharmaceutics & Targeted Drug Delivery</option>
+                <option value="Pharmaceutical Analysis & Method Validation">Pharmaceutical Analysis & Method Validation</option>
+                <option value="Industrial Pharmacy & Formulation Science">Industrial Pharmacy & Formulation Science</option>
+                <option value="Biopharmaceutics & Biotechnology">Biopharmaceutics & Biotechnology</option>
+                <option value="Regulatory Affairs, GMP & Quality Assurance">Regulatory Affairs, GMP & Quality Assurance</option>
+                <option value="Pharmacology & Clinical Pharmacokinetics">Pharmacology & Clinical Pharmacokinetics</option>
+                <option value="Medicinal Chemistry & Nanomedicine">Medicinal Chemistry & Nanomedicine</option>
+                <option value="Clinical Pharmacy & Pharmacovigilance">Clinical Pharmacy & Pharmacovigilance</option>
+              </select>
             </div>
           </div>
 
           <div class="form-group">
             <label for="articleTitle">Article Title <span class="required-star">*</span></label>
-            <input type="text" id="articleTitle" placeholder="e.g., Formulation Development and RP-HPLC Validation of Gastroretentive Metformin Microballoons" oninput="updateStats()">
-            <p class="form-hint">Capitalize initial letters of principal words. Avoid non-standard chemical abbreviations in the title.</p>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="articleTrack">Journal Subject Track <span class="required-star">*</span></label>
-              <select id="articleTrack">
-                <option value="Pharmaceutics & Drug Delivery">Pharmaceutics & Novel Drug Delivery Systems (NDDS)</option>
-                <option value="Analytical Chemistry & Validation">Pharmaceutical Analysis & HPLC Method Validation</option>
-                <option value="Pharmacology & Clinical Research">Pharmacology, Toxicology & Clinical Trials</option>
-                <option value="Quality Assurance & GMP">Pharmaceutical Quality Assurance & Regulatory Compliance</option>
-                <option value="Medicinal Chemistry & AI">Medicinal Chemistry, Molecular Modeling & Drug Design</option>
-                <option value="Comprehensive Review">Comprehensive Systematic Review</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="articleKeywords">Indexing Keywords (comma-separated) <span class="required-star">*</span></label>
-              <input type="text" id="articleKeywords" placeholder="e.g., HPLC, Dissolution, Bioavailability, Gastroretentive, Microballoons" oninput="updateStats()">
-              <p class="form-hint">Provide 4 to 6 standardized keywords conforming to MeSH (Medical Subject Headings).</p>
-            </div>
+            <input type="text" id="articleTitle" placeholder="e.g. Development and In-Vitro Characterization of Nanostructured Lipid Carriers..." oninput="updateStats()">
+            <p class="form-hint">Capitalize initial letters of substantive words. Avoid unnecessary abbreviations and trademark names.</p>
           </div>
 
           <div class="form-group">
-            <label for="articleAbstract">Structured Abstract (Background, Methods, Results, Conclusion) <span class="required-star">*</span></label>
-            <textarea id="articleAbstract" rows="6" placeholder="Background: State the clinical/pharmaceutical problem...&#10;Methods: Specify analytical techniques, HPLC conditions, or formulation processes...&#10;Results: Report key quantitative findings, dissolution kinetics, or assay values...&#10;Conclusion: State scientific impact and regulatory relevance..." oninput="updateStats()"></textarea>
-            <p class="form-hint">Word count: <span id="abstractWordCount">0</span>/300 words (Max: 300 words).</p>
+            <label for="articleKeywords">Keywords (comma-separated) <span class="required-star">*</span></label>
+            <input type="text" id="articleKeywords" placeholder="e.g. Nanostructured Lipid Carriers, Doxorubicin, Drug Delivery, Higuchi Kinetics" oninput="updateStats()">
+            <p class="form-hint">Provide 4 to 6 standardized indexing terms.</p>
           </div>
-        </div>
 
-        <div style="display: flex; justify-content: flex-end;">
-          <button type="button" class="btn btn-primary" onclick="jumpToWizardStep(2)">Next: Authors & Affiliations ➔</button>
+          <div class="form-group">
+            <label for="articleAbstract">Abstract <span class="required-star">*</span> (Words: <span id="abstractWordCount">0</span>/300)</label>
+            <textarea id="articleAbstract" rows="6" placeholder="Background: State the clinical or pharmaceutical rationale.&#10;Methods: Summarize experimental formulation and analytical validation.&#10;Results: Highlight principal quantitative findings.&#10;Conclusion: State principal conclusions and therapeutic impact." oninput="updateStats()"></textarea>
+          </div>
+
+          <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:16px;">
+            <button type="button" class="btn btn-primary" onclick="jumpToWizardStep(2)">Next: Authors & Affiliations ➔</button>
+          </div>
         </div>
       </div>
 
       <!-- STEP 2: Authors -->
-      <div class="wizard-pane" id="step-2-pane" style="display:none;">
+      <div id="step-2-pane" class="step-pane" style="display:none;">
         <div class="card">
           <div class="card-header">
             <div>
               <h2 class="card-title">2. Contributing Authors & Institutional Affiliations</h2>
-              <p class="card-subtitle">List all authors conforming strictly to ICMJE authorship guidelines. Designate one Corresponding Author.</p>
+              <p class="card-subtitle">List all contributing researchers meeting ICMJE authorship criteria in order of publication.</p>
             </div>
-            <button type="button" class="btn btn-outline btn-sm" onclick="addAuthorRow()">➕ Add Co-Author</button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="addAuthorRow()">➕ Add Author</button>
           </div>
 
           <div id="authorsContainer"></div>
-        </div>
 
-        <div style="display: flex; justify-content: space-between;">
-          <button type="button" class="btn btn-outline" onclick="jumpToWizardStep(1)">⬅ Back: Metadata</button>
-          <button type="button" class="btn btn-primary" onclick="jumpToWizardStep(3)">Next: IMRAD Article Builder ➔</button>
+          <div style="display:flex; justify-content:space-between; margin-top:20px;">
+            <button type="button" class="btn btn-outline" onclick="jumpToWizardStep(1)">⬅ Back: Metadata</button>
+            <button type="button" class="btn btn-primary" onclick="jumpToWizardStep(3)">Next: Article Builder ➔</button>
+          </div>
         </div>
       </div>
 
       <!-- STEP 3: Article Builder -->
-      <div class="wizard-pane" id="step-3-pane" style="display:none;">
+      <div id="step-3-pane" class="step-pane" style="display:none;">
         <div class="card">
           <div class="card-header">
             <div>
-              <h2 class="card-title">3. Interactive Manuscript Builder (IMRAD Structure)</h2>
-              <p class="card-subtitle">Draft your manuscript online with rich-text formatting, specialized pharmaceutical tables, and equations.</p>
+              <h2 class="card-title">3. Interactive Manuscript Sections & Content Builder</h2>
+              <p class="card-subtitle">Compose or paste manuscript sections. Sections adapt automatically to your selected Article Type.</p>
             </div>
-            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-              <button type="button" class="btn btn-outline btn-sm" onclick="insertPharmaTemplate('formulation')">💊 Formulation Table</button>
-              <button type="button" class="btn btn-outline btn-sm" onclick="insertPharmaTemplate('hplc')">🧪 HPLC Table</button>
-              <button type="button" class="btn btn-outline btn-sm" onclick="insertPharmaTemplate('stability')">⚖️ Stability Table</button>
-              <button type="button" class="btn btn-outline btn-sm" onclick="insertCustomSection()">➕ Custom Section</button>
+            <div style="display:flex; gap:8px;">
+              <button type="button" class="btn btn-outline btn-sm" onclick="applyArticleTypeTemplate()">🔄 Load Sections for Article Type</button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="insertCustomSection()">➕ Add Custom Section</button>
             </div>
           </div>
 
-          <div id="sectionsContainer">
-            <!-- Section 1 -->
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; padding:10px; background:var(--surface-subtle); border-radius:var(--radius-sm); border:1px solid var(--border-light);">
+            <span style="font-size:12px; font-weight:600; color:var(--text-muted); align-self:center;">Insert Specialized Template:</span>
+            <button type="button" class="btn btn-outline btn-sm" onclick="insertPharmaTemplate('chromatography')">HPLC Method Protocol</button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="insertPharmaTemplate('dissolution')">USP Dissolution Profile</button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="insertPharmaTemplate('synthesis')">Nanocarrier Homogenization</button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="insertPharmaTemplate('stability')">ICH Q1A Stability Table</button>
+          </div>
+
+          <!-- Container for dynamic sections -->
+          <div id="editorSectionsContainer">
+            <!-- Section 1: Intro -->
             <div class="editor-section" id="sec-intro">
-              <div class="section-header">
-                <span>1. Introduction</span>
-                <span class="stat-pill">Core Section</span>
-              </div>
+              <h3 style="font-size:15px; font-weight:700; color:var(--primary); margin-bottom:8px;">1. Introduction</h3>
               <div class="editor-toolbar">
-                <button class="toolbar-btn" type="button" onclick="formatDoc('bold')"><b>B</b></button>
-                <button class="toolbar-btn" type="button" onclick="formatDoc('italic')"><i>I</i></button>
-                <button class="toolbar-btn" type="button" onclick="formatDoc('underline')"><u>U</u></button>
-                <div class="toolbar-separator"></div>
-                <button class="toolbar-btn" type="button" onclick="formatDoc('insertUnorderedList')">• Bullet</button>
-                <button class="toolbar-btn" type="button" onclick="formatDoc('insertOrderedList')">1. Number</button>
+                <button class="toolbar-btn" type="button" onclick="formatDoc('bold')">B</button>
+                <button class="toolbar-btn" type="button" onclick="formatDoc('italic')">I</button>
                 <button class="toolbar-btn" type="button" onclick="insertTableAtSelection()">📊 Table</button>
                 <button class="toolbar-btn" type="button" onclick="insertFormula()">∑ Formula</button>
                 <button class="toolbar-btn" type="button" onclick="insertCitationPrompt()">[#] Cite</button>
-                <button class="toolbar-btn" type="button" onclick="openLiteratureSearchModal()" style="background:#e0f2fe; color:#0369a1;">🔍 Literature Search</button>
               </div>
               <div class="editable-area" contenteditable="true" id="editor-intro" oninput="updateStats()">
-                <p>Provide the scientific background, elucidate the current formulation/therapeutic challenges, and state the objective and hypothesis of this investigation.</p>
+                <p>Introduce the therapeutic background, cite existing literature gaps, and state the formal research objectives.</p>
               </div>
             </div>
 
-            <!-- Section 2 -->
+            <!-- Section 2: Methods -->
             <div class="editor-section" id="sec-methods">
-              <div class="section-header">
-                <span>2. Materials & Methods</span>
-                <span class="stat-pill">Core Section</span>
-              </div>
+              <h3 style="font-size:15px; font-weight:700; color:var(--primary); margin-bottom:8px;">2. Materials & Methods</h3>
               <div class="editor-toolbar">
-                <button class="toolbar-btn" type="button" onclick="formatDoc('bold')"><b>B</b></button>
-                <button class="toolbar-btn" type="button" onclick="formatDoc('italic')"><i>I</i></button>
-                <button class="toolbar-btn" type="button" onclick="formatDoc('underline')"><u>U</u></button>
-                <div class="toolbar-separator"></div>
-                <button class="toolbar-btn" type="button" onclick="formatDoc('insertUnorderedList')">• Bullet</button>
-                <button class="toolbar-btn" type="button" onclick="formatDoc('insertOrderedList')">1. Number</button>
+                <button class="toolbar-btn" type="button" onclick="formatDoc('bold')">B</button>
+                <button class="toolbar-btn" type="button" onclick="formatDoc('italic')">I</button>
                 <button class="toolbar-btn" type="button" onclick="insertTableAtSelection()">📊 Table</button>
                 <button class="toolbar-btn" type="button" onclick="insertFormula()">∑ Formula</button>
                 <button class="toolbar-btn" type="button" onclick="insertCitationPrompt()">[#] Cite</button>
-                <button class="toolbar-btn" type="button" onclick="openLiteratureSearchModal()" style="background:#e0f2fe; color:#0369a1;">🔍 Literature Search</button>
               </div>
               <div class="editable-area" contenteditable="true" id="editor-methods" oninput="updateStats()">
-                <p>Detail all reagents, raw materials, analytical instruments, chromatographic parameters, formulation steps, and animal ethics / clinical protocols to guarantee experimental reproducibility.</p>
+                <p>Detail all reagents, formulations, analytical equipment, experimental parameters, and statistical validation methods.</p>
               </div>
             </div>
 
-            <!-- Section 3 -->
+            <!-- Section 3: Results -->
             <div class="editor-section" id="sec-results">
-              <div class="section-header">
-                <span>3. Results</span>
-                <span class="stat-pill">Core Section</span>
-              </div>
+              <h3 style="font-size:15px; font-weight:700; color:var(--primary); margin-bottom:8px;">3. Results</h3>
               <div class="editor-toolbar">
-                <button class="toolbar-btn" type="button" onclick="formatDoc('bold')"><b>B</b></button>
-                <button class="toolbar-btn" type="button" onclick="formatDoc('italic')"><i>I</i></button>
-                <button class="toolbar-btn" type="button" onclick="formatDoc('underline')"><u>U</u></button>
-                <div class="toolbar-separator"></div>
-                <button class="toolbar-btn" type="button" onclick="formatDoc('insertUnorderedList')">• Bullet</button>
-                <button class="toolbar-btn" type="button" onclick="formatDoc('insertOrderedList')">1. Number</button>
+                <button class="toolbar-btn" type="button" onclick="formatDoc('bold')">B</button>
+                <button class="toolbar-btn" type="button" onclick="formatDoc('italic')">I</button>
                 <button class="toolbar-btn" type="button" onclick="insertTableAtSelection()">📊 Table</button>
                 <button class="toolbar-btn" type="button" onclick="insertFormula()">∑ Formula</button>
                 <button class="toolbar-btn" type="button" onclick="insertCitationPrompt()">[#] Cite</button>
-                <button class="toolbar-btn" type="button" onclick="openLiteratureSearchModal()" style="background:#e0f2fe; color:#0369a1;">🔍 Literature Search</button>
               </div>
               <div class="editable-area" contenteditable="true" id="editor-results" oninput="updateStats()">
-                <p>Present experimental findings clearly with statistical validation (mean ± SD, p-values), chromatographic curves, and dissolution kinetic release profiles.</p>
+                <p>Present findings clearly with tables, figures, chromatographic retention parameters, and kinetic release data.</p>
               </div>
             </div>
 
-            <!-- Section 4 -->
+            <!-- Section 4: Discussion -->
             <div class="editor-section" id="sec-discussion">
-              <div class="section-header">
-                <span>4. Discussion</span>
-                <span class="stat-pill">Core Section</span>
-              </div>
+              <h3 style="font-size:15px; font-weight:700; color:var(--primary); margin-bottom:8px;">4. Discussion</h3>
               <div class="editor-toolbar">
-                <button class="toolbar-btn" type="button" onclick="formatDoc('bold')"><b>B</b></button>
-                <button class="toolbar-btn" type="button" onclick="formatDoc('italic')"><i>I</i></button>
-                <button class="toolbar-btn" type="button" onclick="formatDoc('underline')"><u>U</u></button>
-                <div class="toolbar-separator"></div>
-                <button class="toolbar-btn" type="button" onclick="formatDoc('insertUnorderedList')">• Bullet</button>
-                <button class="toolbar-btn" type="button" onclick="formatDoc('insertOrderedList')">1. Number</button>
+                <button class="toolbar-btn" type="button" onclick="formatDoc('bold')">B</button>
+                <button class="toolbar-btn" type="button" onclick="formatDoc('italic')">I</button>
                 <button class="toolbar-btn" type="button" onclick="insertTableAtSelection()">📊 Table</button>
                 <button class="toolbar-btn" type="button" onclick="insertFormula()">∑ Formula</button>
                 <button class="toolbar-btn" type="button" onclick="insertCitationPrompt()">[#] Cite</button>
-                <button class="toolbar-btn" type="button" onclick="openLiteratureSearchModal()" style="background:#e0f2fe; color:#0369a1;">🔍 Literature Search</button>
               </div>
               <div class="editable-area" contenteditable="true" id="editor-discussion" oninput="updateStats()">
-                <p>Correlate observed outcomes with peer-reviewed pharmaceutical literature, explain underlying physicochemical mechanisms, and state study limitations.</p>
+                <p>Interpret results in relation to prior literature, discuss therapeutic mechanisms, and address study limitations.</p>
               </div>
             </div>
 
-            <!-- Section 5 -->
+            <!-- Section 5: Conclusion -->
             <div class="editor-section" id="sec-conclusion">
-              <div class="section-header">
-                <span>5. Conclusion</span>
-                <span class="stat-pill">Core Section</span>
-              </div>
+              <h3 style="font-size:15px; font-weight:700; color:var(--primary); margin-bottom:8px;">5. Conclusion</h3>
               <div class="editor-toolbar">
-                <button class="toolbar-btn" type="button" onclick="formatDoc('bold')"><b>B</b></button>
-                <button class="toolbar-btn" type="button" onclick="formatDoc('italic')"><i>I</i></button>
-                <button class="toolbar-btn" type="button" onclick="formatDoc('underline')"><u>U</u></button>
-                <div class="toolbar-separator"></div>
-                <button class="toolbar-btn" type="button" onclick="formatDoc('insertUnorderedList')">• Bullet</button>
-                <button class="toolbar-btn" type="button" onclick="formatDoc('insertOrderedList')">1. Number</button>
+                <button class="toolbar-btn" type="button" onclick="formatDoc('bold')">B</button>
+                <button class="toolbar-btn" type="button" onclick="formatDoc('italic')">I</button>
+                <button class="toolbar-btn" type="button" onclick="insertCitationPrompt()">[#] Cite</button>
               </div>
               <div class="editable-area" contenteditable="true" id="editor-conclusion" oninput="updateStats()">
-                <p>Conclude with concise statements summarizing the novelty, therapeutic significance, and proposed future research trajectory.</p>
+                <p>Summarize principal scientific findings and propose future translational research trajectories.</p>
               </div>
             </div>
           </div>
 
-          <!-- Bibliography -->
-          <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--border-light);">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px;">
-              <h3 style="font-size: 16px; font-weight: 700; color: var(--primary);">References & Bibliography</h3>
-              <button type="button" class="btn btn-outline btn-sm" onclick="addReferencePrompt()">➕ Add Reference Manually</button>
-            </div>
-            <ol id="referencesContainer" style="padding-left: 20px; font-size: 13px; line-height: 1.8; color: var(--text-main);"></ol>
-          </div>
-        </div>
+          <!-- Custom Sections -->
+          <div id="customSectionsContainer"></div>
 
-        <div style="display: flex; justify-content: space-between;">
-          <button type="button" class="btn btn-outline" onclick="jumpToWizardStep(2)">⬅ Back: Authors</button>
-          <button type="button" class="btn btn-primary" onclick="jumpToWizardStep(4)">Next: Research & Literature Tools ➔</button>
+          <div style="display:flex; justify-content:space-between; margin-top:20px;">
+            <button type="button" class="btn btn-outline" onclick="jumpToWizardStep(2)">⬅ Back: Authors</button>
+            <button type="button" class="btn btn-primary" onclick="jumpToWizardStep(4)">Next: References & Tools ➔</button>
+          </div>
         </div>
       </div>
 
-      <!-- STEP 4: Literature Tools -->
-      <div class="wizard-pane" id="step-4-pane" style="display:none;">
+      <!-- STEP 4: References -->
+      <div id="step-4-pane" class="step-pane" style="display:none;">
         <div class="card">
           <div class="card-header">
             <div>
-              <h2 class="card-title">4. Scholarly Literature Search & Citation Inserter</h2>
-              <p class="card-subtitle">Search indexed scientific papers and seamlessly insert formatted citations directly into your article draft.</p>
+              <h2 class="card-title">4. Bibliography & Reference Management</h2>
+              <p class="card-subtitle">Manage cited literature (Vancouver / APA format).</p>
             </div>
+            <button type="button" class="btn btn-outline btn-sm" onclick="addReferencePrompt()">➕ Add Reference</button>
           </div>
 
-          <div class="search-bar-container">
-            <input type="text" id="litSearchInput" placeholder="Search by drug name, technique, author, or DOI (e.g. HPLC validation, capsule gelatin dissolution, CRISPR)..." onkeydown="if(event.key==='Enter') executeLiteratureSearch()">
-            <button type="button" class="btn btn-primary" onclick="executeLiteratureSearch()">Search Literature</button>
-            <button type="button" class="btn btn-outline" onclick="clearLiteratureSearch()">Clear</button>
+          <div id="referencesList"></div>
+
+          <div style="display:flex; justify-content:space-between; margin-top:20px;">
+            <button type="button" class="btn btn-outline" onclick="jumpToWizardStep(3)">⬅ Back: Article Builder</button>
+            <button type="button" class="btn btn-primary" onclick="jumpToWizardStep(5)">Next: Manuscript Files ➔</button>
           </div>
-
-          <div class="search-filter-row">
-            <label><strong>Database:</strong></label>
-            <select id="litDbSelect" onchange="executeLiteratureSearch()">
-              <option value="all">All Indexed Sources (PubMed, CrossRef, DOAJ, arXiv)</option>
-              <option value="pubmed">PubMed / MEDLINE</option>
-              <option value="crossref">CrossRef DOIs</option>
-              <option value="doaj">DOAJ Open Access</option>
-              <option value="arxiv">arXiv Preprints</option>
-            </select>
-
-            <label style="margin-left: 12px;"><strong>Year:</strong></label>
-            <select id="litYearSelect" onchange="executeLiteratureSearch()">
-              <option value="all">Any Year</option>
-              <option value="2026">2026</option>
-              <option value="2025">2025 - 2026</option>
-              <option value="recent">Recent (2022-2026)</option>
-            </select>
-          </div>
-
-          <div>
-            <span style="font-size: 12px; color: var(--text-muted); font-weight: 600;">Featured Academic Searches:</span>
-            <div class="quick-tags">
-              <span class="quick-tag" onclick="quickSearchTopic('HPLC validation protocols')">🧪 HPLC Validation</span>
-              <span class="quick-tag" onclick="quickSearchTopic('Capsule formulation and quality assurance')">💊 Capsule Formulation</span>
-              <span class="quick-tag" onclick="quickSearchTopic('Capillary electrophoresis biopharmaceuticals')">⚗️ Capillary Electrophoresis</span>
-              <span class="quick-tag" onclick="quickSearchTopic('Machine learning drug discovery')">🤖 AI Drug Discovery</span>
-              <span class="quick-tag" onclick="quickSearchTopic('Nanostructured lipid carriers')">🔬 Lipid Nanocarriers</span>
-            </div>
-          </div>
-
-          <div class="search-results-list" id="litSearchResults"></div>
-        </div>
-
-        <div class="tools-grid">
-          <div class="tool-box">
-            <div class="tool-box-title">🏷️ DOI Citation Resolver</div>
-            <p class="form-hint" style="margin-bottom: 10px;">Resolve Digital Object Identifiers into formatted reference citations.</p>
-            <input type="text" id="doiInput" placeholder="e.g. 10.1016/j.jas.2025.01.004" style="margin-bottom: 8px;">
-            <select id="doiStyleSelect" style="margin-bottom: 10px;">
-              <option value="vancouver">Vancouver (Standard Medical)</option>
-              <option value="apa">APA 7th Edition</option>
-              <option value="ieee">IEEE</option>
-            </select>
-            <div style="display:flex; gap:8px;">
-              <button type="button" class="btn btn-secondary btn-sm" onclick="resolveDoiToCitation()">Generate</button>
-            </div>
-            <div id="doiResultBox" style="display:none; margin-top:10px; background:var(--surface-muted); padding:10px; border-radius:var(--radius-sm); font-size:12px;">
-              <div id="doiResultText" style="margin-bottom:6px;"></div>
-              <button type="button" class="btn btn-outline btn-sm" onclick="addResolvedDoiToArticle()">➕ Add to References</button>
-            </div>
-          </div>
-
-          <div class="tool-box">
-            <div class="tool-box-title">🏷️ MeSH & Keyword Explorer</div>
-            <p class="form-hint" style="margin-bottom: 10px;">Extract standardized MeSH terms from your abstract to boost discoverability.</p>
-            <input type="text" id="kwTopicInput" placeholder="e.g. Chromatography, Solubility, Cancer" style="margin-bottom: 8px;">
-            <div style="display:flex; gap:8px; margin-bottom: 10px;">
-              <button type="button" class="btn btn-outline btn-sm" onclick="exploreKeywords()">Explore Terms</button>
-              <button type="button" class="btn btn-outline btn-sm" onclick="suggestFromAbstract()">Extract from Abstract</button>
-            </div>
-            <div id="kwSuggestedBox" style="display:none; background:var(--surface-muted); padding:10px; border-radius:var(--radius-sm); font-size:12px;">
-              <div id="kwTagsList" class="quick-tags"></div>
-              <button type="button" class="btn btn-primary btn-sm" style="margin-top:8px;" onclick="applySuggestedKeywords()">➕ Append Selected</button>
-            </div>
-          </div>
-
-          <div class="tool-box">
-            <div class="tool-box-title">📊 Manuscript Readability Analyzer</div>
-            <p class="form-hint" style="margin-bottom: 10px;">Assess Flesch score, sentence complexity, and academic vocabulary density.</p>
-            <button type="button" class="btn btn-secondary btn-sm" style="margin-bottom:12px;" onclick="analyzeManuscriptMetrics()">⚡ Analyze Draft Text</button>
-            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; text-align:center;">
-              <div style="background:var(--surface-muted); padding:8px; border-radius:var(--radius-sm);">
-                <div style="font-size:11px; color:var(--text-muted);">Flesch Score</div>
-                <div id="metricFlesch" style="font-size:18px; font-weight:800; color:var(--secondary);">--</div>
-              </div>
-              <div style="background:var(--surface-muted); padding:8px; border-radius:var(--radius-sm);">
-                <div style="font-size:11px; color:var(--text-muted);">Avg. Words/Sentence</div>
-                <div id="metricAvgWords" style="font-size:18px; font-weight:800; color:var(--primary);">--</div>
-              </div>
-            </div>
-            <div id="metricsAdvice" style="margin-top:8px; font-size:11px; color:var(--text-muted);"></div>
-          </div>
-
-          <div class="tool-box">
-            <div class="tool-box-title">📚 BibTeX Citation Importer</div>
-            <p class="form-hint" style="margin-bottom: 10px;">Paste raw BibTeX to automatically append to references.</p>
-            <textarea id="bibtexInput" rows="3" placeholder="@article{ref2026, ...}"></textarea>
-            <button type="button" class="btn btn-outline btn-sm" style="margin-top:8px;" onclick="importBibtexReferences()">📥 Import References</button>
-          </div>
-        </div>
-
-        <div style="display: flex; justify-content: space-between;">
-          <button type="button" class="btn btn-outline" onclick="jumpToWizardStep(3)">⬅ Back: Article Builder</button>
-          <button type="button" class="btn btn-primary" onclick="jumpToWizardStep(5)">Next: Upload Manuscript Files ➔</button>
         </div>
       </div>
 
-      <!-- STEP 5: File Upload -->
-      <div class="wizard-pane" id="step-5-pane" style="display:none;">
+      <!-- STEP 5: Files -->
+      <div id="step-5-pane" class="step-pane" style="display:none;">
         <div class="card">
-          <div class="card-header">
-            <div>
-              <h2 class="card-title">5. Manuscript File Upload Form</h2>
-              <p class="card-subtitle">Upload your complete manuscript and supplementary analytical data files (PDF, DOCX, LaTeX, Chromatograms, Datasets).</p>
+          <h2 class="card-title">5. Manuscript File Upload (PDF, Word DOCX, LaTeX)</h2>
+          <p class="card-subtitle">Upload your finalized manuscript and optional supplementary datasets.</p>
+
+          <div class="file-drop-zone" onclick="document.getElementById('manuscriptFileInput').click()">
+            <div style="font-size:36px; margin-bottom:8px;">📄</div>
+            <strong>Click or Drag Manuscript File Here</strong>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:4px;">Supported: PDF, Microsoft Word (.docx, .doc), LaTeX (.zip)</p>
+            <input type="file" id="manuscriptFileInput" style="display:none;" accept=".pdf,.doc,.docx,.zip,.tex" onchange="handleFileUpload(event, 'primary')">
+          </div>
+          <div id="primaryFileList" style="margin-top:10px;"></div>
+
+          <div style="margin-top:24px;">
+            <label style="font-weight:600; font-size:14px;">Supplementary Data & High-Res Figures (Optional)</label>
+            <div class="file-drop-zone" style="padding:20px; margin-top:8px;" onclick="document.getElementById('suppFileInput').click()">
+              <div style="font-size:24px; margin-bottom:4px;">📦</div>
+              <strong style="font-size:13px;">Upload Chromatograms, Spectra, or Datasets</strong>
+              <input type="file" id="suppFileInput" style="display:none;" multiple accept=".xlsx,.csv,.zip,.png,.jpg,.tif" onchange="handleFileUpload(event, 'supplementary')">
             </div>
+            <div id="suppFileList" style="margin-top:10px;"></div>
           </div>
 
-          <div class="form-group">
-            <label>Primary Manuscript Document (PDF, Word DOCX, LaTeX ZIP) <span class="required-star">*</span></label>
-            <div class="dropzone" id="manuscriptDropzone">
-              <input type="file" id="manuscriptFileInput" class="file-input" accept=".pdf,.doc,.docx,.tex,.zip" onchange="handleFileUpload(event, 'primary')">
-              <div class="dropzone-icon">📄</div>
-              <h3 style="font-size: 15px; font-weight: 700;">Drag & Drop Manuscript File Here, or Click to Browse</h3>
-              <p class="form-hint">Accepted formats: PDF, Microsoft Word (.docx, .doc), LaTeX (.zip) • Max size: 50 MB</p>
-            </div>
-            <div id="primaryFileList"></div>
+          <div style="display:flex; justify-content:space-between; margin-top:20px;">
+            <button type="button" class="btn btn-outline" onclick="jumpToWizardStep(4)">⬅ Back: References</button>
+            <button type="button" class="btn btn-primary" onclick="jumpToWizardStep(6)">Next: Ethics & Disclosures ➔</button>
           </div>
-
-          <div class="form-group" style="margin-top: 24px;">
-            <label>Supplementary Data & High-Res Figures (Optional)</label>
-            <div class="dropzone" id="suppDropzone">
-              <input type="file" id="suppFileInput" class="file-input" multiple accept=".pdf,.xlsx,.csv,.zip,.png,.jpg,.tif" onchange="handleFileUpload(event, 'supp')">
-              <div class="dropzone-icon">📦</div>
-              <h3 style="font-size: 15px; font-weight: 700;">Upload Chromatograms, Raw Data Sheets, Spectra, or Appendices</h3>
-              <p class="form-hint">Accepted formats: CSV, Excel (.xlsx), ZIP archives, high-resolution figures (PNG, TIFF, JPG)</p>
-            </div>
-            <div id="suppFileList"></div>
-          </div>
-        </div>
-
-        <div style="display: flex; justify-content: space-between;">
-          <button type="button" class="btn btn-outline" onclick="jumpToWizardStep(4)">⬅ Back: Research Tools</button>
-          <button type="button" class="btn btn-primary" onclick="jumpToWizardStep(6)">Next: Ethics & UGC Declarations ➔</button>
         </div>
       </div>
 
-      <!-- STEP 6: Ethics & UGC -->
-      <div class="wizard-pane" id="step-6-pane" style="display:none;">
+      <!-- STEP 6: Ethics -->
+      <div id="step-6-pane" class="step-pane" style="display:none;">
         <div class="card">
-          <div class="card-header">
-            <div>
-              <h2 class="card-title">6. Ethics, UGC-CARE Compliance & Anti-Plagiarism Disclosures</h2>
-              <p class="card-subtitle">Mandatory scientific declarations according to UGC-CARE norms, COPE publishing ethics, and statutory committees.</p>
-            </div>
-          </div>
-
-          <div class="ugc-compliance-box">
-            <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
-              <span class="ugc-badge-pill">UGC-CARE Standard Verification</span>
-              <strong style="color:var(--ugc-gold); font-size:14px;">Anti-Plagiarism & Quality Assurance Mandate</strong>
-            </div>
-            <p style="font-size:13px; line-height:1.6; color:#78350f;">
-              Pharmionex Journal subjects all manuscripts to automated similarity screening via <strong>Turnitin / iThenticate</strong>. Articles with a similarity index exceeding <strong>10%</strong> (excluding references) are automatically rejected prior to peer-review.
-            </p>
-          </div>
+          <h2 class="card-title">6. Ethics, Disclosures & Declarations</h2>
+          <p class="card-subtitle">Mandatory declarations under COPE, ICMJE, and UGC-CARE integrity frameworks.</p>
 
           <div class="form-row">
             <div class="form-group">
-              <label for="iaecProtocol">IAEC / Ethics Approval Protocol No. (if animal/human study)</label>
-              <input type="text" id="iaecProtocol" placeholder="e.g. IAEC/PHARM/2026/04 or IEC/HSP/019 (or 'Not Applicable')">
-              <p class="form-hint">Mandatory for in-vivo pharmacology, animal models, or clinical human research.</p>
+              <label for="iaecProtocol">IAEC / Ethics Committee Approval Protocol Number</label>
+              <input type="text" id="iaecProtocol" value="IAEC/PHARM/2026/04">
+              <p class="form-hint">Required for in-vivo animal models or human clinical investigations.</p>
             </div>
-
             <div class="form-group">
-              <label for="ctriNumber">Clinical Trial Registry Number (CTRI / ClinicalTrials.gov)</label>
-              <input type="text" id="ctriNumber" placeholder="e.g. CTRI/2026/08/045812 (or 'Not Applicable')">
-              <p class="form-hint">Mandatory for prospective clinical investigations.</p>
+              <label for="ctriNumber">Clinical Trial Registry India (CTRI) Number</label>
+              <input type="text" id="ctriNumber" value="Not Applicable" placeholder="e.g. CTRI/2026/08/045812">
             </div>
           </div>
 
           <div class="form-group">
-            <label for="fundingStatement">Funding & Grant Statement <span class="required-star">*</span></label>
-            <textarea id="fundingStatement" rows="2" placeholder="Specify granting agency (e.g. ICMR, DST, DBT, CSIR, UGC, or University Grant No.), or state 'This research received no external funding'."></textarea>
+            <label for="fundingStatement">Funding Statement <span class="required-star">*</span></label>
+            <textarea id="fundingStatement" rows="2">This study was conducted with institutional research support from the Department of Pharmaceutical Sciences.</textarea>
           </div>
 
           <div class="form-group">
             <label for="coiStatement">Conflict of Interest Disclosure <span class="required-star">*</span></label>
-            <textarea id="coiStatement" rows="2" placeholder="Declare any commercial, corporate, or financial relationships, or state 'The authors declare that they have no competing financial or personal interests'."></textarea>
+            <textarea id="coiStatement" rows="2">The authors declare that they have no competing financial or personal commercial interests.</textarea>
           </div>
 
           <div class="form-group">
             <label for="dataAvailability">Data Availability Statement <span class="required-star">*</span></label>
-            <textarea id="dataAvailability" rows="2" placeholder="State where primary raw analytical and bioassay data can be accessed (e.g., provided in supplementary files, deposited in Zenodo/Figshare, or available upon request)."></textarea>
+            <textarea id="dataAvailability" rows="2">All experimental, analytical, and chromatographic datasets generated during this study are included in the manuscript and supplementary files.</textarea>
           </div>
 
-          <div style="margin-top:20px; border-top:1px dashed var(--border-light); padding-top:16px;">
-            <label style="display:flex; align-items:flex-start; gap:10px; font-weight:normal; cursor:pointer; margin-bottom:12px;">
-              <input type="checkbox" id="chkOriginality" checked style="margin-top:3px;">
-              <span><strong>Originality & Plagiarism:</strong> I confirm this manuscript represents original work, is not under review elsewhere, and complies with the <strong>&lt; 10% similarity</strong> threshold. <span class="required-star">*</span></span>
+          <div style="background:var(--surface-subtle); padding:16px; border-radius:var(--radius-sm); border:1px solid var(--border-color); margin-top:16px;">
+            <label style="display:flex; align-items:flex-start; gap:10px; margin-bottom:10px; cursor:pointer;">
+              <input type="checkbox" id="chkOriginality" checked style="margin-top:4px;">
+              <span style="font-size:13px;">I confirm that this manuscript represents original work, has not been published previously, and is not under review elsewhere. Plagiarism similarity index is verified &lt; 10%.</span>
             </label>
-
-            <label style="display:flex; align-items:flex-start; gap:10px; font-weight:normal; cursor:pointer; margin-bottom:12px;">
-              <input type="checkbox" id="chkAuthorship" checked style="margin-top:3px;">
-              <span><strong>Authorship Consensus:</strong> All listed authors fulfill ICMJE criteria, have reviewed the finalized draft, and consent to submission. <span class="required-star">*</span></span>
+            <label style="display:flex; align-items:flex-start; gap:10px; margin-bottom:10px; cursor:pointer;">
+              <input type="checkbox" id="chkAuthorship" checked style="margin-top:4px;">
+              <span style="font-size:13px;">All listed authors meet ICMJE authorship criteria, approved the final manuscript, and agree to submission to Pharmionex Journal.</span>
             </label>
-
-            <label style="display:flex; align-items:flex-start; gap:10px; font-weight:normal; cursor:pointer;">
-              <input type="checkbox" id="chkCopyright" checked style="margin-top:3px;">
-              <span><strong>Open Access Agreement:</strong> Authors retain copyright and grant Pharmionex Journal right of first publication under Creative Commons Attribution (CC BY 4.0). <span class="required-star">*</span></span>
+            <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer;">
+              <input type="checkbox" id="chkCopyright" checked style="margin-top:4px;">
+              <span style="font-size:13px;">Authors retain unrestricted copyright and grant Pharmionex Journal right of first publication under Creative Commons Attribution (CC BY 4.0).</span>
             </label>
           </div>
-        </div>
 
-        <div style="display: flex; justify-content: space-between;">
-          <button type="button" class="btn btn-outline" onclick="jumpToWizardStep(5)">⬅ Back: File Upload</button>
-          <button type="button" class="btn btn-primary" onclick="jumpToWizardStep(7)">Next: Final Review & Live Preview ➔</button>
+          <div style="display:flex; justify-content:space-between; margin-top:20px;">
+            <button type="button" class="btn btn-outline" onclick="jumpToWizardStep(5)">⬅ Back: Files</button>
+            <button type="button" class="btn btn-primary" onclick="jumpToWizardStep(7)">Next: Preview & Submit ➔</button>
+          </div>
         </div>
       </div>
 
-      <!-- STEP 7: Review & Live Preview -->
-      <div class="wizard-pane" id="step-7-pane" style="display:none;">
-        <div class="card no-print">
-          <div class="card-header">
+      <!-- STEP 7: Preview & Submit -->
+      <div id="step-7-pane" class="step-pane" style="display:none;">
+        <div class="card">
+          <div class="card-header no-print">
             <div>
-              <h2 class="card-title">7. Manuscript Review & Final Submission</h2>
-              <p class="card-subtitle">Examine the formatted academic layout preview. Once verified, submit your article to the editorial board.</p>
+              <h2 class="card-title">7. Submission Review & Formatted Layout Preview</h2>
+              <p class="card-subtitle">Examine formatted academic layout preview before formal submission to Editor-in-Chief Vivek Sharma.</p>
             </div>
-            <div style="display: flex; gap: 8px;">
+            <div style="display:flex; gap:8px;">
               <button type="button" class="btn btn-outline btn-sm" onclick="toggleColumns()">Toggle 1 / 2 Columns</button>
-              <button type="button" class="btn btn-outline btn-sm" onclick="window.print()">🖨️ Print / Save as PDF</button>
-              <button type="button" class="btn btn-secondary btn-sm" onclick="submitArticleToJournal()">🚀 Submit Article to Journal</button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="window.print()">🖨️ Print Preview</button>
+              <button type="button" class="btn btn-primary btn-sm" onclick="submitArticleToJournal()">🚀 Submit Article</button>
             </div>
           </div>
-        </div>
 
-        <article class="journal-preview-paper" id="printableArticle">
-          <div class="preview-header">
-            <div class="preview-journal-tag">
-              <span>PHARMIONEX JOURNAL • e-ISSN: 2835-7191 • Research Article</span>
+          <!-- Formatted Paper -->
+          <div class="journal-preview-paper" id="printablePaper">
+            <div class="preview-header-bar">
+              <span>PHARMIONEX JOURNAL • ISSN: Application in Process (NIScPR, India) • Open Access</span>
+              <span id="pvArticleType">Original Research Article</span>
             </div>
-            <h1 class="preview-title" id="pvTitle">Untitled Manuscript</h1>
+
+            <h1 class="preview-article-title" id="pvTitle">Untitled Manuscript</h1>
             <div class="preview-authors" id="pvAuthors">Author Name</div>
             <div class="preview-affiliations" id="pvAffiliations">Affiliation Details</div>
-          </div>
 
-          <div class="preview-abstract-box">
-            <strong style="display:block; text-transform:uppercase; font-size:11px; letter-spacing:1px; color:var(--primary); margin-bottom:4px;">Abstract</strong>
-            <div id="pvAbstract">No abstract text provided.</div>
-            <div class="preview-keywords" id="pvKeywords" style="margin-top:10px;"><strong>Keywords:</strong> None</div>
-          </div>
+            <div class="preview-abstract-box">
+              <div class="preview-abstract-title">ABSTRACT</div>
+              <p id="pvAbstract">No abstract text provided.</p>
+              <div id="pvKeywords" style="margin-top:8px; font-size:12px;">Keywords: None</div>
+            </div>
 
-          <div class="preview-columns" id="pvColumns">
-            <div id="pvBody"></div>
-            <div style="break-inside: avoid; margin-top: 24px;">
-              <h2 class="preview-section-title">References</h2>
-              <ol id="pvReferences" style="font-size: 12px; font-family: sans-serif; line-height: 1.6;"></ol>
+            <div class="preview-two-col" id="pvColumns">
+              <div id="pvBody"></div>
+            </div>
+
+            <div style="margin-top:24px; border-top:1px solid #cbd5e1; padding-top:16px;">
+              <h3 style="font-size:14px; font-weight:700; color:var(--primary); margin-bottom:8px;">REFERENCES</h3>
+              <ol id="pvReferences" style="padding-left:18px; font-size:12px; line-height:1.6;"></ol>
+            </div>
+
+            <div style="margin-top:24px; padding-top:12px; border-top:1px solid #cbd5e1; font-size:11px; color:#64748b;">
+              Editor-in-Chief & Publisher: Vivek Sharma (pharmionex.journal@gmail.com) • Published by Pharmionex Scientific Publications • CC BY 4.0
             </div>
           </div>
-        </article>
 
-        <div class="no-print" style="display:flex; justify-content:space-between; margin-top:28px;">
-          <button type="button" class="btn btn-outline" onclick="jumpToWizardStep(6)">⬅ Back: Ethics & Declarations</button>
-          <button type="button" class="btn btn-secondary" onclick="submitArticleToJournal()">🚀 Submit Manuscript to Pharmionex Journal</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- VIEW 3: CURRENT ISSUE & ARTICLES -->
-    <div id="view-articles" class="app-view">
-      <div class="card">
-        <div class="card-header">
-          <div>
-            <h2 class="card-title">📚 Volume 14, Issue 4 (October 2026)</h2>
-            <p class="card-subtitle">Current peer-reviewed articles published in Pharmionex Journal.</p>
-          </div>
-          <button type="button" class="btn btn-primary btn-sm" onclick="switchMainView('submission')">Submit to Next Issue</button>
-        </div>
-
-        <!-- Article 1 -->
-        <div class="result-card" style="margin-bottom:16px;">
-          <span class="stat-pill" style="color:var(--secondary); font-weight:700;">Original Research</span>
-          <h3 class="result-title" style="font-size:16px; margin-top:6px;">
-            Development and In-Vitro Characterization of Nanostructured Lipid Carriers for Targeted Doxorubicin Delivery
-          </h3>
-          <div class="result-meta">
-            <strong>V. Sharma, R. K. Patel, S. A. Nair, H. Chen</strong> • <em>Pharmionex J.</em> 2026; 14(4): 412–428 • DOI: 
-            <a href="https://doi.org/10.59234/pharmionex.2026.04.01" target="_blank" style="color:var(--accent);">10.59234/pharmionex.2026.04.01</a>
-          </div>
-          <p class="result-abstract">
-            Nanostructured lipid carriers (NLCs) were formulated using glycerol monostearate and oleic acid via high-pressure homogenization. Particle size (142.5 ± 4.2 nm) and high entrapment efficiency (88.4%) yielded sustained drug release obeying Higuchi kinetics over 48 hours with enhanced tumor cytotoxicity.
-          </p>
-          <div class="result-actions">
-            <button type="button" class="btn btn-outline btn-sm" onclick="showToast('Downloading simulated PDF...', 'info')">📄 Download PDF</button>
-            <button type="button" class="btn btn-outline btn-sm" onclick="copyCitationDirect('V. Sharma et al. Development and In-Vitro Characterization of Nanostructured Lipid Carriers for Targeted Doxorubicin Delivery. Pharmionex J. 2026;14(4):412-428.')">📋 Copy Citation</button>
-          </div>
-        </div>
-
-        <!-- Article 2 -->
-        <div class="result-card" style="margin-bottom:16px;">
-          <span class="stat-pill" style="color:var(--primary); font-weight:700;">Methodology & Validation</span>
-          <h3 class="result-title" style="font-size:16px; margin-top:6px;">
-            RP-HPLC Method Development and Validation for Simultaneous Estimation of Metformin and Remogliflozin in Combined Dosage Forms
-          </h3>
-          <div class="result-meta">
-            <strong>A. K. Srivastava, M. Sengupta, V. Sharma</strong> • <em>Pharmionex J.</em> 2026; 14(4): 429–441 • DOI: 
-            <a href="https://doi.org/10.59234/pharmionex.2026.04.02" target="_blank" style="color:var(--accent);">10.59234/pharmionex.2026.04.02</a>
-          </div>
-          <p class="result-abstract">
-            A validated isocratic reversed-phase HPLC method utilizing a C18 column (250 × 4.6 mm, 5 µm) with mobile phase acetonitrile:phosphate buffer pH 4.5 (60:40 v/v) at 1.0 mL/min. Validated strictly in adherence to ICH Q2(R1) with recovery rates between 98.6% and 101.2%.
-          </p>
-          <div class="result-actions">
-            <button type="button" class="btn btn-outline btn-sm" onclick="showToast('Downloading simulated PDF...', 'info')">📄 Download PDF</button>
-            <button type="button" class="btn btn-outline btn-sm" onclick="copyCitationDirect('A. K. Srivastava et al. RP-HPLC Method Development and Validation for Simultaneous Estimation of Metformin and Remogliflozin. Pharmionex J. 2026;14(4):429-441.')">📋 Copy Citation</button>
-          </div>
-        </div>
-
-        <!-- Article 3 -->
-        <div class="result-card">
-          <span class="stat-pill" style="color:var(--ugc-gold); font-weight:700;">Quality Control & Stability</span>
-          <h3 class="result-title" style="font-size:16px; margin-top:6px;">
-            Comparative Stability and Dissolution Profiling of Commercial Hard Gelatin Capsules Under Accelerated ICH Conditions
-          </h3>
-          <div class="result-meta">
-            <strong>D. Kumar, V. Sharma, T. Anderson</strong> • <em>Pharmionex J.</em> 2026; 14(4): 442–455 • DOI: 
-            <a href="https://doi.org/10.59234/pharmionex.2026.04.03" target="_blank" style="color:var(--accent);">10.59234/pharmionex.2026.04.03</a>
-          </div>
-          <p class="result-abstract">
-            Assessment of shell brittleness, moisture migration, and plasticizer degradation under 40°C ± 2°C / 75% RH ± 5% RH over a 6-month stability study. Cross-linking effects and dissolution retarding mechanisms were analyzed via FTIR spectroscopy.
-          </p>
-          <div class="result-actions">
-            <button type="button" class="btn btn-outline btn-sm" onclick="showToast('Downloading simulated PDF...', 'info')">📄 Download PDF</button>
-            <button type="button" class="btn btn-outline btn-sm" onclick="copyCitationDirect('D. Kumar et al. Comparative Stability and Dissolution Profiling of Commercial Hard Gelatin Capsules. Pharmionex J. 2026;14(4):442-455.')">📋 Copy Citation</button>
+          <div class="no-print" style="display:flex; justify-content:space-between; margin-top:20px;">
+            <button type="button" class="btn btn-outline" onclick="jumpToWizardStep(6)">⬅ Back: Ethics</button>
+            <button type="button" class="btn btn-primary" onclick="submitArticleToJournal()">🚀 Submit Article to Journal</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- VIEW 4: UGC & ETHICS STANDARDS -->
-    <div id="view-ugc" class="app-view">
+    <!-- ====================================================================
+         VIEW 5: AUTHOR GUIDELINES & SUBMISSION CHECKLIST (NEW DEDICATED VIEW)
+         ==================================================================== -->
+    <div id="view-guidelines" class="app-view">
       <div class="card">
         <div class="card-header">
           <div>
-            <h2 class="card-title">📜 UGC-CARE & International Publishing Quality Framework</h2>
-            <p class="card-subtitle">Verification checklist, plagiarism tolerance, peer-review timelines, and indexing credentials.</p>
+            <h2 class="card-title">📖 Instructions for Authors & Manuscript Guidelines</h2>
+            <p class="card-subtitle">Comprehensive standards for manuscript preparation, reporting frameworks, reference styles, and ethical requirements.</p>
           </div>
+          <button type="button" class="btn btn-primary btn-sm" onclick="switchMainView('submission')">✍️ Start Submission</button>
         </div>
 
+        <!-- Article Types Matrix Table -->
+        <h3 style="font-size:16px; font-weight:700; color:var(--primary); margin-bottom:12px;">📋 Article Categories & Specifications</h3>
+        <div style="overflow-x:auto; margin-bottom:24px;">
+          <table style="width:100%; border-collapse:collapse; font-size:13px;">
+            <thead>
+              <tr style="background:var(--primary); color:#ffffff;">
+                <th style="padding:10px; text-align:left;">Article Type</th>
+                <th style="padding:10px; text-align:center;">Word Limit</th>
+                <th style="padding:10px; text-align:center;">Abstract</th>
+                <th style="padding:10px; text-align:center;">Tables / Figures</th>
+                <th style="padding:10px; text-align:center;">Key Structure</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--border-light);">
+                <td style="padding:10px;"><strong>Original Research Article</strong></td>
+                <td style="padding:10px; text-align:center;">4,000 – 7,000</td>
+                <td style="padding:10px; text-align:center;">250–300 words (Structured)</td>
+                <td style="padding:10px; text-align:center;">Up to 8</td>
+                <td style="padding:10px;">Introduction, Materials & Methods, Results, Discussion, Conclusion</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border-light); background:var(--surface-subtle);">
+                <td style="padding:10px;"><strong>Comprehensive Review Article</strong></td>
+                <td style="padding:10px; text-align:center;">6,000 – 12,000</td>
+                <td style="padding:10px; text-align:center;">250–350 words</td>
+                <td style="padding:10px; text-align:center;">Up to 10</td>
+                <td style="padding:10px;">Historical Background, Mechanistic Review, Advances, Future Perspectives</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border-light);">
+                <td style="padding:10px;"><strong>Short Communication / Letter</strong></td>
+                <td style="padding:10px; text-align:center;">2,000 – 3,500</td>
+                <td style="padding:10px; text-align:center;">Up to 200 words</td>
+                <td style="padding:10px; text-align:center;">Up to 3</td>
+                <td style="padding:10px;">Condensed Intro, Methods, Combined Results & Discussion, Conclusion</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border-light); background:var(--surface-subtle);">
+                <td style="padding:10px;"><strong>Methodology Protocol (ICH Q2)</strong></td>
+                <td style="padding:10px; text-align:center;">3,500 – 6,000</td>
+                <td style="padding:10px; text-align:center;">200–250 words</td>
+                <td style="padding:10px; text-align:center;">Up to 6</td>
+                <td style="padding:10px;">Rationale, Equipment & Reagents, Step-by-Step SOP, Validation Parameters</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border-light);">
+                <td style="padding:10px;"><strong>Clinical Case Study & ADR Report</strong></td>
+                <td style="padding:10px; text-align:center;">2,000 – 3,500</td>
+                <td style="padding:10px; text-align:center;">150–250 words</td>
+                <td style="padding:10px; text-align:center;">Up to 4</td>
+                <td style="padding:10px;">Introduction, Case History, Naranjo ADR Scoring, Discussion, Clinical Lessons</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border-light); background:var(--surface-subtle);">
+                <td style="padding:10px;"><strong>Systematic Review & Meta-Analysis</strong></td>
+                <td style="padding:10px; text-align:center;">5,000 – 10,000</td>
+                <td style="padding:10px; text-align:center;">300 words (Structured)</td>
+                <td style="padding:10px; text-align:center;">PRISMA Flowchart</td>
+                <td style="padding:10px;">PRISMA Statement, Search Strategy, Risk of Bias, Quantitative Synthesis</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Manuscript Formatting & Standards -->
         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px;">
-          <div style="background:var(--ugc-bg); border:1px solid #fde68a; border-radius:var(--radius); padding:16px;">
-            <strong style="color:var(--ugc-gold);">UGC-CARE Standards Checklist</strong>
-            <ul style="padding-left:18px; font-size:13px; margin-top:8px; line-height:1.7;">
-              <li>Registered ISSN (Online: 2835-7191, Print: 2835-7183)</li>
-              <li>Affiliated Editorial Board with international scholar representation</li>
-              <li>Clear Aims & Scope with defined pharmacy/biomedical sub-disciplines</li>
-              <li>Mandatory Double-Blind Peer Review workflow</li>
-              <li>Transparent Open Access & Licensing (CC BY 4.0)</li>
+          <div style="background:var(--surface-subtle); border:1px solid var(--border-color); border-radius:var(--radius-sm); padding:18px;">
+            <h4 style="color:var(--primary); font-size:14px; margin-bottom:8px;">📐 Manuscript Formatting</h4>
+            <ul style="font-size:12px; color:#334155; padding-left:18px; line-height:1.7;">
+              <li><strong>File Formats:</strong> Microsoft Word (.docx), PDF (.pdf), or LaTeX archive (.zip).</li>
+              <li><strong>Typography:</strong> 12 pt Times New Roman or Arial, double-spaced with continuous line numbers.</li>
+              <li><strong>Title Page:</strong> Running title, full author names, institutional affiliations, and corresponding author email.</li>
+              <li><strong>Keywords:</strong> 4 to 6 terms chosen from Medical Subject Headings (MeSH).</li>
             </ul>
           </div>
 
-          <div style="background:var(--secondary-light); border:1px solid #99f6e4; border-radius:var(--radius); padding:16px;">
-            <strong style="color:var(--secondary);">COPE & ICMJE Compliance</strong>
-            <ul style="padding-left:18px; font-size:13px; margin-top:8px; line-height:1.7;">
-              <li>Strict adherence to Committee on Publication Ethics guidelines</li>
-              <li>Declaration of Competing Interests mandatory for all authors</li>
-              <li>Financial support and grant disclosures required</li>
-              <li>Institutional Animal Ethics Committee (IAEC) clearance enforced</li>
-              <li>Clinical trial registration (CTRI) verification</li>
+          <div style="background:var(--surface-subtle); border:1px solid var(--border-color); border-radius:var(--radius-sm); padding:18px;">
+            <h4 style="color:var(--secondary); font-size:14px; margin-bottom:8px;">🖼️ Figures & Artwork (300 DPI)</h4>
+            <ul style="font-size:12px; color:#334155; padding-left:18px; line-height:1.7;">
+              <li><strong>Resolution:</strong> Minimum 300 DPI for photographs and halftones; 600 DPI for line graphs.</li>
+              <li><strong>Formats:</strong> TIFF, PNG, EPS, or high-resolution PDF.</li>
+              <li><strong>Labeling:</strong> 8–10 pt sans-serif font (Arial/Helvetica); clearly defined axes and units.</li>
+              <li><strong>Chromatograms:</strong> Clear baseline, labeled retention times, and solvent peak annotations.</li>
+            </ul>
+          </div>
+
+          <div style="background:var(--surface-subtle); border:1px solid var(--border-color); border-radius:var(--radius-sm); padding:18px;">
+            <h4 style="color:#b45309; font-size:14px; margin-bottom:8px;">📚 Reference Citations (Vancouver Style)</h4>
+            <ul style="font-size:12px; color:#334155; padding-left:18px; line-height:1.7;">
+              <li><strong>Citation in Text:</strong> Numbered consecutively in order of appearance using square brackets [1] or superscripts.</li>
+              <li><strong>Journal Article Example:</strong> Sharma V, Patel RK. Formulation of lipid nanocarriers. <em>Pharmionex J.</em> 2026;1(1):1-16.</li>
+              <li><strong>Pharmacopoeial Reference:</strong> United States Pharmacopeia. USP 46–NF 41. Rockville, MD; 2023.</li>
+              <li><strong>DOI Requirement:</strong> Include CrossRef DOI for all cited literature where available.</li>
             </ul>
           </div>
         </div>
 
-        <h3 style="font-size:16px; font-weight:700; color:var(--primary); margin-bottom:12px;">🔄 Double-Blind Peer Review Lifecycle</h3>
+        <!-- Diamond Open Access & Zero Fees -->
+        <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:var(--radius); padding:18px; margin-bottom:24px;">
+          <h3 style="font-size:15px; font-weight:700; color:#166534; margin-bottom:6px;">💎 Diamond Open Access Policy (Zero APC / Free Publication)</h3>
+          <p style="font-size:13px; color:#1e293b; line-height:1.6;">
+            Pharmionex Journal operates under a <strong>Platinum / Diamond Open Access Model</strong>. There are <strong>no submission fees</strong> and <strong>no Article Processing Charges (APCs)</strong> for authors during our inaugural volumes. All costs are supported by Pharmionex Scientific Publications to ensure unfettered global access to pharmaceutical discoveries.
+          </p>
+        </div>
+
+        <!-- Pre-Submission Verification Checklist -->
+        <h3 style="font-size:16px; font-weight:700; color:var(--primary); margin-bottom:12px;">✅ Pre-Submission 8-Point Checklist</h3>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:10px;">
+          <div style="background:var(--surface-muted); padding:10px 14px; border-radius:4px; font-size:12px;">
+            ☑️ <strong>1. Authorship:</strong> All co-authors meet ICMJE criteria and approved final manuscript.
+          </div>
+          <div style="background:var(--surface-muted); padding:10px 14px; border-radius:4px; font-size:12px;">
+            ☑️ <strong>2. Plagiarism:</strong> Similarity index verified &lt; 10% (Turnitin / iThenticate).
+          </div>
+          <div style="background:var(--surface-muted); padding:10px 14px; border-radius:4px; font-size:12px;">
+            ☑️ <strong>3. Ethics:</strong> IAEC animal approval number or CTRI trial ID specified.
+          </div>
+          <div style="background:var(--surface-muted); padding:10px 14px; border-radius:4px; font-size:12px;">
+            ☑️ <strong>4. Disclosures:</strong> Competing financial interests and funding sources declared.
+          </div>
+          <div style="background:var(--surface-muted); padding:10px 14px; border-radius:4px; font-size:12px;">
+            ☑️ <strong>5. Blinding:</strong> Title page blinded in main manuscript for double-blind peer review.
+          </div>
+          <div style="background:var(--surface-muted); padding:10px 14px; border-radius:4px; font-size:12px;">
+            ☑️ <strong>6. Artwork:</strong> High-resolution figures (≥ 300 DPI) uploaded with clear legends.
+          </div>
+          <div style="background:var(--surface-muted); padding:10px 14px; border-radius:4px; font-size:12px;">
+            ☑️ <strong>7. References:</strong> Formatted in standard Vancouver style with DOIs.
+          </div>
+          <div style="background:var(--surface-muted); padding:10px 14px; border-radius:4px; font-size:12px;">
+            ☑️ <strong>8. Data Access:</strong> Raw chromatographic / spectral datasets available in supplementary files.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         VIEW 6: EDITORIAL BOARD & POLICIES (ISSN APPLICATION READY)
+         ==================================================================== -->
+    <div id="view-editorial" class="app-view">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title">👥 Editorial Board, Governance & ISSN Policies</h2>
+            <p class="card-subtitle">Official masthead, publisher credentials, peer review policies, and ISSN compliance disclosures.</p>
+          </div>
+        </div>
+
+        <!-- Editorial Masthead -->
+        <div style="background:var(--surface-subtle); border:1px solid var(--border-color); border-radius:var(--radius); padding:24px; margin-bottom:24px;">
+          <div style="display:flex; gap:20px; align-items:center; flex-wrap:wrap;">
+            <div style="width:72px; height:72px; border-radius:50%; background:var(--primary-light); color:var(--primary); display:flex; align-items:center; justify-content:center; font-size:32px; font-weight:bold; border:2px solid var(--primary);">
+              VS
+            </div>
+            <div>
+              <span class="stat-pill" style="background:var(--primary-light); color:var(--primary); font-weight:700; margin-bottom:4px; display:inline-block;">Editor-in-Chief & Publisher</span>
+              <h2 style="font-size:22px; font-weight:700; color:var(--text-main);">Vivek Sharma</h2>
+              <p style="font-size:13px; color:var(--text-muted); line-height:1.5;">
+                Department of Pharmaceutical Sciences, India<br>
+                Official Editorial Email: <a href="mailto:pharmionex.journal@gmail.com" style="color:var(--accent); font-weight:600;">pharmionex.journal@gmail.com</a><br>
+                ORCID: <a href="https://orcid.org/0000-0002-1825-0097" target="_blank" style="color:var(--accent);">0000-0002-1825-0097</a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ISSN Application Information Box -->
+        <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:var(--radius); padding:20px; margin-bottom:24px;">
+          <h3 style="font-size:16px; font-weight:700; color:#166534; margin-bottom:8px;">🏛️ Official ISSN Registration Status & Statement</h3>
+          <p style="font-size:13px; color:#1e293b; line-height:1.6;">
+            <strong>Pharmionex Journal</strong> (International Journal of Pharmaceutical, Biomedical & Clinical Research) is currently in the formal application process for official ISSN assignment with the <strong>National Science Library (NIScPR - CSIR), New Delhi, India</strong>, the official National Centre for ISSN in India, and the International Centre for the Registration of Serial Publications (CIEPS, Paris).
+          </p>
+          <ul style="font-size:12px; color:#334155; margin-top:8px; padding-left:20px; line-height:1.7;">
+            <li><strong>Journal Title:</strong> Pharmionex Journal</li>
+            <li><strong>Abbreviated Key Title (ISO 4):</strong> Pharmionex J.</li>
+            <li><strong>Frequency:</strong> Bi-Monthly (6 regular issues per year)</li>
+            <li><strong>Publication Format:</strong> Online Open Access</li>
+            <li><strong>Publisher:</strong> Pharmionex Scientific Publications (Vivek Sharma), New Delhi / Haryana, India</li>
+            <li><strong>Editorial Contact:</strong> pharmionex.journal@gmail.com</li>
+            <li><strong>Sample Inaugural Issue:</strong> Volume 1, Issue 1 (October 2026) fully accessible for evaluation with 8 peer-reviewed research papers across all article categories.</li>
+          </ul>
+        </div>
+
+        <!-- Double-Blind Peer Review Framework -->
+        <h3 style="font-size:16px; font-weight:700; color:var(--primary); margin:24px 0 12px;">🔄 Double-Blind Peer Review Workflow</h3>
         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-bottom:24px;">
-          <div style="background:var(--surface-muted); padding:14px; border-radius:var(--radius); border-left:3px solid var(--accent);">
-            <strong>1. Initial Screening</strong>
-            <p style="font-size:12px; color:var(--text-muted); margin-top:4px;">Turnitin plagiarism check (&lt; 10%) & editorial scope evaluation (Days 1–3).</p>
+          <div style="background:var(--surface-muted); padding:14px; border-radius:var(--radius-sm); border-left:3px solid var(--primary);">
+            <strong>1. Scope & Similarity Check</strong>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:4px;">Turnitin anti-plagiarism screening (&lt; 10% threshold) and editorial fit review by Vivek Sharma (Days 1–3).</p>
           </div>
-          <div style="background:var(--surface-muted); padding:14px; border-radius:var(--radius); border-left:3px solid var(--secondary);">
-            <strong>2. Double-Blind Review</strong>
-            <p style="font-size:12px; color:var(--text-muted); margin-top:4px;">Two independent expert peer-reviewers evaluate methodology and rigor (Days 4–18).</p>
+          <div style="background:var(--surface-muted); padding:14px; border-radius:var(--radius-sm); border-left:3px solid var(--secondary);">
+            <strong>2. Double-Blind Evaluation</strong>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:4px;">Blinded manuscript dispatched to two independent external reviewers with subject expertise (Days 4–18).</p>
           </div>
-          <div style="background:var(--surface-muted); padding:14px; border-radius:var(--radius); border-left:3px solid var(--warning);">
-            <strong>3. Revision & Decision</strong>
-            <p style="font-size:12px; color:var(--text-muted); margin-top:4px;">Author responds to reviewer comments. Final editorial decision (Day 21).</p>
+          <div style="background:var(--surface-muted); padding:14px; border-radius:var(--radius-sm); border-left:3px solid #b45309;">
+            <strong>3. Author Revision</strong>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:4px;">Authors submit point-by-point rebuttal and revised manuscript incorporating reviewer remarks (Days 19–28).</p>
           </div>
-          <div style="background:var(--surface-muted); padding:14px; border-radius:var(--radius); border-left:3px solid var(--success);">
-            <strong>4. DOI Assignment</strong>
-            <p style="font-size:12px; color:var(--text-muted); margin-top:4px;">Proofing, CrossRef DOI activation, and open-access archiving.</p>
+          <div style="background:var(--surface-muted); padding:14px; border-radius:var(--radius-sm); border-left:3px solid var(--success);">
+            <strong>4. Acceptance & DOI</strong>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:4px;">Final editorial decision by Vivek Sharma, typesetting, galley proof, Crossref DOI allotment, and open-access publication.</p>
           </div>
+        </div>
+
+        <!-- Open Access & Ethical Compliance -->
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
+          <div style="background:var(--surface-subtle); border:1px solid var(--border-color); border-radius:var(--radius-sm); padding:16px;">
+            <strong style="color:var(--primary); font-size:14px;">Open Access & Copyright Licensing</strong>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:8px; line-height:1.6;">
+              All articles are published under the <strong>Creative Commons Attribution 4.0 International License (CC BY 4.0)</strong>. Authors retain full copyright without commercial restriction. Readers may freely access, download, distribute, and cite published articles with appropriate attribution.
+            </p>
+          </div>
+
+          <div style="background:var(--surface-subtle); border:1px solid var(--border-color); border-radius:var(--radius-sm); padding:16px;">
+            <strong style="color:var(--secondary); font-size:14px;">COPE & ICMJE Publication Integrity</strong>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:8px; line-height:1.6;">
+              We adhere strictly to the guidelines of the <strong>Committee on Publication Ethics (COPE)</strong> and ICMJE. Mandatory requirements include clear conflict of interest disclosures, funding declarations, IAEC animal ethics numbers, and CTRI trial registrations.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         VIEW 7: GOOGLE APPS SCRIPT & AUTOMATION HUB (FOR VIVEK SHARMA)
+         ==================================================================== -->
+    <div id="view-automation" class="app-view">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title">⚡ Editorial Automation & Google Apps Script Backend</h2>
+            <p class="card-subtitle">Control submissions, automated author email notifications, and live status tracking through Google Sheets.</p>
+          </div>
+          <span class="stat-pill" style="background:var(--primary-light); color:var(--primary); font-weight:700;">Vivek Sharma Admin Hub</span>
+        </div>
+
+        <!-- Webhook Configuration Card -->
+        <div style="background:var(--surface-subtle); border:1px solid var(--border-color); border-radius:var(--radius); padding:20px; margin-bottom:24px;">
+          <h3 style="font-size:15px; font-weight:700; color:var(--primary); margin-bottom:8px;">🔗 Connect Live Google Apps Script Web App</h3>
+          <p style="font-size:13px; color:var(--text-muted); margin-bottom:14px;">
+            Paste your deployed Google Apps Script Web App URL below to activate live synchronization between this website and your Google Sheet database:
+          </p>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px;">
+            <input type="url" id="gasWebhookUrlInput" placeholder="https://script.google.com/macros/s/AKfycbx.../exec" style="flex:1; min-width:280px; padding:10px 14px; font-family:monospace; font-size:13px; border:1px solid var(--border-color); border-radius:var(--radius-sm); outline:none;">
+            <button type="button" class="btn btn-primary btn-sm" onclick="saveGasUrl()">💾 Save URL</button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="testGasConnection()">🚀 Test Connection</button>
+          </div>
+
+          <div id="gasStatusBadge" style="font-size:12px; color:var(--text-muted);">
+            Status: <span style="font-weight:600;">Local Simulation Mode Active (Paste Web App URL above for live Google Sheet sync)</span>
+          </div>
+        </div>
+
+        <!-- Automated Workflow Architecture -->
+        <h3 style="font-size:15px; font-weight:700; color:var(--primary); margin-bottom:12px;">🤖 Built-in Editorial Automation Systems</h3>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:14px; margin-bottom:24px;">
+          <div style="background:var(--surface); border:1px solid var(--border-light); padding:16px; border-radius:var(--radius-sm); border-top:3px solid var(--primary);">
+            <strong style="color:var(--primary);">1. Instant Author Acknowledgment</strong>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:6px; line-height:1.5;">
+              When an author submits via the portal, <code>doPost</code> appends their row to Google Sheets, creates a Tracking ID, and immediately emails them an official HTML receipt from <code>pharmionex.journal@gmail.com</code>.
+            </p>
+          </div>
+
+          <div style="background:var(--surface); border:1px solid var(--border-light); padding:16px; border-radius:var(--radius-sm); border-top:3px solid var(--secondary);">
+            <strong style="color:var(--secondary);">2. Editor Alert Notification</strong>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:6px; line-height:1.5;">
+              Vivek Sharma receives an instant notification email alerting him of the new submission with author name, subject track, and a 1-click link to the Google Sheet.
+            </p>
+          </div>
+
+          <div style="background:var(--surface); border:1px solid var(--border-light); padding:16px; border-radius:var(--radius-sm); border-top:3px solid #b45309;">
+            <strong style="color:#b45309;">3. 1-Click Status Update Email</strong>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:6px; line-height:1.5;">
+              In the Google Sheet menu <strong>"📑 Pharmionex Editorial Control"</strong>, Vivek Sharma can click <em>"Send Status Email"</em> to notify authors of revisions or acceptance decisions with one click.
+            </p>
+          </div>
+
+          <div style="background:var(--surface); border:1px solid var(--border-light); padding:16px; border-radius:var(--radius-sm); border-top:3px solid #16a34a;">
+            <strong style="color:#16a34a;">4. Automated Acceptance Certificate</strong>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:6px; line-height:1.5;">
+              Selecting any accepted manuscript and clicking <em>"Generate Official Acceptance Letter"</em> produces an official formatted Google Doc / PDF certificate complete with journal header and reference numbers.
+            </p>
+          </div>
+        </div>
+
+        <!-- Google Apps Script Code View -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <h3 style="font-size:15px; font-weight:700; color:var(--primary);">📄 Google Apps Script Code (Code.gs)</h3>
+          <button type="button" class="btn btn-outline btn-sm" onclick="copyGasCode()">📋 Copy Entire Script</button>
+        </div>
+        <p style="font-size:12px; color:var(--text-muted); margin-bottom:10px;">
+          Open your Google Sheet ➔ <strong>Extensions</strong> ➔ <strong>Apps Script</strong>, paste the code below, and deploy as Web App:
+        </p>
+
+        <div class="code-block-wrap">
+          <pre id="gasCodeSnippet">/**
+ * PHARMIONEX JOURNAL - EDITORIAL MANAGEMENT & AUTOMATION ENGINE
+ * Editor-in-Chief & Publisher: Vivek Sharma | pharmionex.journal@gmail.com
+ * ISSN: Application in Process (NIScPR, India)
+ */
+function onOpen() {
+  SpreadsheetApp.getUi().createMenu("📑 Pharmionex Editorial Control")
+    .addItem("⚙️ Initialize / Format Sheet Headers", "setupSheetHeaders")
+    .addSeparator()
+    .addItem("📧 Send Status Email to Selected Author", "sendAuthorStatusEmail")
+    .addItem("📨 Send Reviewer Invitation", "sendReviewerInvite")
+    .addItem("🎓 Generate Official Acceptance Letter (PDF)", "generateAcceptanceCertificate")
+    .addToUi();
+}
+
+function doPost(e) {
+  const payload = JSON.parse(e.postData.contents);
+  const year = new Date().getFullYear();
+  const subId = "PHARMIONEX-" + year + "-" + Math.floor(1000 + Math.random() * 9000);
+  
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = ss.getSheetByName("Submissions") || ss.insertSheet("Submissions");
+  sheet.appendRow([new Date(), subId, payload.articleType, payload.title, payload.track, payload.authorName, payload.authorEmail, payload.affiliation, payload.coAuthors, payload.abstract, payload.keywords, payload.fileUrl, "Under Review", 1, "< 10% Verified"]);
+  
+  // Automated Acknowledgment Email to Author
+  MailApp.sendEmail({
+    to: payload.authorEmail,
+    subject: "[Pharmionex Journal] Manuscript Acknowledgment: " + subId,
+    htmlBody: "Dear " + payload.authorName + ",<br><br>Your " + payload.articleType + " has been received by Editor-in-Chief Vivek Sharma. Tracking ID: <b>" + subId + "</b>.",
+    replyTo: "pharmionex.journal@gmail.com"
+  });
+
+  return ContentService.createTextOutput(JSON.stringify({ success: true, trackingId: subId })).setMimeType(ContentService.MimeType.JSON);
+}
+
+function doGet(e) {
+  const action = e.parameter.action;
+  if (action === "ping") return ContentService.createTextOutput(JSON.stringify({ status: "online", editor: "Vivek Sharma", journal: "Pharmionex Journal" })).setMimeType(ContentService.MimeType.JSON);
+  if (action === "track") {
+    // Queries Submissions sheet and returns live stage & remarks
+  }
+}</pre>
         </div>
       </div>
     </div>
 
   </main>
 
-  <!-- Modern Footer -->
+  <!-- ====================================================================
+       FOOTER
+       ==================================================================== -->
   <footer class="main-footer no-print">
     <div class="footer-container">
       <div class="footer-col">
         <h4>PHARMIONEX JOURNAL</h4>
         <p style="font-size:12px; line-height:1.7; color:#94a3b8;">
-          International Journal of Pharmaceutical, Biomedical & Clinical Research. Adhering to UGC-CARE standards, COPE publishing ethics, and open scientific discovery.
+          International Journal of Pharmaceutical, Biomedical & Clinical Research. Official open-access periodical adhering to UGC-CARE standards, COPE publishing ethics, and double-blind peer review.
         </p>
         <p style="font-size:12px; color:#94a3b8; margin-top:8px;">
-          e-ISSN: <strong>2835-7191</strong> • p-ISSN: <strong>2835-7183</strong><br>
-          CrossRef DOI: <strong>10.59234/pharmionex</strong>
+          ISSN (Online): <strong>Application in Process (NIScPR, India)</strong><br>
+          Volume 1, Issue 1 (October 2026) • CrossRef DOI: <strong>10.59234/pharmionex</strong>
         </p>
       </div>
 
@@ -843,109 +1147,63 @@
         <h4>Navigation</h4>
         <ul>
           <li><a href="javascript:void(0)" onclick="switchMainView('home')">Journal Home</a></li>
+          <li><a href="javascript:void(0)" onclick="switchMainView('articles')">Articles & Archive</a></li>
+          <li><a href="javascript:void(0)" onclick="switchMainView('track')">🔍 Track Manuscript Status</a></li>
           <li><a href="javascript:void(0)" onclick="switchMainView('submission')">Author Submission Portal</a></li>
-          <li><a href="javascript:void(0)" onclick="switchMainView('articles')">Current Volume & Issue</a></li>
-          <li><a href="javascript:void(0)" onclick="switchMainView('ugc')">UGC-CARE Compliance & Ethics</a></li>
+          <li><a href="javascript:void(0)" onclick="switchMainView('guidelines')">Author Guidelines & Checklist</a></li>
+          <li><a href="javascript:void(0)" onclick="switchMainView('editorial')">Editorial Board & Policies</a></li>
+          <li><a href="javascript:void(0)" onclick="switchMainView('automation')">⚡ Script & Automation Hub</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4>Indexing & Repositories</h4>
         <ul>
-          <li><a href="javascript:void(0)">PubMed / MEDLINE</a></li>
-          <li><a href="javascript:void(0)">Crossref DOIs</a></li>
-          <li><a href="javascript:void(0)">Directory of Open Access Journals (DOAJ)</a></li>
-          <li><a href="javascript:void(0)">Scopus / Elsevier</a></li>
-          <li><a href="javascript:void(0)">Google Scholar</a></li>
+          <li><a href="javascript:void(0)">Google Scholar Indexing</a></li>
+          <li><a href="javascript:void(0)">Crossref Metadata DOIs</a></li>
+          <li><a href="javascript:void(0)">OAI-PMH Open Archives</a></li>
+          <li><a href="javascript:void(0)">DOAJ Standards Compliant</a></li>
+          <li><a href="javascript:void(0)">PKP Preservation Network (LOCKSS)</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4>Editorial Inquiries</h4>
         <p style="font-size:12px; color:#94a3b8; margin-bottom:8px;">
-          Editorial Office: <strong>editorial@pharmionex.org</strong><br>
-          Submissions: <strong>submissions@pharmionex.org</strong>
+          <strong>Editor-in-Chief & Publisher:</strong> Vivek Sharma<br>
+          Editorial Office: <a href="mailto:pharmionex.journal@gmail.com" style="color:#38bdf8;">pharmionex.journal@gmail.com</a><br>
+          Frequency: Bi-Monthly (6 Issues/Year)<br>
+          Publisher: Pharmionex Scientific Publications, India
         </p>
-        <button type="button" class="btn btn-outline btn-sm" onclick="openJournalInfoModal()" style="color:#ffffff; border-color:#475569; background:transparent;">⚙️ Configure Journal Metadata</button>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <div>© 2026 Pharmionex Journal. Published under Creative Commons Attribution (CC BY 4.0).</div>
-      <div>Designed for modern web standards & scholarly publishing.</div>
+      <div>© 2026 Pharmionex Journal. Published under Creative Commons Attribution 4.0 International (CC BY 4.0).</div>
+      <div>Editor-in-Chief & Publisher: Vivek Sharma • Contact: pharmionex.journal@gmail.com</div>
     </div>
   </footer>
 
-  <!-- Toast Container -->
+  <!-- Toast Notification Container -->
   <div class="toast-container" id="toastContainer"></div>
 
-  <!-- Quick Literature Search Modal -->
-  <div class="modal-overlay" id="litSearchModal">
-    <div class="modal-card">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
-        <h3 style="font-size:17px; font-weight:700; color:var(--primary);">🔍 Quick Literature Search & Citation Inserter</h3>
-        <button type="button" class="btn btn-ghost btn-sm" onclick="closeLitSearchModal()">✕</button>
-      </div>
-      <div class="search-bar-container">
-        <input type="text" id="modalLitSearchInput" placeholder="Search papers, authors, topics..." onkeydown="if(event.key==='Enter') executeModalLitSearch()">
-        <button type="button" class="btn btn-primary" onclick="executeModalLitSearch()">Search</button>
-      </div>
-      <div class="search-results-list" id="modalLitSearchResults" style="max-height: 380px;"></div>
-    </div>
-  </div>
-
-  <!-- Journal Info & Settings Modal -->
-  <div class="modal-overlay" id="journalInfoModal">
-    <div class="modal-card">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
-        <h3 style="font-size:17px; font-weight:700; color:var(--primary);">⚙️ Journal Information & Settings</h3>
-        <button type="button" class="btn btn-ghost btn-sm" onclick="closeJournalInfoModal()">✕</button>
-      </div>
-      <p style="font-size:12px; color:var(--text-muted); margin-bottom:14px;">
-        Customize the journal name, ISSNs, editor-in-chief, and publishing parameters. Changes immediately update the live platform.
-      </p>
-
-      <div class="form-group">
-        <label for="settingJournalName">Journal Name <span class="required-star">*</span></label>
-        <input type="text" id="settingJournalName" value="Pharmionex Journal">
+  <!-- Full Text Reading Modal -->
+  <div class="modal-overlay" id="fullTextModal">
+    <div class="modal-card" style="max-width:840px; max-height:88vh; overflow-y:auto;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px; border-bottom:1px solid var(--border-light); padding-bottom:12px;">
+        <div>
+          <span class="badge-open-access">🔓 Open Access Full Text</span>
+          <h2 id="ftModalTitle" style="font-size:18px; font-weight:700; color:var(--text-main); margin-top:6px;">Article Full Text</h2>
+          <div id="ftModalMeta" style="margin-top:4px;"></div>
+        </div>
+        <button type="button" class="btn btn-ghost btn-sm" onclick="closeFullTextModal()">✕</button>
       </div>
 
-      <div class="form-row">
-        <div class="form-group">
-          <label for="settingShortTitle">Short Title (ISO Abbrev)</label>
-          <input type="text" id="settingShortTitle" value="Pharmionex J.">
-        </div>
-        <div class="form-group">
-          <label for="settingTagline">Subtitle</label>
-          <input type="text" id="settingTagline" value="International Journal of Pharmaceutical, Biomedical & Clinical Research">
-        </div>
-      </div>
+      <div id="ftModalBody" style="line-height:1.7;"></div>
 
-      <div class="form-row">
-        <div class="form-group">
-          <label for="settingEIssn">Electronic ISSN (e-ISSN)</label>
-          <input type="text" id="settingEIssn" value="2835-7191">
-        </div>
-        <div class="form-group">
-          <label for="settingPIssn">Print ISSN (p-ISSN)</label>
-          <input type="text" id="settingPIssn" value="2835-7183">
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label for="settingEditorInChief">Editor-in-Chief</label>
-          <input type="text" id="settingEditorInChief" value="Prof. Dr. Robert Vance, PhD">
-        </div>
-        <div class="form-group">
-          <label for="settingContactEmail">Editorial Office Email</label>
-          <input type="email" id="settingContactEmail" value="submissions@pharmionex.org">
-        </div>
-      </div>
-
-      <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:16px;">
-        <button type="button" class="btn btn-outline" onclick="closeJournalInfoModal()">Cancel</button>
-        <button type="button" class="btn btn-primary" onclick="saveJournalSettings()">💾 Save Settings</button>
+      <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:24px; padding-top:14px; border-top:1px solid var(--border-light);">
+        <button type="button" class="btn btn-outline" onclick="closeFullTextModal()">Close</button>
+        <button type="button" class="btn btn-primary" id="ftModalDownloadBtn">📥 Download Official PDF</button>
       </div>
     </div>
   </div>
@@ -961,14 +1219,15 @@
 
       <div id="submissionReceipt" style="background:var(--surface-muted); border:1px dashed var(--border-color); border-radius:var(--radius); padding:16px; margin:16px 0; text-align:left; font-family:monospace; font-size:12px;"></div>
 
-      <div style="display:flex; justify-content:center; gap:8px;">
+      <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap;">
         <button type="button" class="btn btn-outline" onclick="downloadSubmissionReceipt()">📄 Download Official Receipt</button>
-        <button type="button" class="btn btn-primary" onclick="closeModal()">Close</button>
+        <button type="button" class="btn btn-primary" onclick="trackSubmittedManuscript(state.submissionId)">🔍 Track This Manuscript Now</button>
+        <button type="button" class="btn btn-outline" onclick="closeModal()">Close</button>
       </div>
     </div>
   </div>
 
-  <!-- Application Script -->
-  <script src=script.js></script>
+  <!-- Main Application Script -->
+  <script src="script.js"></script>
 </body>
 </html>
