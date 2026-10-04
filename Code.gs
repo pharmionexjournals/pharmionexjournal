@@ -62,6 +62,7 @@ const STAGE_NAMES = [
 function onOpen() {
   SpreadsheetApp.getUi().createMenu("📑 Pharmionex Editorial Control")
     .addItem("⚙️ Initialize Editorial Sheet Headers", "setupSheetHeaders")
+    .addItem("📝 Create Manuscript Submission Google Form", "createSubmissionForm")
     .addItem("📁 Open/Verify Submissions Drive Folder", "openSubmissionsFolder")
     .addSeparator()
     .addItem("📧 Send Status Email to Selected Author", "sendAuthorStatusEmail")
@@ -649,4 +650,47 @@ function buildAckEmail_(authorName, title, articleType, track, subId) {
     "<li><strong>Advance Online Publication (Volume 1, Issue 1, 2026):</strong> open access with zero APC.</li></ol>" +
     "<p style='margin-top:24px;font-size:13px;color:#64748b;'>To provide updated files or supplementary data, reply to this email or write to <a href='mailto:" +
     CONFIG.EDITORIAL_EMAIL + "'>" + CONFIG.EDITORIAL_EMAIL + "</a>.</p>");
+}
+
+
+/**
+ * Creates the "Pharmionex Manuscript Submission" Google Form, linked to this spreadsheet.
+ * Run once from the Apps Script editor, then open View > Logs for the form link.
+ * Paste the PUBLISHED link into the website (footer > Editorial Management Portal > Google Form URL).
+ *
+ * Note: Apps Script cannot create file-upload questions, so the form asks for a Drive/Dropbox
+ * link instead. To accept uploads, add a "File upload" question by hand in the Form editor.
+ */
+function createSubmissionForm() {
+  var form = FormApp.create('Pharmionex Journal - Manuscript Submission');
+  form.setDescription('Open-access, double-blind peer-reviewed. Zero APC. Please read the Author Guidelines first. ' +
+    'Editorial office: pharmioneex.journal@gmail.com')
+    .setCollectEmail(true)
+    .setConfirmationMessage('Thank you. Your manuscript was received. You will get an email from the editorial office.');
+
+  form.addTextItem().setTitle('Article title').setRequired(true);
+  form.addListItem().setTitle('Article type').setRequired(true).setChoiceValues([
+    'Original Research Article', 'Comprehensive Review Article', 'Short Communication / Rapid Letter',
+    'Methodology & Validation Protocol', 'Industrial Research Article', 'Regulatory & Review Article',
+    'Pharmacokinetic Research Article', 'Clinical Case Study & Pharmacovigilance', 'Systematic Review & Meta-Analysis']);
+  form.addListItem().setTitle('Subject track').setRequired(true).setChoiceValues([
+    'Pharmaceutics & Targeted Drug Delivery', 'Pharmaceutical Analysis & Method Validation',
+    'Industrial Pharmacy & Formulation Science', 'Biopharmaceutics & Biotechnology',
+    'Regulatory Affairs, GMP & Quality Assurance', 'Pharmacology & Clinical Pharmacokinetics',
+    'Medicinal Chemistry & Nanomedicine', 'Clinical Pharmacy & Pharmacovigilance', 'Pharmacognosy & Phytomedicine']);
+  form.addTextItem().setTitle('Corresponding author name').setRequired(true);
+  form.addTextItem().setTitle('Affiliation / institution').setRequired(true);
+  form.addTextItem().setTitle('Co-authors (names, comma separated)');
+  form.addParagraphTextItem().setTitle('Abstract (max 300 words)').setRequired(true);
+  form.addTextItem().setTitle('Keywords (4 to 6, comma separated)').setRequired(true);
+  form.addTextItem().setTitle('Manuscript link (Google Drive / Dropbox, set to "Anyone with the link can view")').setRequired(true);
+  form.addTextItem().setTitle('Ethics approval / IAEC / CTRI number (or "Not applicable")');
+  form.addCheckboxItem().setTitle('Declarations').setRequired(true).setChoiceValues([
+    'Original work, not under review elsewhere; similarity index below 10%',
+    'All authors meet ICMJE criteria and approved this submission',
+    'I agree to publication under CC BY 4.0']);
+
+  form.setDestination(FormApp.DestinationType.SPREADSHEET, SpreadsheetApp.getActiveSpreadsheet().getId());
+  Logger.log('Edit link (private): ' + form.getEditUrl());
+  Logger.log('Published link (paste into website): ' + form.getPublishedUrl());
 }

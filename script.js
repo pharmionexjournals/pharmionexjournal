@@ -10,8 +10,12 @@
  * ============================================================================
  */
 
-// Google Apps Script Web App URL for live synchronization (configurable by Vivek Sharma)
-var GOOGLE_APPS_SCRIPT_URL = localStorage.getItem("pharmionex_gas_url") || "https://script.google.com/macros/s/AKfycbxJkZ9yZ__-HndejeWlAlzzsdP8s2CHqHCicdv9tGVZhAcp8Zw2mx8SVZMu40JCfDG1/exec";
+// Google Apps Script Web App URL for live synchronization
+var GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxJkZ9yZ__-HndejeWlAlzzsdP8s2CHqHCicdv9tGVZhAcp8Zw2mx8SVZMu40JCfDG1/exec";
+
+// Google Form for article submission. Paste your form's published link between the quotes
+// (docs.google.com/forms/.../viewform) and push. Until then the tab shows a friendly fallback.
+var GOOGLE_FORM_URL = "";
 
 // Real File objects (state.uploadedFiles only keeps name/size, which is not enough to upload)
 var uploadedFileObjects = { primary: null, supplementary: [] };
@@ -73,8 +77,7 @@ var state = {
   submissionId: null
 };
 
-// Official Published Articles Repository (Volume 1, Issue 1 - October 2026)
-// Spanning all core pharmaceutical article types
+// Article types & subject tracks accepted by the journal (no published issue yet)
 var publishedArticlesDataset = [
   {
     id: "track-1",
@@ -82,13 +85,8 @@ var publishedArticlesDataset = [
     title: "Official Author Template: Original Research Article",
     track: "Pharmaceutics & Targeted Drug Delivery",
     category: "Pharmaceutics & Drug Delivery",
-    volume: 1,
-    issue: 1,
-    year: 2026,
-    status: "Call for Papers Open (Inaugural Vol. 1, 2026)",
+    status: "Call for Papers Open",
     issuingBody: "Pharmionex Editorial Board • Vivek Sharma (Editor-in-Chief & Publisher)",
-    pdfPath: "articles/pharmionex-2026-01-01.pdf",
-    date: "Inaugural Issue 2026",
     wordLimit: "4,000 – 7,000 words (excluding abstract & references)",
     abstractFormat: "250 – 300 words (Structured: Background, Methods, Results, Conclusion)",
     scope: "Novel drug delivery systems, nanocarriers (SLNs, NLCs, liposomes), modified-release formulations, dissolution kinetics, and preformulation studies.",
@@ -106,13 +104,8 @@ var publishedArticlesDataset = [
     title: "Official Author Template: Methodology & Validation Protocol",
     track: "Pharmaceutical Analysis & Method Validation",
     category: "Pharmaceutical Analysis",
-    volume: 1,
-    issue: 1,
-    year: 2026,
-    status: "Call for Papers Open (Inaugural Vol. 1, 2026)",
+    status: "Call for Papers Open",
     issuingBody: "Pharmionex Editorial Board • Vivek Sharma (Editor-in-Chief & Publisher)",
-    pdfPath: "articles/pharmionex-2026-01-02.pdf",
-    date: "Inaugural Issue 2026",
     wordLimit: "3,500 – 6,000 words",
     abstractFormat: "200 – 250 words (Structured: Analytical Rationale, Chromatographic System, Validation Results, Utility)",
     scope: "Stability-indicating RP-HPLC, UPLC, LC-MS/MS, GC, and spectrophotometric method development and validation strictly under ICH Q2(R1)/Q2(R2) guidelines.",
@@ -130,13 +123,8 @@ var publishedArticlesDataset = [
     title: "Official Author Template: Industrial Pharmacy & Formulation Science",
     track: "Industrial Pharmacy & Formulation Science",
     category: "Industrial Pharmacy",
-    volume: 1,
-    issue: 1,
-    year: 2026,
-    status: "Call for Papers Open (Inaugural Vol. 1, 2026)",
+    status: "Call for Papers Open",
     issuingBody: "Pharmionex Editorial Board • Vivek Sharma (Editor-in-Chief & Publisher)",
-    pdfPath: "articles/pharmionex-2026-01-03.pdf",
-    date: "Inaugural Issue 2026",
     wordLimit: "4,000 – 7,000 words",
     abstractFormat: "250 words (Structured: Industrial Context, Formulation Engineering, Stability Testing, Scalability)",
     scope: "Solid oral dosage forms, hard gelatin capsules, Critical Quality Attributes (CQAs), pilot scale-up, accelerated stability testing (ICH Q1A), and WHO Schedule M cGMP controls.",
@@ -154,13 +142,8 @@ var publishedArticlesDataset = [
     title: "Official Author Template: Comprehensive Review Article",
     track: "Pharmaceutics & Targeted Drug Delivery",
     category: "Review Article",
-    volume: 1,
-    issue: 1,
-    year: 2026,
-    status: "Call for Papers Open (Inaugural Vol. 1, 2026)",
+    status: "Call for Papers Open",
     issuingBody: "Pharmionex Editorial Board • Vivek Sharma (Editor-in-Chief & Publisher)",
-    pdfPath: "articles/pharmionex-2026-01-04.pdf",
-    date: "Inaugural Issue 2026",
     wordLimit: "6,000 – 12,000 words (Minimum 60 references)",
     abstractFormat: "250 – 350 words (Narrative overview of therapeutic landscape, mechanistic barriers, and future horizons)",
     scope: "Decadal advances in lipid-based nanocarriers, polymeric micelles, stimuli-responsive carriers, monoclonal antibodies, active targeting ligands, and clinical translation barriers.",
@@ -178,13 +161,8 @@ var publishedArticlesDataset = [
     title: "Official Author Template: Regulatory Affairs & Quality Assurance",
     track: "Regulatory Affairs, GMP & Quality Assurance",
     category: "Regulatory Affairs",
-    volume: 1,
-    issue: 1,
-    year: 2026,
-    status: "Call for Papers Open (Inaugural Vol. 1, 2026)",
+    status: "Call for Papers Open",
     issuingBody: "Pharmionex Editorial Board • Vivek Sharma (Editor-in-Chief & Publisher)",
-    pdfPath: "articles/pharmionex-2026-01-05.pdf",
-    date: "Inaugural Issue 2026",
     wordLimit: "4,500 – 8,000 words",
     abstractFormat: "250 words (Structured: Regulatory Context, Compliance Challenges, Implementation Framework, Policy Impact)",
     scope: "Revised WHO Schedule M implementation, 21 CFR Part 11 computerized system validation (CSV), data integrity, CAPA, Quality Risk Management (ICH Q9), and pharmaceutical quality systems (ICH Q10).",
@@ -202,13 +180,8 @@ var publishedArticlesDataset = [
     title: "Official Author Template: Pharmacokinetic & IVIVC Studies",
     track: "Pharmacology & Clinical Pharmacokinetics",
     category: "Pharmacokinetics",
-    volume: 1,
-    issue: 1,
-    year: 2026,
-    status: "Call for Papers Open (Inaugural Vol. 1, 2026)",
+    status: "Call for Papers Open",
     issuingBody: "Pharmionex Editorial Board • Vivek Sharma (Editor-in-Chief & Publisher)",
-    pdfPath: "articles/pharmionex-2026-01-06.pdf",
-    date: "Inaugural Issue 2026",
     wordLimit: "4,000 – 7,000 words",
     abstractFormat: "250 words (Structured: Objective, Study Design, Bioanalytical Assay, IVIVC Results, Conclusion)",
     scope: "In-vitro/in-vivo correlation (Level A/B/C), bioavailability enhancement, bioequivalence protocols, mathematical deconvolution (Wagner-Nelson), and clinical PK/PD modeling.",
@@ -226,13 +199,8 @@ var publishedArticlesDataset = [
     title: "Official Author Template: Short Communication / Rapid Letter",
     track: "Medicinal Chemistry & Nanomedicine",
     category: "Short Communication",
-    volume: 1,
-    issue: 1,
-    year: 2026,
-    status: "Call for Papers Open (Inaugural Vol. 1, 2026)",
+    status: "Call for Papers Open",
     issuingBody: "Pharmionex Editorial Board • Vivek Sharma (Editor-in-Chief & Publisher)",
-    pdfPath: "articles/pharmionex-2026-01-07.pdf",
-    date: "Inaugural Issue 2026",
     wordLimit: "2,000 – 3,500 words (Max 3 Display Items)",
     abstractFormat: "Up to 200 words (Unstructured, concise summary of core experimental breakthrough)",
     scope: "Rapid reporting of significant breakthroughs: green nanoparticle synthesis, microwave-assisted synthesis, novel synthetic routes, and antimicrobial biofilm assays.",
@@ -250,13 +218,8 @@ var publishedArticlesDataset = [
     title: "Official Author Template: Clinical Case Study & ADR Report",
     track: "Clinical Pharmacy & Pharmacovigilance",
     category: "Case Study & Safety",
-    volume: 1,
-    issue: 1,
-    year: 2026,
-    status: "Call for Papers Open (Inaugural Vol. 1, 2026)",
+    status: "Call for Papers Open",
     issuingBody: "Pharmionex Editorial Board • Vivek Sharma (Editor-in-Chief & Publisher)",
-    pdfPath: "articles/pharmionex-2026-01-08.pdf",
-    date: "Inaugural Issue 2026",
     wordLimit: "2,000 – 3,500 words",
     abstractFormat: "150 – 250 words (Unstructured: Clinical Event, Suspected Drug, Causality Assessment, Pharmacovigilance Impact)",
     scope: "Adverse drug reactions (ADRs), post-marketing pharmacovigilance, causality assessment (Naranjo Probability Scale, WHO-UMC criteria), drug interactions, and therapeutic drug monitoring (TDM).",
@@ -267,8 +230,48 @@ var publishedArticlesDataset = [
       results: "Clinical presentation details, dechallenge/rechallenge response, causality score computation, and histopathological or biochemical findings.",
       conclusion: "Clinical management takeaways, risk mitigation strategies, and recommendations for hospital clinical pharmacists and prescribing physicians."
     }
+  },
+  {
+    id: "track-9",
+    type: "Systematic Review & Meta-Analysis",
+    title: "Official Author Template: Systematic Review & Meta-Analysis (PRISMA 2020)",
+    track: "Clinical Pharmacy & Pharmacovigilance",
+    wordLimit: "5,000 – 10,000 words",
+    abstractFormat: "300 words (Structured: Objective, Data Sources, Study Selection, Synthesis, Conclusion)",
+    scope: "PRISMA 2020-compliant systematic reviews and meta-analyses of drug efficacy, safety, pharmacoeconomics and comparative effectiveness.",
+    keywords: "Systematic Review; Meta-Analysis; PRISMA; Risk of Bias; Pharmacoeconomics",
+    fullContent: {
+      intro: "States the clinical question in PICO format and justifies why a new synthesis is needed. The protocol should be registered (e.g. PROSPERO) before screening begins.",
+      methods: "Reports databases searched (PubMed, Scopus, Embase, Cochrane), full search strings, inclusion/exclusion criteria, dual-reviewer screening, and risk-of-bias tools (RoB 2, ROBINS-I).",
+      results: "Includes a PRISMA flow diagram, study characteristics table, forest plots, heterogeneity (I²), publication-bias assessment and GRADE certainty ratings.",
+      conclusion: "Interprets pooled effects in clinical context, states limitations of included evidence and recommends practice or research priorities."
+    }
+  },
+  {
+    id: "track-10",
+    type: "Original Research Article",
+    title: "Official Author Template: Pharmacognosy & Phytomedicine",
+    track: "Pharmacognosy & Phytomedicine",
+    wordLimit: "4,000 – 7,000 words",
+    abstractFormat: "250 words (Structured: Plant Material, Extraction, Phytochemical Profile, Bioactivity)",
+    scope: "Herbal drug standardization, bioactive phytoconstituent isolation, HPTLC/HPLC fingerprinting, antioxidant, antimicrobial and anti-inflammatory evaluation of plant extracts.",
+    keywords: "Pharmacognosy; Phytochemistry; HPTLC Fingerprint; Standardization; Herbal Drugs",
+    fullContent: {
+      intro: "Describes the ethnopharmacological background of the plant and the rationale for investigation, citing traditional use and prior phytochemical reports.",
+      methods: "Gives botanical authentication (voucher specimen number), extraction solvent and method, phytochemical screening, chromatographic fingerprinting, and bioassay protocols with controls.",
+      results: "Reports extract yield, marker compound content, IC50 values with standard deviations, and statistical comparison against reference standards.",
+      conclusion: "Summarises the therapeutic potential and standardisation parameters, with suggested in-vivo and toxicity follow-up."
+    }
   }
 ];
+
+// Fill in fields the UI reads, so every record renders and is searchable
+publishedArticlesDataset.forEach(function (a) {
+  var defaults = { status: "Call for Papers Open", issuingBody: "Pharmionex Editorial Board • Vivek Sharma (Editor-in-Chief & Publisher)", category: a.track };
+  Object.keys(defaults).forEach(function (k) { if (a[k] === undefined) a[k] = defaults[k]; });
+  if (!a.authors) a.authors = a.issuingBody;
+  if (!a.abstract) a.abstract = (a.abstractFormat || "") + (a.scope ? " Scope: " + a.scope : "");
+});
 
 // Tracking Registry for Author Status Tracking
 var trackingRegistry = {
@@ -294,10 +297,23 @@ var trackingRegistry = {
       { stage: 3, title: "Double-Blind Peer Review", date: "October 04, 2026", status: "current", remarks: "Manuscript dispatched to two independent external reviewers with specialized domain expertise. Reviewer reports expected within 14 days." },
       { stage: 4, title: "Author Revisions & Rebuttal", date: "Scheduled", status: "pending", remarks: "Author will be notified with anonymized reviewer comments if revisions are required." },
       { stage: 5, title: "Final Editorial Acceptance Decision", date: "Pending", status: "pending", remarks: "Final publication decision by Editor-in-Chief Vivek Sharma." },
-      { stage: 6, title: "Typesetting, Galley Proof & Open-Access Publication", date: "Pending", status: "pending", remarks: "Immediate advance online open-access publication with Zero APC in Volume 1, Issue 1 (2026)." }
+      { stage: 6, title: "Typesetting, Galley Proof & Open-Access Publication", date: "Pending", status: "pending", remarks: "Advance online open-access publication with Zero APC." }
     ]
   }
 };
+
+
+// Sample records for the demo buttons on the Track page
+[["PHARMIONEX-2026-4109","Under Peer Review",3,"Stage 3: Double-Blind Peer Review in Progress"],
+ ["PHARMIONEX-2026-3822","Accepted",5,"Stage 5: Accepted for Publication"],
+ ["PHARMIONEX-2026-5120","Published",6,"Stage 6: Published"]].forEach(function (r) {
+  var st = ["Submission Received","Scope & Plagiarism Check","Double-Blind Peer Review","Author Revisions & Rebuttal","Final Editorial Acceptance Decision","Typesetting, Galley Proof & Publication"];
+  trackingRegistry[r[0]] = { trackingId: r[0], articleType: "Original Research Article", title: "Sample Manuscript (" + r[1] + ") - Demonstration Record",
+    track: "Pharmaceutics & Targeted Drug Delivery", author: "Sample Author", email: "sample@example.org", affiliation: "Demonstration Profile",
+    submissionDate: "October 01, 2026", status: r[3], stage: r[2], plagiarismScore: "5.2% Similarity (< 10% Standard)",
+    assignedEditor: "Vivek Sharma", assignedReviewers: "2 Independent External Peer Reviewers", editorRemarks: "Demonstration record for the tracking tool.",
+    timeline: st.map(function (t, i) { return { stage: i + 1, title: t, date: i + 1 <= r[2] ? "Completed" : "Pending", status: i + 1 < r[2] ? "completed" : (i + 1 === r[2] ? "current" : "pending"), remarks: "Demonstration milestone." }; }) };
+});
 
 // Load any submissions previously made on this browser
 function loadSavedSubmissions() {
@@ -332,11 +348,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Load configured Google Apps Script Web App URL if saved
-  const gasInput = document.getElementById("gasWebhookUrlInput");
-  if (gasInput && GOOGLE_APPS_SCRIPT_URL) {
-    gasInput.value = GOOGLE_APPS_SCRIPT_URL;
-  }
 });
 
 // View Navigation Router
@@ -351,7 +362,9 @@ function switchMainView(viewId) {
   if (navLink) navLink.classList.add("active");
 
   // Specific view hooks
-  if (viewId === "articles") {
+  if (viewId === "gform") {
+    renderGoogleForm();
+  } else if (viewId === "articles") {
     renderArticlesRepo(publishedArticlesDataset);
   } else if (viewId === "track") {
     setTimeout(() => {
@@ -544,7 +557,7 @@ function renderArticlesRepo(articles) {
   container.innerHTML = "";
 
   if (countBanner) {
-    countBanner.innerHTML = `Showing <strong>${articles.length}</strong> Official Subject Tracks & Author Preparation Templates for <strong>Volume 1, Issue 1 (Inaugural Issue 2026)</strong> • Call for Papers Active`;
+    countBanner.innerHTML = `Showing <strong>${articles.length}</strong> article types & subject tracks • Call for Papers Active`;
   }
 
   if (articles.length === 0) {
@@ -566,8 +579,6 @@ function renderArticlesRepo(articles) {
       <div class="article-badges-row">
         <span class="badge-track" style="background:#e0e7ff; color:#3730a3;">${escapeHtml(art.type)}</span>
         <span class="badge-track">${escapeHtml(art.track)}</span>
-        <span class="badge-open-access">🔓 Open Access (CC BY 4.0)</span>
-        <span class="badge-doi">DOI: <a href="https://doi.org/${art.doi}" target="_blank" style="color:var(--accent); text-decoration:none;">${art.doi}</a></span>
       </div>
 
       <h3 class="article-title-link" onclick="openFullTextModal('${art.id}')">
@@ -576,10 +587,6 @@ function renderArticlesRepo(articles) {
 
       <div class="article-authors-text">
         ${escapeHtml(art.authors)}
-      </div>
-
-      <div class="article-citation-info">
-        <em>Pharmionex Journal</em> • Vol. ${art.volume}, Iss. ${art.issue} (${art.year}), pp. ${art.pages} • Published under Creative Commons Attribution 4.0
       </div>
 
       <div class="article-abstract-text">
@@ -591,14 +598,9 @@ function renderArticlesRepo(articles) {
       </div>
 
       <div class="article-actions-bar">
-        <button type="button" class="btn btn-primary btn-sm" onclick="downloadArticlePDF('${art.id}')" title="Download Official Academic PDF">
-          📥 Download PDF
-        </button>
+        <button type="button" class="btn btn-primary btn-sm" onclick="prepareTrackSubmission('${escapeHtml(art.track)}', '${escapeHtml(art.type)}')">✍️ Submit this type</button>
         <button type="button" class="btn btn-outline btn-sm" onclick="openFullTextModal('${art.id}')" title="Read Full Text Online">
-          📄 Read Full Text
-        </button>
-        <button type="button" class="btn btn-outline btn-sm" onclick="copyArticleCitation('${art.id}')" title="Copy Formatted Citation">
-          📋 Cite Article
+          📄 View Guidelines
         </button>
       </div>
     `;
@@ -618,7 +620,7 @@ function filterArticles() {
       art.authors.toLowerCase().includes(query) ||
       art.abstract.toLowerCase().includes(query) ||
       art.keywords.toLowerCase().includes(query) ||
-      art.doi.toLowerCase().includes(query) ||
+      (art.scope || "").toLowerCase().includes(query) ||
       art.type.toLowerCase().includes(query);
 
     const matchesTrack = (track === "ALL") || (art.track === track);
@@ -653,23 +655,6 @@ function quickFilterChip(topic) {
   }
 }
 
-function downloadArticlePDF(articleId) {
-  const art = publishedArticlesDataset.find(a => a.id === articleId);
-  if (!art) {
-    showToast("Article not found", "danger");
-    return;
-  }
-
-  const a = document.createElement("a");
-  a.href = art.pdfPath;
-  a.download = `pharmionex-template-${art.id}.pdf`;
-  a.target = "_blank";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-
-  showToast(`Downloading official PDF for "${art.title.slice(0, 40)}..."`, "success");
-}
 
 function openFullTextModal(articleId) {
   const art = publishedArticlesDataset.find(a => a.id === articleId);
@@ -686,8 +671,7 @@ function openFullTextModal(articleId) {
       <div style="font-size:13px; color:var(--primary); font-weight:bold; margin-bottom:4px;">${escapeHtml(art.authors)}</div>
       <div style="font-size:12px; color:var(--text-muted);">
         <span class="badge-track" style="background:#e0e7ff; color:#3730a3; margin-right:6px;">${escapeHtml(art.type)}</span>
-        <em>Pharmionex Journal</em> • Vol. ${art.volume}, Iss. ${art.issue} (${art.year}), pp. ${art.pages} • DOI: 
-        <a href="https://doi.org/${art.doi}" target="_blank" style="color:var(--accent);">${art.doi}</a> • Open Access (CC BY 4.0)
+        <em>Pharmionex Journal</em> • Open Access (CC BY 4.0)
       </div>
     `;
   }
@@ -751,10 +735,6 @@ function openFullTextModal(articleId) {
     `;
   }
 
-  const dlBtn = document.getElementById("ftModalDownloadBtn");
-  if (dlBtn) {
-    dlBtn.onclick = () => downloadArticlePDF(articleId);
-  }
 
   if (modal) modal.classList.add("active");
 }
@@ -764,22 +744,6 @@ function closeFullTextModal() {
   if (modal) modal.classList.remove("active");
 }
 
-function copyArticleCitation(articleId) {
-  const art = publishedArticlesDataset.find(a => a.id === articleId);
-  if (!art) return;
-
-  const authors = art.authors || "Pharmionex Editorial Board (Vivek Sharma, Ed.)";
-  const citation = `${authors}. ${art.title}. Pharmionex J. 2026;1(1). Official Author Template & Guidelines.`;
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(citation).then(() => {
-      showToast("Citation format copied to clipboard!", "success");
-    }).catch(() => {
-      copyCitationDirect(citation);
-    });
-  } else {
-    copyCitationDirect(citation);
-  }
-}
 
 /* ==========================================================================
    Public Manuscript Tracking System
@@ -865,7 +829,7 @@ function renderTrackResult(data, isLiveFromGas = false) {
     "3. Double-Blind Peer Review",
     "4. Reviewer Revisions",
     "5. Acceptance Decision",
-    "6. Published in Issue"
+    "6. Published"
   ];
 
   const progressPercent = Math.min(100, Math.round(((currentStage - 1) / 5) * 100));
@@ -1044,55 +1008,8 @@ For inquiries, contact Editor-in-Chief Vivek Sharma at: pharmioneex.journal@gmai
 /* ==========================================================================
    Google Apps Script Automation & Webhook Controls for Vivek Sharma
    ========================================================================== */
-function saveGasUrl() {
-  const input = document.getElementById("gasWebhookUrlInput");
-  if (!input) return;
-  const url = input.value.trim();
-  GOOGLE_APPS_SCRIPT_URL = url;
-  localStorage.setItem("pharmionex_gas_url", url);
-  showToast("Google Apps Script URL saved successfully!", "success");
-}
 
-function testGasConnection() {
-  const input = document.getElementById("gasWebhookUrlInput");
-  const url = (input ? input.value : GOOGLE_APPS_SCRIPT_URL).trim();
 
-  if (!url) {
-    showToast("Please paste your Google Apps Script Web App URL first", "warning");
-    return;
-  }
-
-  showToast("Testing Google Apps Script Web App connection...", "info");
-  const testUrl = `${url}?action=ping`;
-
-  fetch(testUrl)
-    .then(res => res.json())
-    .then(data => {
-      if (data && data.status === "online") {
-        showToast(`Connected! Editor: ${data.editor}, Journal: ${data.journal}`, "success");
-        const statusEl = document.getElementById("gasStatusBadge");
-        if (statusEl) {
-          statusEl.innerHTML = `<span style="color:var(--success); font-weight:bold;">🟢 Connected to Google Sheets API (${data.editor})</span>`;
-        }
-      } else {
-        showToast("Connected, but unexpected response format received.", "warning");
-      }
-    })
-    .catch(err => {
-      showToast("Could not connect to Apps Script. Ensure Web App is deployed with 'Who has access: Anyone'.", "danger");
-      console.error("GAS connection error:", err);
-    });
-}
-
-function copyGasCode() {
-  const codeEl = document.getElementById("gasCodeSnippet");
-  if (!codeEl) return;
-  navigator.clipboard.writeText(codeEl.innerText).then(() => {
-    showToast("Google Apps Script Code.gs copied to clipboard!", "success");
-  }).catch(() => {
-    copyCitationDirect(codeEl.innerText);
-  });
-}
 
 /* ==========================================================================
    Author Submission Wizard & Form Handlers
@@ -1540,7 +1457,7 @@ function submitArticleToJournal() {
       { stage: 3, title: "Double-Blind Peer Review", date: "Scheduled", status: "pending", remarks: "Will be assigned to two independent external reviewers." },
       { stage: 4, title: "Author Revisions (if required)", date: "Pending", status: "pending", remarks: "Subject to reviewer assessment." },
       { stage: 5, title: "Editorial Acceptance Decision", date: "Pending", status: "pending", remarks: "Decision by Editor-in-Chief Vivek Sharma." },
-      { stage: 6, title: "Typesetting, Galley Proof & Publication", date: "Pending", status: "pending", remarks: "Scheduled for next monthly issue." }
+      { stage: 6, title: "Typesetting, Galley Proof & Publication", date: "Pending", status: "pending", remarks: "Scheduled for the next available issue." }
     ]
   };
 
@@ -1816,74 +1733,10 @@ function formatBytes(bytes) {
 // ============================================================================
 // EDITORIAL CONTROL MODAL (FOR VIVEK SHARMA - GOOGLE DRIVE & APPS SCRIPT)
 // ============================================================================
-function openEditorialControlModal() {
-  const modal = document.getElementById("modalEditorialControl");
-  if (modal) {
-    modal.classList.add("active");
-    const input = document.getElementById("gasWebhookUrlInputModal");
-    if (input) input.value = GOOGLE_APPS_SCRIPT_URL;
-    updateGasStatusBadgeModal();
-  }
-}
 
-function closeEditorialControlModal() {
-  const modal = document.getElementById("modalEditorialControl");
-  if (modal) {
-    modal.classList.remove("active");
-  }
-}
 
-function updateGasStatusBadgeModal(isOnline = false, data = null) {
-  const badge = document.getElementById("gasStatusBadgeModal");
-  if (!badge) return;
-  if (GOOGLE_APPS_SCRIPT_URL) {
-    if (isOnline && data) {
-      badge.innerHTML = `<span style="color:var(--accent); font-weight:700;">🟢 Online & Connected</span> — ${escapeHtml(data.journal || "Pharmionex Journal")} | Drive: <code>pharmioneex.journal@gmail.com</code>`;
-    } else {
-      badge.innerHTML = `<span style="color:var(--secondary); font-weight:600;">🔗 Configured</span> — URL set: <code style="font-size:11px;">${escapeHtml(GOOGLE_APPS_SCRIPT_URL.substring(0, 36))}...</code>`;
-    }
-  } else {
-    badge.innerHTML = `<span style="color:var(--text-muted); font-weight:600;">⚪ Inactive (Paste Web App URL above to enable real-time Google Sheet & Drive synchronization)</span>`;
-  }
-}
 
-function saveGasUrlModal() {
-  const input = document.getElementById("gasWebhookUrlInputModal");
-  const val = (input ? input.value : "").trim();
-  GOOGLE_APPS_SCRIPT_URL = val;
-  try {
-    localStorage.setItem("pharmionex_gas_url", val);
-  } catch (e) {
-    console.warn("Could not save to localStorage", e);
-  }
-  updateGasStatusBadgeModal();
-  showToast("Google Apps Script Webhook URL saved successfully!", "success");
-}
 
-function testGasConnectionModal() {
-  const input = document.getElementById("gasWebhookUrlInputModal");
-  const url = (input ? input.value : "").trim() || GOOGLE_APPS_SCRIPT_URL;
-  if (!url) {
-    showToast("Please enter a Google Apps Script Web App URL first", "warning");
-    return;
-  }
-  showToast("Connecting to Google Apps Script backend...", "info");
-  fetch(`${url}?action=ping`)
-    .then(res => res.json())
-    .then(data => {
-      if (data && data.status === "online") {
-        showToast(`Connected successfully to ${data.journal}! Editor: ${data.editor}`, "success");
-        updateGasStatusBadgeModal(true, data);
-      } else {
-        showToast("Connected, but unexpected response received", "warning");
-      }
-    })
-    .catch(err => {
-      console.warn("Connection test failed:", err);
-      showToast("Connection failed. Check Web App deployment permissions (Access: Anyone).", "danger");
-      updateGasStatusBadgeModal(false);
-    });
-}
 
 
 // ============================================================================
@@ -1898,7 +1751,7 @@ const indexingData = {
   "crossref": {
     title: "Crossref Metadata & Persistent Digital Object Identifiers (DOIs)",
     badge: "Official DOI Registration Agency",
-    description: "All peer-reviewed manuscripts accepted for Volume 1, Issue 1 will be assigned persistent Crossref DOIs. Deposited metadata includes complete bibliographic data, author ORCID iDs, abstracts, and reference linking, guaranteeing permanent discoverability and reliable scholarly citation across the international scientific record."
+    description: "All peer-reviewed manuscripts accepted for publication will be assigned persistent Crossref DOIs. Deposited metadata includes complete bibliographic data, author ORCID iDs, abstracts, and reference linking, guaranteeing permanent discoverability and reliable scholarly citation across the international scientific record."
   },
   "oai-pmh": {
     title: "Open Archives Initiative Protocol for Metadata Harvesting (OAI-PMH v2.0)",
@@ -1908,7 +1761,7 @@ const indexingData = {
   "doaj": {
     title: "Directory of Open Access Journals (DOAJ) Compliance",
     badge: "Open Access Best Practice & Quality Standards",
-    description: "Pharmionex Journal strictly follows the DOAJ Principles of Transparency and Best Practice in Scholarly Publishing: Diamond Open Access (Zero APC), CC BY 4.0 licensing, author copyright retention, double-blind peer review, and anti-plagiarism verification (< 10% similarity). Formal indexing application will be submitted following the inaugural volume release."
+    description: "Pharmionex Journal strictly follows the DOAJ Principles of Transparency and Best Practice in Scholarly Publishing: Diamond Open Access (Zero APC), CC BY 4.0 licensing, author copyright retention, double-blind peer review, and anti-plagiarism verification (< 10% similarity). Formal indexing application will be submitted after the first issue is published."
   },
   "lockss": {
     title: "Permanent Digital Preservation (LOCKSS / CLOCKSS Networks)",
@@ -1939,7 +1792,7 @@ function prepareTrackSubmission(trackName, articleType) {
   state.track = trackName;
   state.articleType = articleType;
   const selType = document.getElementById("articleType");
-  const selTrack = document.getElementById("subjectTrack");
+  const selTrack = document.getElementById("articleTrack");
   if (selType) selType.value = articleType;
   if (selTrack) selTrack.value = trackName;
   onArticleTypeChange();
@@ -1963,3 +1816,42 @@ if (typeof document !== "undefined" && document.addEventListener) {
     }
   });
 }
+
+
+// ============================================================================
+// SUBMIT VIA GOOGLE FORM TAB
+// ============================================================================
+function isGoogleFormUrl(url) {
+  return /^https:\/\/(docs\.google\.com\/forms\/|forms\.gle\/)/.test(url || "");
+}
+
+function renderGoogleForm() {
+  const box = document.getElementById("gformContainer");
+  if (!box) return;
+  const url = (GOOGLE_FORM_URL || "").trim();
+  const mail = "pharmioneex.journal@gmail.com";
+
+  if (!isGoogleFormUrl(url)) {
+    box.innerHTML = `
+      <div style="text-align:center; padding:36px 20px; border:1px dashed var(--border-color); border-radius:var(--radius);">
+        <div style="font-size:36px;">🛠️</div>
+        <h3 style="font-size:17px; margin:8px 0 6px;">The submission form is being set up</h3>
+        <p style="font-size:13px; color:var(--text-muted); max-width:520px; margin:0 auto 14px;">
+          In the meantime, use the full submission wizard, or email your manuscript to
+          <a href="mailto:${mail}" style="color:var(--accent);">${mail}</a>.
+        </p>
+        <button type="button" class="btn btn-primary" onclick="switchMainView('submission')">Open Submission Wizard ➔</button>
+      </div>`;
+    return;
+  }
+
+  const embedUrl = url.includes("docs.google.com") ? url.replace(/[?&]embedded=true/, "") + (url.includes("?") ? "&" : "?") + "embedded=true" : "";
+  box.innerHTML = `
+    ${embedUrl ? `<iframe src="${escapeHtml(embedUrl)}" title="Pharmionex manuscript submission form" loading="lazy"
+        style="width:100%; height:1500px; max-height:80vh; min-height:620px; border:1px solid var(--border-color); border-radius:var(--radius); background:#fff;">Loading form…</iframe>` : ""}
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-top:12px; font-size:12px; color:var(--text-muted);">
+      <span>Form not loading? Open it in a new tab instead.</span>
+      <a href="${escapeHtml(url)}" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Open Google Form in new tab ↗</a>
+    </div>`;
+}
+

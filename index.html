@@ -17,7 +17,7 @@
       <div class="top-bar-left">
         <span>📖 Open Access Peer-Reviewed Journal</span>
         <span>• ISSN (Online): <strong>Application in Process (NIScPR, New Delhi)</strong></span>
-        <span>• Volume 1, Issue 1 (October 2026)</span>
+        <span>• Call for Papers Open</span>
         <span>• UGC-CARE, COPE & ICMJE Guidelines Compliant</span>
       </div>
       <div class="top-bar-right">
@@ -52,9 +52,10 @@
 
       <nav class="nav-links">
         <a href="javascript:void(0)" onclick="switchMainView('home')" class="active" id="nav-home">Home</a>
-        <a href="javascript:void(0)" onclick="switchMainView('articles')" id="nav-articles">Articles & Archive</a>
+        <a href="javascript:void(0)" onclick="switchMainView('articles')" id="nav-articles">Article Types</a>
         <a href="javascript:void(0)" onclick="switchMainView('track')" id="nav-track">🔍 Track Article</a>
         <a href="javascript:void(0)" onclick="switchMainView('submission')" id="nav-submission">Submit Manuscript</a>
+        <a href="javascript:void(0)" onclick="switchMainView('gform')" id="nav-gform">📝 Submit via Google Form</a>
         <a href="javascript:void(0)" onclick="switchMainView('guidelines')" id="nav-guidelines">Author Guidelines</a>
         <a href="javascript:void(0)" onclick="switchMainView('editorial')" id="nav-editorial">Editorial Board & Policies</a>
         
@@ -75,9 +76,10 @@
     </div>
     <ul class="mobile-nav-list">
       <li><button type="button" onclick="switchMainView('home'); toggleMobileMenu();">🏠 Journal Home</button></li>
-      <li><button type="button" onclick="switchMainView('articles'); toggleMobileMenu();">📚 Articles & Repository</button></li>
+      <li><button type="button" onclick="switchMainView('articles'); toggleMobileMenu();">📚 Article Types & Tracks</button></li>
       <li><button type="button" onclick="switchMainView('track'); toggleMobileMenu();">🔍 Track Manuscript Status</button></li>
       <li><button type="button" onclick="switchMainView('submission'); toggleMobileMenu();">✍️ Author Submission Portal</button></li>
+      <li><button type="button" onclick="switchMainView('gform'); toggleMobileMenu();">📝 Submit via Google Form</button></li>
       <li><button type="button" onclick="switchMainView('guidelines'); toggleMobileMenu();">📖 Author Guidelines & Checklist</button></li>
       <li><button type="button" onclick="switchMainView('editorial'); toggleMobileMenu();">👥 Editorial Board & Policies</button></li>
       
@@ -93,15 +95,15 @@
     <div id="view-home" class="app-view active">
       <div class="hero-banner">
         <div class="hero-content">
-          <div class="hero-badge">🧬 Volume 1, Issue 1 (Inaugural Issue, 2026) • Call for Papers Open • Diamond Open Access (Zero APC)</div>
+          <div class="hero-badge">🧬 Call for Papers Open • Diamond Open Access (Zero APC)</div>
           <h1 class="hero-title">Advancing Pharmaceutical Sciences, Drug Delivery & Translational Medicine</h1>
           <p class="hero-subtitle">
-            <strong>Pharmionex Journal</strong> is a peer-reviewed open-access academic periodical edited and published by <strong>Vivek Sharma</strong>. Currently accepting original research, comprehensive reviews, methodology protocols, short communications, and clinical case studies for our Inaugural Volume 1 (2026). All submissions undergo double-blind peer review with zero article processing charges.
+            <strong>Pharmionex Journal</strong> is a peer-reviewed open-access academic periodical edited and published by <strong>Vivek Sharma</strong>. Currently accepting original research, comprehensive reviews, methodology protocols, short communications, and clinical case studies. All submissions undergo double-blind peer review with zero article processing charges.
           </p>
           <div class="hero-buttons">
-            <button type="button" class="btn btn-primary" onclick="switchMainView('articles')">📚 Explore Tracks & Templates</button>
+            <button type="button" class="btn btn-primary" onclick="switchMainView('articles')">📚 Explore Article Types</button>
             <button type="button" class="btn btn-outline" onclick="switchMainView('track')">🔍 Track Manuscript Status</button>
-            <button type="button" class="btn btn-light" onclick="switchMainView('submission')">✍️ Submit Paper to Volume 1</button>
+            <button type="button" class="btn btn-light" onclick="switchMainView('submission')">✍️ Submit Your Paper</button>
           </div>
         </div>
       </div>
@@ -184,14 +186,14 @@
         </div>
       </div>
 
-      <!-- Inaugural Issue Call for Papers & Subject Tracks -->
+      <!-- Call for Papers & Subject Tracks -->
       <div class="card">
         <div class="card-header">
           <div>
-            <h2 class="card-title">📢 Volume 1, Issue 1 (Inaugural Issue, 2026) — Call for Papers</h2>
-            <p class="card-subtitle">Now accepting scholarly manuscripts across 8 core pharmaceutical disciplines with Zero APC (Diamond Open Access).</p>
+            <h2 class="card-title">📢 Call for Papers</h2>
+            <p class="card-subtitle">Now accepting scholarly manuscripts across core pharmaceutical disciplines with Zero APC (Diamond Open Access).</p>
           </div>
-          <button type="button" class="btn btn-outline btn-sm" onclick="switchMainView('articles')">Browse All 8 Subject Tracks & Templates ➔</button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="switchMainView('articles')">Browse All Article Types & Tracks ➔</button>
         </div>
 
         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">
@@ -210,7 +212,6 @@
             <div style="display:flex; justify-content:space-between; align-items:center;">
               <span style="font-size:11px; color:var(--text-muted);">Word limit: 4,000–7,000</span>
               <div style="display:flex; gap:6px;">
-                <button type="button" class="btn btn-primary btn-sm" onclick="downloadArticlePDF('track-1')">📥 Template (PDF)</button>
                 <button type="button" class="btn btn-outline btn-sm" onclick="switchMainView('submission')">✍️ Submit</button>
               </div>
             </div>
@@ -231,7 +232,6 @@
             <div style="display:flex; justify-content:space-between; align-items:center;">
               <span style="font-size:11px; color:var(--text-muted);">Word limit: 6,000–12,000</span>
               <div style="display:flex; gap:6px;">
-                <button type="button" class="btn btn-primary btn-sm" onclick="downloadArticlePDF('track-4')">📥 Template (PDF)</button>
                 <button type="button" class="btn btn-outline btn-sm" onclick="switchMainView('submission')">✍️ Submit</button>
               </div>
             </div>
@@ -247,8 +247,8 @@
       <div class="card" style="margin-bottom:16px;">
         <div class="card-header">
           <div>
-            <h2 class="card-title">📚 Published Articles & Scholarly Archive</h2>
-            <p class="card-subtitle">Search, filter, and download peer-reviewed open-access articles published in Pharmionex Journal.</p>
+            <h2 class="card-title">📚 Article Types & Subject Tracks</h2>
+            <p class="card-subtitle">Browse the article types and subject tracks Pharmionex Journal accepts, with scope, word limits and abstract formats.</p>
           </div>
           <button type="button" class="btn btn-primary btn-sm" onclick="switchMainView('submission')">✍️ Submit Paper</button>
         </div>
@@ -256,7 +256,7 @@
         <!-- SEARCH TOOLBAR -->
         <div class="repo-search-toolbar">
           <div class="repo-search-input-wrap">
-            <input type="text" id="articleRepoSearchInput" class="repo-search-input" placeholder="Search by title, author name, keyword, DOI, or abstract text (e.g. HPLC, Lipid, Capsule)..." oninput="filterArticles()">
+            <input type="text" id="articleRepoSearchInput" class="repo-search-input" placeholder="Search by article type, subject track, scope or keyword (e.g. HPLC, Lipid, Capsule)..." oninput="filterArticles()">
             <button type="button" class="btn btn-primary" onclick="filterArticles()">🔍 Search</button>
             <button type="button" class="btn btn-outline" onclick="resetArticleFilters()">Clear</button>
           </div>
@@ -274,6 +274,7 @@
                 <option value="Regulatory & Review Article">Regulatory & Review Article</option>
                 <option value="Pharmacokinetic Research Article">Pharmacokinetic Research Article</option>
                 <option value="Clinical Case Study & Pharmacovigilance">Clinical Case Study & Pharmacovigilance</option>
+                <option value="Systematic Review & Meta-Analysis">Systematic Review & Meta-Analysis</option>
               </select>
             </div>
 
@@ -288,13 +289,7 @@
                 <option value="Pharmacology & Clinical Pharmacokinetics">Pharmacology & Clinical Pharmacokinetics</option>
                 <option value="Medicinal Chemistry & Nanomedicine">Medicinal Chemistry & Nanomedicine</option>
                 <option value="Clinical Pharmacy & Pharmacovigilance">Clinical Pharmacy & Pharmacovigilance</option>
-              </select>
-            </div>
-
-            <div>
-              <label style="font-size:12px; font-weight:600; color:var(--text-muted); margin-right:6px;">Issue:</label>
-              <select id="articleFilterIssue" class="repo-filter-select" onchange="filterArticles()">
-                <option value="ALL">Volume 1, Issue 1 (October 2026)</option>
+                <option value="Pharmacognosy & Phytomedicine">Pharmacognosy & Phytomedicine</option>
               </select>
             </div>
 
@@ -322,7 +317,7 @@
 
         <!-- Results Counter -->
         <div id="articleCountBanner" class="repo-results-count">
-          Showing 8 published peer-reviewed articles across all pharmaceutical categories
+          Loading article tracks…
         </div>
 
         <!-- Article List Container -->
@@ -461,6 +456,7 @@
                 <option value="Pharmaceutical Analysis & Method Validation">Pharmaceutical Analysis & Method Validation</option>
                 <option value="Industrial Pharmacy & Formulation Science">Industrial Pharmacy & Formulation Science</option>
                 <option value="Biopharmaceutics & Biotechnology">Biopharmaceutics & Biotechnology</option>
+                <option value="Pharmacognosy & Phytomedicine">Pharmacognosy & Phytomedicine</option>
                 <option value="Regulatory Affairs, GMP & Quality Assurance">Regulatory Affairs, GMP & Quality Assurance</option>
                 <option value="Pharmacology & Clinical Pharmacokinetics">Pharmacology & Clinical Pharmacokinetics</option>
                 <option value="Medicinal Chemistry & Nanomedicine">Medicinal Chemistry & Nanomedicine</option>
@@ -780,6 +776,23 @@
       </div>
     </div>
 
+    <!-- VIEW: SUBMIT VIA GOOGLE FORM -->
+    <div id="view-gform" class="app-view">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title">📝 Submit Your Article via Google Form</h2>
+            <p class="card-subtitle">A quick alternative to the 7-step wizard. Fill in the form and upload your manuscript; the editorial office receives it directly. Zero APC.</p>
+          </div>
+          <button type="button" class="btn btn-outline btn-sm" onclick="switchMainView('submission')">Use the full submission wizard ➔</button>
+        </div>
+        <div style="background:var(--surface-subtle); border-left:3px solid var(--primary); padding:12px 14px; border-radius:var(--radius-sm); font-size:12px; color:var(--text-muted); line-height:1.6; margin-bottom:16px;">
+          <strong>Before you submit:</strong> read the <a href="javascript:void(0)" onclick="switchMainView('guidelines')" style="color:var(--accent);">Author Guidelines</a>, keep plagiarism similarity below 10%, and blind the title page of the manuscript file (double-blind review). You will need a Google account to upload files in the form.
+        </div>
+        <div id="gformContainer"></div>
+      </div>
+    </div>
+
     <!-- ====================================================================
          VIEW 5: AUTHOR GUIDELINES & SUBMISSION CHECKLIST (NEW DEDICATED VIEW)
          ==================================================================== -->
@@ -890,7 +903,7 @@
         <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:var(--radius); padding:18px; margin-bottom:24px;">
           <h3 style="font-size:15px; font-weight:700; color:#166534; margin-bottom:6px;">💎 Diamond Open Access Policy (Zero APC / Free Publication)</h3>
           <p style="font-size:13px; color:#1e293b; line-height:1.6;">
-            Pharmionex Journal operates under a <strong>Platinum / Diamond Open Access Model</strong>. There are <strong>no submission fees</strong> and <strong>no Article Processing Charges (APCs)</strong> for authors during our inaugural volumes. All costs are supported by Pharmionex Scientific Publications to ensure unfettered global access to pharmaceutical discoveries.
+            Pharmionex Journal operates under a <strong>Platinum / Diamond Open Access Model</strong>. There are <strong>no submission fees</strong> and <strong>no Article Processing Charges (APCs)</strong> for authors while the journal is launching. All costs are supported by Pharmionex Scientific Publications to ensure unfettered global access to pharmaceutical discoveries.
           </p>
         </div>
 
@@ -968,7 +981,6 @@
             <li><strong>Publication Format:</strong> Online Open Access</li>
             <li><strong>Publisher:</strong> Pharmionex Scientific Publications (Vivek Sharma), New Delhi / Haryana, India</li>
             <li><strong>Editorial Contact:</strong> pharmioneex.journal@gmail.com</li>
-            <li><strong>Sample Inaugural Issue:</strong> Volume 1, Issue 1 (October 2026) fully accessible for evaluation with 8 peer-reviewed research papers across all article categories.</li>
           </ul>
         </div>
 
@@ -1026,7 +1038,7 @@
         </p>
         <p style="font-size:12px; color:#94a3b8; margin-top:8px;">
           ISSN (Online): <strong>Application in Process (NIScPR, India)</strong><br>
-          Volume 1, Issue 1 (October 2026) • CrossRef DOI: <strong>Assigned upon Inaugural Volume Release (Crossref)</strong>
+          CrossRef DOI: <strong>Assigned upon publication</strong>
         </p>
       </div>
 
@@ -1034,9 +1046,10 @@
         <h4>Navigation</h4>
         <ul>
           <li><a href="javascript:void(0)" onclick="switchMainView('home')">Journal Home</a></li>
-          <li><a href="javascript:void(0)" onclick="switchMainView('articles')">Articles & Archive</a></li>
+          <li><a href="javascript:void(0)" onclick="switchMainView('articles')">Article Types</a></li>
           <li><a href="javascript:void(0)" onclick="switchMainView('track')">🔍 Track Manuscript Status</a></li>
           <li><a href="javascript:void(0)" onclick="switchMainView('submission')">Author Submission Portal</a></li>
+          <li><a href="javascript:void(0)" onclick="switchMainView('gform')">Submit via Google Form</a></li>
           <li><a href="javascript:void(0)" onclick="switchMainView('guidelines')">Author Guidelines & Checklist</a></li>
           <li><a href="javascript:void(0)" onclick="switchMainView('editorial')">Editorial Board & Policies</a></li>
           
@@ -1071,9 +1084,6 @@
       </div>
       <div style="display:flex; align-items:center; gap:18px;">
         <span>Publisher & Editor-in-Chief: <strong>Vivek Sharma</strong></span>
-        <a href="javascript:void(0)" onclick="openEditorialControlModal()" style="color:var(--accent); text-decoration:none; font-weight:600; display:inline-flex; align-items:center; gap:6px; padding:5px 10px; border-radius:4px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15);">
-          🔒 Editorial Management Portal
-        </a>
       </div>
     </div>
   </footer>
@@ -1123,57 +1133,6 @@
 
   <!-- Main Application Script -->
   <script src="script.js"></script>
-
-  <!-- ====================================================================
-       EDITORIAL CONTROL MODAL (FOR VIVEK SHARMA - SECURE / DISCREET)
-       ==================================================================== -->
-  <div class="modal-overlay" id="modalEditorialControl">
-    <div class="modal-card" style="max-width:680px; max-height:88vh; overflow-y:auto;">
-      <div class="modal-header">
-        <div>
-          <h3 style="font-size:18px; font-weight:800; color:var(--primary); margin:0;">🔒 Editorial Backend & Google Apps Script Setup</h3>
-          <p style="font-size:12px; color:var(--text-muted); margin:4px 0 0;">Private Management Console for Editor-in-Chief Vivek Sharma</p>
-        </div>
-        <button type="button" class="btn btn-ghost btn-sm" onclick="closeEditorialControlModal()">✕</button>
-      </div>
-      <div class="modal-body" style="padding:20px;">
-        <div style="background:var(--surface-subtle); border:1px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; margin-bottom:16px;">
-          <h4 style="font-size:14px; font-weight:700; color:var(--primary); margin-bottom:6px;">📁 Google Drive & Account Infrastructure</h4>
-          <p style="font-size:13px; color:var(--text-main); margin-bottom:4px;">
-            <strong>Official Editorial Account:</strong> <code style="color:var(--accent);">pharmioneex.journal@gmail.com</code>
-          </p>
-          <p style="font-size:12px; color:var(--text-muted); margin:0; line-height:1.5;">
-            All manuscript files, author metadata, and submission manifests are automatically received and archived in the dedicated <em>"Pharmionex Journal - Submissions Archive"</em> Google Drive folder under this account.
-          </p>
-        </div>
-
-        <div style="margin-bottom:16px;">
-          <label style="display:block; font-size:13px; font-weight:700; color:var(--text-main); margin-bottom:6px;">
-            🔗 Google Apps Script Web App URL (Live Synchronization)
-          </label>
-          <div style="display:flex; gap:8px; flex-wrap:wrap;">
-            <input type="url" id="gasWebhookUrlInputModal" placeholder="https://script.google.com/macros/s/AKfycbx.../exec" style="flex:1; min-width:260px; padding:10px 12px; font-family:monospace; font-size:12px; border:1px solid var(--border-color); border-radius:var(--radius-sm); outline:none;">
-            <button type="button" class="btn btn-primary btn-sm" onclick="saveGasUrlModal()">💾 Save URL</button>
-            <button type="button" class="btn btn-outline btn-sm" onclick="testGasConnectionModal()">🚀 Test Connection</button>
-          </div>
-          <div id="gasStatusBadgeModal" style="font-size:12px; color:var(--text-muted); margin-top:8px;">
-            Status: <span style="font-weight:600;">Direct Google Drive & Local Storage Active</span>
-          </div>
-        </div>
-
-        <div style="background:var(--surface-subtle); border-left:3px solid var(--primary); padding:12px 14px; border-radius:var(--radius-sm); font-size:12px; color:var(--text-muted); line-height:1.5;">
-          <strong>Quick Setup Reminder:</strong><br>
-          1. Open Google Sheets logged in as <code>pharmioneex.journal@gmail.com</code>.<br>
-          2. Go to <strong>Extensions → Apps Script</strong> and paste <code>google_apps_script/Code.gs</code>.<br>
-          3. Run <code>setupSheetHeaders</code>, deploy as Web App (Access: Anyone), and paste the URL above.<br>
-          4. Submissions will immediately log to Google Sheets, create author folders in Drive, and send official confirmation emails!
-        </div>
-      </div>
-      <div class="modal-footer" style="padding:14px 20px; display:flex; justify-content:flex-end;">
-        <button type="button" class="btn btn-secondary btn-sm" onclick="closeEditorialControlModal()">Close Management Panel</button>
-      </div>
-    </div>
-  </div>
 
   <!-- Indexing & Preservation Info Modal -->
   <div class="modal-overlay" id="modalIndexingInfo">
