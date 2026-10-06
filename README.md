@@ -32,7 +32,3 @@ All actions are recorded in the **AuditLog** tab.
 - A Sheet/Drive/email failure never loses the submission (the sheet row is always written, and problems are returned as warnings)
 
 Gmail's free quota is about 100 emails per day; each submission uses 2.
-
-
-## Editorial status control
-The website has NO editor control panel. The editorial office controls public tracking directly from the `Submissions` sheet. In column O (`Stage (1-6)`), select a stage from the dropdown. The Apps Script `onEdit(e)` trigger automatically updates `Current Status` and `Last Updated`, and the public Track Article page reads the current record from the sheet.
