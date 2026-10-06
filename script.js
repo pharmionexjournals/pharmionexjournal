@@ -10,7 +10,7 @@
  */
 
 // Google Apps Script Web App URL for live synchronization
-var GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxJkZ9yZ__-HndejeWlAlzzsdP8s2CHqHCicdv9tGVZhAcp8Zw2mx8SVZMu40JCfDG1/exec";
+var GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwrJ6JzTjuLCQij764SBqsVBj74gRjdlUW0ICNA7hJoXh86HGLMFcU2-fn3I9jsLZ6F/exec";
 
 // Google Form for article submission. This is the journal\'s live intake form (docs.google.com/forms).
 var GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfeNhcHdfcFAu_Z3MQY_lX_ju8lZXdai0CCKfW_jMNTN7yV7w/viewform";
