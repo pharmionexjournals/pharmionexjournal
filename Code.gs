@@ -37,14 +37,16 @@ const CONFIG = {
 const COL = {
   TIMESTAMP: 1, ID: 2, TYPE: 3, TITLE: 4, TRACK: 5, AUTHOR: 6, EMAIL: 7,
   AFFILIATION: 8, COAUTHORS: 9, ABSTRACT: 10, KEYWORDS: 11, FOLDER: 12,
-  ETHICS: 13, STATUS: 14, STAGE: 15, PLAGIARISM: 16, EDITOR: 17, DATA: 18
+  ETHICS: 13, STATUS: 14, STAGE: 15, PLAGIARISM: 16, EDITOR: 17, DATA: 18,
+  REVIEWERS: 19, REMARKS: 20, REVIEWER_COMMENTS: 21, LAST_UPDATED: 22
 };
 
 const HEADERS = [
   "Timestamp", "Tracking ID", "Article Category", "Manuscript Title", "Subject Track",
   "Corresponding Author", "Author Email", "Affiliation", "Co-Authors", "Structured Abstract",
   "Keywords (MeSH)", "Google Drive Folder Link", "Ethics Protocol", "Current Status",
-  "Stage (1-6)", "Plagiarism Similarity (%)", "Handling Editor", "Data Availability"
+  "Stage (1-6)", "Plagiarism Similarity (%)", "Handling Editor", "Data Availability",
+  "Reviewers Assigned", "Latest Editor Remarks", "Reviewer Comments / Internal Note", "Last Updated"
 ];
 
 const STAGE_NAMES = [
@@ -201,7 +203,11 @@ function doPost(e) {
     sheet.appendRow([
       new Date(), subId, articleType, title, track, authorName, authorEmail, affiliation,
       coAuthors, abstract, keywords, folderUrl, iaec,
-      "Stage 1: Initial Editorial Desk Review", 1, "Pending", CONFIG.EDITOR_IN_CHIEF, dataAvail
+      "Stage 1: Initial Editorial Desk Review", "1 — Submission Received", "Pending", CONFIG.EDITOR_IN_CHIEF, dataAvail,
+      "Pending Scope Review",
+      "Manuscript formally received. Initial editorial desk review and similarity screening are in progress.",
+      "Awaiting initial editorial evaluation.",
+      new Date()
     ]);
     logAudit_("SUBMISSION_RECEIVED", subId, title);
 
@@ -278,20 +284,7 @@ function doGet(e) {
     const row = findRowById_(sheet, id);
     if (!row) return json_({ found: false, message: "Tracking ID not found in database" });
 
-    const v = sheet.getRange(row, 1, 1, HEADERS.length).getValues()[0];
-    return json_({
-      found: true,
-      trackingId: v[COL.ID - 1],
-      articleType: v[COL.TYPE - 1],
-      title: v[COL.TITLE - 1],
-      track: v[COL.TRACK - 1],
-      author: v[COL.AUTHOR - 1],
-      submissionDate: Utilities.formatDate(new Date(v[COL.TIMESTAMP - 1]), Session.getScriptTimeZone(), "MMMM dd, yyyy"),
-      status: v[COL.STATUS - 1],
-      stage: v[COL.STAGE - 1] || 1,
-      plagiarismScore: v[COL.PLAGIARISM - 1] || "In Progress",
-      assignedEditor: v[COL.EDITOR - 1] || CONFIG.EDITOR_IN_CHIEF
-    });
+    return json_(getPublicTrackingRecord_(sheet, row));
   }
 
   return json_({ error: "Invalid action" });
@@ -327,6 +320,35 @@ function setupSheetHeaders() {
   subSheet.setFrozenRows(1);
   subSheet.autoResizeColumns(1, HEADERS.length);
 
+  // Editorial control: change ONLY the Stage dropdown (column O).
+  // The Current Status column is then updated automatically by onEdit(e).
+  const stageOptions = [
+    "1 — Submission Received",
+    "2 — Scope & Plagiarism Check",
+    "3 — Double-Blind Peer Review",
+    "4 — Reviewer Revisions",
+    "5 — Acceptance Decision",
+    "6 — Published in Issue"
+  ];
+  // Normalize existing numeric stages so the dropdown works immediately.
+  const existingRows = Math.max(subSheet.getLastRow() - 1, 0);
+  if (existingRows > 0) {
+    const stageRange = subSheet.getRange(2, COL.STAGE, existingRows, 1);
+    const stageValues = stageRange.getValues().map(function(r) {
+      const n = parseStage_(r[0]) || 1;
+      return [stageOptions[n - 1]];
+    });
+    stageRange.setValues(stageValues);
+  }
+  const stageRule = SpreadsheetApp.newDataValidation()
+    .requireValueInList(stageOptions, true)
+    .setAllowInvalid(false)
+    .build();
+  subSheet.getRange(2, COL.STAGE, Math.max(subSheet.getMaxRows() - 1, 1), 1).setDataValidation(stageRule);
+  subSheet.getRange(1, COL.STAGE).setNote("EDITOR CONTROL: Select a stage from the dropdown. The public tracking page updates from this sheet automatically.");
+  subSheet.getRange(1, COL.STATUS).setNote("Automatically synchronized from the Stage dropdown. You normally do not need to edit this cell manually.");
+  subSheet.getRange(1, COL.LAST_UPDATED).setNote("Automatically updated whenever an editorial field is changed.");
+
   const audit = ss.getSheetByName(CONFIG.AUDIT_SHEET) || ss.insertSheet(CONFIG.AUDIT_SHEET);
   if (audit.getLastRow() === 0) {
     audit.getRange(1, 1, 1, 4).setValues([["Timestamp", "Action", "Tracking ID", "Details"]])
@@ -336,13 +358,76 @@ function setupSheetHeaders() {
 
   getOrCreateSubmissionsFolder();
 
-  // The pop-up only works when run from the Sheet menu, not from the script editor.
   try {
-    SpreadsheetApp.getUi().alert("✅ Pharmionex Editorial Google Sheet initialized successfully for " + CONFIG.EDITOR_IN_CHIEF + "!");
+    SpreadsheetApp.getUi().alert("✅ Editorial sheet ready. To update an article, open the Submissions sheet and change the Stage dropdown in column O. The public Track Article page will use the new value.");
   } catch (uiErr) {
-    Logger.log("Headers set up OK (no UI available when run from the editor).");
+    Logger.log("Editorial sheet initialized.");
   }
 }
+
+/**
+ * Spreadsheet-only editorial control. No editor panel or token is exposed on the website.
+ * Change the Stage dropdown in column O; the public tracking record follows it.
+ */
+function onEdit(e) {
+  if (!e || !e.range) return;
+  const sheet = e.range.getSheet();
+  if (sheet.getName() !== CONFIG.SUBMISSIONS_SHEET || e.range.getRow() < 2) return;
+
+  const row = e.range.getRow();
+  const col = e.range.getColumn();
+  const watched = [COL.STATUS, COL.STAGE, COL.PLAGIARISM, COL.EDITOR, COL.REVIEWERS, COL.REMARKS, COL.REVIEWER_COMMENTS];
+  if (watched.indexOf(col) === -1) return;
+
+  const trackingId = String(sheet.getRange(row, COL.ID).getValue() || "").trim().toUpperCase();
+  if (!trackingId) return;
+
+  // Stage is the primary control. A stage selection automatically supplies the public status.
+  if (col === COL.STAGE) {
+    const parsed = parseStage_(e.value);
+    if (parsed) {
+      sheet.getRange(row, COL.STAGE).setValue(stageLabel_(parsed));
+      sheet.getRange(row, COL.STATUS).setValue(stageStatus_(parsed));
+    }
+  }
+
+  sheet.getRange(row, COL.LAST_UPDATED).setValue(new Date());
+
+  const stage = parseInt(sheet.getRange(row, COL.STAGE).getValue(), 10) || 1;
+  const status = String(sheet.getRange(row, COL.STATUS).getValue() || stageStatus_(stage));
+  const details = JSON.stringify({stage: stage, status: status, editor: String(sheet.getRange(row, COL.EDITOR).getValue() || CONFIG.EDITOR_IN_CHIEF)});
+  logAudit_("STATUS_UPDATED", trackingId, details);
+}
+
+function parseStage_(value) {
+  const m = String(value || "").match(/^[1-6]/);
+  return m ? Number(m[0]) : null;
+}
+
+function stageLabel_(stage) {
+  const labels = {
+    1: "1 — Submission Received",
+    2: "2 — Scope & Plagiarism Check",
+    3: "3 — Double-Blind Peer Review",
+    4: "4 — Reviewer Revisions",
+    5: "5 — Acceptance Decision",
+    6: "6 — Published in Issue"
+  };
+  return labels[Number(stage)] || labels[1];
+}
+
+function stageStatus_(stage) {
+  const statuses = {
+    1: "Stage 1: Initial Editorial Desk Review",
+    2: "Stage 2: Scope & Plagiarism Check",
+    3: "Stage 3: Double-Blind Peer Review",
+    4: "Stage 4: Reviewer Revisions",
+    5: "Stage 5: Acceptance Decision",
+    6: "Stage 6: Published in Issue"
+  };
+  return statuses[Number(stage)] || statuses[1];
+}
+
 
 /* ============================================================================
  * MENU ACTIONS
@@ -596,7 +681,8 @@ function getSelectedSubmission_() {
     id: v[COL.ID - 1], type: v[COL.TYPE - 1], title: v[COL.TITLE - 1], track: v[COL.TRACK - 1],
     author: v[COL.AUTHOR - 1], email: v[COL.EMAIL - 1], affiliation: v[COL.AFFILIATION - 1],
     abstract: v[COL.ABSTRACT - 1], keywords: v[COL.KEYWORDS - 1], folderUrl: v[COL.FOLDER - 1],
-    status: v[COL.STATUS - 1], stage: v[COL.STAGE - 1]
+    status: v[COL.STATUS - 1], stage: v[COL.STAGE - 1],
+    assignedReviewers: v[COL.REVIEWERS - 1], editorRemarks: v[COL.REMARKS - 1], reviewerComments: v[COL.REVIEWER_COMMENTS - 1]
   };
 }
 
