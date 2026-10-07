@@ -26,7 +26,6 @@ const CONFIG = {
   SUBMISSIONS_SHEET: "Submissions",
   ARTICLES_SHEET: "Inaugural_Volume_1",
   AUDIT_SHEET: "AuditLog",
-  EDITOR_TOKEN_PROPERTY: "EDITOR_CONTROL_TOKEN",
   MAX_TOTAL_FILE_BYTES: 20 * 1024 * 1024,           // all uploaded files combined
   ALLOWED_PRIMARY_EXT: ["pdf", "doc", "docx", "zip", "tex"],
   ALLOWED_SUPP_EXT: ["xlsx", "csv", "zip", "png", "jpg", "jpeg", "tif", "tiff", "pdf", "doc"],
@@ -38,14 +37,16 @@ const CONFIG = {
 const COL = {
   TIMESTAMP: 1, ID: 2, TYPE: 3, TITLE: 4, TRACK: 5, AUTHOR: 6, EMAIL: 7,
   AFFILIATION: 8, COAUTHORS: 9, ABSTRACT: 10, KEYWORDS: 11, FOLDER: 12,
-  ETHICS: 13, STATUS: 14, STAGE: 15, PLAGIARISM: 16, EDITOR: 17, DATA: 18
+  ETHICS: 13, STATUS: 14, STAGE: 15, PLAGIARISM: 16, EDITOR: 17, DATA: 18,
+  REVIEWERS: 19, REMARKS: 20, REVIEWER_COMMENTS: 21, LAST_UPDATED: 22
 };
 
 const HEADERS = [
   "Timestamp", "Tracking ID", "Article Category", "Manuscript Title", "Subject Track",
   "Corresponding Author", "Author Email", "Affiliation", "Co-Authors", "Structured Abstract",
   "Keywords (MeSH)", "Google Drive Folder Link", "Ethics Protocol", "Current Status",
-  "Stage (1-6)", "Plagiarism Similarity (%)", "Handling Editor", "Data Availability"
+  "Stage (1-6)", "Plagiarism Similarity (%)", "Handling Editor", "Data Availability",
+  "Reviewers Assigned", "Latest Editor Remarks", "Reviewer Comments / Internal Note", "Last Updated"
 ];
 
 const STAGE_NAMES = [
@@ -66,7 +67,6 @@ function onOpen() {
     .addItem("📁 Open/Verify Submissions Drive Folder", "openSubmissionsFolder")
     .addSeparator()
     .addItem("📧 Send Status Email to Selected Author", "sendAuthorStatusEmail")
-    .addItem("🔐 Set/Change Editor Control Token", "setEditorControlToken")
     .addItem("📨 Send Double-Blind Reviewer Invitation", "sendReviewerInvite")
     .addItem("🎓 Generate Official Acceptance Letter (PDF)", "generateAcceptanceCertificate")
     .addToUi();
@@ -88,11 +88,6 @@ function doPost(e) {
       return json_({ success: false, error: "Empty request." });
     }
     const payload = JSON.parse(e.postData.contents);
-
-    // ---- Editor-only status control --------------------------------------
-    if (payload.action === "updateStatus") {
-      return handleEditorStatusUpdate_(payload);
-    }
 
     // ---- Validation -------------------------------------------------------
     const authorEmail = clip_(payload.authorEmail, 200).trim();
@@ -208,7 +203,7 @@ function doPost(e) {
     sheet.appendRow([
       new Date(), subId, articleType, title, track, authorName, authorEmail, affiliation,
       coAuthors, abstract, keywords, folderUrl, iaec,
-      "Stage 1: Initial Editorial Desk Review", 1, "Pending", CONFIG.EDITOR_IN_CHIEF, dataAvail,
+      "Stage 1: Initial Editorial Desk Review", "1 — Submission Received", "Pending", CONFIG.EDITOR_IN_CHIEF, dataAvail,
       "Pending Scope Review",
       "Manuscript formally received. Initial editorial desk review and similarity screening are in progress.",
       "Awaiting initial editorial evaluation.",
@@ -296,149 +291,6 @@ function doGet(e) {
 }
 
 /* ============================================================================
- * EDITOR CONTROL PANEL
- * ========================================================================== */
-function setEditorControlToken() {
-  const ui = SpreadsheetApp.getUi();
-  const result = ui.prompt(
-    "Editor Control Token",
-    "Enter a strong private token (minimum 16 characters). Keep it secret; it is used by the website Editor Control panel.",
-    ui.ButtonSet.OK_CANCEL
-  );
-  if (result.getSelectedButton() !== ui.Button.OK) return;
-  const token = result.getResponseText().trim();
-  if (token.length < 16) {
-    ui.alert("Token must be at least 16 characters long.");
-    return;
-  }
-  PropertiesService.getScriptProperties().setProperty(CONFIG.EDITOR_TOKEN_PROPERTY, token);
-  ui.alert("✅ Editor Control token saved. Use this token in the website's 🔐 Editor Control panel.");
-}
-
-function isValidEditorToken_(token) {
-  const stored = PropertiesService.getScriptProperties().getProperty(CONFIG.EDITOR_TOKEN_PROPERTY) || "";
-  token = String(token || "");
-  if (!stored || !token || stored.length !== token.length) return false;
-  let diff = 0;
-  for (let i = 0; i < stored.length; i++) diff |= stored.charCodeAt(i) ^ token.charCodeAt(i);
-  return diff === 0;
-}
-
-function handleEditorStatusUpdate_(payload) {
-  if (!isValidEditorToken_(payload.editorToken)) {
-    return json_({ success: false, error: "Editor authentication failed. Check your control token." });
-  }
-
-  const trackingId = String(payload.trackingId || "").trim().toUpperCase();
-  if (!/^PHARMIONEX-\\d{4}-[A-Z0-9]{4,8}$/.test(trackingId)) {
-    return json_({ success: false, error: "Invalid Tracking ID." });
-  }
-
-  const sheet = getSubmissionsSheet_();
-  const row = findRowById_(sheet, trackingId);
-  if (!row) return json_({ success: false, error: "Tracking ID not found." });
-
-  const current = sheet.getRange(row, 1, 1, Math.max(HEADERS.length, COL.LAST_UPDATED)).getValues()[0];
-  let stage = parseInt(payload.stage, 10);
-  if (!isFinite(stage)) stage = parseInt(current[COL.STAGE - 1], 10) || 1;
-  stage = Math.min(6, Math.max(1, stage));
-
-  const status = clip_(payload.status, 250).trim() || String(current[COL.STATUS - 1] || ("Stage " + stage));
-  const plagiarism = clip_(payload.plagiarismScore, 100).trim() || String(current[COL.PLAGIARISM - 1] || "Pending");
-  const editor = clip_(payload.assignedEditor, 200).trim() || CONFIG.EDITOR_IN_CHIEF;
-  const reviewers = clip_(payload.assignedReviewers, 500).trim() || String(current[COL.REVIEWERS - 1] || "Pending Scope Review");
-  const remarks = clip_(payload.editorRemarks, 2000).trim() || String(current[COL.REMARKS - 1] || "");
-  const reviewerComments = clip_(payload.reviewerComments, 2000).trim() || String(current[COL.REVIEWER_COMMENTS - 1] || "");
-  const now = new Date();
-
-  sheet.getRange(row, COL.STATUS).setValue(status);
-  sheet.getRange(row, COL.STAGE).setValue(stage);
-  sheet.getRange(row, COL.PLAGIARISM).setValue(plagiarism);
-  sheet.getRange(row, COL.EDITOR).setValue(editor);
-  sheet.getRange(row, COL.REVIEWERS).setValue(reviewers);
-  sheet.getRange(row, COL.REMARKS).setValue(remarks);
-  sheet.getRange(row, COL.REVIEWER_COMMENTS).setValue(reviewerComments);
-  sheet.getRange(row, COL.LAST_UPDATED).setValue(now);
-
-  const event = { stage: stage, status: status, remarks: remarks, editor: editor, reviewers: reviewers };
-  logAudit_("STATUS_UPDATED", trackingId, JSON.stringify(event));
-
-  let emailSent = false;
-  if (payload.sendEmail === true && String(current[COL.EMAIL - 1] || "")) {
-    try {
-      const author = String(current[COL.AUTHOR - 1] || "Author");
-      const title = String(current[COL.TITLE - 1] || "Manuscript");
-      const body = emailShell_(
-        "<p>Dear <strong>" + esc_(author) + "</strong>,</p>" +
-        "<p>This is an editorial status update for your manuscript submitted to <strong>" + esc_(CONFIG.JOURNAL_NAME) + "</strong>.</p>" +
-        infoBox_([["Manuscript Title", title], ["Tracking ID", trackingId], ["Current Stage", stage + " of 6 - " + STAGE_NAMES[stage - 1]], ["Status", status]]) +
-        (remarks ? "<p><strong>Editor's remarks:</strong><br>" + esc_(remarks).replace(/\n/g, "<br>") + "</p>" : "") +
-        "<p>You can view the live status at <a href='" + CONFIG.WEBSITE_URL + "#track'>" + CONFIG.WEBSITE_URL + "#track</a>.</p>"
-      );
-      sendMail_(String(current[COL.EMAIL - 1]), "[Pharmionex Journal] Status Update - " + trackingId, body);
-      emailSent = true;
-    } catch (mailErr) {
-      logAudit_("STATUS_EMAIL_ERROR", trackingId, String(mailErr));
-    }
-  }
-
-  return json_(Object.assign(getPublicTrackingRecord_(sheet, row), { success: true, emailSent: emailSent }));
-}
-
-function getPublicTrackingRecord_(sheet, row) {
-  const width = Math.max(HEADERS.length, COL.LAST_UPDATED);
-  const v = sheet.getRange(row, 1, 1, width).getValues()[0];
-  const stage = Math.min(6, Math.max(1, parseInt(v[COL.STAGE - 1], 10) || 1));
-  const timeline = getTrackingTimeline_(String(v[COL.ID - 1]));
-  return {
-    found: true,
-    trackingId: v[COL.ID - 1],
-    articleType: v[COL.TYPE - 1],
-    title: v[COL.TITLE - 1],
-    track: v[COL.TRACK - 1],
-    author: v[COL.AUTHOR - 1],
-    email: v[COL.EMAIL - 1],
-    affiliation: v[COL.AFFILIATION - 1],
-    submissionDate: Utilities.formatDate(new Date(v[COL.TIMESTAMP - 1]), Session.getScriptTimeZone(), "MMMM dd, yyyy"),
-    status: v[COL.STATUS - 1],
-    stage: stage,
-    plagiarismScore: v[COL.PLAGIARISM - 1] || "In Progress",
-    assignedEditor: v[COL.EDITOR - 1] || CONFIG.EDITOR_IN_CHIEF,
-    assignedReviewers: v[COL.REVIEWERS - 1] || "Assigned after desk review",
-    editorRemarks: v[COL.REMARKS - 1] || "Manuscript under active editorial review.",
-    reviewerComments: v[COL.REVIEWER_COMMENTS - 1] || "Awaiting reviewer evaluation.",
-    lastUpdated: v[COL.LAST_UPDATED - 1] ? Utilities.formatDate(new Date(v[COL.LAST_UPDATED - 1]), Session.getScriptTimeZone(), "MMMM dd, yyyy HH:mm") : "",
-    timeline: timeline
-  };
-}
-
-function getTrackingTimeline_(trackingId) {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
-  const audit = ss.getSheetByName(CONFIG.AUDIT_SHEET);
-  if (!audit || audit.getLastRow() < 2) return [];
-  const rows = audit.getRange(2, 1, audit.getLastRow() - 1, 4).getValues();
-  const events = [];
-  rows.forEach(function (r) {
-    if (String(r[2] || "").trim().toUpperCase() !== trackingId.toUpperCase()) return;
-    const action = String(r[1] || "");
-    if (action !== "STATUS_UPDATED" && action !== "SUBMISSION_RECEIVED") return;
-    let title = action === "SUBMISSION_RECEIVED" ? "Submission Received" : "Editorial Status Updated";
-    let remarks = String(r[3] || "");
-    let stage = 1;
-    if (action === "STATUS_UPDATED") {
-      try {
-        const obj = JSON.parse(remarks);
-        stage = parseInt(obj.stage, 10) || 1;
-        title = "Stage " + stage + ": " + (obj.status || "Status Updated");
-        remarks = obj.remarks || obj.status || "Editorial status updated.";
-      } catch (ignore) {}
-    }
-    events.push({ stage: stage, title: title, date: Utilities.formatDate(new Date(r[0]), Session.getScriptTimeZone(), "MMM dd, yyyy HH:mm"), status: "completed", remarks: remarks });
-  });
-  return events.slice(-20);
-}
-
-/* ============================================================================
  * DRIVE + SHEET SETUP
  * ========================================================================== */
 function getOrCreateSubmissionsFolder() {
@@ -468,6 +320,35 @@ function setupSheetHeaders() {
   subSheet.setFrozenRows(1);
   subSheet.autoResizeColumns(1, HEADERS.length);
 
+  // Editorial control: change ONLY the Stage dropdown (column O).
+  // The Current Status column is then updated automatically by onEdit(e).
+  const stageOptions = [
+    "1 — Submission Received",
+    "2 — Scope & Plagiarism Check",
+    "3 — Double-Blind Peer Review",
+    "4 — Reviewer Revisions",
+    "5 — Acceptance Decision",
+    "6 — Published in Issue"
+  ];
+  // Normalize existing numeric stages so the dropdown works immediately.
+  const existingRows = Math.max(subSheet.getLastRow() - 1, 0);
+  if (existingRows > 0) {
+    const stageRange = subSheet.getRange(2, COL.STAGE, existingRows, 1);
+    const stageValues = stageRange.getValues().map(function(r) {
+      const n = parseStage_(r[0]) || 1;
+      return [stageOptions[n - 1]];
+    });
+    stageRange.setValues(stageValues);
+  }
+  const stageRule = SpreadsheetApp.newDataValidation()
+    .requireValueInList(stageOptions, true)
+    .setAllowInvalid(false)
+    .build();
+  subSheet.getRange(2, COL.STAGE, Math.max(subSheet.getMaxRows() - 1, 1), 1).setDataValidation(stageRule);
+  subSheet.getRange(1, COL.STAGE).setNote("EDITOR CONTROL: Select a stage from the dropdown. The public tracking page updates from this sheet automatically.");
+  subSheet.getRange(1, COL.STATUS).setNote("Automatically synchronized from the Stage dropdown. You normally do not need to edit this cell manually.");
+  subSheet.getRange(1, COL.LAST_UPDATED).setNote("Automatically updated whenever an editorial field is changed.");
+
   const audit = ss.getSheetByName(CONFIG.AUDIT_SHEET) || ss.insertSheet(CONFIG.AUDIT_SHEET);
   if (audit.getLastRow() === 0) {
     audit.getRange(1, 1, 1, 4).setValues([["Timestamp", "Action", "Tracking ID", "Details"]])
@@ -477,13 +358,76 @@ function setupSheetHeaders() {
 
   getOrCreateSubmissionsFolder();
 
-  // The pop-up only works when run from the Sheet menu, not from the script editor.
   try {
-    SpreadsheetApp.getUi().alert("✅ Pharmionex Editorial Google Sheet initialized successfully for " + CONFIG.EDITOR_IN_CHIEF + "!");
+    SpreadsheetApp.getUi().alert("✅ Editorial sheet ready. To update an article, open the Submissions sheet and change the Stage dropdown in column O. The public Track Article page will use the new value.");
   } catch (uiErr) {
-    Logger.log("Headers set up OK (no UI available when run from the editor).");
+    Logger.log("Editorial sheet initialized.");
   }
 }
+
+/**
+ * Spreadsheet-only editorial control. No editor panel or token is exposed on the website.
+ * Change the Stage dropdown in column O; the public tracking record follows it.
+ */
+function onEdit(e) {
+  if (!e || !e.range) return;
+  const sheet = e.range.getSheet();
+  if (sheet.getName() !== CONFIG.SUBMISSIONS_SHEET || e.range.getRow() < 2) return;
+
+  const row = e.range.getRow();
+  const col = e.range.getColumn();
+  const watched = [COL.STATUS, COL.STAGE, COL.PLAGIARISM, COL.EDITOR, COL.REVIEWERS, COL.REMARKS, COL.REVIEWER_COMMENTS];
+  if (watched.indexOf(col) === -1) return;
+
+  const trackingId = String(sheet.getRange(row, COL.ID).getValue() || "").trim().toUpperCase();
+  if (!trackingId) return;
+
+  // Stage is the primary control. A stage selection automatically supplies the public status.
+  if (col === COL.STAGE) {
+    const parsed = parseStage_(e.value);
+    if (parsed) {
+      sheet.getRange(row, COL.STAGE).setValue(stageLabel_(parsed));
+      sheet.getRange(row, COL.STATUS).setValue(stageStatus_(parsed));
+    }
+  }
+
+  sheet.getRange(row, COL.LAST_UPDATED).setValue(new Date());
+
+  const stage = parseInt(sheet.getRange(row, COL.STAGE).getValue(), 10) || 1;
+  const status = String(sheet.getRange(row, COL.STATUS).getValue() || stageStatus_(stage));
+  const details = JSON.stringify({stage: stage, status: status, editor: String(sheet.getRange(row, COL.EDITOR).getValue() || CONFIG.EDITOR_IN_CHIEF)});
+  logAudit_("STATUS_UPDATED", trackingId, details);
+}
+
+function parseStage_(value) {
+  const m = String(value || "").match(/^[1-6]/);
+  return m ? Number(m[0]) : null;
+}
+
+function stageLabel_(stage) {
+  const labels = {
+    1: "1 — Submission Received",
+    2: "2 — Scope & Plagiarism Check",
+    3: "3 — Double-Blind Peer Review",
+    4: "4 — Reviewer Revisions",
+    5: "5 — Acceptance Decision",
+    6: "6 — Published in Issue"
+  };
+  return labels[Number(stage)] || labels[1];
+}
+
+function stageStatus_(stage) {
+  const statuses = {
+    1: "Stage 1: Initial Editorial Desk Review",
+    2: "Stage 2: Scope & Plagiarism Check",
+    3: "Stage 3: Double-Blind Peer Review",
+    4: "Stage 4: Reviewer Revisions",
+    5: "Stage 5: Acceptance Decision",
+    6: "Stage 6: Published in Issue"
+  };
+  return statuses[Number(stage)] || statuses[1];
+}
+
 
 /* ============================================================================
  * MENU ACTIONS

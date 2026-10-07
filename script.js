@@ -10,7 +10,8 @@
  */
 
 // Google Apps Script Web App URL for live synchronization
-var GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwrJ6JzTjuLCQij764SBqsVBj74gRjdlUW0ICNA7hJoXh86HGLMFcU2-fn3I9jsLZ6F/exec";
+// Updated: 2026-10-07
+var GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxyEDW3BmAmJmrR6ePSpwRsG_Rpdiy64b8fOqG34GNLID5yvFU5RqQiwMuURqJOe6CGHw/exec";
 
 // Google Form for article submission. This is the journal\'s live intake form (docs.google.com/forms).
 var GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfeNhcHdfcFAu_Z3MQY_lX_ju8lZXdai0CCKfW_jMNTN7yV7w/viewform";
@@ -273,7 +274,6 @@ let lastActiveEditorId = "editor-intro";
 document.addEventListener("DOMContentLoaded", () => {
   loadDraftFromStorage();
   loadSavedSubmissions();
-  try { const savedEditorToken = sessionStorage.getItem("pharmionex_editor_token"); const tokenField = document.getElementById("editorControlToken"); if (savedEditorToken && tokenField) tokenField.value = savedEditorToken; } catch (e) {}
   applyTypeConfigUI(state.articleType);
   renderCustomSectionsUI();
   renderAuthors();
@@ -834,131 +834,29 @@ function executeTrackArticle(targetId = null) {
   resultContainer.innerHTML = `
     <div style="text-align:center; padding:40px 20px;">
       <div class="indicator-dot" style="width:16px; height:16px; margin:0 auto 12px; background:var(--accent);"></div>
-      <p style="font-size:14px; color:var(--text-muted);">Checking the Pharmionex Journal tracking database for <strong>${escapeHtml(normalizedId)}</strong>...</p>
+      <p style="font-size:14px; color:var(--text-muted);">Querying Pharmionex Journal tracking database for <strong>${escapeHtml(normalizedId)}</strong>...</p>
     </div>
   `;
 
-  if (!GOOGLE_APPS_SCRIPT_URL) {
-    fallbackLocalTracking(normalizedId);
-    return;
-  }
-
-  // The Google Apps Script endpoint uses ?tracking_id=...
-  const fetchUrl = `${GOOGLE_APPS_SCRIPT_URL}?tracking_id=${encodeURIComponent(normalizedId)}`;
-
-  fetch(fetchUrl, { method: "GET", cache: "no-store" })
-    .then(res => {
-      if (!res.ok) throw new Error("Tracking service returned HTTP " + res.status);
-      return res.json();
-    })
-    .then(response => {
-      if (response && response.success && response.data) {
-        const d = response.data;
-        // Adapt the Google Sheet response to the existing tracking-page UI.
-        const stage = parseInt(d.stage, 10) || 1;
-        const mapped = {
-          found: true,
-          trackingId: d.trackingId || normalizedId,
-          title: d.articleTitle || "Manuscript",
-          articleType: d.articleType || "Original Research Article",
-          track: d.track || "On file with the editorial office",
-          submissionDate: d.submissionDate || d.lastUpdated || "On file",
-          author: d.authorName || "On file with the editorial office",
-          email: d.email || "",
-          affiliation: d.affiliation || "On file with the editorial office",
-          status: d.status || ["Submission Received", "Scope & Plagiarism Check", "Double-Blind Peer Review", "Reviewer Revisions", "Acceptance Decision", "Published"][stage - 1],
-          stage: stage,
-          plagiarismScore: d.plagiarism || "Pending",
-          assignedReviewers: d.reviewersAssigned || "Assigned after desk review",
-          editorRemarks: d.editorRemarks || "No additional editorial remarks.",
-          reviewerComments: d.reviewerComments || "",
-          lastUpdated: d.lastUpdated || "",
-          timeline: []
-        };
-
-        // Build a simple timeline from the current stage for the existing UI.
-        const titles = [
-          "Submission Received & Acknowledged",
-          "Scope & Plagiarism Check",
-          "Double-Blind Peer Review",
-          "Reviewer Revisions",
-          "Acceptance Decision",
-          "Published"
-        ];
-        mapped.timeline = titles.map((title, i) => ({
-          stage: i + 1,
-          title: title,
-          date: i + 1 < stage ? "Completed" : (i + 1 === stage ? (d.lastUpdated || "Current") : "Pending"),
-          status: i + 1 < stage ? "completed" : (i + 1 === stage ? "current" : "pending"),
-          remarks: i + 1 === stage ? mapped.editorRemarks : ""
-        }));
-
-        // Keep a copy locally for the status-report button.
-        trackingRegistry[normalizedId] = mapped;
-        renderTrackResult(mapped, true);
-      } else {
+  // If Vivek Sharma has configured Google Apps Script Web App URL, query it first
+  if (GOOGLE_APPS_SCRIPT_URL) {
+    const fetchUrl = `${GOOGLE_APPS_SCRIPT_URL}?action=track&id=${encodeURIComponent(normalizedId)}`;
+    fetch(fetchUrl)
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.found) {
+          renderTrackResult(data, true);
+        } else {
+          fallbackLocalTracking(normalizedId);
+        }
+      })
+      .catch(err => {
+        console.warn("GAS tracking query failed, checking local registry:", err);
         fallbackLocalTracking(normalizedId);
-      }
-    })
-    .catch(err => {
-      console.warn("Google Sheet tracking query failed:", err);
-      fallbackLocalTracking(normalizedId);
-    });
-}
-
-async function loadEditorTrackingRecord() {
-  const idEl = document.getElementById("editorTrackingId");
-  const tokenEl = document.getElementById("editorControlToken");
-  const id = (idEl ? idEl.value : "").trim().toUpperCase();
-  const token = (tokenEl ? tokenEl.value : "").trim();
-  if (!id || !token) { setEditorControlMessage("Enter the Tracking ID and private control token first.", "error"); return; }
-  sessionStorage.setItem("pharmionex_editor_token", token);
-  setEditorControlMessage("Loading current editorial record…", "info");
-  try {
-    const res = await fetch(`${GOOGLE_APPS_SCRIPT_URL}?action=track&id=${encodeURIComponent(id)}`);
-    const data = await res.json();
-    if (!data || !data.found) throw new Error("Tracking ID not found.");
-    fillEditorControl(data);
-    document.getElementById("editorAuthBadge").textContent = "Token ready";
-    document.getElementById("editorAuthBadge").classList.add("is-authenticated");
-    setEditorControlMessage("Current record loaded. Review the fields and click Update Public Status when ready.", "success");
-  } catch (err) { setEditorControlMessage(err.message || "Could not load the record.", "error"); }
-}
-
-function fillEditorControl(data) {
-  const set = (id, value) => { const el = document.getElementById(id); if (el) el.value = value == null ? "" : value; };
-  set("editorTrackingId", data.trackingId); set("editorStage", data.stage || 1); set("editorStatus", data.status || "");
-  set("editorPlagiarism", data.plagiarismScore || ""); set("editorReviewers", data.assignedReviewers || "");
-  set("editorRemarks", data.editorRemarks || ""); set("editorReviewerComments", data.reviewerComments || "");
-}
-
-async function updateEditorTrackingStatus() {
-  const token = (document.getElementById("editorControlToken")?.value || "").trim() || sessionStorage.getItem("pharmionex_editor_token") || "";
-  const id = (document.getElementById("editorTrackingId")?.value || "").trim().toUpperCase();
-  if (!token || !id) { setEditorControlMessage("Enter the private token and Tracking ID.", "error"); return; }
-  if (!GOOGLE_APPS_SCRIPT_URL) { setEditorControlMessage("Google Apps Script URL is not configured.", "error"); return; }
-  const payload = {
-    action: "updateStatus", editorToken: token, trackingId: id,
-    stage: document.getElementById("editorStage")?.value, status: document.getElementById("editorStatus")?.value,
-    plagiarismScore: document.getElementById("editorPlagiarism")?.value, assignedEditor: "Vivek Sharma",
-    assignedReviewers: document.getElementById("editorReviewers")?.value, editorRemarks: document.getElementById("editorRemarks")?.value,
-    reviewerComments: document.getElementById("editorReviewerComments")?.value,
-    sendEmail: !!document.getElementById("editorSendEmail")?.checked
-  };
-  sessionStorage.setItem("pharmionex_editor_token", token); setEditorControlMessage("Saving editorial status…", "info");
-  try {
-    const res = await fetch(GOOGLE_APPS_SCRIPT_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) });
-    const data = await res.json();
-    if (!data || !data.success) throw new Error((data && data.error) || "Update failed.");
-    fillEditorControl(data); document.getElementById("editorAuthBadge").textContent = "Authenticated"; document.getElementById("editorAuthBadge").classList.add("is-authenticated");
-    setEditorControlMessage(`✅ Status updated for ${id}${data.emailSent ? " and emailed to the author." : "."}`, "success");
-    const publicInput = document.getElementById("trackingIdInput"); if (publicInput) { publicInput.value = id; executeTrackArticle(id); }
-  } catch (err) { setEditorControlMessage(err.message || "Could not update the editorial record.", "error"); }
-}
-
-function setEditorControlMessage(message, type) {
-  const el = document.getElementById("editorControlMessage"); if (!el) return;
-  el.textContent = message; el.className = "editor-control-message " + (type || "info");
+      });
+  } else {
+    fallbackLocalTracking(normalizedId);
+  }
 }
 
 function fallbackLocalTracking(id) {
